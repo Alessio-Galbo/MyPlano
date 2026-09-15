@@ -1,0 +1,86 @@
+{
+  "title": "Recurring Expenses & Bills",
+  "subtitle": "Track utilities, taxes, insurance, and subscriptions",
+  "addExpense": "New Expense",
+  "editExpense": "Edit Expense",
+  "fields": {
+    "title": "Expense title",
+    "amount": "Amount (€)",
+    "category": "Category",
+    "frequency": "Frequency",
+    "profile": "Profile / Household",
+    "nextDueDate": "Next due date",
+    "enableAlert": "Enable alert",
+    "includeInCalendar": "Include in calendar (.ics)",
+    "notes": "Notes"
+  },
+  "frequencies": {
+    "monthly": "Monthly",
+    "bimonthly": "Bimonthly",
+    "quarterly": "Quarterly",
+    "semiannual": "Semiannual",
+    "annual": "Annual",
+    "biennial": "Biennial (every 2 years)",
+    "custom": "Custom (free interval)",
+    "oneOff": "One-off"
+  },
+  "customFreq": {
+    "every": "Every",
+    "months": "Months",
+    "days": "Days"
+  },
+  "categories": {
+    "utilities": "Utilities (Power/Gas/Water)",
+    "vehicle": "Auto & Moto (Insurance/Tax)",
+    "home": "Home & Mortgage/Rent",
+    "taxes": "Taxes & Duties",
+    "subscriptions": "Subscriptions & Services",
+    "health": "Health & Insurance",
+    "other": "Other"
+  },
+  "status": {
+    "due": "To Pay",
+    "paid": "Paid",
+    "upcoming": "Upcoming",
+    "overdue": "Overdue"
+  },
+  "pastDate": {
+    "isPastWarning": "The date entered is in the past.",
+    "alreadyPaidLabel": "Was this expense already paid?",
+    "alreadyPaidHint": "If paid, we calculate the next future occurrence using the selected frequency.",
+    "unpaidWarning": "If unpaid, this expense counts as an overdue debt.",
+    "projectedNextDate": "Projected next due date:",
+    "applyProjected": "Set this date"
+  },
+  "viewMode": {
+    "list": "List",
+    "grouped": "By Category"
+  },
+  "variable": {
+    "isVariableLabel": "Variable expense / usage-based utility",
+    "isVariableHint": "Calculates the real average of bills under the active contract",
+    "contractName": "Provider / Active contract",
+    "contractStartDate": "Contract start date",
+    "badgeVariable": "Variable",
+    "activeAverage": "Active contract average",
+    "basedOnBills": "across {count} bills",
+    "initialEstimate": "Estimate",
+    "historyBtn": "Bill history",
+    "historyTitle": "Bill History & Contracts",
+    "addBillTitle": "Record Actual Bill Payment",
+    "billDate": "Bill date",
+    "billAmount": "Amount (€)",
+    "billNote": "Notes",
+    "addBillBtn": "Record bill",
+    "newContractBtn": "Switch Contract",
+    "newContractTitle": "Start New Contract / Provider",
+    "newContractHint": "Past bills remain visible but won't skew the new contract average",
+    "activateContract": "Save new contract",
+    "noBills": "No bills recorded yet for the active contract."
+  },
+  "tags": {
+    "variable": "Variable",
+    "fixed": "Fixed"
+  },
+  "emptyState": "No recurring expenses recorded."
+}

@@ -1,0 +1,86 @@
+{
+  "title": "Spese Periodiche & Pagamenti",
+  "subtitle": "Traccia bollette, tributi, assicurazioni e abbonamenti",
+  "addExpense": "Nuova Spesa",
+  "editExpense": "Modifica Spesa",
+  "fields": {
+    "title": "Nome spesa",
+    "amount": "Importo (€)",
+    "category": "Categoria",
+    "frequency": "Frequenza",
+    "profile": "Profilo / Nucleo",
+    "nextDueDate": "Prossima scadenza",
+    "enableAlert": "Abilita avviso",
+    "includeInCalendar": "Includi in calendario (.ics)",
+    "notes": "Note"
+  },
+  "frequencies": {
+    "monthly": "Mensile",
+    "bimonthly": "Bimestrale",
+    "quarterly": "Trimestrale",
+    "semiannual": "Semestrale",
+    "annual": "Annuale",
+    "biennial": "Biennale (ogni 2 anni)",
+    "custom": "Personalizzata (intervallo libero)",
+    "oneOff": "Una tantum"
+  },
+  "customFreq": {
+    "every": "Ogni",
+    "months": "Mesi",
+    "days": "Giorni"
+  },
+  "categories": {
+    "utilities": "Utenze (Luce/Gas/Acqua)",
+    "vehicle": "Auto & Moto (Assicurazione/Bollo)",
+    "home": "Casa & Mutuo/Affitto",
+    "taxes": "Tasse & F24",
+    "subscriptions": "Abbonamenti & Servizi",
+    "health": "Salute & Assicurazioni",
+    "other": "Altro"
+  },
+  "status": {
+    "due": "Da Pagare",
+    "paid": "Saldato",
+    "upcoming": "In Arrivo",
+    "overdue": "In Ritardo"
+  },
+  "pastDate": {
+    "isPastWarning": "La data inserita è già passata.",
+    "alreadyPaidLabel": "Spesa già pagata in passato?",
+    "alreadyPaidHint": "Se già saldata, calcoliamo la prossima scadenza futura con la cadenza scelta.",
+    "unpaidWarning": "Se non è stata pagata, questa voce risulta un debito scaduto immediato.",
+    "projectedNextDate": "Prossima scadenza prevista:",
+    "applyProjected": "Imposta questa data"
+  },
+  "viewMode": {
+    "list": "Elenco",
+    "grouped": "Per Categoria"
+  },
+  "variable": {
+    "isVariableLabel": "Importo variabile / bolletta a consumo",
+    "isVariableHint": "Calcola la media reale dei pagamenti del contratto attivo",
+    "contractName": "Fornitore / Contratto attivo",
+    "contractStartDate": "Data inizio contratto",
+    "badgeVariable": "Variabile",
+    "activeAverage": "Media contratto",
+    "basedOnBills": "su {count} bollette",
+    "initialEstimate": "Stima",
+    "historyBtn": "Storico bollette",
+    "historyTitle": "Storico Bollette & Contratti",
+    "addBillTitle": "Registra Bolletta Effettiva",
+    "billDate": "Data bolletta",
+    "billAmount": "Importo (€)",
+    "billNote": "Note",
+    "addBillBtn": "Registra bolletta",
+    "newContractBtn": "Cambio Contratto",
+    "newContractTitle": "Attiva Nuovo Contratto / Fornitore",
+    "newContractHint": "Le bollette passate restano visibili ma non falsano la nuova media",
+    "activateContract": "Salva nuovo contratto",
+    "noBills": "Nessuna bolletta ancora registrata per il contratto attivo."
+  },
+  "tags": {
+    "variable": "Variabile",
+    "fixed": "Fissa"
+  },
+  "emptyState": "Nessuna spesa periodica registrata."
+}

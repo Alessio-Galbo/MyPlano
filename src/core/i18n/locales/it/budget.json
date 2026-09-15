@@ -1,0 +1,78 @@
+{
+  "title": "Bilancio Preventivo & Accantonamento",
+  "subtitle": "Elimina le sorprese calcolando la tua quota mensile ideale (Sinking Funds)",
+  "metrics": {
+    "totalAnnual": "Totale Spese Annuali",
+    "monthlyQuota": "Quota Mensile di Regime",
+    "monthlyQuotaDesc": "Metti da parte questa somma ogni mese per coprire tutte le spese a regime",
+    "activeExpensesCount": "Voci di Spesa Attive",
+    "upcoming30Days": "In Scadenza (Prossimi 30gg)"
+  },
+  "incomeHub": {
+    "startingReserve": "Fondo (€)",
+    "mainFund": "Fondo Principale (€)",
+    "dedicatedFund": "Fondo Dedicato (€)",
+    "useDedicatedFund": "Usa un fondo separato per questo profilo",
+    "sharedFundNotice": "Questo profilo usa il fondo principale condiviso:",
+    "dedicatedIncome": "Introito Dedicato (€)",
+    "useDedicatedIncome": "Usa un introito separato per questo profilo",
+    "sharedIncomeNotice": "Questo profilo usa l'introito globale condiviso:",
+    "globalHubTitle": "Fondo & Introito Globale (Condivisi)",
+    "profileHubTitle": "Parametri Specifici: {name}",
+    "monthlyIncome": "Introito Mensile Indicativo (€)",
+    "optional": "Opzionale",
+    "saveBalance": "Salva fondo",
+    "saveIncome": "Salva introito",
+    "discretionaryTitle": "Disponibilità Mensile per il Quotidiano",
+    "discretionaryDesc": "Tolte le spese cicliche e la quota fissa del fondo, questo è il margine per spese vive e risparmio"
+  },
+  "zeroDeficit": {
+    "safeQuotaTitle": "Quota di Sicurezza Zero-Deficit",
+    "safeQuotaDesc": "Quota minima calcolata per non scendere mai sotto zero",
+    "surgeAlert": "Quota iniziale consigliata: per i primi {months} mesi versa {amount}/mese per superare il primo picco."
+  },
+  "coldStart": {
+    "title": "Verifica Resilienza & Momento Più Critico",
+    "criticalMonthLabel": "Momento più impegnativo",
+    "safetyMarginLabel": "Margine di Sicurezza Minimo",
+    "safetyMarginDesc": "Nel momento più arduo ({month}), il tuo fondo manterrà un margine residuo di {amount} sopra lo zero.",
+    "fullyCoveredTitle": "Copertura Totale Garantita",
+    "fullyCoveredDesc": "Con la quota mensile standard tutte le spese sono coperte fin dal primo mese senza scoperti.",
+    "initialBalanceCoveredDesc": "Con il fondo di {amount}, tutte le uscite sono coperte.",
+    "deficitTitle": "Situazione Critica prima di {month}",
+    "deficitAlert": "Prima della spesa di {month} ({expenses}), le uscite superano il fondo disponibile con uno scoperto di {amount}.",
+    "solutionOneTitle": "Integrazione Immediata (Fondo)",
+    "solutionOneDesc": "Versa {amount} una tantum nel fondo per azzerare subito lo scoperto.",
+    "solutionTwoTitle": "Quota Minima di Sopravvivenza",
+    "solutionTwoDesc": "Per non andare in rosso prima di {month}, serve accantonare minimo {amount}/mese (fino a tale data), poi basterà la quota standard.",
+    "adaptiveMultiPhaseDesc": "Spalmata per frangenti: {firstQuota}/mese fino a {firstMonth}, poi scende a {secondQuota}/mese fino a {secondMonth} per restare in pari senza accumulare eccessi, poi quota a regime.",
+    "solutionStandardTitle": "Quota a Regime (Standard)",
+    "solutionStandardDesc": "Accantona sempre la quota fissa ({amount}/mese). Evidenzia i mesi di scoperto naturale nella timeline.",
+    "activeSimulationLabel": "Attiva",
+    "quickTopUpBtn": "+ Integra {amount} nel fondo",
+    "quickTopUpHint": "Oppure versa subito questa somma per azzerare il disavanzo:",
+    "chartStrategiesTitle": "Scegli quale strategia proiettare nella timeline:",
+    "strategyActive": "Attiva"
+  },
+  "simulation": {
+    "title": "Timeline Cashflow & Picchi di Spesa",
+    "subtitle": "Confronto tra uscite effettive e andamento della riserva",
+    "horizonLabel": "Orizzonte temporale",
+    "horizonMonths": "mesi",
+    "horizon6m": "6 mesi",
+    "horizon12m": "1 anno (12m)",
+    "horizon24m": "2 anni (24m)",
+    "horizon36m": "3 anni (36m)",
+    "horizon60m": "5 anni (60m)",
+    "customLabel": "Libero:",
+    "month": "Mese",
+    "outflow": "Uscite Previste",
+    "accumulated": "Fondo di Riserva",
+    "netBalance": "Differenza Mese",
+    "warningShortage": "Attenzione: la spesa supera la riserva accumulata a inizio anno"
+  },
+  "advice": {
+    "title": "Come Funziona il Sinking Fund?",
+    "text": "Invece di subire la maxirata a sorpresa dell'assicurazione o del bollo, accantoni ogni mese 1/12 delle tue spese fisse annuali in un salvadanaio dedicato."
+  }
+}

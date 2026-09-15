@@ -1,0 +1,74 @@
+.suggest-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.suggest-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.suggest-input-field {
+  width: 100%;
+  padding-right: 2rem;
+}
+
+.suggest-toggle-btn {
+  position: absolute;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  transition: color var(--transition-fast);
+}
+
+.suggest-toggle-btn:hover {
+  color: var(--text-main);
+}
+
+.suggest-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #181c2e;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0.25rem 0;
+}
+
+.suggest-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.suggest-item:hover,
+.suggest-item.selected {
+  background: rgba(124, 93, 250, 0.15);
+  color: #ffffff;
+}
+
+.suggest-item-count {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}

@@ -1,0 +1,54 @@
+{
+  "appName": "MyPlano",
+  "appSubtitle": "Scadenze & Bilancio Preventivo",
+  "nav": {
+    "dashboard": "Panoramica",
+    "documents": "Documenti",
+    "expenses": "Spese & Scadenze",
+    "budget": "Bilancio & Fondo",
+    "settings": "Impostazioni"
+  },
+  "actions": {
+    "add": "Aggiungi",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "save": "Salva",
+    "saved": "Salvato!",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "filter": "Filtra",
+    "all": "Tutti",
+    "renew": "Rinnova",
+    "markPaid": "Segna come pagato",
+    "exportCalendar": "Esporta Calendario (.ics)",
+    "backup": "Backup JSON",
+    "restore": "Ripristina JSON"
+  },
+  "profiles": {
+    "allProfiles": "Nucleo Completo (Tutti)",
+    "personal": "Personale",
+    "family": "Famiglia",
+    "vehicles": "Veicoli",
+    "manage": "Gestisci profili",
+    "addProfile": "Nuovo profilo",
+    "profileName": "Nome profilo",
+    "deleteProfile": "Elimina profilo",
+    "deleteConfirmTitle": "Elimina Profilo e Dati Annessi",
+    "deleteConfirmDesc": "Sei sicuro di voler eliminare il profilo \"{name}\"?",
+    "deleteCascadeWarning": "Verranno eliminati definitivamente anche {expensesCount} spese e {documentsCount} documenti associati a questo profilo.",
+    "deleteButton": "Elimina Profilo e Dati"
+  },
+  "notifications": {
+    "globalMute": "Silenzia Tutte le Notifiche",
+    "globalActive": "Notifiche Attive",
+    "remindMe": "Promemoria",
+    "daysBefore": "giorni prima"
+  },
+  "settings": {
+    "languageLabel": "Lingua dell'Interfaccia",
+    "languageDesc": "Seleziona la lingua per testi ed etichette",
+    "muteDesc": "Disattiva temporaneamente tutti i promemoria",
+    "calendarDesc": "Genera file .ics per Google Calendar, Outlook o Apple Calendar",
+    "backupDesc": "Salva una copia di sicurezza di tutti i tuoi dati o ripristina un file"
+  }
+}

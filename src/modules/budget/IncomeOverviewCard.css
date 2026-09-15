@@ -1,0 +1,82 @@
+.income-hub-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.income-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.income-input-box {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.income-box-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.income-box-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.income-box-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.income-field-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.income-number-input {
+  width: 100%;
+  max-width: 130px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.625rem;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.income-hub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.income-hub-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+}
+
+.profile-hub-card {
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04) 0%, var(--bg-card) 100%);
+}

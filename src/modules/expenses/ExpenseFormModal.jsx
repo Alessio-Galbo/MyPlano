@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from 'react';
+import { Modal, Button } from '../../components/ui';
+import { useI18n } from '../../core/i18n';
+import { ExpenseFormFields } from './ExpenseFormFields';
+import '../profiles/AddProfileModal.css';
+
+const DEFAULT_EXP = {
+  title: '',
+  amount: '',
+  category: 'utilities',
+  frequency: 'monthly',
+  profileId: '',
+  nextDueDate: '',
+  enableAlert: true,
+  includeInCalendar: true,
+};
+
+export function ExpenseFormModal({ isOpen, onClose, onSave, editingExp, profiles, expenses = [] }) {
+  const { t } = useI18n();
+  const [formData, setFormData] = useState(DEFAULT_EXP);
+
+  useEffect(() => {
+    if (editingExp) {
+      setFormData(editingExp);
+    } else {
+      setFormData({
+        ...DEFAULT_EXP,
+        profileId: profiles[0]?.id || '',
+      });
+    }
+  }, [editingExp, profiles, isOpen]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave({ ...formData, amount: parseFloat(formData.amount) || 0 });
+    onClose();
+  };
+
+  const titleKey = editingExp ? 'expenses.editExpense' : 'expenses.addExpense';
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title={t(titleKey)}>
+      <form onSubmit={handleSubmit}>
+        <ExpenseFormFields
+          formData={formData}
+          setFormData={setFormData}
+          expenses={expenses}
+        />
+        <div className="form-actions">
+          <Button variant="secondary" onClick={onClose}>
+            {t('common.actions.cancel')}
+          </Button>
+          <Button type="submit" variant="primary">
+            {t('common.actions.save')}
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Budget & Sinking Fund",
+  "subtitle": "Eliminate surprises by calculating your ideal monthly reserve (Sinking Funds)",
+  "metrics": {
+    "totalAnnual": "Total Annual Expenses",
+    "monthlyQuota": "Steady Monthly Quota",
+    "monthlyQuotaDesc": "Set aside this amount each month to smoothly cover all ongoing expenses",
+    "activeExpensesCount": "Active Expense Items",
+    "upcoming30Days": "Due in Next 30 Days"
+  },
+  "incomeHub": {
+    "startingReserve": "Fund (€)",
+    "mainFund": "Main Fund (€)",
+    "dedicatedFund": "Dedicated Fund (€)",
+    "useDedicatedFund": "Use a separate fund for this profile",
+    "sharedFundNotice": "This profile uses the shared global fund:",
+    "dedicatedIncome": "Dedicated Monthly Income (€)",
+    "useDedicatedIncome": "Use a separate monthly income for this profile",
+    "sharedIncomeNotice": "This profile uses the shared global income:",
+    "globalHubTitle": "Global Household Parameters",
+    "profileHubTitle": "Specific Parameters: {name}",
+    "monthlyIncome": "Estimated Monthly Income (€)",
+    "optional": "Optional",
+    "saveBalance": "Save fund",
+    "saveIncome": "Save income",
+    "discretionaryTitle": "Monthly Living & Discretionary Margin",
+    "discretionaryDesc": "After setting aside fixed cyclical costs, this remains for daily expenses and personal savings"
+  },
+  "zeroDeficit": {
+    "safeQuotaTitle": "Zero-Deficit Safe Quota",
+    "safeQuotaDesc": "Minimum monthly savings required to never dip into negative balance",
+    "surgeAlert": "Recommended initial rate: for the first {months} months save {amount}/mo to meet the first major peak."
+  },
+  "coldStart": {
+    "title": "Resilience & Critical Moment Analysis",
+    "criticalMonthLabel": "Most demanding moment",
+    "safetyMarginLabel": "Minimum Safety Margin",
+    "safetyMarginDesc": "At the hardest point ({month}), your fund will still retain a positive safety margin of {amount} above zero.",
+    "fullyCoveredTitle": "Full Year Coverage Guaranteed",
+    "fullyCoveredDesc": "With the steady monthly quota, all expenses are fully covered from day one without deficits.",
+    "initialBalanceCoveredDesc": "With your fund of {amount}, all expenses are covered.",
+    "deficitTitle": "Critical Situation before {month}",
+    "deficitAlert": "Before the expense of {month} ({expenses}), outflows exceed the available fund with a shortage of {amount}.",
+    "solutionOneTitle": "Immediate Deposit (Fund)",
+    "solutionOneDesc": "Deposit {amount} into the fund now to immediately eliminate the deficit.",
+    "solutionTwoTitle": "Minimum Survival Rate",
+    "solutionTwoDesc": "To avoid going negative before {month}, set aside at least {amount}/mo (until that date), then return to normal.",
+    "adaptiveMultiPhaseDesc": "Spread across phases: {firstQuota}/mo until {firstMonth}, then decreases to {secondQuota}/mo until {secondMonth} to stay balanced without overpaying, then standard rate.",
+    "solutionStandardTitle": "Standard Rate",
+    "solutionStandardDesc": "Save the fixed standard quota each month ({amount}/mo). Shows natural deficit months in the timeline.",
+    "activeSimulationLabel": "Active",
+    "quickTopUpBtn": "+ Add {amount} to fund",
+    "quickTopUpHint": "Or deposit this one-time amount now to eliminate the deficit:",
+    "chartStrategiesTitle": "Select strategy to project in the cashflow timeline:",
+    "strategyActive": "Active"
+  },
+  "simulation": {
+    "title": "Cashflow Timeline & Peaks",
+    "subtitle": "Comparison of expected outflows versus accumulated reserve",
+    "horizonLabel": "Time horizon",
+    "horizonMonths": "months",
+    "horizon6m": "6 months",
+    "horizon12m": "1 year (12m)",
+    "horizon24m": "2 years (24m)",
+    "horizon36m": "3 years (36m)",
+    "horizon60m": "5 years (60m)",
+    "customLabel": "Custom:",
+    "month": "Month",
+    "outflow": "Expected Outflow",
+    "accumulated": "Reserve Fund",
+    "netBalance": "Net Balance",
+    "warningShortage": "Warning: Expense exceeds accumulated reserve at start of year"
+  },
+  "advice": {
+    "title": "How Does a Sinking Fund Work?",
+    "text": "Instead of scrambling when a large lump-sum bill arrives, you set aside 1/12 of your annual fixed costs each month into a dedicated reserve."
+  }
+}

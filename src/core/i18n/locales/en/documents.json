@@ -1,0 +1,47 @@
+{
+  "title": "Documents & Cards",
+  "subtitle": "Track validity dates for your household personal documents",
+  "addDocument": "New Document",
+  "editDocument": "Edit Document",
+  "fields": {
+    "title": "Document title",
+    "type": "Type",
+    "owner": "Owner / Profile",
+    "identifier": "Identifier number",
+    "issuer": "Issuing authority",
+    "issueDate": "Issue date",
+    "expiryDate": "Expiry date",
+    "enableAlert": "Enable reminder",
+    "alertDays": "Advance days notice",
+    "notes": "Notes (optional)"
+  },
+  "status": {
+    "valid": "Valid",
+    "expiring": "Expiring soon",
+    "expired": "Expired",
+    "daysLeft": "days left",
+    "daysShort": "{days}d left",
+    "expiredSince": "Expired since",
+    "expiredSinceShort": "Expired ({days}d)",
+    "expiresToday": "Expires today"
+  },
+  "types": {
+    "idCard": "National ID Card",
+    "drivingLicense": "Driving License",
+    "passport": "Passport",
+    "healthCard": "Health Card",
+    "bankCard": "Credit/Debit Card",
+    "subscription": "Personal Pass",
+    "other": "Other Document"
+  },
+  "emptyState": "No documents found for this profile.",
+  "quickRenew": "Renew Expiration",
+  "newExpiryPrompt": "Select the new expiration date",
+  "renew": {
+    "title": "Renew Document Expiration",
+    "currentExpiry": "Current Expiration",
+    "newExpiry": "New Expiration Date",
+    "chooseDuration": "Add duration:",
+    "confirm": "Confirm Renewal"
+  }
+}

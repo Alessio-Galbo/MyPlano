@@ -1,0 +1,54 @@
+{
+  "appName": "MyPlano",
+  "appSubtitle": "Due Dates & Budget Smoothing",
+  "nav": {
+    "dashboard": "Overview",
+    "documents": "Documents",
+    "expenses": "Expenses & Due Dates",
+    "budget": "Budget & Sinking Fund",
+    "settings": "Settings"
+  },
+  "actions": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "saved": "Saved!",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "filter": "Filter",
+    "all": "All",
+    "renew": "Renew",
+    "markPaid": "Mark as Paid",
+    "exportCalendar": "Export Calendar (.ics)",
+    "backup": "Backup JSON",
+    "restore": "Restore JSON"
+  },
+  "profiles": {
+    "allProfiles": "Entire Household (All)",
+    "personal": "Personal",
+    "family": "Family",
+    "vehicles": "Vehicles",
+    "manage": "Manage Profiles",
+    "addProfile": "New Profile",
+    "profileName": "Profile Name",
+    "deleteProfile": "Delete Profile",
+    "deleteConfirmTitle": "Delete Profile and Linked Data",
+    "deleteConfirmDesc": "Are you sure you want to delete profile \"{name}\"?",
+    "deleteCascadeWarning": "This will also permanently delete {expensesCount} expenses and {documentsCount} documents linked to this profile.",
+    "deleteButton": "Delete Profile & Data"
+  },
+  "notifications": {
+    "globalMute": "Mute All Notifications",
+    "globalActive": "Notifications Active",
+    "remindMe": "Reminder",
+    "daysBefore": "days before"
+  },
+  "settings": {
+    "languageLabel": "Interface Language",
+    "languageDesc": "Select your preferred language for text and labels",
+    "muteDesc": "Temporarily silence all due date alerts",
+    "calendarDesc": "Generate .ics file for Google Calendar, Outlook, or Apple Calendar",
+    "backupDesc": "Save a local security backup of all your data or restore from file"
+  }
+}

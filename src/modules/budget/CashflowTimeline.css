@@ -1,0 +1,85 @@
+.cashflow-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.cashflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.cashflow-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cashflow-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.cashflow-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.cashflow-table th {
+  padding: 0.75rem 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cashflow-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.cashflow-row-shortage {
+  background-color: var(--color-danger-bg);
+}
+
+.val-positive {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.val-negative {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.timeline-due-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.25rem;
+}
+
+.timeline-due-item {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.quota-badge-survival {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-warning, #f59e0b);
+}
+

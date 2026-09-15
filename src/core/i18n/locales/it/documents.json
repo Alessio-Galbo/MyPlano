@@ -1,0 +1,47 @@
+{
+  "title": "Documenti & Carte",
+  "subtitle": "Monitora la validità dei documenti personali del tuo nucleo",
+  "addDocument": "Nuovo Documento",
+  "editDocument": "Modifica Documento",
+  "fields": {
+    "title": "Titolo documento",
+    "type": "Tipo",
+    "owner": "Intestatario / Profilo",
+    "identifier": "Numero identificativo",
+    "issuer": "Ente emittente",
+    "issueDate": "Data rilascio",
+    "expiryDate": "Data scadenza",
+    "enableAlert": "Abilita promemoria",
+    "alertDays": "Giorni di preavviso",
+    "notes": "Note (opzionali)"
+  },
+  "status": {
+    "valid": "Valido",
+    "expiring": "In scadenza",
+    "expired": "Scaduto",
+    "daysLeft": "giorni rimasti",
+    "daysShort": "{days} gg",
+    "expiredSince": "Scaduto da",
+    "expiredSinceShort": "Scaduto da {days} gg",
+    "expiresToday": "Scade oggi"
+  },
+  "types": {
+    "idCard": "Carta d'Identità",
+    "drivingLicense": "Patente di Guida",
+    "passport": "Passaporto",
+    "healthCard": "Tessera Sanitaria",
+    "bankCard": "Carta di Credito/Debito",
+    "subscription": "Abbonamento Personale",
+    "other": "Altro Documento"
+  },
+  "emptyState": "Nessun documento trovato per questo profilo.",
+  "quickRenew": "Rinnova Scadenza",
+  "newExpiryPrompt": "Seleziona la nuova data di scadenza",
+  "renew": {
+    "title": "Rinnova Scadenza Documento",
+    "currentExpiry": "Scadenza Attuale",
+    "newExpiry": "Nuova Data di Scadenza",
+    "chooseDuration": "Aggiungi durata:",
+    "confirm": "Conferma Rinnovo"
+  }
+}

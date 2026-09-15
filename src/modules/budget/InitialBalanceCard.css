@@ -1,0 +1,69 @@
+.initial-balance-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.initial-balance-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.initial-balance-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.initial-balance-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.initial-balance-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.initial-balance-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.initial-balance-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.initial-balance-input {
+  width: 130px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+}
+
+.initial-balance-input:focus {
+  border-color: var(--color-primary);
+}
