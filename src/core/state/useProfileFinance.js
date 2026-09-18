@@ -46,9 +46,13 @@ export function useProfileFinance() {
     profileIncomes,
     profileIncomeConfigs,
     updateProfileFund,
+    onUpdateProfileFund: updateProfileFund,
     setProfileUsesDedicatedFund,
+    onSetProfileUsesDedicatedFund: setProfileUsesDedicatedFund,
     updateProfileIncome,
+    onUpdateProfileIncome: updateProfileIncome,
     setProfileUsesDedicatedIncome,
+    onSetProfileUsesDedicatedIncome: setProfileUsesDedicatedIncome,
     reloadProfileFinance,
   };
 }

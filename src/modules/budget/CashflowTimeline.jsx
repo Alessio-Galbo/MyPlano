@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import { useI18n } from '../../core/i18n';
 import { generateCashflowTimeline } from './budgetCalculations';
 import { TimelineHorizonSelector } from './TimelineHorizonSelector';
+import { TimelineCategoryPills } from './TimelineCategoryPills';
+import { CategoryPieChart } from './CategoryPieChart';
+import { CashflowTableRow } from './CashflowTableRow';
+import { CashflowGroupedRow } from './CashflowGroupedRow';
+import { groupTimelineByCategory } from './calculations/timelineGroupingHelper';
+import { calculateHorizonTotals } from './calculations/horizonTotalsHelper';
 import './CashflowTimeline.css';
 
 export function CashflowTimeline({
@@ -13,16 +18,21 @@ export function CashflowTimeline({
 }) {
   const { t } = useI18n();
   const [horizon, setHorizon] = useState(12);
-  const timeline = generateCashflowTimeline(
-    expenses,
-    selectedProfileId,
-    horizon,
-    initialBalance,
-    simOptions
-  );
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('timeline');
 
-  const formatCurr = (val) =>
-    val.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+  useEffect(() => { setSelectedCategory('all'); }, [selectedProfileId]);
+
+  const profileExpenses = selectedProfileId === 'all'
+    ? expenses
+    : expenses.filter((e) => e.profileId === selectedProfileId);
+
+  const categories = Array.from(new Set(profileExpenses.map((e) => e.category).filter(Boolean)));
+  const effectiveCategory = (selectedCategory === 'all' || categories.includes(selectedCategory)) ? selectedCategory : 'all';
+  const effectiveSimOptions = { ...simOptions, categoryFilter: effectiveCategory };
+  const timeline = generateCashflowTimeline(expenses, selectedProfileId, horizon, initialBalance, effectiveSimOptions);
+  const displayItems = groupTimelineByCategory(timeline, effectiveCategory);
+  const { catMap: horizonCatMap, total: horizonTotal } = calculateHorizonTotals(expenses, selectedProfileId, horizon);
 
   return (
     <div className="cashflow-container">
@@ -31,59 +41,44 @@ export function CashflowTimeline({
           <h3 className="cashflow-title">{t('budget.simulation.title')}</h3>
           <p className="cashflow-subtitle">{t('budget.simulation.subtitle')}</p>
         </div>
-
         <TimelineHorizonSelector horizon={horizon} onChange={setHorizon} />
       </div>
 
-      <div className="table-wrapper">
-        <table className="cashflow-table">
-          <thead>
-            <tr>
-              <th>{t('budget.simulation.month')}</th>
-              <th>{t('budget.metrics.monthlyQuota')}</th>
-              <th>{t('budget.simulation.outflow')}</th>
-              <th>{t('budget.simulation.accumulated')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {timeline.map((m, idx) => (
-              <tr key={idx} className={m.isShortage ? 'cashflow-row-shortage' : ''}>
-                <td><strong>{m.monthNameKey} {m.year}</strong></td>
-                <td>
-                  {formatCurr(m.quota)}
-                  {m.isSurvivalQuota && <span className="quota-badge-survival"> (Min)</span>}
-                </td>
-                <td>
-                  {m.outflow > 0 ? (
-                    <div>
-                      <span className="val-negative">-{formatCurr(m.outflow)}</span>
-                      <div className="timeline-due-list">
-                        {m.dueExpenses?.map((de) => (
-                          <div key={de.id} className="timeline-due-item">
-                            {de.title} ({formatCurr(de.amount)})
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ) : ('€ 0,00')}
-                </td>
-                <td>
-                  <span className={m.reserve >= 0 ? 'val-positive' : 'val-negative'}>
-                    {formatCurr(m.reserve)}
-                  </span>
-                  {m.isShortage && (
-                    <AlertTriangle
-                      size={14}
-                      className="val-negative"
-                      title={t('budget.simulation.warningShortage')}
-                    />
-                  )}
-                </td>
+      <TimelineCategoryPills
+        categories={categories}
+        selectedCategory={effectiveCategory}
+        onSelectCategory={setSelectedCategory}
+        categoryTotals={horizonCatMap}
+        totalAmount={horizonTotal}
+        viewMode={viewMode}
+        onToggleViewMode={() => setViewMode((prev) => (prev === 'timeline' ? 'pie' : 'timeline'))}
+      />
+
+      {viewMode === 'pie' ? (
+        <CategoryPieChart categoryTotals={horizonCatMap} totalAmount={horizonTotal} />
+      ) : (
+        <div className="table-wrapper">
+          <table className="cashflow-table">
+            <thead>
+              <tr>
+                <th>{t('budget.simulation.month')}</th>
+                <th><span className="th-desktop">{t('budget.metrics.monthlyQuota')}</span><span className="th-mobile">{t('budget.simulation.mobileQuota')}</span></th>
+                <th><span className="th-desktop">{t('budget.simulation.outflow')}</span><span className="th-mobile">{t('budget.simulation.mobileOutflow')}</span></th>
+                <th><span className="th-desktop">{t('budget.simulation.accumulated')}</span><span className="th-mobile">{t('budget.simulation.mobileReserve')}</span></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {displayItems.map((item, idx) => (
+                item.isGroupedPeriod ? (
+                  <CashflowGroupedRow key={item.key || idx} item={item} />
+                ) : (
+                  <CashflowTableRow key={item.key || idx} month={item} />
+                )
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

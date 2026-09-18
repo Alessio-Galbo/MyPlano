@@ -2,22 +2,20 @@ import React from 'react';
 import './Toggle.css';
 
 export function Toggle({
-  checked,
+  checked = false,
   onChange,
   label = null,
   disabled = false,
   id = null,
 }) {
-  const inputId = id || `toggle-${Math.random().toString(36).substring(2, 9)}`;
-
   return (
-    <label htmlFor={inputId} className="toggle-wrapper">
+    <label className={`toggle-wrapper ${disabled ? 'toggle-disabled' : ''}`}>
       <input
         type="checkbox"
-        id={inputId}
+        id={id || undefined}
         className="toggle-input"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        checked={Boolean(checked)}
+        onChange={(e) => onChange?.(e.target.checked)}
         disabled={disabled}
       />
       <span className="toggle-track">

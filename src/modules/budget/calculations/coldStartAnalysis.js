@@ -29,10 +29,10 @@ export function calculateColdStartAnalysis(expenses, profileId = 'all', initialB
     if (m.reserve < baselineMin) baselineMin = m.reserve;
   }
 
-  const hasDeficit = minReserve < 0;
+  const hasDeficit = minReserve < -0.05;
   const maxDeficit = hasDeficit ? Math.abs(minReserve) : 0;
-  const theoreticalBufferNeeded = Math.abs(baselineMin);
-  const safetyMargin = minReserve >= 0 ? Math.round(minReserve * 100) / 100 : 0;
+  const theoreticalBufferNeeded = baselineMin < -0.05 ? Math.abs(baselineMin) : 0;
+  const safetyMargin = minReserve >= -0.05 ? Math.max(0, Math.round(minReserve * 100) / 100) : 0;
   const stdQuota = timeline.length > 0 ? timeline[0].quota : 0;
 
   const { phases, quotas: survivalSchedule } = computeAdaptiveSurvivalPhases(

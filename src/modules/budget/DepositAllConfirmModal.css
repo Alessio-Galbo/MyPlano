@@ -1,0 +1,60 @@
+.deposit-all-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deposit-all-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.deposit-all-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+}
+
+.deposit-all-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.deposit-all-item-name {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.deposit-all-item-val {
+  color: #34d399;
+  font-weight: 600;
+}
+
+.deposit-all-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.deposit-all-total-val {
+  color: #38bdf8;
+}
+
+.deposit-all-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

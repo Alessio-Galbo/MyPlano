@@ -10,13 +10,15 @@ export function ExpenseCardGrid({
   onToggleCalendar,
   onMarkPaid,
   onOpenHistory,
+  onNavigateYear,
 }) {
   return (
     <div className="grid-cards">
       {expenses.map((exp) => (
         <ExpenseCard
-          key={exp.id}
+          key={`${exp.id}-${exp.dueDate || exp.nextDueDate}`}
           expense={exp}
+          dueDate={exp.dueDate || exp.nextDueDate}
           profile={profiles.find((p) => p.id === exp.profileId)}
           onEdit={onEdit}
           onDelete={onDelete}
@@ -24,6 +26,7 @@ export function ExpenseCardGrid({
           onToggleCalendar={onToggleCalendar}
           onMarkPaid={onMarkPaid}
           onOpenHistory={onOpenHistory}
+          onNavigateYear={onNavigateYear}
         />
       ))}
     </div>

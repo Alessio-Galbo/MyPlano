@@ -20,14 +20,18 @@ export const DOCUMENT_TYPES = [
 ];
 
 export const EXPENSE_CATEGORIES = [
-  'utilities',
   'vehicle',
   'home',
+  'utilities',
   'taxes',
+  'insurance',
   'subscriptions',
   'health',
+  'work',
+  'sport',
   'other',
 ];
+
 
 export const ALERT_THRESHOLDS = {
   WARNING_DAYS: 60,

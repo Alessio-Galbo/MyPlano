@@ -1,0 +1,55 @@
+.expense-year-selector-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem; padding: 0.5rem 0.75rem; background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  margin-bottom: 0.875rem; flex-wrap: wrap;
+}
+
+.year-selector-left {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+}
+
+.year-selector-label {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.78rem; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+
+.year-pills-row {
+  display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;
+}
+
+.year-pill {
+  padding: 0.28rem 0.65rem; border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+  color: var(--text-muted); font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: all var(--transition-fast);
+  display: inline-flex; align-items: center; gap: 0.3rem;
+}
+
+.year-pill:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+.year-pill.active {
+  background: rgba(56, 189, 248, 0.2); border-color: #38bdf8;
+  color: #ffffff; box-shadow: 0 0 8px rgba(56, 189, 248, 0.25);
+}
+
+.year-range-inputs-row {
+  display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem;
+  color: var(--text-muted); background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.6rem; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.range-label { font-weight: 600; }
+.year-range-select {
+  background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs, 4px); padding: 0.15rem 0.35rem;
+  font-size: 0.78rem; font-weight: 700; cursor: pointer; outline: none;
+}
+.year-range-select:focus { border-color: var(--color-primary); }
+
+@media (max-width: 640px) {
+  .expense-year-selector-bar { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .year-selector-left { justify-content: flex-start; }
+  .year-range-inputs-row { width: 100%; justify-content: center; }
+}

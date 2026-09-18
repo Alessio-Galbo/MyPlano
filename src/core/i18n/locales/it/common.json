@@ -22,21 +22,32 @@
     "markPaid": "Segna come pagato",
     "exportCalendar": "Esporta Calendario (.ics)",
     "backup": "Backup JSON",
-    "restore": "Ripristina JSON"
+    "restore": "Ripristina JSON",
+    "factoryReset": "Ripristina Dati di Esempio",
+    "wipeDatabase": "Azzera Tutto il Database"
   },
   "profiles": {
-    "allProfiles": "Nucleo Completo (Tutti)",
+    "allProfiles": "Visione d'Insieme",
     "personal": "Personale",
     "family": "Famiglia",
     "vehicles": "Veicoli",
     "manage": "Gestisci profili",
     "addProfile": "Nuovo profilo",
     "profileName": "Nome profilo",
+    "initialFund": "Fondo Iniziale (€)",
+    "monthlyIncome": "Introito Mensile (€)",
     "deleteProfile": "Elimina profilo",
     "deleteConfirmTitle": "Elimina Profilo e Dati Annessi",
     "deleteConfirmDesc": "Sei sicuro di voler eliminare il profilo \"{name}\"?",
     "deleteCascadeWarning": "Verranno eliminati definitivamente anche {expensesCount} spese e {documentsCount} documenti associati a questo profilo.",
-    "deleteButton": "Elimina Profilo e Dati"
+    "deleteButton": "Elimina Profilo e Dati",
+    "perYear": "/a",
+    "modalTitle": "Gestione Profili & Nucleo",
+    "modalSubtitle": "Seleziona il profilo attivo o consulta la visione d'insieme consolidata",
+    "viewAllDesc": "Vista d'insieme con tutte le spese e finanze aggregate",
+    "editProfile": "Modifica profilo",
+    "active": "Attivo",
+    "fund": "Fondo"
   },
   "notifications": {
     "globalMute": "Silenzia Tutte le Notifiche",
@@ -49,6 +60,16 @@
     "languageDesc": "Seleziona la lingua per testi ed etichette",
     "muteDesc": "Disattiva temporaneamente tutti i promemoria",
     "calendarDesc": "Genera file .ics per Google Calendar, Outlook o Apple Calendar",
-    "backupDesc": "Salva una copia di sicurezza di tutti i tuoi dati o ripristina un file"
+    "backupDesc": "Salva una copia di sicurezza di tutti i tuoi dati o ripristina un file",
+    "databaseMaintenance": "Manutenzione & Reset Database",
+    "databaseMaintenanceDesc": "Ripristina i dati di fabbrica di esempio oppure azzera completamente l'archivio",
+    "factoryResetDesc": "Ripristina i profili, le spese e i documenti di default di esempio",
+    "wipeDatabaseDesc": "Elimina definitivamente tutti i dati inseriti per iniziare da zero",
+    "confirmFactoryTitle": "Ripristinare i Dati di Fabbrica?",
+    "confirmFactoryDesc": "Questa operazione sostituirà tutti i dati correnti con il database d'esempio di default (3 profili bilanciati, spese e documenti d'esempio).",
+    "confirmWipeTitle": "Azzerare Completamente il Database?",
+    "confirmWipeDesc": "ATTENZIONE: Questa azione cancellerà TUTTI i profili, le spese e i documenti memorizzati. Il database diventerà completamente vuoto.",
+    "confirmWipeButton": "Sì, azzera tutto definitivamente",
+    "confirmFactoryButton": "Sì, ripristina dati di fabbrica"
   }
 }

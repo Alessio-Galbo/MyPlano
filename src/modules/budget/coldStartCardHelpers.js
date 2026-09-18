@@ -20,11 +20,66 @@ export function getSurvivalOptionDetails(analysis, worstMonthLabel, t, formatCur
 
 export function getDeficitAlertTexts(analysis, worstMonthLabel, t, formatCurr) {
   const expensesSummary = analysis.worstMonth?.dueExpenses?.map((e) => e.title).join(', ') || '';
-  const title = t('budget.coldStart.deficitTitle').replace('{month}', worstMonthLabel);
-  const alert = t('budget.coldStart.deficitAlert')
-    .replace('{month}', worstMonthLabel)
-    .replace('{expenses}', expensesSummary || t('budget.simulation.outflow'))
-    .replace('{amount}', formatCurr(analysis.maxDeficit));
+  const firstMonth = analysis.firstDeficitMonth;
+  const firstMonthLabel = firstMonth
+    ? `${firstMonth.monthLongName || firstMonth.monthNameKey} ${firstMonth.year}`
+    : worstMonthLabel;
 
-  return { title, alert };
+  const isProgressive = firstMonthLabel && worstMonthLabel && firstMonthLabel !== worstMonthLabel;
+  const amountFormatted = formatCurr(analysis.maxDeficit);
+  const expensesFormatted = expensesSummary || t('budget.simulation.outflow');
+
+  if (isProgressive) {
+    const title = t('budget.coldStart.deficitTitleProgressive')
+      .replace('{firstMonth}', firstMonthLabel)
+      .replace('{worstMonth}', worstMonthLabel);
+
+    const rawTemplate = t('budget.coldStart.deficitAlertProgressive');
+    const replacements = {
+      '{firstMonth}': firstMonthLabel,
+      '{worstMonth}': worstMonthLabel,
+      '{expenses}': expensesFormatted,
+      '{amount}': amountFormatted,
+    };
+    const alert = rawTemplate
+      .replace('{firstMonth}', firstMonthLabel)
+      .replace('{worstMonth}', worstMonthLabel)
+      .replace('{expenses}', expensesFormatted)
+      .replace('{amount}', amountFormatted);
+
+    return { title, alert, rawTemplate, replacements };
+  }
+
+  const title = t('budget.coldStart.deficitTitle').replace('{month}', worstMonthLabel);
+  const rawTemplate = t('budget.coldStart.deficitAlert');
+  const replacements = {
+    '{month}': worstMonthLabel,
+    '{expenses}': expensesFormatted,
+    '{amount}': amountFormatted,
+  };
+  const alert = rawTemplate
+    .replace('{month}', worstMonthLabel)
+    .replace('{expenses}', expensesFormatted)
+    .replace('{amount}', amountFormatted);
+
+  return { title, alert, rawTemplate, replacements };
+}
+
+export function getPlanBPhaseItems(analysis, worstMonthLabel, t, formatCurr) {
+  const phases = analysis.phases || [];
+  if (phases.length > 0) {
+    const items = phases.map((phase) =>
+      t('budget.coldStart.planBPhaseItem')
+        .replace('{quota}', formatCurr(phase.quota))
+        .replace('{month}', phase.monthLabel)
+    );
+    items.push(t('budget.coldStart.planBReactivateStandard'));
+    return items;
+  }
+  return [
+    t('budget.coldStart.planBPhaseItem')
+      .replace('{quota}', formatCurr(analysis.catchUpMonthlyQuota))
+      .replace('{month}', worstMonthLabel),
+    t('budget.coldStart.planBReactivateStandard'),
+  ];
 }

@@ -10,6 +10,7 @@ export function ValueSaveBox({
   onSave,
   saveButtonText,
   placeholder,
+  extraAction,
 }) {
   const { t } = useI18n();
   const [val, setVal] = useState(value ? String(value) : '');
@@ -52,6 +53,7 @@ export function ValueSaveBox({
             {isSaved ? t('common.actions.saved') : saveButtonText}
           </Button>
         </div>
+        {extraAction}
       </div>
     </div>
   );

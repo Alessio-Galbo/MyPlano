@@ -4,6 +4,7 @@ import { Toggle } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { useApp } from '../../core/state';
 import { SettingsBackupCard } from './SettingsBackupCard';
+import { SettingsResetCard } from './SettingsResetCard';
 import './SettingsView.css';
 
 export function SettingsView({ documents, expenses, onDataRestored }) {
@@ -55,6 +56,8 @@ export function SettingsView({ documents, expenses, onDataRestored }) {
         expenses={expenses}
         onDataRestored={onDataRestored}
       />
+
+      <SettingsResetCard onDataRestored={onDataRestored} />
     </div>
   );
 }

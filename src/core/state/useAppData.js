@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { storageService } from '../storage';
 import { useProfileFinance } from './useProfileFinance';
+import { useProfileState } from './useProfileState';
 
 export function useAppData() {
-  const [profiles, setProfiles] = useState(() => storageService.getProfiles());
+  const profileFinance = useProfileFinance();
+  const profileState = useProfileState(profileFinance);
+  const { profiles, addProfile, updateProfileBalance, depositQuotaToProfile, updateProfileIncome, reloadProfiles } = profileState;
+
   const [documents, setDocuments] = useState(() => storageService.getDocuments());
   const [expenses, setExpenses] = useState(() => storageService.getExpenses());
   const [initialBalance, setInitialBalance] = useState(() => storageService.getInitialBalance());
   const [monthlyIncome, setMonthlyIncome] = useState(() => storageService.getMonthlyIncome());
-
-  const profileFinance = useProfileFinance();
 
   const updateInitialBalance = (amount) => {
     const val = parseFloat(amount) || 0;
@@ -23,21 +25,11 @@ export function useAppData() {
     storageService.saveMonthlyIncome(val);
   };
 
-  const addProfile = (p) => {
-    const next = [...profiles, { ...p, id: `p-${Date.now()}` }];
-    setProfiles(next);
-    storageService.saveProfiles(next);
-  };
-
   const deleteProfile = (profileId) => {
-    const nextProfiles = profiles.filter((p) => p.id !== profileId);
-    setProfiles(nextProfiles);
-    storageService.saveProfiles(nextProfiles);
-
+    profileState.deleteProfile(profileId);
     const nextExpenses = expenses.filter((e) => e.profileId !== profileId);
     setExpenses(nextExpenses);
     storageService.saveExpenses(nextExpenses);
-
     const nextDocs = documents.filter((d) => d.profileId !== profileId);
     setDocuments(nextDocs);
     storageService.saveDocuments(nextDocs);
@@ -70,7 +62,7 @@ export function useAppData() {
   };
 
   const reloadAll = () => {
-    setProfiles(storageService.getProfiles());
+    reloadProfiles();
     setDocuments(storageService.getDocuments());
     setExpenses(storageService.getExpenses());
     setInitialBalance(storageService.getInitialBalance());
@@ -79,9 +71,11 @@ export function useAppData() {
   };
 
   return {
-    profiles, documents, expenses, initialBalance, monthlyIncome,
-    ...profileFinance,
-    updateInitialBalance, updateMonthlyIncome,
-    addProfile, deleteProfile, saveDocument, deleteDocument, saveExpense, deleteExpense, reloadAll,
+    profiles, documents, expenses, initialBalance, monthlyIncome, ...profileFinance,
+    updateInitialBalance, onUpdateInitialBalance: updateInitialBalance,
+    updateMonthlyIncome, onUpdateMonthlyIncome: updateMonthlyIncome,
+    updateProfileBalance, updateProfileIncome, depositQuotaToProfile,
+    addProfile, deleteProfile, saveDocument, deleteDocument,
+    saveExpense, deleteExpense, reloadAll,
   };
 }

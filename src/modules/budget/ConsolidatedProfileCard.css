@@ -1,0 +1,88 @@
+.consolidated-profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color var(--transition-fast);
+}
+.consolidated-profile-card:hover { border-color: rgba(255, 255, 255, 0.2); }
+
+.consolidated-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-identity { display: flex; align-items: center; gap: 0.5rem; }
+.profile-card-name { font-size: 0.9375rem; color: var(--text-main); }
+
+.consolidated-open-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.consolidated-open-btn:hover { color: var(--text-main); border-color: var(--color-primary); }
+
+.consolidated-card-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  text-align: center;
+}
+.card-num-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.card-num-label {
+  font-size: 0.7rem;
+  line-height: 1.25;
+  color: var(--text-muted);
+  min-height: 2.4em;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+}
+
+.consolidated-status-bar {
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.status-safe {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+.status-main-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  min-width: 0;
+}
+.consolidated-status-bar .deposit-quota-container { margin-top: 0; flex-shrink: 0; }
+.consolidated-status-bar .deposit-quota-btn {
+  font-size: 0.76rem;
+  padding: 0.25rem 0.55rem;
+  gap: 0.35rem;
+  white-space: nowrap;
+}

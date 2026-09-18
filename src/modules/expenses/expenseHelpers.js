@@ -62,3 +62,16 @@ export function getCategoryLabel(category, t) {
   const translated = t(key);
   return translated !== key ? translated : category;
 }
+
+export function getExpenseBadgeInfo(isPaid, isFromFund, urgency, t) {
+  if (isPaid) {
+    return {
+      variant: 'success',
+      label: isFromFund ? t('expenses.installments.paidFromFund') : t('expenses.installments.paid'),
+    };
+  }
+  return {
+    variant: urgency.variant,
+    label: t(`expenses.status.${urgency.label}`),
+  };
+}

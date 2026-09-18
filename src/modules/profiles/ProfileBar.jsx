@@ -1,7 +1,8 @@
 import React from 'react';
-import { Users, Plus, Trash2 } from 'lucide-react';
+import { Layers, Plus, Trash2 } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { Button } from '../../components/ui';
+import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 import './ProfileBar.css';
 
 export function ProfileBar({
@@ -13,53 +14,68 @@ export function ProfileBar({
 }) {
   const { t } = useI18n();
 
+  const formatCompact = (v) =>
+    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+  const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
+
   return (
     <div className="profile-bar">
-      <div className="profile-pills">
-        <button
-          type="button"
-          className={`profile-pill ${selectedProfileId === 'all' ? 'active' : ''}`}
-          onClick={() => onSelectProfile('all')}
-        >
-          <Users size={16} />
-          <span>{t('common.profiles.allProfiles')}</span>
-        </button>
-
-        {profiles.map((profile) => {
-          const isActive = selectedProfileId === profile.id;
-          return (
-            <div key={profile.id} className="profile-pill-wrapper">
-              <button
-                type="button"
-                className={`profile-pill ${isActive ? 'active' : ''}`}
-                onClick={() => onSelectProfile(profile.id)}
-              >
-                <span className={`profile-color-dot dot-${profile.id}`} />
-                <span>{profile.name}</span>
-              </button>
-              {isActive && profiles.length > 1 && onRequestDeleteProfile && (
+      <div className="profile-left-group">
+        <div className="profile-pills">
+          {profiles.map((profile, idx) => {
+            const isActive = selectedProfileId === profile.id;
+            const themeClass = ensureProfileClass(profile.id, idx);
+            return (
+              <div key={profile.id} className="profile-pill-wrapper">
                 <button
                   type="button"
-                  className="profile-pill-delete"
-                  title={t('common.profiles.deleteProfile')}
-                  onClick={() => onRequestDeleteProfile(profile)}
+                  className={`profile-pill ${isActive ? 'active' : ''}`}
+                  onClick={() => onSelectProfile(profile.id)}
                 >
-                  <Trash2 size={12} />
+                  <span className={`dynamic-color-dot ${themeClass}`} />
+                  <span>{profile.name}</span>
+                  <span className="profile-pill-balance">{formatCompact(profile.initialBalance)}</span>
                 </button>
-              )}
-            </div>
-          );
-        })}
+                {isActive && profiles.length > 1 && onRequestDeleteProfile && (
+                  <button
+                    type="button"
+                    className="profile-pill-delete"
+                    title={t('common.profiles.deleteProfile')}
+                    onClick={() => onRequestDeleteProfile(profile)}
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <Button
+          variant="secondary"
+          size="sm"
+          icon={<Plus size={14} />}
+          onClick={onOpenAddModal}
+        >
+          {t('common.profiles.addProfile')}
+        </Button>
       </div>
 
-      <Button
-        variant="secondary"
-        size="sm"
-        icon={<Plus size={14} />}
-        onClick={onOpenAddModal}
-      >
-        {t('common.profiles.addProfile')}
-      </Button>
+      {profiles.length > 1 && (
+        <div className="profile-master-section">
+          <button
+            type="button"
+            className={`profile-pill profile-pill-master ${selectedProfileId === 'all' ? 'active' : ''}`}
+            onClick={() => onSelectProfile('all')}
+            title={t('budget.overview.title')}
+          >
+            <Layers size={14} />
+            <span>{t('common.profiles.allProfiles')}</span>
+            <span className="profile-pill-balance">{formatCompact(totalLiquidity)}</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

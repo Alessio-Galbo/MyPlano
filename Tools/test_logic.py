@@ -62,5 +62,29 @@ class TestMyPlanoLogic(unittest.TestCase):
                 en_b = json.load(f)
             self.assertEqual(set(it_b.keys()), set(en_b.keys()))
 
+    def test_quota_rounding_ceil_no_deficit(self):
+        import math
+        annual_total = 100.0
+        monthly_quota = math.ceil((annual_total / 12.0) * 100.0) / 100.0
+        self.assertEqual(monthly_quota, 8.34)
+        annual_saved = monthly_quota * 12.0
+        self.assertGreaterEqual(annual_saved, annual_total)
+        self.assertAlmostEqual(annual_saved - annual_total, 0.08, places=2)
+
+    def test_timeline_interim_grouping(self):
+        # Verify interim collapse preserves exact financial balances
+        quotas = [100.0, 100.0, 100.0]
+        outflows = [30.0, 40.0, 50.0]
+        init_res = 500.0
+        cur_res = init_res
+        for q, o in zip(quotas, outflows):
+            cur_res += (q - o)
+        # Grouped representation:
+        grp_quota = sum(quotas)
+        grp_outflow = sum(outflows)
+        grp_end_res = init_res + grp_quota - grp_outflow
+        self.assertEqual(cur_res, grp_end_res)
+        self.assertEqual(grp_end_res, 680.0)
+
 if __name__ == '__main__':
     unittest.main()

@@ -21,6 +21,7 @@
   position: relative;
   transition: background-color var(--transition-fast);
   border: 1px solid var(--border-subtle);
+  pointer-events: none;
 }
 
 .toggle-thumb {
@@ -33,6 +34,7 @@
   left: 3px;
   transition: transform var(--transition-fast);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
 }
 
 .toggle-input:checked + .toggle-track {

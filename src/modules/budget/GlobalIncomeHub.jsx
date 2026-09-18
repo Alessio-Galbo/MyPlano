@@ -1,23 +1,31 @@
 import React from 'react';
 import { Wallet, DollarSign } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
-import { DiscretionaryMarginPanel } from './DiscretionaryMarginPanel';
 import { ValueSaveBox } from './ValueSaveBox';
+import { DepositQuotaButton } from './DepositQuotaButton';
 import './IncomeOverviewCard.css';
 
 export function GlobalIncomeHub({
+  title,
   initialBalance = 0,
   onUpdateInitialBalance,
   monthlyIncome = 0,
   onUpdateMonthlyIncome,
-  safeMonthlyQuota = 0,
+  monthlyQuota = 0,
 }) {
   const { t } = useI18n();
+  const displayTitle = title || t('budget.incomeHub.globalHubTitle');
+
+  const handleDeposit = (amount) => {
+    const cur = Number(initialBalance) || 0;
+    const next = Math.round((cur + amount) * 100) / 100;
+    onUpdateInitialBalance(next);
+  };
 
   return (
     <div className="income-hub-card global-hub-card">
       <div className="income-hub-header">
-        <h4 className="income-hub-title">{t('budget.incomeHub.globalHubTitle')}</h4>
+        <h4 className="income-hub-title">{displayTitle}</h4>
       </div>
 
       <div className="income-inputs-grid">
@@ -27,6 +35,11 @@ export function GlobalIncomeHub({
           value={initialBalance}
           onSave={onUpdateInitialBalance}
           saveButtonText={t('budget.incomeHub.saveBalance')}
+          extraAction={
+            monthlyQuota > 0 ? (
+              <DepositQuotaButton monthlyQuota={monthlyQuota} onDeposit={handleDeposit} />
+            ) : null
+          }
         />
 
         <ValueSaveBox
@@ -38,11 +51,6 @@ export function GlobalIncomeHub({
           placeholder={t('budget.incomeHub.optional')}
         />
       </div>
-
-      <DiscretionaryMarginPanel
-        monthlyIncome={monthlyIncome}
-        safeMonthlyQuota={safeMonthlyQuota}
-      />
     </div>
   );
 }

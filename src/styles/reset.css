@@ -8,15 +8,19 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   font-family: var(--font-body);
   background-color: var(--bg-app);
   color: var(--text-main);
   line-height: 1.5;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 button, input, select, textarea {

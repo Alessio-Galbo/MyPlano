@@ -27,7 +27,7 @@ export function calculateZeroDeficitQuota(
     }
   }
 
-  const safeMonthlyQuota = Math.round(
+  const safeMonthlyQuota = Math.ceil(
     Math.max(steadyQuota, maxRequiredQuota) * 100
   ) / 100;
 

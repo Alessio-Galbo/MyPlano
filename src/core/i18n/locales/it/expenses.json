@@ -30,12 +30,15 @@
     "days": "Giorni"
   },
   "categories": {
-    "utilities": "Utenze (Luce/Gas/Acqua)",
-    "vehicle": "Auto & Moto (Assicurazione/Bollo)",
-    "home": "Casa & Mutuo/Affitto",
-    "taxes": "Tasse & F24",
-    "subscriptions": "Abbonamenti & Servizi",
-    "health": "Salute & Assicurazioni",
+    "vehicle": "Veicoli",
+    "home": "Casa",
+    "utilities": "Utenze",
+    "taxes": "Tasse",
+    "insurance": "Assicurazioni",
+    "subscriptions": "Abbonamenti",
+    "health": "Salute",
+    "work": "Lavoro",
+    "sport": "Sport",
     "other": "Altro"
   },
   "status": {
@@ -81,6 +84,31 @@
   "tags": {
     "variable": "Variabile",
     "fixed": "Fissa"
+  },
+  "yearFilter": {
+    "yearLabel": "Anno:",
+    "allYears": "Tutti",
+    "range": "Intervallo",
+    "from": "Da",
+    "to": "A",
+    "yearTotal": "Totale anno",
+    "installmentsCount": "{count} scadenze"
+  },
+  "installments": {
+    "paid": "Pagato",
+    "paidFromFund": "Pagato (dal fondo)",
+    "paidExternal": "Pagato (esterno)",
+    "due": "Da Pagare",
+    "markPaid": "Segna come pagato",
+    "markUnpaid": "Segna non pagato",
+    "nextOccurrence": "Prossima scadenza:",
+    "jumpToNext": "Vai al {year} →",
+    "deductModalTitle": "Registra Pagamento Spesa",
+    "deductModalDesc": "Vuoi scalare l'importo dal Fondo Risparmio di questo profilo?",
+    "currentFundLabel": "Saldo fondo attuale",
+    "newFundLabel": "Nuovo saldo dopo pagamento",
+    "btnDeduct": "Sì, scala dal Fondo",
+    "btnNoDeduct": "Segna senza scalare"
   },
   "emptyState": "Nessuna spesa periodica registrata."
 }

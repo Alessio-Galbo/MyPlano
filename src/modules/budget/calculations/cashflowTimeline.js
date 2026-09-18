@@ -26,10 +26,17 @@ export function generateCashflowTimeline(
     const year = targetMonthDate.getFullYear();
 
     const dueExpenses = [];
+    let excludedOutflow = 0;
+    const catFilter = simOptions.categoryFilter;
+
     const monthOutflow = filtered.reduce((sum, item) => {
       if (isExpenseDueInMonth(item, year, monthIndex)) {
         const amt = getExpenseEffectiveAmount(item);
-        dueExpenses.push({ id: item.id, title: item.title, amount: amt, category: item.category });
+        if (!catFilter || catFilter === 'all' || item.category === catFilter) {
+          dueExpenses.push({ id: item.id, title: item.title, amount: amt, category: item.category });
+        } else {
+          excludedOutflow += amt;
+        }
         return sum + amt;
       }
       return sum;
@@ -49,16 +56,23 @@ export function generateCashflowTimeline(
 
     accumulatedReserve += (appliedQuota - monthOutflow);
 
+    const rawShort = targetMonthDate.toLocaleString('default', { month: 'short' });
+    const capShort = rawShort.charAt(0).toUpperCase() + rawShort.slice(1);
+    const rawLong = targetMonthDate.toLocaleString('default', { month: 'long' });
+    const capLong = rawLong.charAt(0).toUpperCase() + rawLong.slice(1);
+
     months.push({
       date: targetMonthDate,
-      monthNameKey: targetMonthDate.toLocaleString('default', { month: 'short' }),
+      monthNameKey: capShort,
+      monthLongName: capLong,
       year,
       quota: Math.round(appliedQuota * 100) / 100,
       isSurvivalQuota: isSurv,
       outflow: Math.round(monthOutflow * 100) / 100,
       reserve: Math.round(accumulatedReserve * 100) / 100,
-      isShortage: accumulatedReserve < 0,
+      isShortage: accumulatedReserve < -0.05,
       dueExpenses,
+      excludedOutflow: Math.round(excludedOutflow * 100) / 100,
     });
   }
 

@@ -1,0 +1,63 @@
+.standard-plan-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1.125rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  width: 100%; box-sizing: border-box; text-align: left;
+}
+
+.standard-plan-card.card-active {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 100%);
+}
+
+.standard-plan-badge { color: #67e8f9; }
+.standard-plan-value {
+  font-size: 1.25rem; font-weight: 800; font-family: var(--font-display);
+  color: #f8fafc;
+}
+
+.standard-status-pill {
+  font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.5rem;
+  border-radius: 9999px; background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle); color: var(--text-muted);
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  cursor: pointer; transition: all var(--transition-fast);
+}
+.standard-status-pill:hover { border-color: rgba(255, 255, 255, 0.3); color: #ffffff; }
+.standard-status-pill.status-active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #34d399;
+}
+
+.deficit-shield-notice {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+
+.deficit-shield-header {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8125rem; font-weight: 700; color: #fca5a5;
+}
+
+.deficit-bullet-list {
+  margin: 0; padding-left: 1.25rem; list-style-type: disc !important;
+}
+
+.deficit-bullet-list li {
+  display: list-item !important; color: #cbd5e1;
+  font-size: 0.8125rem; line-height: 1.45; margin-bottom: 0.25rem;
+}
+.deficit-bullet-list li::marker { color: #ef4444; }
+.deficit-bullet-list li:last-child { margin-bottom: 0; }
+.deficit-bullet-list li strong { color: #ffffff; }
+
+@media (max-width: 640px) {
+  .standard-plan-card { padding: 0.875rem 1rem; }
+}
+

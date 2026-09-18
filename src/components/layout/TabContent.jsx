@@ -4,30 +4,16 @@ import { DocumentList } from '../../modules/documents';
 import { ExpenseList } from '../../modules/expenses';
 import { SettingsView } from '../../modules/settings';
 
-export function TabContent({
-  activeTab,
-  selectedProfileId,
-  expenses,
-  documents,
-  profiles,
-  initialBalance,
-  onUpdateInitialBalance,
-  monthlyIncome,
-  onUpdateMonthlyIncome,
-  profileFunds,
-  profileFundConfigs,
-  onUpdateProfileFund,
-  onSetProfileUsesDedicatedFund,
-  profileIncomes,
-  profileIncomeConfigs,
-  onUpdateProfileIncome,
-  onSetProfileUsesDedicatedIncome,
-  saveDocument,
-  deleteDocument,
-  saveExpense,
-  deleteExpense,
-  reloadAll,
-}) {
+export function TabContent(props) {
+  const {
+    activeTab, selectedProfileId, onSelectProfile, expenses, documents, profiles,
+    saveDocument, deleteDocument, saveExpense, deleteExpense, reloadAll,
+  } = props;
+
+  const onUpdateProfileBalance = props.onUpdateProfileBalance || props.updateProfileBalance;
+  const onUpdateProfileIncome = props.onUpdateProfileIncome || props.updateProfileIncome;
+  const onDepositProfileQuota = props.onDepositProfileQuota || props.depositQuotaToProfile;
+
   switch (activeTab) {
     case 'budget':
       return (
@@ -35,18 +21,10 @@ export function TabContent({
           expenses={expenses}
           profiles={profiles}
           selectedProfileId={selectedProfileId}
-          initialBalance={initialBalance}
-          onUpdateInitialBalance={onUpdateInitialBalance}
-          monthlyIncome={monthlyIncome}
-          onUpdateMonthlyIncome={onUpdateMonthlyIncome}
-          profileFunds={profileFunds}
-          profileFundConfigs={profileFundConfigs}
-          onUpdateProfileFund={onUpdateProfileFund}
-          onSetProfileUsesDedicatedFund={onSetProfileUsesDedicatedFund}
-          profileIncomes={profileIncomes}
-          profileIncomeConfigs={profileIncomeConfigs}
+          onSelectProfile={onSelectProfile}
+          onUpdateProfileBalance={onUpdateProfileBalance}
           onUpdateProfileIncome={onUpdateProfileIncome}
-          onSetProfileUsesDedicatedIncome={onSetProfileUsesDedicatedIncome}
+          onDepositProfileQuota={onDepositProfileQuota}
         />
       );
     case 'documents':
@@ -67,6 +45,7 @@ export function TabContent({
           selectedProfileId={selectedProfileId}
           onSaveExpense={saveExpense}
           onDeleteExpense={deleteExpense}
+          onUpdateProfileBalance={onUpdateProfileBalance}
         />
       );
     case 'settings':

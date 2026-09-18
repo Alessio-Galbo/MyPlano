@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { storageService } from '../../core/storage/storageService';
 import { BudgetOverview } from './BudgetOverview';
 import { CashflowTimeline } from './CashflowTimeline';
 import { calculateColdStartAnalysis } from './budgetCalculations';
@@ -7,28 +8,34 @@ export function BudgetTab({
   expenses,
   profiles = [],
   selectedProfileId = 'all',
-  initialBalance = 0,
-  onUpdateInitialBalance,
-  monthlyIncome = 0,
-  onUpdateMonthlyIncome,
-  profileFunds = {},
-  profileFundConfigs = {},
-  onUpdateProfileFund,
-  onSetProfileUsesDedicatedFund,
-  profileIncomes = {},
-  profileIncomeConfigs = {},
+  onSelectProfile,
+  onUpdateProfileBalance,
   onUpdateProfileIncome,
-  onSetProfileUsesDedicatedIncome,
+  onDepositProfileQuota,
 }) {
-  const [simulationStrategy, setSimulationStrategy] = useState('survival');
+  const [strategies, setStrategies] = useState(() => storageService.getProfileStrategies());
 
-  const usesDedicatedFund = selectedProfileId !== 'all' && !!profileFundConfigs[selectedProfileId];
-  const effectiveFund = usesDedicatedFund ? (profileFunds[selectedProfileId] || 0) : initialBalance;
-
-  const usesDedicatedIncome = selectedProfileId !== 'all' && !!profileIncomeConfigs[selectedProfileId];
-  const effectiveIncome = usesDedicatedIncome ? (profileIncomes[selectedProfileId] || 0) : monthlyIncome;
+  const profile = profiles.find((p) => p.id === selectedProfileId);
+  const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
+  const effectiveFund = selectedProfileId === 'all' ? totalLiquidity : (profile?.initialBalance || 0);
 
   const coldStart = calculateColdStartAnalysis(expenses, selectedProfileId, effectiveFund);
+
+  const currentStrategy = strategies[selectedProfileId] || 'standard';
+  const simulationStrategy = (!coldStart.hasDeficit && currentStrategy === 'survival')
+    ? 'standard'
+    : currentStrategy;
+
+  const handleSelectStrategy = (strat) => {
+    setStrategies((prev) => ({ ...prev, [selectedProfileId]: strat }));
+    storageService.saveProfileStrategy(selectedProfileId, strat);
+  };
+
+  useEffect(() => {
+    if (!coldStart.hasDeficit && currentStrategy === 'survival') {
+      handleSelectStrategy('standard');
+    }
+  }, [coldStart.hasDeficit, currentStrategy]);
 
   const simOptions = {
     strategy: simulationStrategy,
@@ -44,23 +51,13 @@ export function BudgetTab({
         expenses={expenses}
         profiles={profiles}
         selectedProfileId={selectedProfileId}
-        initialBalance={initialBalance}
-        onUpdateInitialBalance={onUpdateInitialBalance}
-        monthlyIncome={monthlyIncome}
-        onUpdateMonthlyIncome={onUpdateMonthlyIncome}
-        profileFunds={profileFunds}
-        profileFundConfigs={profileFundConfigs}
-        onUpdateProfileFund={onUpdateProfileFund}
-        onSetProfileUsesDedicatedFund={onSetProfileUsesDedicatedFund}
-        profileIncomes={profileIncomes}
-        profileIncomeConfigs={profileIncomeConfigs}
+        onSelectProfile={onSelectProfile}
+        onUpdateProfileBalance={onUpdateProfileBalance}
         onUpdateProfileIncome={onUpdateProfileIncome}
-        onSetProfileUsesDedicatedIncome={onSetProfileUsesDedicatedIncome}
-        effectiveFund={effectiveFund}
-        effectiveIncome={effectiveIncome}
+        onDepositProfileQuota={onDepositProfileQuota}
         coldStart={coldStart}
         simulationStrategy={simulationStrategy}
-        onSelectStrategy={setSimulationStrategy}
+        onSelectStrategy={handleSelectStrategy}
       />
       <CashflowTimeline
         expenses={expenses}

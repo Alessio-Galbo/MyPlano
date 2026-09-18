@@ -1,5 +1,14 @@
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .app-shell {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
   background: radial-gradient(circle at 15% 15%, rgba(124, 93, 250, 0.08) 0%, transparent 40%),

@@ -1,0 +1,48 @@
+.profile-mgmt-container { display: flex; flex-direction: column; gap: 1.25rem; }
+.profile-mgmt-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: -0.5rem; }
+.profile-mgmt-list { display: flex; flex-direction: column; gap: 0.625rem; }
+
+.profile-mgmt-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1rem; border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+.profile-mgmt-item.active { border-color: var(--color-primary); background: rgba(124, 93, 250, 0.12); }
+.profile-mgmt-item.master {
+  background: rgba(124, 93, 250, 0.08); border-color: rgba(124, 93, 250, 0.35);
+  cursor: pointer; text-align: left; width: 100%;
+}
+
+.profile-mgmt-item-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 1; background: none; border: none; padding: 0; cursor: pointer; text-align: left;
+}
+.profile-mgmt-info { display: flex; align-items: center; gap: 0.75rem; }
+.profile-mgmt-master-icon { color: var(--color-primary); }
+.profile-mgmt-name-row { display: flex; align-items: center; gap: 0.5rem; }
+.profile-mgmt-name { font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+
+.profile-active-tag {
+  display: inline-flex; align-items: center; gap: 0.2rem;
+  font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-full); background: var(--color-primary); color: #ffffff;
+}
+
+.profile-mgmt-desc, .profile-mgmt-balance { font-size: 0.75rem; color: var(--text-muted); }
+.profile-mgmt-amounts { display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem; }
+.profile-mgmt-annual { font-size: 0.88rem; font-weight: 700; color: #38bdf8; }
+
+.profile-mgmt-delete-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25);
+  color: var(--color-danger); cursor: pointer; margin-left: 0.5rem;
+  transition: all var(--transition-fast);
+}
+.profile-mgmt-delete-btn:hover { background: var(--color-danger); color: #ffffff; }
+
+.profile-mgmt-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-subtle);
+}

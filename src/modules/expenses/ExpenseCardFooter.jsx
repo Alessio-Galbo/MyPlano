@@ -5,23 +5,28 @@ import { useI18n } from '../../core/i18n';
 
 export function ExpenseCardFooter({
   expense,
+  dueDate,
+  isPaid = false,
   onMarkPaid,
   onEdit,
   onDelete,
   onOpenHistory,
 }) {
   const { t } = useI18n();
+  const isFromFund = Boolean(expense.installments?.[dueDate]?.deductedFromFund);
+  const paidText = isFromFund ? t('expenses.installments.paidFromFund') : t('expenses.installments.paid');
 
   return (
     <div className="expense-footer">
       <div className="expense-footer-left">
         <Button
-          variant="secondary"
+          variant={isPaid ? 'success' : 'secondary'}
           size="sm"
           icon={<CheckCircle size={14} />}
-          onClick={() => onMarkPaid(expense)}
+          onClick={() => onMarkPaid(expense, dueDate)}
+          title={isPaid ? t('expenses.installments.markUnpaid') : t('expenses.installments.markPaid')}
         >
-          {t('common.actions.markPaid')}
+          {isPaid ? paidText : t('expenses.installments.markPaid')}
         </Button>
 
         {expense.isVariable && (

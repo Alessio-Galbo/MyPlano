@@ -30,12 +30,15 @@
     "days": "Days"
   },
   "categories": {
-    "utilities": "Utilities (Power/Gas/Water)",
-    "vehicle": "Auto & Moto (Insurance/Tax)",
-    "home": "Home & Mortgage/Rent",
-    "taxes": "Taxes & Duties",
-    "subscriptions": "Subscriptions & Services",
-    "health": "Health & Insurance",
+    "vehicle": "Vehicles",
+    "home": "Home",
+    "utilities": "Utilities",
+    "taxes": "Taxes",
+    "insurance": "Insurance",
+    "subscriptions": "Subscriptions",
+    "health": "Health",
+    "work": "Work",
+    "sport": "Sport",
     "other": "Other"
   },
   "status": {
@@ -81,6 +84,31 @@
   "tags": {
     "variable": "Variable",
     "fixed": "Fixed"
+  },
+  "yearFilter": {
+    "yearLabel": "Year:",
+    "allYears": "All",
+    "range": "Range",
+    "from": "From",
+    "to": "To",
+    "yearTotal": "Year total",
+    "installmentsCount": "{count} due"
+  },
+  "installments": {
+    "paid": "Paid",
+    "paidFromFund": "Paid (from fund)",
+    "paidExternal": "Paid (external)",
+    "due": "To Pay",
+    "markPaid": "Mark as paid",
+    "markUnpaid": "Mark as unpaid",
+    "nextOccurrence": "Next due date:",
+    "jumpToNext": "Go to {year} →",
+    "deductModalTitle": "Record Expense Payment",
+    "deductModalDesc": "Do you want to deduct this amount from this profile's Sinking Fund?",
+    "currentFundLabel": "Current fund balance",
+    "newFundLabel": "New balance after payment",
+    "btnDeduct": "Yes, deduct from Fund",
+    "btnNoDeduct": "Mark without deducting"
   },
   "emptyState": "No recurring expenses recorded."
 }

@@ -24,7 +24,7 @@ export function calculateBudgetMetrics(expenses, profileId = 'all') {
     0
   );
 
-  const monthlyQuota = totalAnnual / 12;
+  const monthlyQuota = Math.ceil((totalAnnual / 12) * 100) / 100;
 
   const now = new Date();
   const thirtyDaysLater = new Date();
@@ -39,7 +39,7 @@ export function calculateBudgetMetrics(expenses, profileId = 'all') {
   return {
     filteredCount: filtered.length,
     totalAnnual: Math.round(totalAnnual * 100) / 100,
-    monthlyQuota: Math.round(monthlyQuota * 100) / 100,
+    monthlyQuota,
     upcoming30DaysCount,
   };
 }

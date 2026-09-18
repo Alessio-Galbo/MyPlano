@@ -1,6 +1,8 @@
 import { INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES } from './initialData';
 import { exportAllAppData, importAllAppData } from './exportImportService';
 import { profileFinanceStorage } from './profileFinanceStorage';
+import { normalizeProfileFinances } from './profileMigrationHelper';
+import { storageResetService } from './storageResetService';
 
 const KEYS = {
   PROFILES: 'myplano_profiles',
@@ -14,21 +16,22 @@ const KEYS = {
 export const storageService = {
   getProfiles() {
     const raw = localStorage.getItem(KEYS.PROFILES);
-    return raw ? JSON.parse(raw) : INITIAL_PROFILES;
+    const parsed = raw !== null ? JSON.parse(raw) : INITIAL_PROFILES;
+    return normalizeProfileFinances(parsed, this.getInitialBalance(), this.getMonthlyIncome());
   },
   saveProfiles(profiles) {
     localStorage.setItem(KEYS.PROFILES, JSON.stringify(profiles));
   },
   getDocuments() {
     const raw = localStorage.getItem(KEYS.DOCUMENTS);
-    return raw ? JSON.parse(raw) : INITIAL_DOCUMENTS;
+    return raw !== null ? JSON.parse(raw) : INITIAL_DOCUMENTS;
   },
   saveDocuments(docs) {
     localStorage.setItem(KEYS.DOCUMENTS, JSON.stringify(docs));
   },
   getExpenses() {
     const raw = localStorage.getItem(KEYS.EXPENSES);
-    return raw ? JSON.parse(raw) : INITIAL_EXPENSES;
+    return raw !== null ? JSON.parse(raw) : INITIAL_EXPENSES;
   },
   saveExpenses(expenses) {
     localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
@@ -61,10 +64,24 @@ export const storageService = {
   saveProfileIncomes: (i) => profileFinanceStorage.saveProfileIncomes(i),
   getProfileIncomeConfigs: () => profileFinanceStorage.getProfileIncomeConfigs(),
   saveProfileIncomeConfigs: (c) => profileFinanceStorage.saveProfileIncomeConfigs(c),
-  exportAllData() {
-    return exportAllAppData(this);
+  getProfileStrategies() {
+    try {
+      const raw = localStorage.getItem('myplano_budget_strategies');
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
   },
-  importAllData(jsonString) {
-    return importAllAppData(this, jsonString);
+  getProfileStrategy(profileId) {
+    return this.getProfileStrategies()[profileId] || 'standard';
   },
+  saveProfileStrategy(profileId, strategy) {
+    try {
+      const map = this.getProfileStrategies();
+      map[profileId] = strategy;
+      localStorage.setItem('myplano_budget_strategies', JSON.stringify(map));
+    } catch { /* ignore */ }
+  },
+  exportAllData() { return exportAllAppData(this); },
+  importAllData(json) { return importAllAppData(this, json); },
+  clearAllData() { return storageResetService.clearAllData(this); },
+  resetToFactoryDefaults() { return storageResetService.resetToFactoryDefaults(this); },
 };

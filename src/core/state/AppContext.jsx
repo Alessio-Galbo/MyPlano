@@ -5,7 +5,10 @@ const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [activeTab, setActiveTab] = useState('budget'); // 'budget', 'documents', 'expenses', 'settings'
-  const [selectedProfileId, setSelectedProfileId] = useState('all'); // 'all' or profile.id
+  const [selectedProfileId, setSelectedProfileId] = useState(() => {
+    const list = storageService.getProfiles();
+    return list[0]?.id || 'p1';
+  });
   const [isGlobalMuted, setIsGlobalMuted] = useState(() => storageService.getGlobalMute());
 
   const toggleGlobalMute = () => {

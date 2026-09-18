@@ -1,0 +1,76 @@
+.budget-kpi-container { width: 100%; margin-bottom: 1.25rem; }
+.budget-kpi-carousel-wrapper { width: 100%; position: relative; }
+.budget-kpi-track-window { width: 100%; }
+
+.budget-kpi-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.kpi-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.35rem;
+  transition: transform var(--transition-fast);
+}
+
+.kpi-card:hover { transform: translateY(-2px); border-color: rgba(124, 93, 250, 0.4); }
+.kpi-card-highlight {
+  border-color: rgba(124, 93, 250, 0.4);
+  background: linear-gradient(180deg, rgba(124, 93, 250, 0.08) 0%, var(--bg-card) 100%);
+}
+
+.kpi-header { display: flex; align-items: center; justify-content: space-between; }
+.kpi-label { font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); }
+.kpi-icon { color: var(--color-primary); }
+
+.kpi-value {
+  font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--text-main); display: flex; align-items: baseline; gap: 0.25rem;
+}
+.kpi-desc { font-size: 0.72rem; color: var(--text-muted); }
+
+.kpi-carousel-arrow { display: none; }
+.kpi-carousel-dots { display: none; }
+
+@media (max-width: 640px) {
+  .budget-kpi-carousel-wrapper {
+    position: relative; width: 100%; overflow: hidden; border-radius: var(--radius-lg);
+  }
+  .budget-kpi-track-window { overflow: hidden; width: 100%; border-radius: var(--radius-lg); }
+  .budget-kpi-track {
+    display: flex; width: 100%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .budget-kpi-track .kpi-card {
+    flex: 0 0 100%; width: 100%; min-width: 100%; box-sizing: border-box;
+  }
+  .kpi-carousel-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-main); cursor: pointer; opacity: 0.85;
+    transition: all var(--transition-fast);
+  }
+  .kpi-carousel-arrow:hover, .kpi-carousel-arrow:active {
+    opacity: 1; background: var(--color-primary); color: #ffffff;
+  }
+  .kpi-carousel-arrow.left { left: 6px; }
+  .kpi-carousel-arrow.right { right: 6px; }
+  .kpi-carousel-dots {
+    display: flex; justify-content: center; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2); border: none; padding: 0; cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+  .carousel-dot.active {
+    width: 18px; border-radius: 4px; background: var(--color-primary);
+  }
+}

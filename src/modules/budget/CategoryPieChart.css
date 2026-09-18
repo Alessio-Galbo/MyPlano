@@ -1,0 +1,73 @@
+.donut-chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.donut-svg-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donut-hole { fill: var(--bg-card); }
+.donut-ring { fill: transparent; stroke: rgba(255, 255, 255, 0.05); stroke-width: 4; }
+.donut-segment {
+  fill: transparent;
+  stroke-width: 4;
+  transition: stroke-width var(--transition-fast), filter var(--transition-fast);
+  cursor: pointer;
+}
+
+.donut-segment:hover, .donut-segment.hovered {
+  stroke-width: 5.5;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.donut-center-text {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  pointer-events: none; text-align: center; padding: 0.5rem;
+}
+
+.donut-center-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.donut-center-value { font-size: 1.2rem; font-weight: 800; color: var(--text-main); font-family: var(--font-display); }
+
+.donut-legend {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  flex: 1; min-width: 240px; max-height: 220px; overflow-y: auto;
+}
+
+.donut-legend-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.6rem; border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02); border: 1px solid transparent;
+  font-size: 0.8rem; cursor: pointer; transition: all var(--transition-fast);
+}
+
+.donut-legend-item:hover, .donut-legend-item.active {
+  background: rgba(255, 255, 255, 0.06); border-color: var(--border-subtle);
+}
+
+.donut-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.donut-legend-name { flex: 1; color: var(--text-main); font-weight: 600; }
+.donut-legend-percent { color: var(--text-muted); font-size: 0.75rem; min-width: 42px; text-align: right; }
+.donut-legend-val { color: #38bdf8; font-weight: 700; min-width: 65px; text-align: right; }
+
+@media (max-width: 640px) {
+  .donut-chart-container { flex-direction: column; padding: 1rem; gap: 1.25rem; }
+  .donut-legend { width: 100%; }
+}

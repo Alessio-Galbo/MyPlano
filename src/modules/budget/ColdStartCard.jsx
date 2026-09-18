@@ -1,16 +1,18 @@
 import React from 'react';
-import { ShieldAlert } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { ColdStartSuccessView } from './ColdStartSuccessView';
-import { ColdStartOptionCard } from './ColdStartOptionCard';
-import { ColdStartDeficitBanner } from './ColdStartDeficitBanner';
-import { getSurvivalOptionDetails, getDeficitAlertTexts } from './coldStartCardHelpers';
+import { ColdStartDeficitList } from './ColdStartDeficitList';
+import { ColdStartActionsCarousel } from './ColdStartActionsCarousel';
+import {
+  getSurvivalOptionDetails,
+  getPlanBPhaseItems,
+} from './coldStartCardHelpers';
 import './ColdStartCard.css';
 
 export function ColdStartCard({
   analysis,
   standardMonthlyQuota = 0,
-  selectedStrategy = 'survival',
+  selectedStrategy = 'standard',
   onSelectStrategy,
   onTopUpFund,
 }) {
@@ -19,64 +21,49 @@ export function ColdStartCard({
     Number(val || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
 
   const worstMonthLabel = analysis.worstMonth
-    ? `${analysis.worstMonth.monthNameKey} ${analysis.worstMonth.year}`
+    ? `${analysis.worstMonth.monthLongName || analysis.worstMonth.monthNameKey} ${analysis.worstMonth.year}`
     : '';
 
   if (!analysis.hasDeficit) {
     return <ColdStartSuccessView analysis={analysis} worstMonthLabel={worstMonthLabel} />;
   }
 
-  const { title: deficitTitle, alert: deficitAlert } = getDeficitAlertTexts(
-    analysis,
-    worstMonthLabel,
-    t,
-    formatCurr
-  );
-
-  const { amountFormatted: survivalAmountFormatted, desc: survivalDesc } =
+  const { amountFormatted: survivalAmountFormatted } =
     getSurvivalOptionDetails(analysis, worstMonthLabel, t, formatCurr);
+  const planBPhases = getPlanBPhaseItems(analysis, worstMonthLabel, t, formatCurr);
 
-  const optStdDesc = t('budget.coldStart.solutionStandardDesc')
-    .replace('{amount}', formatCurr(standardMonthlyQuota));
+  const handleTogglePlanB = () => {
+    const nextStrategy = selectedStrategy === 'survival' ? 'standard' : 'survival';
+    onSelectStrategy(nextStrategy);
+  };
+
+  const handleTopUp = () => {
+    onTopUpFund(analysis.initialBufferRequired);
+  };
 
   return (
     <div className="cold-start-card cold-start-warning">
-      <div className="cold-start-header">
-        <ShieldAlert size={20} className="val-negative" />
-        <h4 className="cold-start-title">{deficitTitle}</h4>
-      </div>
 
-      <ColdStartDeficitBanner
-        deficitAlert={deficitAlert}
-        initialBufferRequired={analysis.initialBufferRequired}
-        onTopUpFund={onTopUpFund}
+      <ColdStartDeficitList
+        standardMonthlyQuota={standardMonthlyQuota}
+        analysis={analysis}
+        worstMonthLabel={worstMonthLabel}
         formatCurr={formatCurr}
+        isStandardActive={selectedStrategy === 'standard'}
+        onSelectStandard={() => onSelectStrategy('standard')}
+        t={t}
       />
 
-      <span className="cold-start-section-subtitle">
-        {t('budget.coldStart.chartStrategiesTitle')}
-      </span>
-
-      <div className="cold-start-grid cold-start-dual-grid">
-        <ColdStartOptionCard
-          id="survival"
-          title={t('budget.coldStart.solutionTwoTitle')}
-          amountFormatted={survivalAmountFormatted}
-          isMonthly
-          desc={survivalDesc}
-          isActive={selectedStrategy === 'survival'}
-          onClick={onSelectStrategy}
-        />
-        <ColdStartOptionCard
-          id="standard"
-          title={t('budget.coldStart.solutionStandardTitle')}
-          amountFormatted={formatCurr(standardMonthlyQuota)}
-          isMonthly
-          desc={optStdDesc}
-          isActive={selectedStrategy === 'standard'}
-          onClick={onSelectStrategy}
-        />
-      </div>
+      <ColdStartActionsCarousel
+        topUpAmountFormatted={formatCurr(analysis.initialBufferRequired)}
+        standardQuotaFormatted={formatCurr(standardMonthlyQuota)}
+        onTopUpFund={handleTopUp}
+        planBAmountFormatted={survivalAmountFormatted}
+        planBPhases={planBPhases}
+        isPlanBActive={selectedStrategy === 'survival'}
+        onTogglePlanB={handleTogglePlanB}
+        t={t}
+      />
     </div>
   );
 }

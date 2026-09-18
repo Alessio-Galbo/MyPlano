@@ -14,6 +14,7 @@ export function CategoryGroupedView({
   onToggleCalendar,
   onMarkPaid,
   onOpenHistory,
+  onNavigateYear,
 }) {
   const { t } = useI18n();
 
@@ -47,8 +48,9 @@ export function CategoryGroupedView({
             <div className="grid-cards">
               {items.map((exp) => (
                 <ExpenseCard
-                  key={exp.id}
+                  key={`${exp.id}-${exp.dueDate || exp.nextDueDate}`}
                   expense={exp}
+                  dueDate={exp.dueDate || exp.nextDueDate}
                   profile={profiles.find((p) => p.id === exp.profileId)}
                   onEdit={onEdit}
                   onDelete={onDelete}
@@ -56,6 +58,7 @@ export function CategoryGroupedView({
                   onToggleCalendar={onToggleCalendar}
                   onMarkPaid={onMarkPaid}
                   onOpenHistory={onOpenHistory}
+                  onNavigateYear={onNavigateYear}
                 />
               ))}
             </div>

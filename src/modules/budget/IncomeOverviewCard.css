@@ -80,3 +80,9 @@
   border-color: rgba(99, 102, 241, 0.3);
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.04) 0%, var(--bg-card) 100%);
 }
+
+@media (max-width: 640px) {
+  .income-hub-card { padding: 1rem 0.875rem; }
+  .income-inputs-grid { grid-template-columns: 1fr; }
+}
+

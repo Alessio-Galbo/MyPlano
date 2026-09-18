@@ -22,21 +22,32 @@
     "markPaid": "Mark as Paid",
     "exportCalendar": "Export Calendar (.ics)",
     "backup": "Backup JSON",
-    "restore": "Restore JSON"
+    "restore": "Restore JSON",
+    "factoryReset": "Restore Sample Data",
+    "wipeDatabase": "Clear Entire Database"
   },
   "profiles": {
-    "allProfiles": "Entire Household (All)",
+    "allProfiles": "Overview",
     "personal": "Personal",
     "family": "Family",
     "vehicles": "Vehicles",
     "manage": "Manage Profiles",
     "addProfile": "New Profile",
     "profileName": "Profile Name",
+    "initialFund": "Initial Fund (€)",
+    "monthlyIncome": "Monthly Income (€)",
     "deleteProfile": "Delete Profile",
     "deleteConfirmTitle": "Delete Profile and Linked Data",
     "deleteConfirmDesc": "Are you sure you want to delete profile \"{name}\"?",
     "deleteCascadeWarning": "This will also permanently delete {expensesCount} expenses and {documentsCount} documents linked to this profile.",
-    "deleteButton": "Delete Profile & Data"
+    "deleteButton": "Delete Profile & Data",
+    "perYear": "/yr",
+    "modalTitle": "Manage Profiles & Household",
+    "modalSubtitle": "Select active profile or view consolidated household overview",
+    "viewAllDesc": "Consolidated view with all combined expenses & finances",
+    "editProfile": "Edit profile",
+    "active": "Active",
+    "fund": "Fund"
   },
   "notifications": {
     "globalMute": "Mute All Notifications",
@@ -49,6 +60,16 @@
     "languageDesc": "Select your preferred language for text and labels",
     "muteDesc": "Temporarily silence all due date alerts",
     "calendarDesc": "Generate .ics file for Google Calendar, Outlook, or Apple Calendar",
-    "backupDesc": "Save a local security backup of all your data or restore from file"
+    "backupDesc": "Save a local security backup of all your data or restore from file",
+    "databaseMaintenance": "Database Maintenance & Reset",
+    "databaseMaintenanceDesc": "Restore factory sample data or completely clear your local database",
+    "factoryResetDesc": "Restore default sample profiles, expenses, and documents",
+    "wipeDatabaseDesc": "Permanently delete all stored data to start fresh with a clean slate",
+    "confirmFactoryTitle": "Restore Sample Data?",
+    "confirmFactoryDesc": "This action will replace all existing data with default sample data (3 balanced profiles, demo expenses, and documents).",
+    "confirmWipeTitle": "Clear Entire Database?",
+    "confirmWipeDesc": "CAUTION: This will permanently delete ALL stored profiles, expenses, and documents. Your database will become completely empty.",
+    "confirmWipeButton": "Yes, wipe everything permanently",
+    "confirmFactoryButton": "Yes, restore sample data"
   }
 }

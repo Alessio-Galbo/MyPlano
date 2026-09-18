@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useI18n } from '../../core/i18n';
-import { ExpenseFormModal } from './ExpenseFormModal';
-import { ExpenseHistoryModal } from './ExpenseHistoryModal';
 import { ExpenseListHeader } from './ExpenseListHeader';
 import { ExpenseCardGrid } from './ExpenseCardGrid';
 import { CategoryGroupedView } from './CategoryGroupedView';
-import { advanceNextDueDate } from './expenseHelpers';
+import { ExpenseCategoryFilter } from './ExpenseCategoryFilter';
+import { ExpenseYearSelector } from './ExpenseYearSelector';
+import { ExpenseModalsContainer } from './ExpenseModalsContainer';
+import { useExpenseListState } from './useExpenseListState';
+import { useExpenseFilterData } from './useExpenseFilterData';
+import { useExpensePaymentHandler } from './useExpensePaymentHandler';
 import '../documents/DocumentList.css';
 
 export function ExpenseList({
@@ -14,30 +17,19 @@ export function ExpenseList({
   selectedProfileId,
   onSaveExpense,
   onDeleteExpense,
+  onUpdateProfileBalance,
 }) {
   const { t } = useI18n();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingExp, setEditingExp] = useState(null);
-  const [historyModalExp, setHistoryModalExp] = useState(null);
-  const [viewMode, setViewMode] = useState('list');
+  const state = useExpenseListState(selectedProfileId);
+  const filterData = useExpenseFilterData(expenses, selectedProfileId, state);
+  const paymentHandler = useExpensePaymentHandler({ profiles, onSaveExpense, onUpdateProfileBalance });
 
-  const filtered = selectedProfileId === 'all'
-    ? expenses
-    : expenses.filter((e) => e.profileId === selectedProfileId);
-
-  const handleEdit = (exp) => {
-    setEditingExp(exp);
-    setIsModalOpen(true);
-  };
-
-  const handleCreate = () => {
-    setEditingExp(null);
-    setIsModalOpen(true);
-  };
-
-  const handleMarkPaid = (exp) => {
-    const nextDate = advanceNextDueDate(exp.nextDueDate, exp.frequency);
-    onSaveExpense({ ...exp, nextDueDate: nextDate });
+  const handleNavigateYear = (targetYear, expId) => {
+    state.setSelectedYearRange({ mode: 'single', fromYear: targetYear, toYear: targetYear });
+    setTimeout(() => {
+      const el = document.querySelector(`[id^="exp-card-${expId}"]`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 150);
   };
 
   const handleToggleProp = (id, prop, val) => {
@@ -46,46 +38,53 @@ export function ExpenseList({
   };
 
   const commonProps = {
-    expenses: filtered,
+    expenses: filterData.displayedExpenses,
     profiles,
-    onEdit: handleEdit,
+    onEdit: (e) => { state.setEditingExp(e); state.setIsModalOpen(true); },
     onDelete: onDeleteExpense,
     onToggleAlert: (id, val) => handleToggleProp(id, 'enableAlert', val),
     onToggleCalendar: (id, val) => handleToggleProp(id, 'includeInCalendar', val),
-    onMarkPaid: handleMarkPaid,
-    onOpenHistory: (e) => setHistoryModalExp(e),
+    onMarkPaid: paymentHandler.handleTogglePaid,
+    onNavigateYear: handleNavigateYear,
+    onOpenHistory: (e) => state.setHistoryModalExp(e),
   };
 
   return (
     <div className="doc-list-view">
       <ExpenseListHeader
-        viewMode={viewMode}
-        onToggleViewMode={setViewMode}
-        onCreate={handleCreate}
+        viewMode={state.viewMode}
+        onToggleViewMode={state.setViewMode}
+        onCreate={() => { state.setEditingExp(null); state.setIsModalOpen(true); }}
       />
-
-      {filtered.length === 0 ? (
+      <ExpenseYearSelector
+        selectedRange={state.selectedYearRange}
+        onSelectRange={state.setSelectedYearRange}
+      />
+      <ExpenseCategoryFilter
+        categories={filterData.categories}
+        selectedCategory={filterData.effectiveCategory}
+        onSelectCategory={state.setSelectedCategory}
+        counts={filterData.counts}
+      />
+      {filterData.displayedExpenses.length === 0 ? (
         <div className="empty-state">{t('expenses.emptyState')}</div>
-      ) : viewMode === 'grouped' ? (
+      ) : state.viewMode === 'grouped' ? (
         <CategoryGroupedView {...commonProps} />
       ) : (
         <ExpenseCardGrid {...commonProps} />
       )}
-
-      <ExpenseFormModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={onSaveExpense}
-        editingExp={editingExp}
+      <ExpenseModalsContainer
+        isFormOpen={state.isModalOpen}
+        onCloseForm={() => state.setIsModalOpen(false)}
+        onSaveExpense={onSaveExpense}
+        editingExp={state.editingExp}
         profiles={profiles}
         expenses={expenses}
-      />
-
-      <ExpenseHistoryModal
-        isOpen={!!historyModalExp}
-        onClose={() => setHistoryModalExp(null)}
-        expense={historyModalExp}
-        onUpdateExpense={(up) => { onSaveExpense(up); setHistoryModalExp(up); }}
+        historyExp={state.historyModalExp}
+        onCloseHistory={() => state.setHistoryModalExp(null)}
+        pendingPayment={paymentHandler.pendingPayment}
+        onClosePayment={paymentHandler.handleCloseModal}
+        onConfirmPayment={paymentHandler.handleConfirmPayment}
       />
     </div>
   );

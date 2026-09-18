@@ -25,12 +25,12 @@ export function computeAdaptiveSurvivalPhases(timeline, stdQuota, initialBalance
       break;
     }
 
-    const phaseRate = Math.round(maxRate * 100) / 100;
+    const phaseRate = Math.ceil(maxRate * 100) / 100;
     const targetMonth = timeline[hurdleM - 1];
     phases.push({
       fromMonthIndex: currentM + 1,
       toMonthIndex: hurdleM,
-      monthLabel: `${targetMonth.monthNameKey} ${targetMonth.year}`,
+      monthLabel: `${targetMonth.monthLongName || targetMonth.monthNameKey} ${targetMonth.year}`,
       quota: phaseRate,
     });
 

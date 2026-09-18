@@ -35,41 +35,10 @@
   flex-shrink: 0;
 }
 
-.tag-profile.tag-profile-p1 {
-  background: rgba(124, 93, 250, 0.12);
-  color: #c4b5fd;
-  border-color: rgba(124, 93, 250, 0.35);
-}
-
-.tag-profile.tag-profile-p2 {
-  background: rgba(56, 189, 248, 0.12);
-  color: #7dd3fc;
-  border-color: rgba(56, 189, 248, 0.35);
-}
-
-.tag-profile.tag-profile-p3 {
-  background: rgba(16, 185, 129, 0.12);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.35);
-}
-
-.tag-profile.tag-profile-p4 {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fcd34d;
-  border-color: rgba(245, 158, 11, 0.35);
-}
-
-.tag-profile.tag-profile-p5 {
-  background: rgba(236, 72, 153, 0.12);
-  color: #f472b6;
-  border-color: rgba(236, 72, 153, 0.35);
-}
-
 .tag-category {
-  background: rgba(124, 93, 250, 0.1);
-  color: #c4b5fd;
-  border: 1px solid rgba(124, 93, 250, 0.25);
+  border: 1px solid var(--border-subtle);
 }
+
 
 .tag-type {
   border: 1px solid transparent;

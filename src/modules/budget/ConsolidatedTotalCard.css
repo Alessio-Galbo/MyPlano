@@ -1,0 +1,17 @@
+.consolidated-total-card {
+  border-color: rgba(124, 93, 250, 0.35);
+  background: linear-gradient(180deg, rgba(26, 34, 52, 0.9) 0%, rgba(18, 24, 38, 0.9) 100%);
+}
+
+.total-nucleo-icon {
+  color: #38bdf8;
+}
+
+.total-profiles-badge {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
