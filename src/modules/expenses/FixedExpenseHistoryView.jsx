@@ -1,40 +1,56 @@
 import React from 'react';
+import { ChevronLeft } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
-import { formatCurrency } from './expenseHelpers';
 import { useFixedExpenseHistory } from './useFixedExpenseHistory';
-import { FixedNextDueEditor } from './FixedNextDueEditor';
-import { FixedInstallmentRow } from './FixedInstallmentRow';
+import { FixedHistoryTopBar } from './FixedHistoryTopBar';
 import { FixedExtraPaymentForm } from './FixedExtraPaymentForm';
+import { FixedInstallmentsTable } from './FixedInstallmentsTable';
+import { FixedInstallmentsHeader } from './FixedInstallmentsHeader';
 import './FixedExpenseHistoryView.css';
 
-export function FixedExpenseHistoryView({ expense, onUpdateExpense }) {
+export function FixedExpenseHistoryView({
+  expense,
+  onUpdateExpense,
+  installmentSort = 'desc',
+  onToggleInstallmentSort,
+  hidePastInstallments = false,
+  onToggleHidePastInstallments,
+  activeInstallmentDate,
+  onSelectInstallmentDate,
+  onRequestDeleteExtra,
+  onBackToList,
+}) {
   const { t } = useI18n();
-  const history = useFixedExpenseHistory({ expense, onUpdateExpense });
+  const history = useFixedExpenseHistory({
+    expense,
+    onUpdateExpense,
+    installmentSort,
+    hidePastInstallments,
+  });
+  const activeDate = activeInstallmentDate || history.activeInstallmentDate;
 
   return (
     <div className="fixed-history-container">
-      <div className="fixed-history-top-card">
-        <div>
-          <span className="fixed-history-next-label">{t('expenses.history.nextScheduled')}</span>
-          <FixedNextDueEditor
-            nextDueDate={expense.nextDueDate}
-            onSaveDate={(d) => onUpdateExpense({ ...expense, nextDueDate: d })}
-          />
-        </div>
-        <div className="fixed-history-meta-pill">
-          {t('expenses.history.regularAmount')}: <strong>{formatCurrency(expense.amount)}</strong> ({t(`expenses.frequencies.${expense.frequency}`)})
-        </div>
-      </div>
+      {onBackToList && (
+        <button type="button" className="mobile-col-back-btn" onClick={onBackToList}>
+          <ChevronLeft size={16} />
+          <span>{t('expenses.databaseHub.backToList')}</span>
+        </button>
+      )}
+
+      <FixedHistoryTopBar expense={expense} onUpdateExpense={onUpdateExpense} t={t} />
 
       <div className="fixed-installments-section">
-        <div className="fixed-installments-header">
-          <h5 className="fixed-installments-title">{t('expenses.history.installmentsList')} ({history.dates.length})</h5>
-          {!history.showExtra && (
-            <button type="button" className="fixed-extra-toggle-btn" onClick={() => history.setShowExtra(true)}>
-              {t('expenses.history.addExtra')}
-            </button>
-          )}
-        </div>
+        <FixedInstallmentsHeader
+          datesCount={history.dates.length}
+          showExtra={history.showExtra}
+          onShowExtra={() => history.setShowExtra(true)}
+          hidePastInstallments={hidePastInstallments}
+          onToggleHidePastInstallments={onToggleHidePastInstallments}
+          installmentSort={installmentSort}
+          onToggleInstallmentSort={onToggleInstallmentSort}
+          t={t}
+        />
 
         {history.showExtra && (
           <FixedExtraPaymentForm
@@ -44,32 +60,16 @@ export function FixedExpenseHistoryView({ expense, onUpdateExpense }) {
           />
         )}
 
-        <div className="payments-table-wrapper">
-          <table className="fixed-table">
-            <thead>
-              <tr>
-                <th>{t('expenses.history.date')}</th>
-                <th>{t('expenses.history.amount')}</th>
-                <th>{t('expenses.history.status')}</th>
-                <th>{t('expenses.history.receipt')}</th>
-                <th>{t('expenses.history.notes')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {history.dates.map((d) => (
-                <FixedInstallmentRow
-                  key={d}
-                  expense={expense}
-                  details={history.getDetails(d)}
-                  onToggleStatus={history.handleToggleStatus}
-                  onSaveReceipt={history.handleSaveReceipt}
-                  onRemoveReceipt={history.handleRemoveReceipt}
-                  onDeleteExtra={history.handleDeleteExtra}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <FixedInstallmentsTable
+          dates={history.dates}
+          activeDate={activeDate}
+          getDetails={history.getDetails}
+          onSelectInstallmentDate={onSelectInstallmentDate}
+          onToggleStatus={history.handleToggleStatus}
+          onSaveDate={history.handleUpdateInstallmentDate}
+          onRequestDeleteExtra={onRequestDeleteExtra}
+          t={t}
+        />
       </div>
     </div>
   );

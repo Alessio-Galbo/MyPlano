@@ -1,0 +1,90 @@
+.att-modal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.att-upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(124, 93, 250, 0.08);
+  border: 1px dashed rgba(124, 93, 250, 0.35);
+  border-radius: var(--radius-md);
+  padding: 0.875rem 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.att-upload-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.att-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.att-empty-state {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+}
+.att-item-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  transition: all var(--transition-fast);
+}
+.att-item-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.att-item-icon { flex-shrink: 0; }
+.pdf-icon { color: #f87171; }
+.img-icon { color: #38bdf8; }
+.att-item-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.att-item-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.att-item-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.att-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.att-action-btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.3rem 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.att-action-btn.open:hover { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: #38bdf8; }
+.att-action-btn.delete:hover { background: rgba(239, 68, 68, 0.2); color: var(--color-danger); border-color: var(--color-danger); }
+.att-modal-footer { display: flex; justify-content: flex-end; padding-top: 0.5rem; }

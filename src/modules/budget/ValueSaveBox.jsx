@@ -1,60 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { Check } from 'lucide-react';
-import { Button } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import './ValueSaveBox.css';
 
 export function ValueSaveBox({
   icon,
   label,
   value = 0,
   onSave,
-  saveButtonText,
   placeholder,
-  extraAction,
+  footer,
 }) {
-  const { t } = useI18n();
-  const [val, setVal] = useState(value ? String(value) : '');
+  const formatVal = (v) => (v != null && v !== '' ? Number(v).toFixed(2) : '');
+  const [val, setVal] = useState(formatVal(value));
+  const [isFocused, setIsFocused] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    setVal(value ? String(value) : '');
-  }, [value]);
+    if (!isFocused) {
+      setVal(formatVal(value));
+    }
+  }, [value, isFocused]);
 
-  const handleSave = () => {
+  const handleBlur = () => {
+    setIsFocused(false);
     const num = parseFloat(val) || 0;
-    onSave(num);
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 2000);
+    const formatted = num.toFixed(2);
+    setVal(formatted);
+    if (num !== Number(value)) {
+      onSave(num);
+      setIsSaved(true);
+      setTimeout(() => setIsSaved(false), 2200);
+    }
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    if (value) setVal(String(value));
   };
 
   return (
     <div className="income-input-box">
-      {icon}
-      <div className="income-box-details">
-        <span className="income-box-label">{label}</span>
-        <div className="income-field-row">
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            className="income-number-input"
-            value={val}
-            placeholder={placeholder || '0,00'}
-            onChange={(e) => setVal(e.target.value)}
-            onBlur={handleSave}
-          />
-          <Button
-            type="button"
-            size="sm"
-            variant={isSaved ? 'secondary' : 'primary'}
-            icon={isSaved ? <Check size={14} /> : null}
-            onClick={handleSave}
-          >
-            {isSaved ? t('common.actions.saved') : saveButtonText}
-          </Button>
+      <div className="income-box-top">
+        <div className="income-box-label-group">
+          <div className="income-icon-pill">{icon}</div>
+          <span className="income-box-label">{label}</span>
         </div>
-        {extraAction}
+        <span className={`auto-save-indicator ${isSaved ? 'visible' : ''}`}>
+          <Check size={16} />
+        </span>
       </div>
+
+      <div className="income-field-container">
+        <span className="income-currency-prefix">€</span>
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          className="income-number-input"
+          value={val}
+          placeholder={placeholder || '0.00'}
+          onChange={(e) => setVal(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+      </div>
+
+      {footer && <div className="income-box-footer">{footer}</div>}
     </div>
   );
 }

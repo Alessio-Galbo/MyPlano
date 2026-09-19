@@ -7,7 +7,6 @@
   top: 0;
   z-index: 100;
 }
-
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,19 +16,8 @@
   justify-content: space-between;
   gap: 1.25rem;
 }
-
-.navbar-top-row {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
+.navbar-top-row { display: flex; align-items: center; gap: 1.25rem; }
+.navbar-brand { display: flex; align-items: center; gap: 0.6rem; }
 .brand-icon {
   width: 34px;
   height: 34px;
@@ -41,13 +29,7 @@
   color: #ffffff;
   box-shadow: var(--shadow-glow);
 }
-
-.brand-title {
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
+.brand-title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
 .navbar-tabs {
   display: flex;
   align-items: center;
@@ -57,7 +39,6 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
 }
-
 .nav-tab {
   display: flex;
   align-items: center;
@@ -69,12 +50,10 @@
   color: var(--text-muted);
   transition: all var(--transition-fast);
 }
-
 .nav-tab:hover {
   color: var(--text-main);
   background-color: rgba(255, 255, 255, 0.05);
 }
-
 .nav-tab.active {
   color: #ffffff;
   background-color: var(--color-primary);
@@ -84,7 +63,27 @@
 @media (max-width: 768px) {
   .navbar-container { flex-direction: column; align-items: stretch; padding: 0.5rem 0.75rem; gap: 0.5rem; }
   .navbar-top-row { width: 100%; justify-content: space-between; }
-  .navbar-tabs { width: 100%; overflow-x: hidden; gap: 0.25rem; }
-  .nav-tab { flex: 1; min-width: 0; justify-content: center; padding: 0.4rem 0.25rem; font-size: 0.72rem; gap: 0.25rem; }
-  .nav-tab span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .navbar-tabs {
+    width: 100%;
+    gap: 0.35rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .nav-tab {
+    flex: 0 0 auto;
+    justify-content: center;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.76rem;
+    gap: 0.35rem;
+  }
+  .nav-tab:not(.active) span { display: none; }
+  .nav-tab.active { flex: 1 1 auto; padding: 0.45rem 0.75rem; }
+  .nav-tab.active span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

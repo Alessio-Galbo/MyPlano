@@ -1,28 +1,59 @@
 import React from 'react';
-import { Modal } from '../../components/ui';
+import { Modal, ConfirmModal } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
-import { VariableExpenseHistoryView } from './VariableExpenseHistoryView';
-import { FixedExpenseHistoryView } from './FixedExpenseHistoryView';
+import { useExpenseDatabaseTree } from './useExpenseDatabaseTree';
+import { useDatabaseHubPreferences } from './useDatabaseHubPreferences';
+import { useExpenseHistoryModalState } from './useExpenseHistoryModalState';
+import { ExpenseHistoryModalContent } from './ExpenseHistoryModalContent';
 import './ExpenseHistoryModal.css';
+import './ExpenseDatabaseHub.css';
 
-export function ExpenseHistoryModal({ isOpen, onClose, expense, onUpdateExpense }) {
+export function ExpenseHistoryModal({
+  isOpen,
+  onClose,
+  expense,
+  expenses = [],
+  onUpdateExpense,
+}) {
   const { t } = useI18n();
+  const prefs = useDatabaseHubPreferences();
+  const tree = useExpenseDatabaseTree({
+    expenses: expenses.length > 0 ? expenses : (expense ? [expense] : []),
+    initialExpenseId: expense?.id,
+    yearSort: prefs.yearSort,
+    expenseSort: prefs.expenseSort,
+    hidePastYears: prefs.hidePastYears,
+  });
 
-  if (!expense) return null;
+  const currentExpense = tree.selectedExpense || expense;
+  const state = useExpenseHistoryModalState({ currentExpense, onUpdateExpense, t });
 
-  const modalTitle = expense.isVariable
-    ? `${expense.title} - ${t('expenses.variable.historyTitle')}`
-    : `${expense.title} - ${t('expenses.history.title')}`;
+  if (!isOpen) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={modalTitle}>
-      <div className="expense-history-modal-body">
-        {expense.isVariable ? (
-          <VariableExpenseHistoryView expense={expense} onUpdateExpense={onUpdateExpense} />
-        ) : (
-          <FixedExpenseHistoryView expense={expense} onUpdateExpense={onUpdateExpense} />
-        )}
-      </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={t('expenses.databaseHub.title')}
+      subtitle={t('expenses.databaseHub.subtitle')}
+      className="modal-database-hub"
+    >
+      <ExpenseHistoryModalContent
+        state={state}
+        tree={tree}
+        prefs={prefs}
+        currentExpense={currentExpense}
+        onUpdateExpense={onUpdateExpense}
+        t={t}
+      />
+
+      <ConfirmModal
+        isOpen={Boolean(state.confirmData)}
+        onClose={state.closeConfirm}
+        onConfirm={state.confirmData?.onConfirm || (() => {})}
+        title={state.confirmData?.title}
+        message={state.confirmData?.message}
+      />
     </Modal>
   );
 }

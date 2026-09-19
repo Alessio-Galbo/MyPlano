@@ -8,7 +8,7 @@ export function ExpenseListHeader({ viewMode, onToggleViewMode, onCreate }) {
   const { t } = useI18n();
 
   return (
-    <div className="section-header">
+    <div className="section-header expense-section-header">
       <div>
         <h2>{t('expenses.title')}</h2>
         <p className="text-subtle">{t('expenses.subtitle')}</p>
@@ -36,8 +36,8 @@ export function ExpenseListHeader({ viewMode, onToggleViewMode, onCreate }) {
           </button>
         </div>
 
-        <Button icon={<Plus size={16} />} onClick={onCreate}>
-          {t('expenses.addExpense')}
+        <Button icon={<Plus size={16} />} onClick={onCreate} className="expense-create-btn">
+          <span>{t('expenses.addExpense')}</span>
         </Button>
       </div>
     </div>

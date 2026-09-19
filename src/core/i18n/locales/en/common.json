@@ -16,6 +16,8 @@
     "saved": "Saved!",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "previous": "Previous",
+    "next": "Next",
     "filter": "Filter",
     "all": "All",
     "renew": "Renew",
@@ -24,7 +26,8 @@
     "backup": "Backup JSON",
     "restore": "Restore JSON",
     "factoryReset": "Restore Sample Data",
-    "wipeDatabase": "Clear Entire Database"
+    "wipeDatabase": "Clear Entire Database",
+    "close": "Close"
   },
   "profiles": {
     "allProfiles": "Overview",

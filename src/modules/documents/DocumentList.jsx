@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Plus } from 'lucide-react';
-import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { DocumentCard } from './DocumentCard';
 import { DocumentFormModal } from './DocumentFormModal';
 import { DocumentRenewModal } from './DocumentRenewModal';
+import { DocumentListHeader } from './DocumentListHeader';
 import './DocumentList.css';
 
 export function DocumentList({
@@ -40,15 +39,7 @@ export function DocumentList({
 
   return (
     <div className="doc-list-view">
-      <div className="section-header">
-        <div>
-          <h2>{t('documents.title')}</h2>
-          <p className="text-subtle">{t('documents.subtitle')}</p>
-        </div>
-        <Button icon={<Plus size={16} />} onClick={handleCreate}>
-          {t('documents.addDocument')}
-        </Button>
-      </div>
+      <DocumentListHeader onCreate={handleCreate} />
 
       {filtered.length === 0 ? (
         <div className="empty-state">{t('documents.emptyState')}</div>
@@ -82,7 +73,12 @@ export function DocumentList({
         onClose={() => setRenewingDoc(null)}
         document={renewingDoc}
         onConfirmRenew={(doc, date) => {
-          const rec = { id: `ren-${Date.now()}`, renewedAt: new Date().toISOString().split('T')[0], previousExpiryDate: doc.expiryDate, newExpiryDate: date };
+          const rec = {
+            id: `ren-${Date.now()}`,
+            renewedAt: new Date().toISOString().split('T')[0],
+            previousExpiryDate: doc.expiryDate,
+            newExpiryDate: date,
+          };
           onSaveDocument({ ...doc, expiryDate: date, renewalHistory: [...(doc.renewalHistory || []), rec] });
         }}
       />

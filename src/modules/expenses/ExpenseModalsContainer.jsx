@@ -41,6 +41,7 @@ export function ExpenseModalsContainer({
         isOpen={Boolean(historyExp)}
         onClose={onCloseHistory}
         expense={historyExp}
+        expenses={expenses}
         onUpdateExpense={(up) => onSaveExpense(up)}
       />
 

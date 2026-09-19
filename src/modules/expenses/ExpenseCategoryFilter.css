@@ -3,8 +3,7 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 

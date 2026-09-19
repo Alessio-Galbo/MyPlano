@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .view-mode-toggle {
@@ -29,11 +28,25 @@
   transition: all var(--transition-fast);
 }
 
-.view-mode-btn:hover {
-  color: var(--text-main);
-}
+.view-mode-btn:hover { color: var(--text-main); }
+.view-mode-btn.active { background: var(--color-primary); color: #ffffff; }
 
-.view-mode-btn.active {
-  background: var(--color-primary);
-  color: #ffffff;
+@media (max-width: 640px) {
+  .expense-section-header {
+    gap: 0.5rem;
+  }
+  .expense-header-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .view-mode-toggle { flex-shrink: 0; }
+  .expense-create-btn {
+    padding: 0.35rem 0.65rem !important;
+    font-size: 0.76rem !important;
+    white-space: nowrap;
+    margin: 0 !important;
+  }
 }

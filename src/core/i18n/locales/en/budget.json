@@ -16,7 +16,7 @@
   },
   "incomeHub": {
     "startingReserve": "Fund (€)",
-    "mainFund": "Main Fund (€)",
+    "mainFund": "Fund (€)",
     "dedicatedFund": "Dedicated Fund (€)",
     "useDedicatedFund": "Use a separate fund for this profile",
     "sharedFundNotice": "This profile uses the shared global fund:",
@@ -25,7 +25,8 @@
     "sharedIncomeNotice": "This profile uses the shared global income:",
     "globalHubTitle": "Global Household Parameters",
     "profileHubTitle": "Specific Parameters: {name}",
-    "monthlyIncome": "Estimated Monthly Income (€)",
+    "monthlyIncome": "Monthly Income (€)",
+    "incomeHint": "Base calculation for monthly discretionary margin",
     "optional": "Optional",
     "saveBalance": "Save fund",
     "saveIncome": "Save income",

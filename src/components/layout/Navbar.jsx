@@ -48,6 +48,8 @@ export function Navbar({
               type="button"
               className={`nav-tab ${activeTab === item.id ? 'active' : ''}`}
               onClick={() => setActiveTab(item.id)}
+              title={item.label}
+              aria-label={item.label}
             >
               {item.icon}
               <span>{item.label}</span>

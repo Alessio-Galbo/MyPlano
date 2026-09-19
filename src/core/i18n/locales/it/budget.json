@@ -16,7 +16,7 @@
   },
   "incomeHub": {
     "startingReserve": "Fondo (€)",
-    "mainFund": "Fondo Principale (€)",
+    "mainFund": "Fondo (€)",
     "dedicatedFund": "Fondo Dedicato (€)",
     "useDedicatedFund": "Usa un fondo separato per questo profilo",
     "sharedFundNotice": "Questo profilo usa il fondo principale condiviso:",
@@ -25,7 +25,8 @@
     "sharedIncomeNotice": "Questo profilo usa l'introito globale condiviso:",
     "globalHubTitle": "Fondo & Introito Globale (Condivisi)",
     "profileHubTitle": "Parametri Specifici: {name}",
-    "monthlyIncome": "Introito Mensile Indicativo (€)",
+    "monthlyIncome": "Introito Mensile (€)",
+    "incomeHint": "Base per il calcolo della quota libera",
     "optional": "Opzionale",
     "saveBalance": "Salva fondo",
     "saveIncome": "Salva introito",

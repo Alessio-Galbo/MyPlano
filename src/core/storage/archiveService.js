@@ -1,5 +1,6 @@
 import { setDbItem, getDbItem, removeDbItem } from './indexedDbHelper';
 import { optimizeReceiptImage } from './imageOptimizer';
+import { injectJpegExifTags } from './jpegExifWriter';
 
 export async function selectArchiveDirectory() {
   if (!('showDirectoryPicker' in window)) return null;
@@ -7,30 +8,49 @@ export async function selectArchiveDirectory() {
     const handle = await window.showDirectoryPicker({ mode: 'readwrite' });
     await setDbItem('archive_dir_handle', handle);
     return handle.name;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 export async function getConnectedDirectoryName() {
   try {
     const handle = await getDbItem('archive_dir_handle');
     return handle ? handle.name : null;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 export async function disconnectArchiveDirectory() {
   await removeDbItem('archive_dir_handle');
 }
 
-export async function saveReceiptToArchive({ file, expense, dueDate }) {
-  const optFile = await optimizeReceiptImage(file);
+async function appendRootIndex(dirHandle, entry) {
+  try {
+    const h = await dirHandle.getFileHandle('myplano_archive_index.json', { create: true });
+    const f = await h.getFile();
+    const txt = await f.text().catch(() => '[]');
+    const items = txt ? JSON.parse(txt) : [];
+    items.push(entry);
+    const w = await h.createWritable();
+    await w.write(JSON.stringify(items, null, 2));
+    await w.close();
+  } catch {}
+}
+
+export async function saveReceiptToArchive({ file, expense, dueDate, index = 1 }) {
+  let optFile = await optimizeReceiptImage(file);
   const year = dueDate ? new Date(dueDate).getFullYear() : new Date().getFullYear();
   const category = expense.category || 'other';
-  const safeTitle = (expense.title || 'spesa').replace(/[^a-zA-Z0-9_-]/g, '-');
-  const cleanName = `${dueDate || 'data'}_${category}_${safeTitle}_${optFile.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+  const dateStr = (dueDate || 'data').replace(/-/g, ' ');
+  const safeTitle = (expense.title || 'Spesa').replace(/[/\\?%*:|"<>]/g, '-');
+  const ext = optFile.name.includes('.') ? optFile.name.slice(optFile.name.lastIndexOf('.')) : '';
+  const cleanName = `${dateStr} - ${safeTitle}${index > 1 ? ` (${index})` : ''}${ext}`;
+
+  if (optFile.type === 'image/jpeg') {
+    try {
+      const buf = await optFile.arrayBuffer();
+      const tagged = injectJpegExifTags(buf, [expense.title, category, String(year), 'MyPlano']);
+      optFile = new File([tagged], cleanName, { type: 'image/jpeg' });
+    } catch {}
+  }
 
   const dirHandle = await getDbItem('archive_dir_handle');
   if (dirHandle) {
@@ -42,34 +62,19 @@ export async function saveReceiptToArchive({ file, expense, dueDate }) {
       await writable.write(optFile);
       await writable.close();
 
-      const metaHandle = await catDir.getFileHandle(`${cleanName}.meta.json`, { create: true });
-      const metaJson = JSON.stringify({
-        expenseId: expense.id,
-        title: expense.title,
-        category,
-        dueDate,
-        amount: expense.amount,
-        savedAt: new Date().toISOString(),
-      }, null, 2);
-      const metaWritable = await metaHandle.createWritable();
-      await metaWritable.write(metaJson);
-      await metaWritable.close();
-
-      return { name: cleanName, path: `${year}/${category}/${cleanName}`, storage: 'fs', type: optFile.type };
-    } catch {
-      // Fallback if permission revoked or error
-    }
+      const record = { id: `att_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`, name: cleanName, path: `${year}/${category}/${cleanName}`, storage: 'fs', type: optFile.type, size: optFile.size, savedAt: new Date().toISOString() };
+      await appendRootIndex(dirHandle, record);
+      return record;
+    } catch { /* Fallback to idb */ }
   }
 
-  // Fallback in IndexedDB
   await setDbItem(`blob_${cleanName}`, optFile);
-  return { name: cleanName, storage: 'idb', type: optFile.type };
+  return { id: `att_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`, name: cleanName, storage: 'idb', type: optFile.type, size: optFile.size };
 }
 
 export async function openReceiptFromArchive(receipt) {
   if (!receipt) return;
   if (receipt.dataUrl) return window.open(receipt.dataUrl, '_blank');
-
   if (receipt.storage === 'fs' && receipt.path) {
     try {
       const dirHandle = await getDbItem('archive_dir_handle');
@@ -79,17 +84,10 @@ export async function openReceiptFromArchive(receipt) {
         const catDir = await yearDir.getDirectoryHandle(parts[1]);
         const fileHandle = await catDir.getFileHandle(parts[2]);
         const file = await fileHandle.getFile();
-        const url = URL.createObjectURL(file);
-        return window.open(url, '_blank');
+        return window.open(URL.createObjectURL(file), '_blank');
       }
-    } catch {
-      // Fallback
-    }
+    } catch { /* Fallback */ }
   }
-
   const blob = await getDbItem(`blob_${receipt.name}`);
-  if (blob) {
-    const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
-  }
+  if (blob) window.open(URL.createObjectURL(blob), '_blank');
 }

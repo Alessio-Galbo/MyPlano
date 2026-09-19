@@ -1,8 +1,7 @@
 import React from 'react';
 import { useI18n } from '../../core/i18n';
-import { calculateBudgetMetrics } from './budgetCalculations';
 import {
-  calculateDiscretionaryMargin,
+  getBudgetOverviewState,
   performTopUpFund,
   performDepositProfileQuota,
 } from './budgetOverviewHelpers';
@@ -25,37 +24,40 @@ export function BudgetOverview({
   onSelectStrategy,
 }) {
   const { t } = useI18n();
-  const profile = profiles.find((p) => p.id === selectedProfileId);
-  const isProfileMode = selectedProfileId !== 'all';
-  const metrics = calculateBudgetMetrics(expenses, selectedProfileId);
+  const state = getBudgetOverviewState({
+    profiles,
+    expenses,
+    selectedProfileId,
+    simulationStrategy,
+    coldStart,
+  });
 
-  const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
-  const totalIncome = profiles.reduce((s, p) => s + (Number(p.monthlyIncome) || 0), 0);
-  const isSurvivalActive = simulationStrategy === 'survival' && coldStart?.hasDeficit;
-  const effectiveQuota = isSurvivalActive ? coldStart.catchUpMonthlyQuota : metrics.monthlyQuota;
+  const { profile, isProfileMode, metrics, totalLiquidity, totalIncome, effectiveQuota, currentIncome, margin } = state;
 
   const handleTopUpFund = (amount) => {
-    const targetId = isProfileMode ? selectedProfileId : profiles[0]?.id;
-    if (targetId) performTopUpFund(profiles, targetId, amount, onUpdateProfileBalance, onSelectStrategy);
+    const tid = isProfileMode ? selectedProfileId : profiles[0]?.id;
+    if (tid) performTopUpFund(profiles, tid, amount, onUpdateProfileBalance, onSelectStrategy);
   };
 
-  const handleDepositProfileQuota = (pId, amount) => {
+  const handleDepositQuota = (pId, amount) => {
     performDepositProfileQuota(profiles, pId, amount, onDepositProfileQuota, onUpdateProfileBalance);
   };
 
-  const currentIncome = isProfileMode ? (profile?.monthlyIncome || 0) : totalIncome;
-  const margin = calculateDiscretionaryMargin(currentIncome, effectiveQuota);
+  const profileTitle = profile?.name
+    ? t('budget.incomeHub.profileHubTitle').replace('{name}', profile.name)
+    : undefined;
 
   return (
     <div className="budget-overview">
       {isProfileMode ? (
         <GlobalIncomeHub
-          title={profile?.name ? t('budget.incomeHub.profileHubTitle').replace('{name}', profile.name) : undefined}
+          title={profileTitle}
           initialBalance={profile?.initialBalance || 0}
           onUpdateInitialBalance={(v) => onUpdateProfileBalance?.(selectedProfileId, v)}
           monthlyIncome={profile?.monthlyIncome || 0}
           onUpdateMonthlyIncome={(v) => onUpdateProfileIncome?.(selectedProfileId, v)}
           monthlyQuota={effectiveQuota}
+          discretionaryMargin={margin}
         />
       ) : (
         <ConsolidatedProfilesGrid
@@ -64,12 +66,13 @@ export function BudgetOverview({
           totalLiquidity={totalLiquidity}
           totalIncome={totalIncome}
           onSelectProfile={onSelectProfile}
-          onDepositQuota={handleDepositProfileQuota}
+          onDepositQuota={handleDepositQuota}
           simulationStrategy={simulationStrategy}
         />
       )}
 
       <BudgetKpiGrid
+        showDiscretionary={!isProfileMode}
         discretionaryMargin={margin}
         monthlyIncome={currentIncome}
         upcomingCount={metrics.upcoming30DaysCount}

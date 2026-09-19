@@ -4,6 +4,16 @@
   margin-top: 0.5rem;
 }
 
+.income-box-footer .deposit-quota-container {
+  margin-top: 0;
+  width: 100%;
+}
+
+.income-box-footer .deposit-quota-btn {
+  width: 100%;
+  justify-content: center;
+}
+
 .consolidated-status-bar .deposit-quota-container {
   margin-top: 0;
 }

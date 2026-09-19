@@ -1,6 +1,7 @@
 import React from 'react';
-import { Wallet, DollarSign } from 'lucide-react';
+import { Wallet, TrendingUp } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
+import { formatCurrency } from '../expenses/expenseHelpers';
 import { ValueSaveBox } from './ValueSaveBox';
 import { DepositQuotaButton } from './DepositQuotaButton';
 import './IncomeOverviewCard.css';
@@ -12,9 +13,11 @@ export function GlobalIncomeHub({
   monthlyIncome = 0,
   onUpdateMonthlyIncome,
   monthlyQuota = 0,
+  discretionaryMargin = 0,
 }) {
   const { t } = useI18n();
   const displayTitle = title || t('budget.incomeHub.globalHubTitle');
+  const hasIncome = Number(monthlyIncome) > 0;
 
   const handleDeposit = (amount) => {
     const cur = Number(initialBalance) || 0;
@@ -30,12 +33,11 @@ export function GlobalIncomeHub({
 
       <div className="income-inputs-grid">
         <ValueSaveBox
-          icon={<Wallet size={24} className="income-box-icon" />}
+          icon={<Wallet size={18} />}
           label={t('budget.incomeHub.mainFund')}
           value={initialBalance}
           onSave={onUpdateInitialBalance}
-          saveButtonText={t('budget.incomeHub.saveBalance')}
-          extraAction={
+          footer={
             monthlyQuota > 0 ? (
               <DepositQuotaButton monthlyQuota={monthlyQuota} onDeposit={handleDeposit} />
             ) : null
@@ -43,12 +45,22 @@ export function GlobalIncomeHub({
         />
 
         <ValueSaveBox
-          icon={<DollarSign size={24} className="income-box-icon" />}
+          icon={<TrendingUp size={18} />}
           label={t('budget.incomeHub.monthlyIncome')}
           value={monthlyIncome}
           onSave={onUpdateMonthlyIncome}
-          saveButtonText={t('budget.incomeHub.saveIncome')}
           placeholder={t('budget.incomeHub.optional')}
+          footer={
+            <div className="income-discretionary-footer">
+              <span className="income-discretionary-label">
+                {t('budget.metrics.residualDiscretionary')}
+              </span>
+              <span className="income-discretionary-val text-gradient">
+                {hasIncome ? formatCurrency(discretionaryMargin) : '—'}
+                {hasIncome && <small className="income-discretionary-unit">/mese</small>}
+              </span>
+            </div>
+          }
         />
       </div>
     </div>

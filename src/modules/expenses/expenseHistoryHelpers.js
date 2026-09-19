@@ -32,12 +32,13 @@ export function getAllExpenseInstallmentDates(expense) {
 export function getInstallmentDetails(expense, dateStr) {
   const inst = expense.installments?.[dateStr];
   const isPaid = inst?.status === 'paid' || (dateStr === expense.nextDueDate && expense.status === 'paid');
+  const atts = inst?.attachments || (inst?.receipt ? [inst.receipt] : []);
   return {
     date: dateStr,
     amount: inst?.amount != null ? inst.amount : expense.amount,
     status: isPaid ? 'paid' : 'due',
     paidAt: inst?.paidAt || (isPaid ? dateStr : null),
-    receipt: inst?.receipt || null,
+    attachments: atts,
     note: inst?.note || '',
     isExtra: Boolean(inst?.isExtra),
   };

@@ -1,0 +1,31 @@
+.att-col-file-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.65rem;
+  transition: all var(--transition-fast);
+}
+.att-col-file-card:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.2); }
+.att-col-file-icon { flex-shrink: 0; }
+.att-col-file-icon .pdf-icon { color: #f87171; }
+.att-col-file-icon .img-icon { color: #38bdf8; }
+.att-col-file-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.att-col-file-name { font-size: 0.76rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.att-col-file-meta { font-size: 0.68rem; color: var(--text-muted); }
+.att-col-file-actions { display: flex; align-items: center; gap: 0.25rem; }
+.att-col-btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem 0.35rem;
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+.att-col-btn.view:hover { color: #38bdf8; border-color: #38bdf8; background: rgba(56, 189, 248, 0.15); }
+.att-col-btn.delete:hover { color: var(--color-danger); border-color: var(--color-danger); background: rgba(239, 68, 68, 0.15); }

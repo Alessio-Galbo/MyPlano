@@ -1,0 +1,68 @@
+.fixed-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+.fixed-table th {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.fixed-table td {
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--text-main);
+  white-space: nowrap;
+}
+.fixed-table tr { cursor: pointer; transition: background var(--transition-fast); }
+.fixed-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+.active-installment-row { background: rgba(99, 102, 241, 0.12) !important; }
+
+.installment-date-col-wrapper { display: flex; align-items: center; gap: 0.35rem; }
+.btn-delete-extra { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.2rem; display: flex; }
+.btn-delete-extra:hover { color: var(--color-danger); }
+.extra-amount-text { font-weight: 600; color: #f59e0b; }
+.installment-date-cell { display: flex; align-items: center; gap: 0.35rem; }
+.installment-date-edit-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.15rem; display: flex; }
+.installment-date-edit-btn:hover { color: #fff; }
+
+.btn-status-icon {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn-status-icon:hover { transform: scale(1.1); }
+.status-icon-check { color: #10b981; }
+.status-icon-clock { color: #94a3b8; }
+.btn-status-icon.paid:hover { background: rgba(16, 185, 129, 0.12); }
+.btn-status-icon.due:hover { background: rgba(148, 163, 184, 0.12); }
+
+.installment-att-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.74rem;
+  padding: 0.2rem 0.45rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.installment-att-trigger.has-files {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-weight: 600;
+}
+.installment-att-trigger.active {
+  border-color: var(--color-primary);
+  background: rgba(99, 102, 241, 0.2);
+  color: #fff;
+}

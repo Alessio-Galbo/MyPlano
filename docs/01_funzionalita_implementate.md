@@ -190,9 +190,9 @@ Tutti gli script di supporto risiedono nella cartella `/Tools` e sono documentat
 
 ## 9. Stato Attuale e Metriche di Qualità
 
-- **File di Codice Verificati**: **137 file** sorgente controllati.
+- **File di Codice Verificati**: **258 file** sorgente controllati.
 - **Conformità Limite 100 Righe**: **100% (0 violazioni, tutti $\le$ 100 righe)**.
-- **Internazionalizzazione (i18n)**: 100% delle stringhe coperte da chiavi in italiano e inglese.
+- **Internazionalizzazione (i18n)**: 100% delle stringhe coperte da chiavi in italiano e inglese (302 chiavi uniche).
 - **Zero Inline Code**: 100% degli stili e della logica isolati in file CSS/JS dedicati.
 - **Test Unitari**: tutti i test eseguiti con esito positivo (OK).
-- **Stato Build**: compilazione di produzione `npm run build` completata in 185ms con 0 errori.
+- **Stato Build**: compilazione di produzione `npm run build` completata con 0 errori.

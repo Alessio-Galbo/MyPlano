@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import './Modal.css';
 
-export function Modal({ isOpen, onClose, title, children }) {
+export function Modal({ isOpen, onClose, title, subtitle, className = '', children }) {
   useEffect(() => {
     if (!isOpen) return;
     const prevOverflow = document.body.style.overflow;
@@ -21,15 +21,18 @@ export function Modal({ isOpen, onClose, title, children }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div className={`modal-backdrop ${className ? `${className}-backdrop` : ''}`} onClick={onClose}>
       <div
-        className="modal-content"
+        className={`modal-content ${className}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
         <div className="modal-header">
-          <h3 className="modal-title">{title}</h3>
+          <div>
+            <h3 className="modal-title">{title}</h3>
+            {subtitle && <p className="modal-subtitle">{subtitle}</p>}
+          </div>
           <button
             type="button"
             className="modal-close-btn"
