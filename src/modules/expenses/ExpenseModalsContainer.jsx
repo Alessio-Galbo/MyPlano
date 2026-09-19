@@ -2,6 +2,7 @@ import React from 'react';
 import { ExpenseFormModal } from './ExpenseFormModal';
 import { ExpenseHistoryModal } from './ExpenseHistoryModal';
 import { DeductFundModal } from './DeductFundModal';
+import { DeleteExpenseConfirmModal } from './DeleteExpenseConfirmModal';
 
 export function ExpenseModalsContainer({
   isFormOpen,
@@ -15,6 +16,11 @@ export function ExpenseModalsContainer({
   pendingPayment,
   onClosePayment,
   onConfirmPayment,
+  deletingData,
+  onCloseDelete,
+  onConfirmSingle,
+  onConfirmTerminate,
+  onConfirmDeleteAll,
 }) {
   const pendingProfile = pendingPayment?.expense?.profileId
     ? profiles.find((p) => p.id === pendingPayment.expense.profileId)
@@ -45,6 +51,16 @@ export function ExpenseModalsContainer({
         dueDate={pendingPayment?.dueDate}
         profile={pendingProfile}
         onConfirm={onConfirmPayment}
+      />
+
+      <DeleteExpenseConfirmModal
+        isOpen={Boolean(deletingData)}
+        onClose={onCloseDelete}
+        expense={deletingData?.expense}
+        dueDate={deletingData?.dueDate}
+        onConfirmSingle={onConfirmSingle}
+        onConfirmTerminate={onConfirmTerminate}
+        onConfirmDeleteAll={onConfirmDeleteAll}
       />
     </>
   );

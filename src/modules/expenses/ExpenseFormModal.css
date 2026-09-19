@@ -1,0 +1,68 @@
+.expense-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.form-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.variable-toggle-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  margin-top: 0.15rem;
+}
+
+.variable-toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.variable-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.variable-icon { color: #38bdf8; flex-shrink: 0; }
+.variable-title-text { font-size: 0.82rem; font-weight: 600; color: var(--text-main); }
+.variable-hint-text { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.05rem; }
+.variable-custom-checkbox { width: 17px; height: 17px; cursor: pointer; accent-color: var(--color-primary); }
+
+.variable-details-box {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 540px) {
+  .form-row { grid-template-columns: 1fr; gap: 0.75rem; }
+}

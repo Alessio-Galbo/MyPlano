@@ -9,7 +9,10 @@
     "category": "Categoria",
     "frequency": "Frequenza",
     "profile": "Profilo / Nucleo",
+    "dueDate": "Scadenza",
     "nextDueDate": "Prossima scadenza",
+    "advanceCycle": "Avanza ciclo (+1)",
+    "advanceDateHelp": "Calcola la scadenza successiva in base alla frequenza",
     "enableAlert": "Abilita avviso",
     "includeInCalendar": "Includi in calendario (.ics)",
     "notes": "Note"
@@ -57,7 +60,13 @@
   },
   "viewMode": {
     "list": "Elenco",
-    "grouped": "Per Categoria"
+    "grouped": "Per Categoria",
+    "itemsCountOne": "1 scadenza",
+    "itemsCountMany": "{count} scadenze",
+    "periodTotalLabel": "Totale periodo",
+    "quotaLabel": "Quota",
+    "perYear": "/ anno",
+    "perMonth": "/ mese"
   },
   "variable": {
     "isVariableLabel": "Importo variabile / bolletta a consumo",
@@ -92,7 +101,8 @@
     "from": "Da",
     "to": "A",
     "yearTotal": "Totale anno",
-    "installmentsCount": "{count} scadenze"
+    "installmentsCount": "{count} scadenze",
+    "yearSectionTitle": "Anno {year}"
   },
   "installments": {
     "paid": "Pagato",
@@ -101,7 +111,7 @@
     "due": "Da Pagare",
     "markPaid": "Segna come pagato",
     "markUnpaid": "Segna non pagato",
-    "nextOccurrence": "Prossima scadenza:",
+    "nextOccurrence": "Successiva",
     "jumpToNext": "Vai al {year} →",
     "deductModalTitle": "Registra Pagamento Spesa",
     "deductModalDesc": "Vuoi scalare l'importo dal Fondo Risparmio di questo profilo?",
@@ -109,6 +119,44 @@
     "newFundLabel": "Nuovo saldo dopo pagamento",
     "btnDeduct": "Sì, scala dal Fondo",
     "btnNoDeduct": "Segna senza scalare"
+  },
+  "history": {
+    "btnTitle": "Storico pagamenti & scadenze",
+    "title": "Storico Pagamenti & Scadenze",
+    "nextScheduled": "Prossimo rinnovo programmato",
+    "editNextDue": "Modifica data prossimo rinnovo",
+    "frequency": "Frequenza",
+    "regularAmount": "Quota regolare",
+    "installmentsList": "Rate & Pagamenti Registrati",
+    "noInstallments": "Nessuna rata ancora registrata nello storico.",
+    "date": "Scadenza / Data",
+    "amount": "Importo",
+    "status": "Stato",
+    "due": "Da Saldare",
+    "paidOn": "Saldato il {date}",
+    "receipt": "Ricevuta / Documento",
+    "attachReceipt": "Allega ricevuta di pagamento",
+    "attach": "Allega",
+    "viewReceipt": "Vedi ricevuta",
+    "removeReceipt": "Rimuovi ricevuta",
+    "extraTag": "Fuori ciclo",
+    "notes": "Note / Allegati",
+    "addExtra": "+ Registra spesa o integrazione fuori ciclo",
+    "extraDate": "Data pagamento",
+    "extraAmount": "Importo (€)",
+    "extraNote": "Causale / Note (es. Conguaglio)",
+    "saveExtra": "Aggiungi allo storico",
+    "cancel": "Annulla"
+  },
+  "deleteModal": {
+    "title": "Elimina Spesa o Scadenza",
+    "prompt": "Cosa desideri fare con questa voce?",
+    "singleTitle": "Elimina solo la scadenza del {date}",
+    "singleDesc": "Rimuove solo questa rata, lasciando intatti lo storico passato e i rinnovi futuri.",
+    "terminateTitle": "Interrompi spesa (Preserva lo storico passato)",
+    "terminateDesc": "I pagamenti passati restano visibili nella timeline e nei bilanci passati, ma non verranno più generati rinnovi futuri.",
+    "destroyTitle": "Elimina definitivamente tutto lo storico",
+    "destroyDesc": "Cancella completamente la spesa e tutti i dati registrati (per errori di inserimento)."
   },
   "emptyState": "Nessuna spesa periodica registrata."
 }

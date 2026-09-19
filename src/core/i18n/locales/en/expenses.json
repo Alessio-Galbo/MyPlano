@@ -9,7 +9,10 @@
     "category": "Category",
     "frequency": "Frequency",
     "profile": "Profile / Household",
+    "dueDate": "Due date",
     "nextDueDate": "Next due date",
+    "advanceCycle": "Advance cycle (+1)",
+    "advanceDateHelp": "Calculate next due date based on frequency",
     "enableAlert": "Enable alert",
     "includeInCalendar": "Include in calendar (.ics)",
     "notes": "Notes"
@@ -57,7 +60,13 @@
   },
   "viewMode": {
     "list": "List",
-    "grouped": "By Category"
+    "grouped": "By Category",
+    "itemsCountOne": "1 deadline",
+    "itemsCountMany": "{count} deadlines",
+    "periodTotalLabel": "Period total",
+    "quotaLabel": "Quota",
+    "perYear": "/ yr",
+    "perMonth": "/ mo"
   },
   "variable": {
     "isVariableLabel": "Variable expense / usage-based utility",
@@ -92,7 +101,8 @@
     "from": "From",
     "to": "To",
     "yearTotal": "Year total",
-    "installmentsCount": "{count} due"
+    "installmentsCount": "{count} due",
+    "yearSectionTitle": "Year {year}"
   },
   "installments": {
     "paid": "Paid",
@@ -101,7 +111,7 @@
     "due": "To Pay",
     "markPaid": "Mark as paid",
     "markUnpaid": "Mark as unpaid",
-    "nextOccurrence": "Next due date:",
+    "nextOccurrence": "Next",
     "jumpToNext": "Go to {year} →",
     "deductModalTitle": "Record Expense Payment",
     "deductModalDesc": "Do you want to deduct this amount from this profile's Sinking Fund?",
@@ -109,6 +119,44 @@
     "newFundLabel": "New balance after payment",
     "btnDeduct": "Yes, deduct from Fund",
     "btnNoDeduct": "Mark without deducting"
+  },
+  "history": {
+    "btnTitle": "Payment history & deadlines",
+    "title": "Payment History & Deadlines",
+    "nextScheduled": "Next scheduled renewal",
+    "editNextDue": "Edit next renewal date",
+    "frequency": "Frequency",
+    "regularAmount": "Regular quota",
+    "installmentsList": "Recorded Installments & Payments",
+    "noInstallments": "No installments recorded in history yet.",
+    "date": "Due date / Date",
+    "amount": "Amount",
+    "status": "Status",
+    "due": "To Pay",
+    "paidOn": "Paid on {date}",
+    "receipt": "Receipt / Document",
+    "attachReceipt": "Attach payment receipt",
+    "attach": "Attach",
+    "viewReceipt": "View receipt",
+    "removeReceipt": "Remove receipt",
+    "extraTag": "Out of cycle",
+    "notes": "Notes / Attachments",
+    "addExtra": "+ Record extra or out-of-cycle payment",
+    "extraDate": "Payment date",
+    "extraAmount": "Amount (€)",
+    "extraNote": "Reason / Notes (e.g. Adjustment)",
+    "saveExtra": "Add to history",
+    "cancel": "Cancel"
+  },
+  "deleteModal": {
+    "title": "Delete Expense or Occurrence",
+    "prompt": "What would you like to do with this item?",
+    "singleTitle": "Delete only the occurrence on {date}",
+    "singleDesc": "Removes only this installment, keeping past history and future renewals intact.",
+    "terminateTitle": "Discontinue expense (Preserve past history)",
+    "terminateDesc": "Past payments remain visible in historical timelines and balances, but no future renewals will be scheduled.",
+    "destroyTitle": "Permanently delete entire expense",
+    "destroyDesc": "Completely wipes the expense and all associated historical data (for entries created by mistake)."
   },
   "emptyState": "No recurring expenses recorded."
 }

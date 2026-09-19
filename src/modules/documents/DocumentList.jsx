@@ -81,7 +81,10 @@ export function DocumentList({
         isOpen={Boolean(renewingDoc)}
         onClose={() => setRenewingDoc(null)}
         document={renewingDoc}
-        onConfirmRenew={(doc, date) => onSaveDocument({ ...doc, expiryDate: date })}
+        onConfirmRenew={(doc, date) => {
+          const rec = { id: `ren-${Date.now()}`, renewedAt: new Date().toISOString().split('T')[0], previousExpiryDate: doc.expiryDate, newExpiryDate: date };
+          onSaveDocument({ ...doc, expiryDate: date, renewalHistory: [...(doc.renewalHistory || []), rec] });
+        }}
       />
     </div>
   );

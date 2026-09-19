@@ -4,6 +4,7 @@ import { Toggle } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { useApp } from '../../core/state';
 import { SettingsBackupCard } from './SettingsBackupCard';
+import { SettingsArchiveCard } from './SettingsArchiveCard';
 import { SettingsResetCard } from './SettingsResetCard';
 import './SettingsView.css';
 
@@ -42,6 +43,8 @@ export function SettingsView({ documents, expenses, onDataRestored }) {
           <Toggle checked={isGlobalMuted} onChange={toggleGlobalMute} />
         </div>
       </div>
+
+      <SettingsArchiveCard />
 
       <div className="settings-card">
         <div className="settings-card-header">

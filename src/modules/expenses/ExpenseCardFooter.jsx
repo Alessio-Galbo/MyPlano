@@ -28,20 +28,17 @@ export function ExpenseCardFooter({
         >
           {isPaid ? paidText : t('expenses.installments.markPaid')}
         </Button>
-
-        {expense.isVariable && (
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            title={t('expenses.variable.historyBtn')}
-            onClick={() => onOpenHistory(expense)}
-          >
-            <History size={15} />
-          </button>
-        )}
       </div>
 
       <div className="doc-actions">
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm"
+          title={t('expenses.history.btnTitle')}
+          onClick={() => onOpenHistory(expense)}
+        >
+          <History size={15} />
+        </button>
         <button
           type="button"
           className="btn btn-ghost btn-sm"
@@ -54,7 +51,7 @@ export function ExpenseCardFooter({
           type="button"
           className="btn btn-ghost btn-sm"
           title={t('common.actions.delete')}
-          onClick={() => onDelete(expense.id)}
+          onClick={() => onDelete(expense, dueDate)}
         >
           <Trash2 size={15} />
         </button>

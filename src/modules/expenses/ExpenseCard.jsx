@@ -10,16 +10,8 @@ import { ExpenseTags } from './ExpenseTags';
 import './ExpenseCard.css';
 
 export function ExpenseCard({
-  expense,
-  profile,
-  dueDate,
-  onEdit,
-  onDelete,
-  onToggleAlert,
-  onToggleCalendar,
-  onMarkPaid,
-  onOpenHistory,
-  onNavigateYear,
+  expense, profile, dueDate, onEdit, onDelete,
+  onToggleAlert, onToggleCalendar, onMarkPaid, onOpenHistory, onNavigateYear,
 }) {
   const { t } = useI18n();
   const effDate = dueDate || expense.nextDueDate;
@@ -53,12 +45,12 @@ export function ExpenseCard({
 
       <div className="expense-meta">
         <div className="doc-meta-row">
-          <span className="doc-meta-label">{t('expenses.fields.nextDueDate')}:</span>
+          <span className="doc-meta-label">{t('expenses.fields.dueDate')}:</span>
           <span className="doc-meta-val">{formatDate(effDate)}</span>
         </div>
         {showNext && (
           <div className="doc-meta-row next-installment-row">
-            <span className="doc-meta-label">{t('expenses.installments.nextOccurrence')}</span>
+            <span className="doc-meta-label">{t('expenses.installments.nextOccurrence')}:</span>
             <button
               type="button"
               className="next-installment-jump-btn"

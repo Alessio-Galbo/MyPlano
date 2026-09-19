@@ -1,17 +1,17 @@
 import React from 'react';
 import { ExpenseCard } from './ExpenseCard';
+import { YearGroupedExpenseGrid } from './YearGroupedExpenseGrid';
 
-export function ExpenseCardGrid({
-  expenses,
-  profiles,
-  onEdit,
-  onDelete,
-  onToggleAlert,
-  onToggleCalendar,
-  onMarkPaid,
-  onOpenHistory,
-  onNavigateYear,
-}) {
+export function ExpenseCardGrid(props) {
+  const { expenses = [], profiles } = props;
+  const distinctYears = new Set(
+    expenses.map((e) => e.dueYear || (e.dueDate ? new Date(e.dueDate).getFullYear() : null)).filter(Boolean)
+  );
+
+  if (distinctYears.size > 1) {
+    return <YearGroupedExpenseGrid {...props} />;
+  }
+
   return (
     <div className="grid-cards">
       {expenses.map((exp) => (
@@ -20,13 +20,13 @@ export function ExpenseCardGrid({
           expense={exp}
           dueDate={exp.dueDate || exp.nextDueDate}
           profile={profiles.find((p) => p.id === exp.profileId)}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onToggleAlert={onToggleAlert}
-          onToggleCalendar={onToggleCalendar}
-          onMarkPaid={onMarkPaid}
-          onOpenHistory={onOpenHistory}
-          onNavigateYear={onNavigateYear}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+          onToggleAlert={props.onToggleAlert}
+          onToggleCalendar={props.onToggleCalendar}
+          onMarkPaid={props.onMarkPaid}
+          onOpenHistory={props.onOpenHistory}
+          onNavigateYear={props.onNavigateYear}
         />
       ))}
     </div>

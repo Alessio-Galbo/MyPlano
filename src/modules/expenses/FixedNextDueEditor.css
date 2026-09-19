@@ -1,0 +1,49 @@
+.fixed-next-due-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fixed-next-due-edit-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.fixed-next-due-edit-btn:hover {
+  background: rgba(124, 93, 250, 0.2);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.fixed-next-due-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.fixed-date-input {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  height: 28px;
+}
+
+.btn-icon-action {
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon-action.save { background: var(--color-success); color: #fff; }
+.btn-icon-action.cancel { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }

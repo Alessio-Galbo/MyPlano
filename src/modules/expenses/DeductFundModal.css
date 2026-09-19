@@ -31,7 +31,7 @@
 .deduct-expense-amount {
   font-size: 1.125rem;
   font-weight: 700;
-  color: var(--color-primary-light);
+  color: #ffffff;
 }
 
 .deduct-expense-date {

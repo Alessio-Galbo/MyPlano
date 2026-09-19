@@ -71,5 +71,15 @@
     "confirmWipeDesc": "ATTENZIONE: Questa azione cancellerà TUTTI i profili, le spese e i documenti memorizzati. Il database diventerà completamente vuoto.",
     "confirmWipeButton": "Sì, azzera tutto definitivamente",
     "confirmFactoryButton": "Sì, ripristina dati di fabbrica"
+  },
+  "archive": {
+    "title": "Archivio Locale Ricevute & Allegati",
+    "desc": "Organizza e salva i file fisici delle ricevute sul tuo computer, divisi per [Anno]/[Categoria] e ricercabili da Esplora Risorse.",
+    "connected": "Cartella PC collegata",
+    "notConnected": "Nessuna cartella PC collegata",
+    "folder": "Cartella",
+    "fallbackNotice": "I file vengono temporaneamente salvati nel database locale protetto IndexedDB.",
+    "selectFolder": "Collega Cartella PC",
+    "disconnect": "Scollega"
   }
 }

@@ -1,0 +1,61 @@
+.receipt-attach-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.receipt-attach-btn:hover {
+  background: rgba(124, 93, 250, 0.15);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.receipt-pill-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.receipt-view-btn {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-sm);
+  color: #38bdf8;
+  cursor: pointer;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.receipt-view-btn:hover {
+  background: rgba(56, 189, 248, 0.25);
+  color: #fff;
+}
+
+.receipt-delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.receipt-delete-btn:hover {
+  color: var(--color-danger);
+}
+
+.receipt-hidden-input {
+  display: none;
+}

@@ -9,22 +9,21 @@ import { ExpenseModalsContainer } from './ExpenseModalsContainer';
 import { useExpenseListState } from './useExpenseListState';
 import { useExpenseFilterData } from './useExpenseFilterData';
 import { useExpensePaymentHandler } from './useExpensePaymentHandler';
+import { useExpenseDeleteHandler } from './useExpenseDeleteHandler';
 import '../documents/DocumentList.css';
 
 export function ExpenseList({
-  expenses,
-  profiles,
-  selectedProfileId,
-  onSaveExpense,
-  onDeleteExpense,
-  onUpdateProfileBalance,
+  expenses, profiles, selectedProfileId, onSaveExpense, onDeleteExpense, onUpdateProfileBalance,
 }) {
   const { t } = useI18n();
   const state = useExpenseListState(selectedProfileId);
   const filterData = useExpenseFilterData(expenses, selectedProfileId, state);
   const paymentHandler = useExpensePaymentHandler({ profiles, onSaveExpense, onUpdateProfileBalance });
+  const deleteHandler = useExpenseDeleteHandler({ onSaveExpense, onDeleteExpense });
 
   const handleNavigateYear = (targetYear, expId) => {
+    const sec = document.getElementById(`year-section-${targetYear}`);
+    if (sec) return sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     state.setSelectedYearRange({ mode: 'single', fromYear: targetYear, toYear: targetYear });
     setTimeout(() => {
       const el = document.querySelector(`[id^="exp-card-${expId}"]`);
@@ -41,7 +40,7 @@ export function ExpenseList({
     expenses: filterData.displayedExpenses,
     profiles,
     onEdit: (e) => { state.setEditingExp(e); state.setIsModalOpen(true); },
-    onDelete: onDeleteExpense,
+    onDelete: deleteHandler.handleRequestDelete,
     onToggleAlert: (id, val) => handleToggleProp(id, 'enableAlert', val),
     onToggleCalendar: (id, val) => handleToggleProp(id, 'includeInCalendar', val),
     onMarkPaid: paymentHandler.handleTogglePaid,
@@ -52,19 +51,13 @@ export function ExpenseList({
   return (
     <div className="doc-list-view">
       <ExpenseListHeader
-        viewMode={state.viewMode}
-        onToggleViewMode={state.setViewMode}
+        viewMode={state.viewMode} onToggleViewMode={state.setViewMode}
         onCreate={() => { state.setEditingExp(null); state.setIsModalOpen(true); }}
       />
-      <ExpenseYearSelector
-        selectedRange={state.selectedYearRange}
-        onSelectRange={state.setSelectedYearRange}
-      />
+      <ExpenseYearSelector selectedRange={state.selectedYearRange} onSelectRange={state.setSelectedYearRange} />
       <ExpenseCategoryFilter
-        categories={filterData.categories}
-        selectedCategory={filterData.effectiveCategory}
-        onSelectCategory={state.setSelectedCategory}
-        counts={filterData.counts}
+        categories={filterData.categories} selectedCategory={filterData.effectiveCategory}
+        onSelectCategory={state.setSelectedCategory} counts={filterData.counts}
       />
       {filterData.displayedExpenses.length === 0 ? (
         <div className="empty-state">{t('expenses.emptyState')}</div>
@@ -74,17 +67,18 @@ export function ExpenseList({
         <ExpenseCardGrid {...commonProps} />
       )}
       <ExpenseModalsContainer
-        isFormOpen={state.isModalOpen}
-        onCloseForm={() => state.setIsModalOpen(false)}
-        onSaveExpense={onSaveExpense}
-        editingExp={state.editingExp}
-        profiles={profiles}
-        expenses={expenses}
-        historyExp={state.historyModalExp}
-        onCloseHistory={() => state.setHistoryModalExp(null)}
+        isFormOpen={state.isModalOpen} onCloseForm={() => state.setIsModalOpen(false)}
+        onSaveExpense={onSaveExpense} editingExp={state.editingExp}
+        profiles={profiles} expenses={expenses}
+        historyExp={state.historyModalExp} onCloseHistory={() => state.setHistoryModalExp(null)}
         pendingPayment={paymentHandler.pendingPayment}
         onClosePayment={paymentHandler.handleCloseModal}
         onConfirmPayment={paymentHandler.handleConfirmPayment}
+        deletingData={deleteHandler.deletingData}
+        onCloseDelete={deleteHandler.handleCloseDelete}
+        onConfirmSingle={deleteHandler.handleConfirmSingle}
+        onConfirmTerminate={deleteHandler.handleConfirmTerminate}
+        onConfirmDeleteAll={deleteHandler.handleConfirmDeleteAll}
       />
     </div>
   );

@@ -71,5 +71,15 @@
     "confirmWipeDesc": "CAUTION: This will permanently delete ALL stored profiles, expenses, and documents. Your database will become completely empty.",
     "confirmWipeButton": "Yes, wipe everything permanently",
     "confirmFactoryButton": "Yes, restore sample data"
+  },
+  "archive": {
+    "title": "Local Receipts & Attachments Archive",
+    "desc": "Organizes and stores physical receipt files on your computer, separated by [Year]/[Category] and searchable via Windows File Explorer.",
+    "connected": "Connected PC folder",
+    "notConnected": "No PC folder connected",
+    "folder": "Folder",
+    "fallbackNotice": "Files are temporarily stored in protected local IndexedDB storage.",
+    "selectFolder": "Connect PC Folder",
+    "disconnect": "Disconnect"
   }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { ExpenseFormFields } from './ExpenseFormFields';
-import '../profiles/AddProfileModal.css';
+import './ExpenseFormModal.css';
 
 const DEFAULT_EXP = {
   title: '',
