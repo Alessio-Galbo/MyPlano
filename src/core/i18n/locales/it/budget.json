@@ -19,7 +19,8 @@
     "dueToday": "Scade oggi",
     "overdue": "Scaduto da {days} gg",
     "viewDetails": "Dettagli scadenza",
-    "upcomingCountPill": "{count} in scadenza"
+    "upcomingCountPill": "{count} in scadenza",
+    "moreUpcoming": "+ altri {count} in scadenza"
   },
   "incomeHub": {
     "startingReserve": "Fondo (€)",

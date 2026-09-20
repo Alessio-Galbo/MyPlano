@@ -10,8 +10,9 @@ export function NotificationCenterModal({
   isOpen,
   onClose,
   items = [],
-  dismissedCount = 0,
-  onDismiss,
+  profiles = [],
+  dismissedIds = [],
+  onToggleVisibility,
   onRestoreAll,
   onViewDetails,
 }) {
@@ -26,8 +27,9 @@ export function NotificationCenterModal({
     return true;
   });
 
-  const activeCountText = t('common.notifications.activeCount').replace('{count}', items.length);
-  const dismissedCountText = t('common.notifications.dismissedCount').replace('{count}', dismissedCount);
+  const activeCount = items.filter((it) => !dismissedIds.includes(it.id)).length;
+  const activeCountText = t('common.notifications.activeCount').replace('{count}', activeCount);
+  const dismissedCountText = t('common.notifications.dismissedCount').replace('{count}', dismissedIds.length);
 
   return (
     <Modal
@@ -40,7 +42,7 @@ export function NotificationCenterModal({
       <div className="notif-center-body">
         <div className="notif-center-status-bar">
           <span>{activeCountText} • {dismissedCountText}</span>
-          {dismissedCount > 0 && (
+          {dismissedIds.length > 0 && (
             <button type="button" className="notif-restore-btn" onClick={onRestoreAll}>
               <RotateCcw size={12} /> {t('common.notifications.restoreAll')}
             </button>
@@ -61,8 +63,10 @@ export function NotificationCenterModal({
               <NotificationCenterItem
                 key={item.id}
                 item={item}
+                profiles={profiles}
+                isHidden={dismissedIds.includes(item.id)}
                 onViewDetails={onViewDetails}
-                onDismiss={onDismiss}
+                onToggleVisibility={onToggleVisibility}
               />
             ))
           )}

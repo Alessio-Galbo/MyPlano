@@ -4,6 +4,7 @@ import {
   getDismissedNotificationIds,
   dismissNotificationId,
   restoreAllDismissedNotifications,
+  toggleNotificationId,
 } from '../../core/storage/notificationStorage';
 
 export function useNotifications(expenses = [], documents = [], selectedProfileId = 'all') {
@@ -23,6 +24,11 @@ export function useNotifications(expenses = [], documents = [], selectedProfileI
     setDismissedIds(getDismissedNotificationIds());
   }, []);
 
+  const toggleItem = useCallback((id) => {
+    toggleNotificationId(id);
+    setDismissedIds(getDismissedNotificationIds());
+  }, []);
+
   const restoreAll = useCallback(() => {
     restoreAllDismissedNotifications();
     setDismissedIds([]);
@@ -32,8 +38,10 @@ export function useNotifications(expenses = [], documents = [], selectedProfileI
     allUpcoming,
     activeList,
     count,
+    dismissedIds,
     dismissedCount,
     dismissItem,
+    toggleItem,
     restoreAll,
   };
 }

@@ -8,9 +8,7 @@ import { useNotifications } from './useNotifications';
 import './NavbarNotificationsBtn.css';
 
 export function NavbarNotificationsBtn({
-  expenses = [],
-  documents = [],
-  selectedProfileId = 'all',
+  expenses = [], documents = [], selectedProfileId = 'all', profiles = [],
 }) {
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
@@ -18,14 +16,12 @@ export function NavbarNotificationsBtn({
   const [isCenterOpen, setIsCenterOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const { allUpcoming, activeList, count, dismissedCount, dismissItem, restoreAll } =
+  const { allUpcoming, activeList, count, dismissedIds, toggleItem, dismissItem, restoreAll } =
     useNotifications(expenses, documents, selectedProfileId);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
+      if (containerRef.current && !containerRef.current.contains(e.target)) setIsOpen(false);
     };
     if (isOpen) document.addEventListener('mousedown', handleOutsideClick);
     return () => document.removeEventListener('mousedown', handleOutsideClick);
@@ -57,13 +53,11 @@ export function NavbarNotificationsBtn({
       {isOpen && (
         <NavbarNotificationsDropdown
           items={activeList}
+          profiles={profiles}
           count={count}
           onItemClick={handleItemClick}
           onDismiss={handleDismiss}
-          onOpenCenter={() => {
-            setIsOpen(false);
-            setIsCenterOpen(true);
-          }}
+          onOpenCenter={() => { setIsOpen(false); setIsCenterOpen(true); }}
         />
       )}
 
@@ -77,13 +71,11 @@ export function NavbarNotificationsBtn({
         isOpen={isCenterOpen}
         onClose={() => setIsCenterOpen(false)}
         items={allUpcoming}
-        dismissedCount={dismissedCount}
-        onDismiss={dismissItem}
+        profiles={profiles}
+        dismissedIds={dismissedIds}
+        onToggleVisibility={toggleItem}
         onRestoreAll={restoreAll}
-        onViewDetails={(item) => {
-          setIsCenterOpen(false);
-          setActiveItem(item);
-        }}
+        onViewDetails={(item) => { setIsCenterOpen(false); setActiveItem(item); }}
       />
     </div>
   );

@@ -34,8 +34,7 @@
 }
 .kpi-desc { font-size: 0.72rem; color: var(--text-muted); }
 
-.kpi-carousel-arrow { display: none; }
-.kpi-carousel-dots { display: none; }
+.kpi-carousel-nav { display: none; }
 
 @media (max-width: 640px) {
   .budget-kpi-carousel-wrapper {
@@ -48,30 +47,31 @@
   }
   .budget-kpi-track .kpi-card {
     flex: 0 0 100%; width: 100%; min-width: 100%; box-sizing: border-box;
-    padding-left: 2.25rem; padding-right: 2.25rem;
+    padding: 0.875rem 1rem;
+  }
+  .kpi-carousel-nav {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.75rem; margin-top: 0.6rem;
   }
   .kpi-carousel-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
     display: flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-main); cursor: pointer; opacity: 0.85;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+    color: var(--text-muted); cursor: pointer;
     transition: all var(--transition-fast);
   }
-  .kpi-carousel-arrow:hover, .kpi-carousel-arrow:active {
-    opacity: 1; background: var(--color-primary); color: #ffffff;
+  .kpi-carousel-arrow:hover {
+    background: var(--color-primary); color: #ffffff;
   }
-  .kpi-carousel-arrow.left { left: 6px; }
-  .kpi-carousel-arrow.right { right: 6px; }
   .kpi-carousel-dots {
-    display: flex; justify-content: center; align-items: center; gap: 0.4rem; margin-top: 0.5rem;
+    display: flex; justify-content: center; align-items: center; gap: 0.35rem;
   }
   .carousel-dot {
-    width: 8px; height: 8px; border-radius: 50%;
+    width: 7px; height: 7px; border-radius: 50%;
     background: rgba(255, 255, 255, 0.2); border: none; padding: 0; cursor: pointer;
     transition: all var(--transition-fast);
   }
   .carousel-dot.active {
-    width: 18px; border-radius: 4px; background: var(--color-primary);
+    width: 16px; border-radius: 4px; background: var(--color-primary);
   }
 }

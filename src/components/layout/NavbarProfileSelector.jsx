@@ -55,6 +55,7 @@ export function NavbarProfileSelector({
         expenses={expenses}
         documents={documents}
         selectedProfileId={selectedProfileId}
+        profiles={profiles}
       />
     </div>
   );

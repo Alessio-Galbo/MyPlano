@@ -19,7 +19,8 @@
     "dueToday": "Due today",
     "overdue": "Overdue by {days} d",
     "viewDetails": "Deadline details",
-    "upcomingCountPill": "{count} due"
+    "upcomingCountPill": "{count} due",
+    "moreUpcoming": "+ {count} more due"
   },
   "incomeHub": {
     "startingReserve": "Fund (€)",

@@ -68,8 +68,10 @@ export function BudgetOverview({
         showDiscretionary={!isProfileMode}
         discretionaryMargin={margin}
         monthlyIncome={currentIncome}
-        upcomingCount={metrics.upcoming30DaysCount}
-        upcomingItems={upcomingItems}
+        expenses={expenses}
+        documents={documents}
+        selectedProfileId={selectedProfileId}
+        profiles={profiles}
       />
 
       <ColdStartCard
