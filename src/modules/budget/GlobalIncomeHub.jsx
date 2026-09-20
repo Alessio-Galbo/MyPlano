@@ -35,6 +35,7 @@ export function GlobalIncomeHub({
         <ValueSaveBox
           icon={<Wallet size={18} />}
           label={t('budget.incomeHub.mainFund')}
+          shortLabel={t('budget.incomeHub.fundShort')}
           value={initialBalance}
           onSave={onUpdateInitialBalance}
           footer={
@@ -47,17 +48,19 @@ export function GlobalIncomeHub({
         <ValueSaveBox
           icon={<TrendingUp size={18} />}
           label={t('budget.incomeHub.monthlyIncome')}
+          shortLabel={t('budget.incomeHub.incomeShort')}
           value={monthlyIncome}
           onSave={onUpdateMonthlyIncome}
           placeholder={t('budget.incomeHub.optional')}
           footer={
             <div className="income-discretionary-footer">
               <span className="income-discretionary-label">
-                {t('budget.metrics.residualDiscretionary')}
+                <span className="disc-label-full">{t('budget.metrics.residualDiscretionary')}</span>
+                <span className="disc-label-short">{t('budget.incomeHub.discretionaryShort')}</span>
               </span>
               <span className="income-discretionary-val text-gradient">
                 {hasIncome ? formatCurrency(discretionaryMargin) : '—'}
-                {hasIncome && <small className="income-discretionary-unit">/mese</small>}
+                {hasIncome && <small className="income-discretionary-unit">/m</small>}
               </span>
             </div>
           }

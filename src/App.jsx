@@ -31,8 +31,8 @@ export function App() {
       <Navbar
         profiles={profiles}
         expenses={expenses}
+        documents={documents}
         onOpenManageModal={() => setIsManageProfilesOpen(true)}
-        onOpenAddModal={() => setIsAddProfileOpen(true)}
       />
 
       <main className="main-content">

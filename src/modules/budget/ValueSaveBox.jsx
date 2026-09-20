@@ -5,6 +5,7 @@ import './ValueSaveBox.css';
 export function ValueSaveBox({
   icon,
   label,
+  shortLabel,
   value = 0,
   onSave,
   placeholder,
@@ -43,7 +44,10 @@ export function ValueSaveBox({
       <div className="income-box-top">
         <div className="income-box-label-group">
           <div className="income-icon-pill">{icon}</div>
-          <span className="income-box-label">{label}</span>
+          <span className="income-box-label">
+            <span className="label-full">{label}</span>
+            <span className="label-short">{shortLabel || label}</span>
+          </span>
         </div>
         <span className={`auto-save-indicator ${isSaved ? 'visible' : ''}`}>
           <Check size={16} />

@@ -53,8 +53,19 @@
     "fund": "Fund"
   },
   "notifications": {
+    "title": "Notifications & Deadlines",
+    "empty": "No upcoming notifications",
+    "manageCenter": "Manage Notifications",
+    "centerTitle": "Notification Management Center",
+    "centerSubtitle": "View, filter and manage all deadlines and alerts",
+    "restoreAll": "Restore dismissed notifications",
+    "dismiss": "Dismiss notification",
+    "activeCount": "{count} active",
+    "dismissedCount": "{count} dismissed",
+    "inDays": "in {days} days",
+    "viewDetails": "Details",
     "globalMute": "Mute All Notifications",
-    "globalActive": "Notifications Active",
+    "globalActive": "Active Notifications",
     "remindMe": "Reminder",
     "daysBefore": "days before"
   },

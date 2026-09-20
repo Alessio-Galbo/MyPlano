@@ -12,7 +12,14 @@
     "currentFund": "Current Fund",
     "currentFundDesc": "Profile initial available liquidity",
     "upcomingDeadlines": "Upcoming Deadlines (30d)",
-    "upcomingDeadlinesDesc": "Expenses and documents due soon"
+    "upcomingDeadlinesDesc": "Expenses and documents due soon",
+    "noUpcoming": "All on track: no expenses or documents due in the next 30 days",
+    "noUpcomingDesc": "No payments or renewals scheduled soon",
+    "inDays": "in {days} d",
+    "dueToday": "Due today",
+    "overdue": "Overdue by {days} d",
+    "viewDetails": "Deadline details",
+    "upcomingCountPill": "{count} due"
   },
   "incomeHub": {
     "startingReserve": "Fund (€)",
@@ -33,9 +40,13 @@
     "discretionaryTitle": "Monthly Living & Discretionary Margin",
     "discretionaryDesc": "After setting aside fixed cyclical costs, this remains for daily expenses and personal savings",
     "depositQuotaBtn": "Deposit quota",
+    "depositShort": "Deposit",
     "depositAllQuotasBtn": "Deposit all quotas",
     "depositSuccess": "Quota deposited!",
-    "depositAllSuccess": "Quotas deposited!"
+    "depositAllSuccess": "Quotas deposited!",
+    "discretionaryShort": "Residual:",
+    "fundShort": "Fund (€)",
+    "incomeShort": "Income (€)"
   },
   "initialBalance": {
     "title": "Starting Reserve Fund",

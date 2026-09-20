@@ -8,8 +8,8 @@ import './Navbar.css';
 export function Navbar({
   profiles = [],
   expenses = [],
+  documents = [],
   onOpenManageModal,
-  onOpenAddModal,
 }) {
   const { activeTab, setActiveTab, selectedProfileId } = useApp();
   const { t } = useI18n();
@@ -36,8 +36,8 @@ export function Navbar({
             profiles={profiles}
             selectedProfileId={selectedProfileId}
             expenses={expenses}
+            documents={documents}
             onOpenManageModal={onOpenManageModal}
-            onOpenAddModal={onOpenAddModal}
           />
         </div>
 

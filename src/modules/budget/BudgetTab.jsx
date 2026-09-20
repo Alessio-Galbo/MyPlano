@@ -6,6 +6,7 @@ import { calculateColdStartAnalysis } from './budgetCalculations';
 
 export function BudgetTab({
   expenses,
+  documents = [],
   profiles = [],
   selectedProfileId = 'all',
   onSelectProfile,
@@ -49,6 +50,7 @@ export function BudgetTab({
     <div className="budget-tab-container">
       <BudgetOverview
         expenses={expenses}
+        documents={documents}
         profiles={profiles}
         selectedProfileId={selectedProfileId}
         onSelectProfile={onSelectProfile}

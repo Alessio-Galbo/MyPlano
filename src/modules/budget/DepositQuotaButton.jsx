@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlusCircle, CheckCircle2 } from 'lucide-react';
+import { Plus, Check } from 'lucide-react';
 import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import './DepositQuotaButton.css';
@@ -24,13 +24,21 @@ export function DepositQuotaButton({
     setTimeout(() => setJustDeposited(false), 2500);
   };
 
-  const btnLabel = isAll
-    ? (showAmount
-        ? `${t('budget.incomeHub.depositAllQuotasBtn')} (+${formatCurr(monthlyQuota)})`
-        : t('budget.incomeHub.depositAllQuotasBtn'))
-    : (showAmount
-        ? `${t('budget.incomeHub.depositQuotaBtn')} (+${formatCurr(monthlyQuota)})`
-        : t('budget.incomeHub.depositQuotaBtn'));
+  const renderLabel = () => {
+    const formattedAmount = formatCurr(monthlyQuota);
+    if (isAll) {
+      return showAmount
+        ? `${t('budget.incomeHub.depositAllQuotasBtn')} (+${formattedAmount})`
+        : t('budget.incomeHub.depositAllQuotasBtn');
+    }
+    if (!showAmount) return t('budget.incomeHub.depositQuotaBtn');
+    return (
+      <>
+        <span className="deposit-label-full">{t('budget.incomeHub.depositQuotaBtn')} (+{formattedAmount})</span>
+        <span className="deposit-label-short">{t('budget.incomeHub.depositShort')} (+{formattedAmount})</span>
+      </>
+    );
+  };
 
   return (
     <div className="deposit-quota-container">
@@ -38,11 +46,17 @@ export function DepositQuotaButton({
         type="button"
         variant="secondary"
         size="sm"
-        icon={justDeposited ? <CheckCircle2 size={15} className="deposit-success-icon" /> : <PlusCircle size={15} />}
+        icon={
+          justDeposited ? (
+            <Check size={15} strokeWidth={2.5} className="deposit-success-icon" />
+          ) : (
+            <Plus size={15} strokeWidth={2.5} className="deposit-plus-icon" />
+          )
+        }
         onClick={handleClick}
         className={`deposit-quota-btn ${justDeposited ? 'deposited' : ''}`}
       >
-        {btnLabel}
+        {renderLabel()}
       </Button>
     </div>
   );

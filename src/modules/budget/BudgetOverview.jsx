@@ -13,6 +13,7 @@ import './BudgetOverview.css';
 
 export function BudgetOverview({
   expenses,
+  documents = [],
   profiles = [],
   selectedProfileId = 'all',
   onSelectProfile,
@@ -27,21 +28,13 @@ export function BudgetOverview({
   const state = getBudgetOverviewState({
     profiles,
     expenses,
+    documents,
     selectedProfileId,
     simulationStrategy,
     coldStart,
   });
 
-  const { profile, isProfileMode, metrics, totalLiquidity, totalIncome, effectiveQuota, currentIncome, margin } = state;
-
-  const handleTopUpFund = (amount) => {
-    const tid = isProfileMode ? selectedProfileId : profiles[0]?.id;
-    if (tid) performTopUpFund(profiles, tid, amount, onUpdateProfileBalance, onSelectStrategy);
-  };
-
-  const handleDepositQuota = (pId, amount) => {
-    performDepositProfileQuota(profiles, pId, amount, onDepositProfileQuota, onUpdateProfileBalance);
-  };
+  const { profile, isProfileMode, metrics, upcomingItems, totalLiquidity, totalIncome, effectiveQuota, currentIncome, margin } = state;
 
   const profileTitle = profile?.name
     ? t('budget.incomeHub.profileHubTitle').replace('{name}', profile.name)
@@ -66,7 +59,7 @@ export function BudgetOverview({
           totalLiquidity={totalLiquidity}
           totalIncome={totalIncome}
           onSelectProfile={onSelectProfile}
-          onDepositQuota={handleDepositQuota}
+          onDepositQuota={(pId, a) => performDepositProfileQuota(profiles, pId, a, onDepositProfileQuota, onUpdateProfileBalance)}
           simulationStrategy={simulationStrategy}
         />
       )}
@@ -76,6 +69,7 @@ export function BudgetOverview({
         discretionaryMargin={margin}
         monthlyIncome={currentIncome}
         upcomingCount={metrics.upcoming30DaysCount}
+        upcomingItems={upcomingItems}
       />
 
       <ColdStartCard
@@ -83,7 +77,10 @@ export function BudgetOverview({
         standardMonthlyQuota={metrics.monthlyQuota}
         selectedStrategy={simulationStrategy}
         onSelectStrategy={onSelectStrategy}
-        onTopUpFund={handleTopUpFund}
+        onTopUpFund={(a) => {
+          const tid = isProfileMode ? selectedProfileId : profiles[0]?.id;
+          if (tid) performTopUpFund(profiles, tid, a, onUpdateProfileBalance, onSelectStrategy);
+        }}
       />
     </div>
   );

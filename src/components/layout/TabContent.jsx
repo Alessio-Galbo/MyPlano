@@ -19,6 +19,7 @@ export function TabContent(props) {
       return (
         <BudgetTab
           expenses={expenses}
+          documents={documents}
           profiles={profiles}
           selectedProfileId={selectedProfileId}
           onSelectProfile={onSelectProfile}

@@ -1,16 +1,17 @@
 import React from 'react';
-import { Layers, ChevronDown, Plus } from 'lucide-react';
+import { Layers, ChevronDown } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { calculateItemAnnualCost } from '../../modules/budget/budgetCalculations';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
+import { NavbarNotificationsBtn } from './NavbarNotificationsBtn';
 import './NavbarProfileSelector.css';
 
 export function NavbarProfileSelector({
   profiles = [],
   selectedProfileId = 'all',
   expenses = [],
+  documents = [],
   onOpenManageModal,
-  onOpenAddModal,
 }) {
   const { t } = useI18n();
 
@@ -50,14 +51,11 @@ export function NavbarProfileSelector({
         <ChevronDown size={12} className="nav-profile-chevron" />
       </button>
 
-      <button
-        type="button"
-        className="nav-profile-add-btn"
-        onClick={onOpenAddModal}
-        title={t('common.profiles.addProfile')}
-      >
-        <Plus size={14} />
-      </button>
+      <NavbarNotificationsBtn
+        expenses={expenses}
+        documents={documents}
+        selectedProfileId={selectedProfileId}
+      />
     </div>
   );
 }

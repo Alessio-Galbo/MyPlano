@@ -53,6 +53,17 @@
     "fund": "Fondo"
   },
   "notifications": {
+    "title": "Notifiche & Scadenze",
+    "empty": "Nessuna notifica presente",
+    "manageCenter": "Gestisci Notifiche",
+    "centerTitle": "Centro Gestione Notifiche",
+    "centerSubtitle": "Consulta, filtra e gestisci tutte le scadenze e gli avvisi",
+    "restoreAll": "Ripristina notifiche rimosse",
+    "dismiss": "Rimuovi notifica",
+    "activeCount": "{count} attive",
+    "dismissedCount": "{count} rimosse",
+    "inDays": "tra {days} gg",
+    "viewDetails": "Dettagli",
     "globalMute": "Silenzia Tutte le Notifiche",
     "globalActive": "Notifiche Attive",
     "remindMe": "Promemoria",

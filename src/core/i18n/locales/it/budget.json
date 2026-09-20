@@ -12,7 +12,14 @@
     "currentFund": "Fondo Attuale",
     "currentFundDesc": "Liquidità iniziale del profilo",
     "upcomingDeadlines": "Scadenze Imminenti (30gg)",
-    "upcomingDeadlinesDesc": "Uscite e documenti con scadenza a breve"
+    "upcomingDeadlinesDesc": "Uscite e documenti con scadenza a breve",
+    "noUpcoming": "Tutto in ordine: nessuna spesa o documento in scadenza nei prossimi 30 giorni",
+    "noUpcomingDesc": "Nessun pagamento o rinnovo previsto a breve",
+    "inDays": "tra {days} gg",
+    "dueToday": "Scade oggi",
+    "overdue": "Scaduto da {days} gg",
+    "viewDetails": "Dettagli scadenza",
+    "upcomingCountPill": "{count} in scadenza"
   },
   "incomeHub": {
     "startingReserve": "Fondo (€)",
@@ -33,9 +40,13 @@
     "discretionaryTitle": "Disponibilità Mensile per il Quotidiano",
     "discretionaryDesc": "Tolte le spese cicliche e la quota fissa del fondo, questo è il margine per spese vive e risparmio",
     "depositQuotaBtn": "Versa quota",
+    "depositShort": "Versa",
     "depositAllQuotasBtn": "Versa tutte le quote",
     "depositSuccess": "Quota versata!",
-    "depositAllSuccess": "Quote versate!"
+    "depositAllSuccess": "Quote versate!",
+    "discretionaryShort": "Residuo:",
+    "fundShort": "Fondo (€)",
+    "incomeShort": "Introito (€)"
   },
   "initialBalance": {
     "title": "Fondo Iniziale di Riserva",
