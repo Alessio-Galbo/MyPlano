@@ -91,7 +91,8 @@ try {
   await sleep(1500);
   const keys2 = await page.eval("caches.keys()");
   const urls = await page.eval(`caches.open(${JSON.stringify(keys2.find((k) => k.includes("precache")))}).then(c => c.keys()).then(r => r.map(x => x.url))`);
-  ok(keys2.length === 1 && !urls.some((u) => u.includes(v3)), "vecchia versione rimossa dalla cache; caches=" + keys2.join(","));
+  ok(keys2.filter((k) => k.includes("precache")).length === 1 && !urls.some((u) => u.includes(v3)), "vecchia versione rimossa dalla cache; caches=" + keys2.join(","));
+  ok(!urls.some((u) => u.endsWith(".webmanifest")), "manifest fuori dalla precache (aggiornabile dalle app installate)");
   ok(!page.drainErrors().length, "console pulita (dopo update)");
   ok(!external.length, "nessuna richiesta esterna " + external.slice(0, 3).join(" "));
 } catch (e) { console.log("ERROR", e.message); fails++; }

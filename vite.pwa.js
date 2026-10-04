@@ -1,6 +1,8 @@
 // PWA (vite-plugin-pwa + Workbox generateSW). Scelte e motivi: docs in AI-hub skill pwa-service-worker-checklist.
-// - Precache di TUTTA la build (shell HTML, asset con hash, font, icone, manifest): l'app non ha dati in rete,
-//   quindi nessuna runtimeCaching. I dati utente restano in localStorage/IndexedDB/File System Access, mai nel SW.
+// - Precache di tutta la build (shell HTML, asset con hash, font, icone) TRANNE il manifest: se fosse in precache
+//   il SW vecchio continuerebbe a dare al browser il manifest vecchio e un'app installata non vedrebbe mai le
+//   modifiche (display, icone, nome). Il manifest va in rete prima, cache solo offline (NetworkFirst).
+//   I dati utente restano in localStorage/IndexedDB/File System Access, mai nel SW.
 // - registerType "prompt": il SW nuovo resta in attesa finché l'utente non tocca "Aggiorna" (niente reload a metà form).
 // - Percorsi relativi (scope/start_url "./"): funzionano sia con base /MyPlano/ (GitHub Pages) sia con base /.
 const THEME = '#0b0f19'
@@ -35,6 +37,18 @@ export const pwaOptions = {
     cleanupOutdatedCaches: true,
     clientsClaim: true,
     skipWaiting: false,
+    runtimeCaching: [{
+      urlPattern: ({ url }) => url.pathname.endsWith('.webmanifest'),
+      handler: 'NetworkFirst',
+      options: { cacheName: 'myplano-manifest', networkTimeoutSeconds: 4 },
+    }],
+  },
+  // Il plugin aggiunge sempre il manifest alla precache (additionalManifestEntries): lo si toglie qui.
+  integration: {
+    beforeBuildServiceWorker(options) {
+      const entries = options.workbox.additionalManifestEntries || []
+      options.workbox.additionalManifestEntries = entries.filter((e) => !String(e.url ?? e).endsWith('.webmanifest'))
+    },
   },
   includeManifestIcons: false, // le icone sono già nel glob: niente voci doppie in precache
   devOptions: { enabled: false },

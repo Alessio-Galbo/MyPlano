@@ -34,7 +34,7 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 | Tema | Scelta | Motivo |
 |---|---|---|
 | SW | `vite-plugin-pwa` generateSW | app statica senza API: elenco precache e revision generati, niente bump a mano |
-| Cache | solo precache (17 voci ≈ 840 KB): shell, bundle con hash, font, icone, manifest | nessuna richiesta esterna, dati utente mai nel SW |
+| Cache | precache (shell, bundle con hash, font, icone) + manifest NetworkFirst fuori precache (`integration.beforeBuildServiceWorker` in `vite.pwa.js`) | nessuna richiesta esterna, dati utente mai nel SW |
 | Navigazioni | `navigateFallback: index.html` | Pages non ha fallback SPA |
 | Aspetto | `display_override: [window-controls-overlay, fullscreen, standalone]`, `display: standalone`; `viewport-fit=cover`, meta apple-* | desktop senza barra del titolo, Android senza barra di stato, iOS standalone |
 | Update | automatico se sicuro: entro 15 s dall'avvio senza interazioni, o app in background senza dialog/campo attivo; banner solo dopo 10 min di attesa con utente attivo; toast "Aggiornato alla nuova versione" | mai ricaricare a metà form; `skipWaiting: false` nel SW, lo decide la pagina |
@@ -61,3 +61,4 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 - `persisted: false` in headless è normale (profilo nuovo, nessun segnale d'uso).
 - Rinominare il repo o passare a un dominio proprio cambia origine/scope: i dati locali restano sulla vecchia origine.
 - Repo pubblico: negli script mai percorsi assoluti del PC. Importa il driver con `../../headless-chrome-cdp/scripts/cdp.mjs` e ricava la radice con `fileURLToPath(new URL("../../../../", import.meta.url))`.
+- Manifest in precache = le app installate non vedono mai le modifiche (il SW vecchio dà il manifest vecchio). Successo con il passaggio a `display_override` (S25 Ultra con ancora le barre): ora è fuori precache e `pwa-scenario.mjs` lo controlla.
