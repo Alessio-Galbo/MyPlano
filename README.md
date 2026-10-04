@@ -54,7 +54,8 @@ MyPlano è pubblicato online all'indirizzo previsto **https://alessio-galbo.gith
 
 - **Installa dal browser**: su Chrome/Edge usa l'icona *Installa* nella barra dell'indirizzo; su Android *Aggiungi a schermata Home*; su iPhone/iPad (Safari) *Condividi → Aggiungi alla schermata Home*.
 - **Funziona offline**: dopo la prima apertura l'app parte anche senza connessione, e non carica font o risorse da server esterni.
-- **Aggiornamenti**: quando c'è una nuova versione compare l'avviso *Nuova versione disponibile* con *Più tardi / Aggiorna*; se hai un modulo aperto, ti avvisa che le modifiche non salvate andranno perse.
+- **A tutto schermo**: installata, l'app non ha bordi. Sul PC (Chrome/Edge) la barra del titolo lascia il posto alla navbar; su Android è a schermo intero; su iPhone arriva fino al bordo superiore con la barra di stato trasparente. Le app installate prima di questa versione si aggiornano da sole su Chrome (entro circa un giorno); su iPhone vanno rimosse e aggiunte di nuovo alla Home.
+- **Aggiornamenti automatici**: l'app controlla le novità all'apertura e ogni ora, e si aggiorna da sola quando non la stai usando (appena aperta o quando passa in secondo piano, senza moduli aperti); poi mostra *Aggiornato alla nuova versione*. Solo se stai lavorando a lungo compare l'avviso *Nuova versione disponibile* con *Più tardi / Aggiorna*.
 - **I dati restano solo nel tuo dispositivo** e sono legati all'indirizzo da cui apri l'app (il browser li separa per indirizzo). Se l'indirizzo cambia (nuovo nome del repository, nuovo dominio), i dati restano sul vecchio indirizzo: **fai un backup da Impostazioni prima** e ripristinalo dopo. L'app chiede al browser l'archiviazione persistente per ridurre il rischio che i dati vengano rimossi.
 - **Notifiche ad app chiusa**: senza un server non sono possibili; per avvisi sul telefono usa l'export `.ics` nel tuo calendario.
 

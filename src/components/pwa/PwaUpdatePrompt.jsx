@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { Button } from '../ui/Button';
+import { hasOpenDialog } from './busyState.js';
 import './PwaUpdatePrompt.css';
-
-// Una finestra di dialogo aperta (form di spesa/documento, impostazioni) può contenere dati non salvati.
-const hasOpenDialog = () => Boolean(document.querySelector('[role="dialog"]'));
 
 // mode "update": versione nuova scaricata e in attesa; "reload": attivata da un'altra scheda.
 export function PwaUpdatePrompt({ mode, onConfirm, onDismiss }) {

@@ -38,3 +38,10 @@
   }
   .pwa-update-actions { width: 100%; justify-content: flex-end; }
 }
+
+/* Toast "Aggiornato alla nuova versione": stessa posizione, più discreto, senza pulsanti. */
+.pwa-updated-toast { width: auto; max-width: calc(100vw - 2rem); border-color: var(--border-subtle); }
+.pwa-updated-icon { color: var(--color-success); flex-shrink: 0; }
+@media (max-width: 640px) {
+  .pwa-updated-toast { left: 50%; right: auto; transform: translateX(-50%); width: max-content; }
+}

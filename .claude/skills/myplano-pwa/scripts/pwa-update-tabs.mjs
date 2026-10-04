@@ -21,19 +21,25 @@ try {
   build(); await start();
   browser = await launch({ port: 19526 });
   const A = await browser.openPage("about:blank");
+  await A.send("Page.addScriptToEvaluateOnNewDocument", { source: "sessionStorage.setItem('myplano_pwa_early_ms','1');sessionStorage.setItem('myplano_pwa_banner_after_ms','1500')" });
   await A.navigate(URL0, ready);
   ok(await A.eval("navigator.serviceWorker.controller === null") || true, "A aperta alla prima installazione");
   await A.waitFor("!!navigator.serviceWorker.controller", 15000); await sleep(1500);
   const oldJs = await A.eval("document.querySelector('script[type=module]').src");
   const B = await browser.openPage("about:blank");
+  await B.send("Page.addScriptToEvaluateOnNewDocument", { source: "sessionStorage.setItem('myplano_pwa_early_ms','1');sessionStorage.setItem('myplano_pwa_banner_after_ms','1500')" });
   await B.navigate(URL0, ready);
   await stop();
   writeFileSync(CSS, cssOrig.replace("padding: 0.75rem 0.875rem;", "padding: 0.75rem 0.9rem;")); build(); writeFileSync(CSS, cssOrig);
   await start();
+  // A (prima installazione) torna in primo piano, B va in background e non sta lavorando: B si aggiorna da sola.
+  await browser.send("Target.activateTarget", { targetId: A.targetId }); await sleep(500);
+  console.log("     visibilità A/B:", await A.eval("document.visibilityState"), await B.eval("document.visibilityState"));
+  const hideB = "(() => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange')); return true; })()";
+  const bJs = await B.eval("document.querySelector('script[type=module]').src");
   await B.eval("navigator.serviceWorker.getRegistration().then(r => r.update())");
-  ok(await B.waitFor("!!document.querySelector('[data-pwa-update=update]')", 20000).catch(() => false), "B: banner update");
-  await B.click(".pwa-update-confirm");
-  await sleep(500); await B.waitFor(ready, 15000);
+  await B.waitFor("navigator.serviceWorker.getRegistration().then(r => !!r.waiting)", 20000); await B.eval(hideB);
+  ok(await B.waitFor(`document.querySelector('script[type=module]').src !== ${JSON.stringify(bJs)}`, 15000).catch(() => false), "B (in background, inattiva) aggiornata da sola");
   ok(await A.waitFor("!!document.querySelector('[data-pwa-update=reload]')", 10000).catch(() => false), "(2) A (prima installazione) vede 'aggiornato in un'altra finestra'");
   await A.screenshot(OUT + "/5-A-reload-banner.png");
   A.drainErrors();

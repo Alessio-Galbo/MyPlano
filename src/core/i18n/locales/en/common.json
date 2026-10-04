@@ -8,7 +8,8 @@
     "updateAction": "Update",
     "updateAnyway": "Update anyway",
     "later": "Later",
-    "unsavedWarning": "A window is open: unsaved changes will be lost."
+    "unsavedWarning": "A window is open: unsaved changes will be lost.",
+    "updatedToast": "Updated to the new version"
   },
   "nav": {
     "dashboard": "Overview",

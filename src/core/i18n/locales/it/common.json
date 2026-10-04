@@ -8,7 +8,8 @@
     "updateAction": "Aggiorna",
     "updateAnyway": "Aggiorna comunque",
     "later": "Più tardi",
-    "unsavedWarning": "Hai una finestra aperta: le modifiche non salvate andranno perse."
+    "unsavedWarning": "Hai una finestra aperta: le modifiche non salvate andranno perse.",
+    "updatedToast": "Aggiornato alla nuova versione"
   },
   "nav": {
     "dashboard": "Panoramica",

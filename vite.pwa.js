@@ -16,6 +16,9 @@ export const pwaOptions = {
     lang: 'it',
     start_url: './',
     scope: './',
+    // Senza bordi: Chrome/Edge desktop → window-controls-overlay (niente barra del titolo), Android →
+    // fullscreen (niente barra di stato), iOS e browser che non conoscono display_override → standalone.
+    display_override: ['window-controls-overlay', 'fullscreen', 'standalone'],
     display: 'standalone',
     background_color: THEME,
     theme_color: THEME,

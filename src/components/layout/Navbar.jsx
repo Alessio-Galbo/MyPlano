@@ -4,6 +4,7 @@ import { useApp } from '../../core/state';
 import { useI18n } from '../../core/i18n';
 import { NavbarProfileSelector } from './NavbarProfileSelector';
 import './Navbar.css';
+import './DisplayModes.css';
 
 export function Navbar({
   profiles = [],

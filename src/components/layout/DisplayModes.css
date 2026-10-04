@@ -1,0 +1,50 @@
+/* App installata senza bordi (manifest display_override: window-controls-overlay → fullscreen → standalone).
+ * Importato da Navbar.jsx dopo Navbar.css; ":root" alza la specificità sopra i CSS dei componenti. */
+
+/* Safe area (notch, barra gesti, angoli arrotondati): con viewport-fit=cover le env() valgono > 0 su telefono
+ * a tutto schermo e su iOS con status bar "black-translucent"; altrove valgono 0 e non cambia nulla. */
+:root .navbar {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+:root .main-content { padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); }
+
+@media (max-width: 768px) {
+  :root .main-content { padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* Modali a schermo intero su telefono: intestazione e pulsanti fuori da notch e barra gesti. */
+@media (max-width: 640px) {
+  :root .modal-backdrop {
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+      env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    background-color: var(--bg-surface);
+  }
+  :root .modal-content { height: 100%; max-height: 100%; }
+}
+
+/* Desktop (Chrome/Edge) senza barra del titolo: la navbar prende il posto della barra. I pulsanti
+ * min/max/chiudi stanno fuori da titlebar-area: la navbar lascia libero quello spazio a destra e a sinistra
+ * (macOS li ha a sinistra), è trascinabile sullo sfondo e cliccabile sui controlli. */
+@media (display-mode: window-controls-overlay) {
+  :root .navbar {
+    padding-left: env(titlebar-area-x, 0px);
+    padding-right: calc(100vw - env(titlebar-area-x, 0px) - env(titlebar-area-width, 100vw));
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+  :root .navbar-container { min-height: env(titlebar-area-height, 33px); }
+  .navbar button,
+  .navbar input,
+  .navbar select,
+  .navbar textarea,
+  .navbar a,
+  .navbar [role],
+  .navbar [class*='dropdown'],
+  .navbar [class*='menu'],
+  .navbar [tabindex] {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+}

@@ -14,7 +14,8 @@ const start = async () => { server = spawn(`npx vite preview --port 18526 --stri
   for (let i = 0; i < 60; i++) { try { if ((await fetch(URL0)).ok) return; } catch {} await sleep(250); } throw new Error("preview down"); };
 const stop = async () => { if (server) { try { execSync(`taskkill /PID ${server.pid} /T /F`, { stdio: "ignore" }); } catch {} server = null; await sleep(800); } };
 process.on("exit", () => { writeFileSync(CSS, cssOrig); console.log(fails ? `FAILED (${fails})` : "ALL OK"); });
-setTimeout(() => { console.log("GLOBAL TIMEOUT"); fails++; stop().then(() => process.exit(1)); }, 240000).unref();
+setTimeout(() => { console.log("GLOBAL TIMEOUT"); fails++; stop().then(() => process.exit(1)); }, 400000).unref();
+const ready = "document.querySelectorAll('#root *').length > 20";
 try {
   build(); await start();
   browser = await launch({ port: 19526 });
@@ -38,6 +39,7 @@ try {
   // Offline: server spento, NUOVA scheda
   await stop(); await page.close();
   page = await browser.openPage("about:blank");
+  await page.send("Page.addScriptToEvaluateOnNewDocument", { source: "sessionStorage.setItem('myplano_pwa_early_ms','1');sessionStorage.setItem('myplano_pwa_banner_after_ms','8000')" });
   await page.navigate(URL0, "document.readyState === 'complete'");
   ok(await page.waitFor("document.querySelectorAll('#root *').length > 20", 10000).catch(() => false), "offline (server spento, scheda nuova): app caricata");
   ok(await page.eval("document.fonts.ready.then(() => document.fonts.check('700 16px Outfit'))"), "font offline");
@@ -46,28 +48,50 @@ try {
   await page.navigate(URL0, "document.readyState === 'complete'"); await page.waitFor("document.querySelectorAll('#root *').length > 20");
   await page.screenshot(OUT + "/2-offline.png");
   const offErr = page.drainErrors(); ok(!offErr.length, "console pulita (offline) " + offErr.join(" | "));
-  // Aggiornamento
-  const oldJs = await page.eval("document.querySelector('script[type=module]').src");
-  writeFileSync(CSS, cssOrig.replace("padding: 0.75rem 0.875rem;", "padding: 0.75rem 0.9rem;")); build(); writeFileSync(CSS, cssOrig);
-  await start();
-  await page.eval("navigator.serviceWorker.getRegistration().then(r => r.update())");
-  ok(await page.waitFor("!!document.querySelector('[data-pwa-update=update]')", 20000).catch(() => false), "banner 'Nuova versione disponibile'");
-  console.log("     testo:", await page.eval("document.querySelector('.pwa-update').innerText.split(String.fromCharCode(10)).join(' / ')"));
-  await page.mobile(390, 844, 2); await page.screenshot(OUT + "/3-banner-mobile.png"); await page.desktop();
-  await page.eval("(() => { const d = document.createElement('div'); d.setAttribute('role','dialog'); d.id='fake-dialog'; document.body.appendChild(d); })()");
+  // Aggiornamento automatico sicuro (manopole: niente finestra "primi secondi", banner dopo 8 s)
+  const js = () => page.eval("document.querySelector('script[type=module]').src.split('/').pop()");
+  const hide = "(() => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' }); document.dispatchEvent(new Event('visibilitychange')); return true; })()";
+  const waiting = "navigator.serviceWorker.getRegistration().then(r => r.update().catch(() => {}).then(() => !!r.waiting))";
+  const release = async (pad) => { await stop(); writeFileSync(CSS, cssOrig.replace("padding: 0.75rem 0.875rem;", `padding: 0.75rem ${pad};`)); build(); writeFileSync(CSS, cssOrig); await start(); };
+  const v1 = await js();
+  await release("0.9rem");
+  await page.waitFor(waiting, 20000); await sleep(500);
+  ok(await js() === v1 && !(await page.eval("!!document.querySelector('.pwa-update')")), "A: versione nuova in attesa, app in primo piano: nessun ricarico, nessun banner");
+  await page.eval(hide);
+  await page.waitFor(`document.querySelector('script[type=module]').src.split('/').pop() !== ${JSON.stringify(v1)} && ${ready}`, 15000);
+  const v2 = await js();
+  ok(v2 !== v1, `A: app in background -> aggiornata da sola (${v1} -> ${v2})`);
+  ok(await page.waitFor("!!document.querySelector('[data-pwa-updated]')", 5000).catch(() => false), "toast 'Aggiornato alla nuova versione'");
+  await page.mobile(390, 844, 2); await page.screenshot(OUT + "/3-updated-toast-mobile.png"); await page.desktop();
+  // B) modale aperto: nessun ricarico automatico; dopo l'attesa il banner, con conferma
+  await page.eval("(() => { [...document.querySelectorAll('.nav-tab')][1].click(); return true; })()", { gesture: true });
+  await page.waitFor("[...document.querySelectorAll('button')].some(x => /Nuovo/.test(x.textContent))", 8000);
+  await page.eval("(() => { [...document.querySelectorAll('button')].find(x => /Nuovo/.test(x.textContent)).click(); return true; })()", { gesture: true });
+  await page.waitFor("!!document.querySelector('[role=dialog]')", 5000);
+  await release("0.95rem");
+  await page.waitFor(waiting, 20000);
+  await page.eval(hide); await sleep(3000);
+  ok(await js() === v2 && await page.eval("!!document.querySelector('[role=dialog]')"), "B: modale aperto + app nascosta: NESSUN ricarico");
+  ok(await page.waitFor("!!document.querySelector('[data-pwa-update=update]')", 15000).catch(() => false), "B: in attesa a lungo -> banner 'Nuova versione disponibile'");
   await page.click(".pwa-update-confirm");
-  ok(await page.waitFor("!!document.querySelector('.pwa-update-warning')", 3000).catch(() => false), "con una finestra aperta chiede conferma (nessun reload)");
+  ok(await page.waitFor("!!document.querySelector('.pwa-update-warning')", 3000).catch(() => false), "B: con il modale aperto chiede conferma");
   await page.screenshot(OUT + "/4-warning.png");
-  ok(await page.eval("!!document.getElementById('fake-dialog')"), "pagina non ricaricata dopo il primo click");
   await page.click(".pwa-update-confirm");
-  await page.waitFor("!document.getElementById('fake-dialog') && document.querySelectorAll('#root *').length > 20", 15000);
-  const newJs = await page.eval("document.querySelector('script[type=module]').src");
-  ok(newJs !== oldJs, `nuova versione attiva: ${oldJs.split('/').pop()} -> ${newJs.split('/').pop()}`);
+  await page.waitFor(`document.querySelector('script[type=module]').src.split('/').pop() !== ${JSON.stringify(v2)} && ${ready}`, 15000);
+  const v3 = await js();
+  ok(v3 !== v2 && !(await page.eval("!!document.querySelector('[role=dialog]')")), `B: conferma -> nuova versione (${v3})`);
+  // C) avvio con una versione nuova sul server: si applica nei primi secondi, senza interazione
+  await page.close();
+  await release("1rem");
+  page = await browser.openPage("about:blank");
+  await page.navigate(URL0, ready);
+  await page.waitFor(`document.querySelector('script[type=module]').src.split('/').pop() !== ${JSON.stringify(v3)} && ${ready}`, 20000);
+  ok(await js() !== v3, "C: all'avvio, prima di toccare nulla -> aggiornata da sola");
+  ok(await page.waitFor("!!document.querySelector('[data-pwa-updated]')", 5000).catch(() => false), "C: toast dopo l'aggiornamento");
   await sleep(1500);
   const keys2 = await page.eval("caches.keys()");
   const urls = await page.eval(`caches.open(${JSON.stringify(keys2.find((k) => k.includes("precache")))}).then(c => c.keys()).then(r => r.map(x => x.url))`);
-  ok(keys2.length === 1 && !urls.some((u) => u.includes(oldJs.split('/').pop())), "vecchia versione rimossa dalla cache; caches=" + keys2.join(","));
-  ok(!(await page.eval("!!document.querySelector('.pwa-update')")), "banner sparito dopo l'aggiornamento");
+  ok(keys2.length === 1 && !urls.some((u) => u.includes(v3)), "vecchia versione rimossa dalla cache; caches=" + keys2.join(","));
   ok(!page.drainErrors().length, "console pulita (dopo update)");
   ok(!external.length, "nessuna richiesta esterna " + external.slice(0, 3).join(" "));
 } catch (e) { console.log("ERROR", e.message); fails++; }
