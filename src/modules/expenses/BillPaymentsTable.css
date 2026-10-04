@@ -1,0 +1,22 @@
+/* Storico bollette su telefono: 5 colonne non stanno in 360 px → ogni bolletta diventa una scheda su due righe
+   (data · importo · elimina / contratto · nota), senza scroll orizzontale. */
+@media (max-width: 540px) {
+  .bill-payments-table thead { display: none; }
+  .bill-payments-table,
+  .bill-payments-table tbody { display: block; width: 100%; }
+  .payments-table.bill-payments-table tr {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "date amount del" "badge note del";
+    align-items: center;
+    gap: 0.3rem 0.75rem;
+    padding: 0.6rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .payments-table.bill-payments-table td { padding: 0; border-bottom: none; min-width: 0; overflow-wrap: anywhere; }
+  .payments-table.bill-payments-table td:nth-child(1) { grid-area: date; }
+  .payments-table.bill-payments-table td:nth-child(2) { grid-area: amount; text-align: right; }
+  .payments-table.bill-payments-table td:nth-child(3) { grid-area: badge; }
+  .payments-table.bill-payments-table td:nth-child(4) { grid-area: note; text-align: right; }
+  .payments-table.bill-payments-table td:nth-child(5) { grid-area: del; }
+}

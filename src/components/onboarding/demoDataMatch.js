@@ -1,56 +1,45 @@
 import { INITIAL_PROFILES, INITIAL_EXPENSES, INITIAL_DOCUMENTS, storageService } from '../../core/storage';
+import { sameList, sameProfiles, findDemoLeftovers } from './demoCompare';
 
-// True only when the data is exactly the sample data: same profiles, expenses and documents
-// (none added or removed, content unchanged, no custom colour) and no budget strategy or
-// fund/income settings chosen. Any user edit → false, so the banner never offers to wipe real data.
+const SEEDS = { profiles: INITIAL_PROFILES, expenses: INITIAL_EXPENSES, documents: INITIAL_DOCUMENTS };
 
-const isEmptyValue = (v) => v === undefined || v === null || v === '' || v === false
-  || (Array.isArray(v) && v.length === 0)
-  || (typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 0);
-
-const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-const keyOf = (item) => item.id || `${item.title}|${item.profileId}`;
-
-// Every seed field must be unchanged; extra fields (e.g. added by migrations) must be empty.
-function sameItem(seed, item) {
-  const seedOk = Object.keys(seed).every((k) => k === 'id' || same(seed[k], item[k]));
-  const extrasOk = Object.keys(item).every((k) => k === 'id' || k in seed || isEmptyValue(item[k]));
-  return seedOk && extrasOk;
+// Profiles with a budget strategy or fund/income settings chosen by the user.
+export function readCustomProfileIds() {
+  const ids = new Set();
+  Object.entries(storageService.getProfileStrategies() || {}).forEach(([id, s]) => { if (s !== 'standard') ids.add(id); });
+  Object.keys(storageService.getProfileFundConfigs() || {}).forEach((id) => ids.add(id));
+  Object.keys(storageService.getProfileIncomeConfigs() || {}).forEach((id) => ids.add(id));
+  return ids;
 }
 
-function sameList(seedList, list = []) {
-  if (list.length !== seedList.length) return false;
-  const byKey = new Map(seedList.map((s) => [keyOf(s), s]));
-  const byTitle = new Map(seedList.map((s) => [`${s.title}|${s.profileId}`, s]));
-  return list.every((item) => {
-    const seed = byKey.get(keyOf(item)) || byTitle.get(`${item.title}|${item.profileId}`);
-    return Boolean(seed) && sameItem(seed, item);
-  });
-}
-
-const num = (v) => (typeof v === 'number' || v === undefined ? Number(v) || 0 : v);
-
-function sameProfiles(profiles = []) {
-  if (profiles.length !== INITIAL_PROFILES.length) return false;
-  return INITIAL_PROFILES.every((seed) => {
-    const p = profiles.find((x) => x.id === seed.id);
-    if (!p) return false;
-    const seedOk = Object.keys(seed).every((k) => num(seed[k]) === num(p[k]));
-    return seedOk && Object.keys(p).every((k) => k in seed || isEmptyValue(p[k])); // e.g. custom `hue`
-  });
-}
-
-const hasEntries = (obj) => Boolean(obj) && Object.keys(obj).length > 0;
-
-function noCustomSettings() {
-  const strategies = Object.values(storageService.getProfileStrategies() || {});
-  return strategies.every((s) => s === 'standard')
-    && !hasEntries(storageService.getProfileFundConfigs())
-    && !hasEntries(storageService.getProfileIncomeConfigs());
-}
-
+// True only when the data is exactly the sample data (nothing added, removed or changed, no
+// custom settings): only then the banner offers to wipe everything.
 export function isDemoData({ profiles, expenses, documents }) {
-  return sameProfiles(profiles) && sameList(INITIAL_EXPENSES, expenses)
-    && sameList(INITIAL_DOCUMENTS, documents) && noCustomSettings();
+  return sameProfiles(INITIAL_PROFILES, profiles) && sameList(INITIAL_EXPENSES, expenses)
+    && sameList(INITIAL_DOCUMENTS, documents) && readCustomProfileIds().size === 0;
+}
+
+// Untouched sample items left next to the user's own data (e.g. a profile created from the menu).
+export function getDemoLeftovers(data) {
+  return findDemoLeftovers(data, SEEDS, readCustomProfileIds());
+}
+
+// Removes only those untouched sample items, re-checked on the stored data. Returns what was removed.
+export function removeDemoLeftovers() {
+  const data = {
+    profiles: storageService.getProfiles(),
+    expenses: storageService.getExpenses(),
+    documents: storageService.getDocuments(),
+  };
+  const left = getDemoLeftovers(data);
+  const keep = (ids) => (x) => !ids.includes(x.id);
+  storageService.saveExpenses(data.expenses.filter(keep(left.expenseIds)));
+  storageService.saveDocuments(data.documents.filter(keep(left.documentIds)));
+  storageService.saveProfiles(data.profiles.filter(keep(left.profileIds)));
+  const funds = { ...storageService.getProfileFunds() };
+  const incomes = { ...storageService.getProfileIncomes() };
+  left.profileIds.forEach((id) => { delete funds[id]; delete incomes[id]; });
+  storageService.saveProfileFunds(funds);
+  storageService.saveProfileIncomes(incomes);
+  return left;
 }

@@ -4,6 +4,7 @@ import { Badge } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { formatCurrency } from './expenseHelpers';
 import { formatDate } from '../documents/documentHelpers';
+import './BillPaymentsTable.css';
 
 export function BillPaymentsTable({ allPayments, activePayments, onDeletePayment, noBillsText }) {
   const { t } = useI18n();
@@ -13,7 +14,7 @@ export function BillPaymentsTable({ allPayments, activePayments, onDeletePayment
 
   return (
     <div className="payments-table-wrapper">
-      <table className="payments-table">
+      <table className="payments-table bill-payments-table">
         <thead>
           <tr>
             <th>{t('expenses.variable.billDate')}</th>

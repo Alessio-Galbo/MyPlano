@@ -38,6 +38,7 @@ jobs:
       - run: node Tools/test_notifications.mjs
       - run: node Tools/test_profiles.mjs
       - run: node Tools/test_system_notifications.mjs
+      - run: node Tools/test_demo_data.mjs
       - name: Build (base /MyPlano/)
         run: npx vite build
         env:

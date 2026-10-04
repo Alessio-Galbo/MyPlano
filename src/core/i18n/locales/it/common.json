@@ -124,7 +124,16 @@
     "firstProfileButton": "Crea il primo profilo",
     "firstProfileOrphans": "Ci sono già {n} spese o documenti in attesa di un profilo: dopo averlo creato potrai assegnarli da Impostazioni.",
     "firstProfileOrphansOne": "C'è già 1 spesa o documento in attesa di un profilo: dopo averlo creato potrai assegnarlo da Impostazioni.",
-    "needProfile": "Crea prima un profilo"
+    "needProfile": "Crea prima un profilo",
+    "mixedTitle": "Ci sono ancora i dati di esempio",
+    "mixedDesc": "Accanto ai tuoi dati restano {n} elementi di esempio mai modificati. Puoi toglierli: i tuoi profili e tutto ciò che hai inserito o modificato restano.",
+    "removeSamples": "Rimuovi gli esempi",
+    "confirmRemoveTitle": "Rimuovere i dati di esempio?",
+    "confirmRemoveMessage": "Verranno tolti solo gli elementi di esempio mai modificati: {profiles} profili, {expenses} spese e {documents} documenti. I tuoi profili e tutto ciò che hai inserito o modificato restano.",
+    "confirmRemoveButton": "Sì, rimuovi gli esempi",
+    "notifyTitle": "Vuoi un avviso sul telefono per le scadenze?",
+    "notifyEnable": "Attiva",
+    "notifyLater": "Non ora"
   },
   "systemNotifications": {
     "title": "Notifiche sul dispositivo",

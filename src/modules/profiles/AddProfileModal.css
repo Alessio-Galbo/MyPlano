@@ -7,8 +7,13 @@
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmax(0): gli input non allargano la modale */
   gap: 0.75rem;
+}
+
+/* Come il form spesa (ExpenseFormModal.css, caricato solo con la tab Spese): su telefono una colonna. */
+@media (max-width: 540px) {
+  .form-row { grid-template-columns: minmax(0, 1fr); }
 }
 
 .form-label {
@@ -25,6 +30,8 @@
   color: var(--text-main);
   outline: none;
   transition: border-color var(--transition-fast);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .form-input:focus {

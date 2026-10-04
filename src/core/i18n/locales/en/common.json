@@ -124,7 +124,16 @@
     "firstProfileButton": "Create the first profile",
     "firstProfileOrphans": "There are already {n} expenses or documents waiting for a profile: once it exists you can assign them from Settings.",
     "firstProfileOrphansOne": "There is already 1 expense or document waiting for a profile: once it exists you can assign it from Settings.",
-    "needProfile": "Create a profile first"
+    "needProfile": "Create a profile first",
+    "mixedTitle": "The sample data is still here",
+    "mixedDesc": "Next to your data there are {n} sample items you never changed. You can remove them: your profiles and everything you added or changed stay.",
+    "removeSamples": "Remove the samples",
+    "confirmRemoveTitle": "Remove the sample data?",
+    "confirmRemoveMessage": "Only the sample items you never changed will be removed: {profiles} profiles, {expenses} expenses and {documents} documents. Your profiles and everything you added or changed stay.",
+    "confirmRemoveButton": "Yes, remove the samples",
+    "notifyTitle": "Do you want a reminder on this device for due dates?",
+    "notifyEnable": "Turn on",
+    "notifyLater": "Not now"
   },
   "systemNotifications": {
     "title": "Device notifications",

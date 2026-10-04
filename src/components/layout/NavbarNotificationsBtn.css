@@ -1,4 +1,4 @@
-.nav-notifications-container { position: relative; display: flex; align-items: center; }
+.nav-notifications-container { position: relative; display: flex; align-items: center; flex-shrink: 0; }
 .nav-notifications-btn {
   position: relative; width: 32px; height: 32px; border-radius: var(--radius-md);
   background: var(--bg-card); border: 1px solid var(--border-subtle);

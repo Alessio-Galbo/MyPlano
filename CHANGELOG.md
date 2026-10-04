@@ -32,6 +32,8 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 - **Schermata di errore** con "Scarica dati grezzi (JSON)" e "Ricarica", senza reset.
 
 ### Modificato
+- **Niente scorrimento orizzontale su telefono**: corretti "Nuovo profilo", barra in alto con nomi lunghi, storico bollette (schede su telefono) e form "Registra bolletta"; controllato su 94 schermate e modali a 360 e 390 px.
+- **Primo avvio**: dopo il primo profilo l'app chiede se attivare le notifiche sul telefono (scelta ricordata).
 - **Impostazioni su telefono**: le righe vanno a capo, i pulsanti larghi scendono sotto il testo invece di comprimerlo in una colonna stretta.
 - **Avvisi**: in coda (nessuno perso), al massimo 3 visibili (2 su telefono), errori in testa, "Spazio esaurito" fisso; su telefono in alto, si chiudono scorrendo.
 - **Reset** rinominato: "Ricarica i dati di esempio" e "Cancella tutto e inizia da zero", entrambi con l'elenco di cosa si perde.
@@ -48,6 +50,8 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 - Schema dati versionato (versione 2) con migrazioni eseguite una sola volta all'avvio.
 
 ### Corretto
+- **Dati di esempio rimasti** dopo aver creato il proprio profilo dal menu profili: ora compare "Ci sono ancora i dati di esempio" con *Rimuovi gli esempi*, che toglie solo le voci di esempio mai modificate.
+- Freccia doppia nei pulsanti "indietro" dell'Hub su telefono.
 - **Rate nel giorno sbagliato**: con il fuso italiano le rate non annuali uscivano il giorno prima e dopo l'ora legale slittavano ancora (15 → 14 → 13).
 - **Fine mese**: 31/01 mensile ora dà 28/02, 31/03, 30/04 (prima 03/03 e slittamento permanente); 29/02 annuale → 28/02.
 - **"Ogni N giorni"** ora è davvero in giorni anche in timeline e quota mensile.

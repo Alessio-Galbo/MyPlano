@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  min-width: 0; /* su telefono la pillola si accorcia (nome con ellissi), la campanella resta visibile */
 }
 
 .nav-profile-pill {
@@ -17,6 +18,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
+  min-width: 0;
 }
 
 .nav-profile-pill:hover {
@@ -48,10 +50,12 @@
   color: #38bdf8;
   padding-left: 0.3rem;
   border-left: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
 }
 
 .nav-profile-chevron {
   opacity: 0.6;
+  flex-shrink: 0;
 }
 
 .nav-profile-add-btn {

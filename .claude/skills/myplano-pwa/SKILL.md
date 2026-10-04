@@ -61,6 +61,10 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 ## Verifica prima di dire "fatto"
 1. `python Tools/check_line_limits.py`, `python Tools/check_i18n_keys.py`, `npx oxlint src`, `npx vite build`.
 2. `pwa-scenario.mjs` → `ALL OK` e leggi gli screenshot (`2-offline.png`, `3-banner-mobile.png`, `4-warning.png`).
+3. Niente scroll orizzontale su telefono (dopo ogni modifica di layout/CSS, ≈2 min): `node .claude/skills/myplano-pwa/scripts/mobile-overflow.mjs [filtro]`
+   → `NESSUN OVERFLOW`; 360x780 e 390x844 con touch, tab + tutti i modali (dati demo, profilo selezionato, 0 profili),
+   tabella html/body/dialog + elementi tagliati + contenitori che scorrono; screenshot in `%TEMP%/myplano-overflow-test/shots/`.
+   Nuovo modale → aggiungi una riga a `STEPS`; scroll orizzontale voluto solo dentro un contenitore con classe `hscroll-ok`.
 
 ## Trappole già incontrate
 - Notifiche headless: `Browser.grantPermissions` (`notifications`, `periodicBackgroundSync`), poi
