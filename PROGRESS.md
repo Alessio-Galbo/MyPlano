@@ -1,7 +1,6 @@
 # MyPlano — Avanzamento lavori
 
 ## Ora
-- [ ] Pubblicazione: rendere pubblico il repo, Pages → Source: GitHub Actions, push su `main` (passi in `README.md`)
 
 ## Prossimi
 - [ ] Sostituire l'icona PWA (generata da `favicon.svg`, logo Vite) con un logo MyPlano
@@ -16,6 +15,7 @@
 - [ ] Snapshot di backup automatico (oggi il backup è solo manuale)
 
 ## Fatto
+- [x] Pubblicazione su GitHub Pages (repo pubblico, Source: GitHub Actions) e app installata senza bordi con aggiornamento automatico — `vite.pwa.js`, `src/components/pwa/`, `.github/workflows/deploy-pages.yml`
 - [x] **Date e ricorrenze**: rate nel giorno giusto (fuso orario/ora legale), fine mese, frequenze "ogni N giorni", `endDate`/`excludedDates` nel bilancio — `src/core/dates/`, `expenseInstallmentHelpers.js`, `budget/calculations/*`
 - [x] **Notifiche**: rispetto di promemoria/preavviso/silenzioso, gruppo "Scaduti", id per occorrenza, stato condiviso tra campanella e Bilancio, ICS con promemoria e ricorrenze — `upcomingHelper.js`, `useNotifications.js`, `icsExportHelper.js`
 - [x] **Robustezza dati**: niente perdite con salvataggi ravvicinati, dati corrotti/memoria piena gestiti, schema versionato, sincronizzazione tra schede, Error Boundary — `useAppData.js`, `safeStorage.js`, `migrations.js`
