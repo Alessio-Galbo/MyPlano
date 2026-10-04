@@ -60,3 +60,4 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 - `hadController` letto una volta sola: la scheda aperta alla prima installazione non vedeva mai "aggiornato altrove" → controller seguito a ogni `controllerchange`.
 - `persisted: false` in headless è normale (profilo nuovo, nessun segnale d'uso).
 - Rinominare il repo o passare a un dominio proprio cambia origine/scope: i dati locali restano sulla vecchia origine.
+- Repo pubblico: negli script mai percorsi assoluti del PC. Importa il driver con `../../headless-chrome-cdp/scripts/cdp.mjs` e ricava la radice con `fileURLToPath(new URL("../../../../", import.meta.url))`.

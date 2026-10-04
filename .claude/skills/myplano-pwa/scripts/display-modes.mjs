@@ -1,9 +1,10 @@
 // Modalità senza bordi: emula display-mode (WCO desktop, fullscreen telefono) + safe area, screenshot e controlli.
-import { launch, sleep } from "file:///D:/Git Repositories/MyPlano/.claude/skills/headless-chrome-cdp/scripts/cdp.mjs";
+import { launch, sleep } from "../../headless-chrome-cdp/scripts/cdp.mjs";
+import { fileURLToPath } from "node:url";
 import { spawn, execSync } from "node:child_process";
 import { mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
-const REPO = "D:/Git Repositories/MyPlano", OUT = (process.env.PWA_OUT || tmpdir() + "/myplano-pwa-test").split(String.fromCharCode(92)).join("/"), URL0 = "http://localhost:18526/MyPlano/";
+const REPO = fileURLToPath(new URL("../../../../", import.meta.url)).split(String.fromCharCode(92)).join("/").replace(/\/$/, ""), OUT = (process.env.PWA_OUT || tmpdir() + "/myplano-pwa-test").split(String.fromCharCode(92)).join("/"), URL0 = "http://localhost:18526/MyPlano/";
 mkdirSync(OUT, { recursive: true });
 let server = null, browser = null, fails = 0;
 const ok = (c, m) => { console.log((c ? "OK   " : "FAIL ") + m); if (!c) fails++; };
