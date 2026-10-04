@@ -69,6 +69,15 @@
     "perMonth": "/ mese"
   },
   "variable": {
+    "billsHistoryTitle": "Storico Bollette Registrate",
+    "contractColumn": "Contratto",
+    "contractActive": "Attivo",
+    "contractPrevious": "Precedente",
+    "billsCountOne": "1 bolletta",
+    "billsCount": "{count} bollette",
+    "defaultContractName": "Nuovo Contratto",
+    "providerPlaceholder": "es. Octopus / Enel",
+    "newProviderPlaceholder": "es. Octopus Energy / Edison",
     "isVariableLabel": "Importo variabile / bolletta a consumo",
     "isVariableHint": "Calcola la media reale dei pagamenti del contratto attivo",
     "contractName": "Fornitore / Contratto attivo",

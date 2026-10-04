@@ -1,11 +1,11 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 
 export function ColdStartSuccessView({ analysis, worstMonthLabel }) {
   const { t } = useI18n();
   const formatCurr = (val) =>
-    Number(val || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(val);
 
   const rawDesc = t('budget.coldStart.safetyMarginDesc');
   const parts = rawDesc.split(/(\{month\}|\{amount\})/g);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layers, CheckCircle2, PlusCircle } from 'lucide-react';
 import { Button } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { calculateColdStartAnalysis } from './budgetCalculations';
 import './ConsolidatedProfileCard.css';
 import './ConsolidatedTotalCard.css';
@@ -17,7 +17,7 @@ export function ConsolidatedTotalCard({
 }) {
   const { t } = useI18n();
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   const analysis = calculateColdStartAnalysis(expenses, 'all', totalLiquidity);
 

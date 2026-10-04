@@ -1,3 +1,5 @@
+import { todayISO } from '../../core/dates/isoDate';
+
 export function recordInstallmentPayment(expense, dateStr, { deductFromFund = false, amount = 0 }) {
   const existingInstallments = expense.installments || {};
   const current = existingInstallments[dateStr] || {};
@@ -6,7 +8,7 @@ export function recordInstallmentPayment(expense, dateStr, { deductFromFund = fa
     [dateStr]: {
       ...current,
       status: 'paid',
-      paidAt: new Date().toISOString().split('T')[0],
+      paidAt: todayISO(),
       deductedFromFund: Boolean(deductFromFund),
       deductedAmount: deductFromFund ? Number(amount || expense.amount || 0) : 0,
       profileId: expense.profileId,

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Calendar, Receipt, FileText } from 'lucide-react';
+import { Receipt, FileText } from 'lucide-react';
 import { Modal, Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { formatCurrency } from '../expenses/expenseHelpers';
+import { getUpcomingDaysLabel } from './upcomingDaysLabel';
 import './UpcomingDetailModal.css';
 
 export function UpcomingDetailModal({ item, isOpen, onClose }) {
@@ -44,10 +45,8 @@ export function UpcomingDetailModal({ item, isOpen, onClose }) {
 
           <div className="upcoming-detail-cell">
             <span className="upcoming-detail-label">{t('budget.metrics.upcomingDeadlines')}</span>
-            <span className="upcoming-detail-val text-gradient">
-              {item.diffDays === 0
-                ? t('budget.metrics.dueToday')
-                : t('budget.metrics.inDays').replace('{days}', item.diffDays)}
+            <span className={`upcoming-detail-val ${item.isOverdue ? 'is-overdue-text' : 'text-gradient'}`}>
+              {getUpcomingDaysLabel(t, item)}
             </span>
           </div>
 

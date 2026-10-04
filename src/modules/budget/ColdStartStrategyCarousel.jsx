@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ColdStartOptionCard } from './ColdStartOptionCard';
+import { useI18n } from '../../core/i18n';
 import { useCarousel } from '../../hooks/useCarousel';
 import './ColdStartStrategyCarousel.css';
 
@@ -14,6 +15,7 @@ export function ColdStartStrategyCarousel({
   survivalAmountFormatted,
   survivalDesc,
 }) {
+  const { t } = useI18n();
   const { activeIdx, setActiveIdx, next, prev, touchHandlers } = useCarousel(2);
 
   return (
@@ -23,7 +25,7 @@ export function ColdStartStrategyCarousel({
           type="button"
           className="strategy-carousel-arrow left"
           onClick={prev}
-          aria-label="Precedente"
+          aria-label={t('common.actions.previous')}
         >
           <ChevronLeft size={16} />
         </button>
@@ -62,7 +64,7 @@ export function ColdStartStrategyCarousel({
           type="button"
           className="strategy-carousel-arrow right"
           onClick={next}
-          aria-label="Successivo"
+          aria-label={t('common.actions.next')}
         >
           <ChevronRight size={16} />
         </button>
@@ -73,13 +75,13 @@ export function ColdStartStrategyCarousel({
           type="button"
           className={`carousel-dot ${activeIdx === 0 ? 'active' : ''}`}
           onClick={() => setActiveIdx(0)}
-          aria-label="Standard"
+          aria-label={t('budget.coldStart.standardPlanTitle')}
         />
         <button
           type="button"
           className={`carousel-dot ${activeIdx === 1 ? 'active' : ''}`}
           onClick={() => setActiveIdx(1)}
-          aria-label="Sopravvivenza"
+          aria-label={t('budget.coldStart.strategySurvivalAria')}
         />
       </div>
     </div>

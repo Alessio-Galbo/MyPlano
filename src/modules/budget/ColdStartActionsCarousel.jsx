@@ -24,7 +24,7 @@ export function ColdStartActionsCarousel({
           type="button"
           className="actions-carousel-arrow left"
           onClick={prev}
-          aria-label="Precedente"
+          aria-label={t('common.actions.previous')}
         >
           <ChevronLeft size={16} />
         </button>
@@ -58,7 +58,7 @@ export function ColdStartActionsCarousel({
           type="button"
           className="actions-carousel-arrow right"
           onClick={next}
-          aria-label="Successivo"
+          aria-label={t('common.actions.next')}
         >
           <ChevronRight size={16} />
         </button>
@@ -69,13 +69,13 @@ export function ColdStartActionsCarousel({
           type="button"
           className={`carousel-dot ${activeIdx === 0 ? 'active' : ''}`}
           onClick={() => setActiveIdx(0)}
-          aria-label="Integrazione Fondo"
+          aria-label={t('budget.coldStart.topUpActionTitle')}
         />
         <button
           type="button"
           className={`carousel-dot ${activeIdx === 1 ? 'active' : ''}`}
           onClick={() => setActiveIdx(1)}
-          aria-label="Piano B"
+          aria-label={t('budget.coldStart.planBShort')}
         />
       </div>
     </div>

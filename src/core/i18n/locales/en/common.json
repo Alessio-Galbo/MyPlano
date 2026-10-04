@@ -1,6 +1,15 @@
 {
   "appName": "MyPlano",
   "appSubtitle": "Due Dates & Budget Smoothing",
+  "loadingTab": "Loading…",
+  "pwa": {
+    "updateAvailable": "New version available",
+    "updatedElsewhere": "MyPlano was updated in another window",
+    "updateAction": "Update",
+    "updateAnyway": "Update anyway",
+    "later": "Later",
+    "unsavedWarning": "A window is open: unsaved changes will be lost."
+  },
   "nav": {
     "dashboard": "Overview",
     "documents": "Documents",
@@ -9,6 +18,9 @@
     "settings": "Settings"
   },
   "actions": {
+    "slideN": "Slide {n}",
+    "yearsPlusOne": "+{n} year",
+    "yearsPlusMany": "+{n} years",
     "add": "Add",
     "edit": "Edit",
     "delete": "Delete",
@@ -67,6 +79,12 @@
     "hideNotification": "Hide notification",
     "showNotification": "Show notification",
     "hidden": "Hidden",
+    "mutedNotice": "Notifications muted: the counter is hidden, the list is still available",
+    "alertOff": "Alert off",
+    "icsDocSummary": "Document expiry: {title}",
+    "icsExpenseSummary": "Payment: {title} ({amount})",
+    "icsDocAlarm": "{title} expires in {days} days",
+    "icsExpenseAlarm": "Payment reminder: {title} in {days} days",
     "manageAll": "Manage notifications",
     "manageAllCount": "Manage all ({count})",
     "viewMore": "View more",
@@ -88,7 +106,7 @@
     "confirmFactoryTitle": "Restore Sample Data?",
     "confirmFactoryDesc": "This action will replace all existing data with default sample data (3 balanced profiles, demo expenses, and documents).",
     "confirmWipeTitle": "Clear Entire Database?",
-    "confirmWipeDesc": "CAUTION: This will permanently delete ALL stored profiles, expenses, and documents. Your database will become completely empty.",
+    "confirmWipeDesc": "CAUTION: This will permanently delete ALL stored profiles, expenses, and documents. Receipts stored in the browser are deleted too. Your database will become completely empty.",
     "confirmWipeButton": "Yes, wipe everything permanently",
     "confirmFactoryButton": "Yes, restore sample data"
   },
@@ -101,5 +119,73 @@
     "fallbackNotice": "Files are temporarily stored in protected local IndexedDB storage.",
     "selectFolder": "Connect PC Folder",
     "disconnect": "Disconnect"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "message": "MyPlano hit an unexpected error and cannot show this screen.",
+    "dataSafe": "Your data has not been deleted. You can download a raw copy before reloading.",
+    "download": "Download raw data (JSON)",
+    "reload": "Reload"
+  },
+  "toast": {
+    "region": "Notifications",
+    "dismiss": "Dismiss notification",
+    "undo": "Undo",
+    "restored": "Restored",
+    "expenseSaved": "Expense saved",
+    "documentSaved": "Document saved",
+    "expenseDeleted": "Expense \"{title}\" deleted",
+    "documentDeleted": "Document \"{title}\" deleted",
+    "installmentSkipped": "Due date of \"{title}\" skipped",
+    "expenseTerminated": "\"{title}\" ended from this due date",
+    "storageFull": "Storage full: your latest changes may not be saved. Export a backup.",
+    "storageError": "Saving failed: your latest changes may not be saved. Export a backup."
+  },
+  "a11y": {
+    "mainNav": "Main navigation",
+    "closeDialog": "Close dialog"
+  },
+  "backup": {
+    "lastBackupDays": "Last backup: {days} days ago",
+    "lastBackupToday": "Last backup: today",
+    "lastBackupYesterday": "Last backup: yesterday",
+    "lastBackupNever": "No backup exported yet",
+    "reminder": "We recommend exporting a backup at least once a month.",
+    "includeAttachments": "Include attachments (receipts)",
+    "attachmentsDesc": "Receipts stored in the browser: {count} files, about {size} MB. The backup file will be larger; receipts in the connected PC folder are not included.",
+    "confirmTitle": "Restore this backup?",
+    "confirmMessage": "Backup from {date}: {profiles} profiles, {expenses} expenses, {documents} documents, {attachments} attachments. All current data will be replaced (interface preferences are kept).",
+    "unknownDate": "unknown date",
+    "confirmButton": "Yes, restore",
+    "exported": "Backup exported.",
+    "restored": "Backup restored successfully.",
+    "errInvalidJson": "The file is not valid JSON. No data was changed.",
+    "errInvalidFormat": "The file is not a recognised MyPlano backup. No data was changed.",
+    "errNewerVersion": "This backup comes from a newer MyPlano version: update the app before restoring it.",
+    "errMissingProfiles": "The backup has no profile list. No data was changed.",
+    "errInvalidData": "The backup contains invalid or damaged data. No data was changed.",
+    "errInvalidAttachments": "The attachments in the backup are damaged. No data was changed.",
+    "errWriteFailed": "Not enough storage space: the restore was cancelled and your previous data is intact.",
+    "errAttachmentsFailed": "Could not save the attachments: no data was changed.",
+    "errReadFailed": "Could not read the selected file.",
+    "errExportFailed": "Backup export failed.",
+    "errRestoreFailed": "Storage full: the restore failed and not all previous data could be put back. Download the copy of your previous data now and import it again after freeing space.",
+    "downloadRecovery": "Download copy of previous data",
+    "legacyWarning": "Older backup version: some settings (strategies, hidden notifications, mute) will go back to their defaults."
+  },
+  "installmentFix": {
+    "banner": "There are {n} paid installments with a date to fix: until you fix them the right installment shows as unpaid.",
+    "bannerOne": "There is 1 paid installment with a date to fix: until you fix it the right installment shows as unpaid.",
+    "review": "Review",
+    "applyOne": "Fix the selected one",
+    "confirmMessageOne": "The selected installment will be moved to the correct date, keeping status, payment date and attachments.",
+    "title": "Paid installments with the wrong date",
+    "desc": "An old timezone bug saved some paid installments on the previous day, so they show up as an extra row next to the right installment. Review the list and fix only the entries you recognise.",
+    "untitled": "Untitled expense",
+    "apply": "Fix the {n} selected",
+    "confirmTitle": "Fix the installment dates?",
+    "confirmMessage": "The {n} selected installments will be moved to the correct date, keeping status, payment date and attachments.",
+    "confirmButton": "Yes, fix them",
+    "done": "Installment dates fixed."
   }
 }

@@ -1,16 +1,11 @@
 import { ALERT_THRESHOLDS } from '../../core/types/constants';
+import { addMonthsClamped, diffDays, todayISO } from '../../core/dates/isoDate';
 
 export function getDocumentStatus(expiryDateStr) {
   if (!expiryDateStr) return { status: 'valid', daysRemaining: 999 };
 
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-
-  const expiry = new Date(expiryDateStr);
-  expiry.setHours(0, 0, 0, 0);
-
-  const diffTime = expiry.getTime() - now.getTime();
-  const daysRemaining = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const daysRemaining = diffDays(todayISO(), String(expiryDateStr).slice(0, 10));
+  if (Number.isNaN(daysRemaining)) return { status: 'valid', daysRemaining: 999 };
 
   if (daysRemaining < 0) {
     return { status: 'expired', daysRemaining, variant: 'danger' };
@@ -22,16 +17,12 @@ export function getDocumentStatus(expiryDateStr) {
 }
 
 export function calculateRenewalDate(currentDateStr, yearsToAdd = 10) {
-  const base = currentDateStr ? new Date(currentDateStr) : new Date();
-  base.setFullYear(base.getFullYear() + yearsToAdd);
-  return base.toISOString().split('T')[0];
+  const base = currentDateStr ? String(currentDateStr).slice(0, 10) : todayISO();
+  return addMonthsClamped(base, Number(yearsToAdd) * 12) || addMonthsClamped(todayISO(), Number(yearsToAdd) * 12);
 }
 
-export function formatDate(dateStr) {
-  if (!dateStr) return '-';
-  const [year, month, day] = dateStr.split('-');
-  return `${day}/${month}/${year}`;
-}
+// Locale-aware (follows the UI language): see core/i18n/formatters.js
+export { formatDate } from '../../core/i18n/formatters';
 
 export function getDocumentTypeLabel(type, t) {
   if (!type) return '';

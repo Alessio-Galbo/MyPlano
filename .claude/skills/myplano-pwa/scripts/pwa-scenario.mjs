@@ -1,0 +1,73 @@
+// Verifica PWA completa (vedi SKILL.md): build in OUT/dist, preview :18526, SW, precache, manifest, offline, update.
+import { launch, sleep } from "file:///D:/Git Repositories/MyPlano/.claude/skills/headless-chrome-cdp/scripts/cdp.mjs";
+import { spawn, execSync } from "node:child_process";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
+const REPO = "D:/Git Repositories/MyPlano", OUT = (process.env.PWA_OUT || tmpdir() + "/myplano-pwa-test").split(String.fromCharCode(92)).join("/"), URL0 = "http://localhost:18526/MyPlano/";
+mkdirSync(OUT, { recursive: true });
+const CSS = REPO + "/src/components/pwa/PwaUpdatePrompt.css", cssOrig = readFileSync(CSS, "utf8");
+let server = null, browser = null, fails = 0;
+const ok = (c, m) => { console.log((c ? "OK   " : "FAIL ") + m); if (!c) fails++; };
+const build = () => execSync(`npx vite build --outDir "${OUT}/dist" --emptyOutDir`, { cwd: REPO, stdio: "pipe" });
+const start = async () => { server = spawn(`npx vite preview --port 18526 --strictPort --outDir "${OUT}/dist"`, { cwd: REPO, shell: true });
+  for (let i = 0; i < 60; i++) { try { if ((await fetch(URL0)).ok) return; } catch {} await sleep(250); } throw new Error("preview down"); };
+const stop = async () => { if (server) { try { execSync(`taskkill /PID ${server.pid} /T /F`, { stdio: "ignore" }); } catch {} server = null; await sleep(800); } };
+process.on("exit", () => { writeFileSync(CSS, cssOrig); console.log(fails ? `FAILED (${fails})` : "ALL OK"); });
+setTimeout(() => { console.log("GLOBAL TIMEOUT"); fails++; stop().then(() => process.exit(1)); }, 240000).unref();
+try {
+  build(); await start();
+  browser = await launch({ port: 19526 });
+  const external = [];
+  browser.on((m) => { if (m.method === "Network.requestWillBeSent") { const u = m.params.request.url; if (!/^(http:\/\/localhost:18526|data:|blob:|chrome)/.test(u)) external.push(u); } });
+  let page = await browser.openPage("about:blank");
+  await page.navigate(URL0, "!!document.querySelector('#root > *')");
+  await page.waitFor("!!navigator.serviceWorker.controller", 15000); await sleep(1500);
+  ok(true, "SW controlla la pagina: " + await page.eval("navigator.serviceWorker.controller.scriptURL"));
+  const keys = await page.eval("caches.keys()"); console.log("     caches:", keys);
+  const n = await page.eval(`caches.open(${JSON.stringify(keys.find((k) => k.includes("precache")))}).then(c => c.keys()).then(r => r.length)`);
+  ok(n >= 15, "voci in precache: " + n);
+  const man = await page.eval("fetch(document.querySelector('link[rel=manifest]').href).then(r => r.json())");
+  const icons = await page.eval(`Promise.all(${JSON.stringify(man.icons.map((i) => i.src))}.map(s => fetch(new URL(s, document.querySelector('link[rel=manifest]').href)).then(r => r.status + ' ' + r.headers.get('content-type'))))`);
+  ok(icons.every((s) => s.startsWith("200 image/png")), "icone manifest: " + icons.join(", ") + " | scope " + man.scope + " start " + man.start_url);
+  const inst = await page.send("Page.getInstallabilityErrors"); ok(!(inst.result?.installabilityErrors || []).length, "installabilità: " + JSON.stringify(inst.result?.installabilityErrors));
+  ok(await page.eval("document.fonts.ready.then(() => document.fonts.check('700 16px Outfit') && document.fonts.check('600 16px \"Plus Jakarta Sans\"'))"), "font self-hosted caricati");
+  console.log("     persisted:", await page.eval("navigator.storage.persisted()"));
+  await page.screenshot(OUT + "/1-online.png");
+  ok(!page.drainErrors().length, "console pulita (online)");
+  // Offline: server spento, NUOVA scheda
+  await stop(); await page.close();
+  page = await browser.openPage("about:blank");
+  await page.navigate(URL0, "document.readyState === 'complete'");
+  ok(await page.waitFor("document.querySelectorAll('#root *').length > 20", 10000).catch(() => false), "offline (server spento, scheda nuova): app caricata");
+  ok(await page.eval("document.fonts.ready.then(() => document.fonts.check('700 16px Outfit'))"), "font offline");
+  await page.navigate(URL0 + "qualcosa/profondo", "document.readyState === 'complete'");
+  ok(await page.waitFor("document.querySelectorAll('#root *').length > 20", 10000).catch(() => false), "offline deep link -> index.html");
+  await page.navigate(URL0, "document.readyState === 'complete'"); await page.waitFor("document.querySelectorAll('#root *').length > 20");
+  await page.screenshot(OUT + "/2-offline.png");
+  const offErr = page.drainErrors(); ok(!offErr.length, "console pulita (offline) " + offErr.join(" | "));
+  // Aggiornamento
+  const oldJs = await page.eval("document.querySelector('script[type=module]').src");
+  writeFileSync(CSS, cssOrig.replace("padding: 0.75rem 0.875rem;", "padding: 0.75rem 0.9rem;")); build(); writeFileSync(CSS, cssOrig);
+  await start();
+  await page.eval("navigator.serviceWorker.getRegistration().then(r => r.update())");
+  ok(await page.waitFor("!!document.querySelector('[data-pwa-update=update]')", 20000).catch(() => false), "banner 'Nuova versione disponibile'");
+  console.log("     testo:", await page.eval("document.querySelector('.pwa-update').innerText.split(String.fromCharCode(10)).join(' / ')"));
+  await page.mobile(390, 844, 2); await page.screenshot(OUT + "/3-banner-mobile.png"); await page.desktop();
+  await page.eval("(() => { const d = document.createElement('div'); d.setAttribute('role','dialog'); d.id='fake-dialog'; document.body.appendChild(d); })()");
+  await page.click(".pwa-update-confirm");
+  ok(await page.waitFor("!!document.querySelector('.pwa-update-warning')", 3000).catch(() => false), "con una finestra aperta chiede conferma (nessun reload)");
+  await page.screenshot(OUT + "/4-warning.png");
+  ok(await page.eval("!!document.getElementById('fake-dialog')"), "pagina non ricaricata dopo il primo click");
+  await page.click(".pwa-update-confirm");
+  await page.waitFor("!document.getElementById('fake-dialog') && document.querySelectorAll('#root *').length > 20", 15000);
+  const newJs = await page.eval("document.querySelector('script[type=module]').src");
+  ok(newJs !== oldJs, `nuova versione attiva: ${oldJs.split('/').pop()} -> ${newJs.split('/').pop()}`);
+  await sleep(1500);
+  const keys2 = await page.eval("caches.keys()");
+  const urls = await page.eval(`caches.open(${JSON.stringify(keys2.find((k) => k.includes("precache")))}).then(c => c.keys()).then(r => r.map(x => x.url))`);
+  ok(keys2.length === 1 && !urls.some((u) => u.includes(oldJs.split('/').pop())), "vecchia versione rimossa dalla cache; caches=" + keys2.join(","));
+  ok(!(await page.eval("!!document.querySelector('.pwa-update')")), "banner sparito dopo l'aggiornamento");
+  ok(!page.drainErrors().length, "console pulita (dopo update)");
+  ok(!external.length, "nessuna richiesta esterna " + external.slice(0, 3).join(" "));
+} catch (e) { console.log("ERROR", e.message); fails++; }
+finally { await browser?.close(); await stop(); process.exit(fails ? 1 : 0); }

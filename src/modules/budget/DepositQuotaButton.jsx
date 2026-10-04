@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Check } from 'lucide-react';
 import { Button } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import './DepositQuotaButton.css';
 
 export function DepositQuotaButton({
@@ -16,7 +16,7 @@ export function DepositQuotaButton({
   if (!monthlyQuota || monthlyQuota <= 0) return null;
 
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   const handleClick = () => {
     onDeposit(monthlyQuota);

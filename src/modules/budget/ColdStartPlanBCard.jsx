@@ -33,7 +33,7 @@ export function ColdStartPlanBCard({
       </div>
 
       <div className="action-card-value plan-b-value">
-        {planBAmountFormatted} <small className="text-subtle">/ mese</small>
+        {planBAmountFormatted} <small className="text-subtle">{t('expenses.viewMode.perMonth')}</small>
       </div>
 
       <ul className="action-card-list">

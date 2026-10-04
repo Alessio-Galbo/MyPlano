@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Wallet, Check } from 'lucide-react';
 import { Button } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 
 export function StartingBalanceBox({
   selectedProfileId = 'all',
@@ -74,7 +74,7 @@ export function StartingBalanceBox({
         ) : (
           <div className="fund-shared-display">
             <span className="fund-shared-value">
-              {Number(fundAmount || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' })}
+              {formatCurrency(fundAmount)}
             </span>
           </div>
         )}

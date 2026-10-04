@@ -1,10 +1,12 @@
 import React from 'react';
 import { Trash2 } from 'lucide-react';
 import { Badge } from '../../components/ui';
+import { useI18n } from '../../core/i18n';
 import { formatCurrency } from './expenseHelpers';
 import { formatDate } from '../documents/documentHelpers';
 
 export function BillPaymentsTable({ allPayments, activePayments, onDeletePayment, noBillsText }) {
+  const { t } = useI18n();
   if (allPayments.length === 0) {
     return <p className="text-subtle">{noBillsText}</p>;
   }
@@ -14,10 +16,10 @@ export function BillPaymentsTable({ allPayments, activePayments, onDeletePayment
       <table className="payments-table">
         <thead>
           <tr>
-            <th>Data</th>
-            <th>Importo</th>
-            <th>Contratto</th>
-            <th>Note</th>
+            <th>{t('expenses.variable.billDate')}</th>
+            <th>{t('expenses.history.amount')}</th>
+            <th>{t('expenses.variable.contractColumn')}</th>
+            <th>{t('expenses.variable.billNote')}</th>
             <th></th>
           </tr>
         </thead>
@@ -30,7 +32,7 @@ export function BillPaymentsTable({ allPayments, activePayments, onDeletePayment
                 <td><strong>{formatCurrency(p.amount)}</strong></td>
                 <td>
                   <Badge variant={isActive ? 'success' : 'neutral'}>
-                    {isActive ? 'Attivo' : 'Precedente'}
+                    {isActive ? t('expenses.variable.contractActive') : t('expenses.variable.contractPrevious')}
                   </Badge>
                 </td>
                 <td className="text-subtle">{p.note || '-'}</td>

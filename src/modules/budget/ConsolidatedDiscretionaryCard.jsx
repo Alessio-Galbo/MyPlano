@@ -18,7 +18,7 @@ export function ConsolidatedDiscretionaryCard({
       </div>
       <div className="kpi-value text-gradient">
         {hasIncome ? formatCurrency(discretionaryMargin) : '—'}
-        {hasIncome && <small className="text-subtle">/mese</small>}
+        {hasIncome && <small className="text-subtle">{t('expenses.viewMode.perMonth')}</small>}
       </div>
       <span className="kpi-desc">
         {hasIncome ? t('budget.metrics.residualDiscretionaryDesc') : t('budget.incomeHub.optional')}

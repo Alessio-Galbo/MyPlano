@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
+import { useI18n } from '../../core/i18n';
 import './ColdStartOptionCard.css';
 
 export function ColdStartOptionCard({
@@ -11,6 +12,7 @@ export function ColdStartOptionCard({
   isActive = false,
   onClick,
 }) {
+  const { t } = useI18n();
   return (
     <div
       role="button"
@@ -26,7 +28,7 @@ export function ColdStartOptionCard({
         </div>
       </div>
       <div className="cold-start-metric-value">
-        {amountFormatted} {isMonthly ? <small className="text-subtle">/ mese</small> : ''}
+        {amountFormatted} {isMonthly ? <small className="text-subtle">{t('expenses.viewMode.perMonth')}</small> : ''}
       </div>
       <span className="cold-start-metric-desc">{desc}</span>
     </div>

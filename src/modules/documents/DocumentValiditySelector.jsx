@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
+import { addMonthsClamped, todayISO } from '../../core/dates/isoDate';
 import './DocumentValiditySelector.css';
 
 const PRESET_YEARS = [1, 3, 5, 10];
@@ -9,9 +10,7 @@ export function DocumentValiditySelector({ onSelectDuration }) {
   const { t } = useI18n();
 
   const handleApplyYears = (years) => {
-    const d = new Date();
-    d.setFullYear(d.getFullYear() + years);
-    const dateStr = d.toISOString().split('T')[0];
+    const dateStr = addMonthsClamped(todayISO(), years * 12);
     onSelectDuration(dateStr);
   };
 
@@ -19,7 +18,7 @@ export function DocumentValiditySelector({ onSelectDuration }) {
     <div className="validity-selector-container">
       <div className="validity-label-row">
         <Clock size={13} className="text-muted" />
-        <span className="validity-label">Calcolo rapido durata:</span>
+        <span className="validity-label">{t('documents.fields.quickDurationLabel')}</span>
       </div>
       <div className="validity-chips">
         {PRESET_YEARS.map((y) => (
@@ -29,7 +28,7 @@ export function DocumentValiditySelector({ onSelectDuration }) {
             className="validity-chip-btn"
             onClick={() => handleApplyYears(y)}
           >
-            +{y} {y === 1 ? 'anno' : 'anni'}
+            {y === 1 ? t('common.actions.yearsPlusOne', { n: y }) : t('common.actions.yearsPlusMany', { n: y })}
           </button>
         ))}
       </div>

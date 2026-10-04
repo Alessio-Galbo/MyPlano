@@ -1,6 +1,7 @@
 import React from 'react';
 import { Zap } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
+import { todayISO } from '../../core/dates/isoDate';
 
 export function ContractSectionFields({ formData, setFormData }) {
   const { t } = useI18n();
@@ -13,7 +14,7 @@ export function ContractSectionFields({ formData, setFormData }) {
       contract: isVariable
         ? formData.contract || {
             name: '',
-            startDate: new Date().toISOString().split('T')[0],
+            startDate: todayISO(),
             estimatedAmount: formData.amount || 0,
           }
         : formData.contract,
@@ -56,7 +57,7 @@ export function ContractSectionFields({ formData, setFormData }) {
               <input
                 type="text"
                 className="form-input"
-                placeholder="es. Octopus / Enel"
+                placeholder={t('expenses.variable.providerPlaceholder')}
                 value={formData.contract?.name || ''}
                 onChange={(e) => handleContractChange('name', e.target.value)}
               />

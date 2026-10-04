@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { storageService } from '../../core/storage/storageService';
 import { BudgetOverview } from './BudgetOverview';
 import { CashflowTimeline } from './CashflowTimeline';
 import { calculateColdStartAnalysis } from './budgetCalculations';
 
-export function BudgetTab({
+// memo: with stable handlers from useAppData, unrelated App re-renders (modals,
+// toasts) skip the whole budget tab.
+export const BudgetTab = memo(function BudgetTab({
   expenses,
   documents = [],
   profiles = [],
@@ -20,31 +22,34 @@ export function BudgetTab({
   const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
   const effectiveFund = selectedProfileId === 'all' ? totalLiquidity : (profile?.initialBalance || 0);
 
-  const coldStart = calculateColdStartAnalysis(expenses, selectedProfileId, effectiveFund);
+  const coldStart = useMemo(
+    () => calculateColdStartAnalysis(expenses, selectedProfileId, effectiveFund),
+    [expenses, selectedProfileId, effectiveFund],
+  );
 
   const currentStrategy = strategies[selectedProfileId] || 'standard';
   const simulationStrategy = (!coldStart.hasDeficit && currentStrategy === 'survival')
     ? 'standard'
     : currentStrategy;
 
-  const handleSelectStrategy = (strat) => {
+  const handleSelectStrategy = useCallback((strat) => {
     setStrategies((prev) => ({ ...prev, [selectedProfileId]: strat }));
     storageService.saveProfileStrategy(selectedProfileId, strat);
-  };
+  }, [selectedProfileId]);
 
   useEffect(() => {
     if (!coldStart.hasDeficit && currentStrategy === 'survival') {
       handleSelectStrategy('standard');
     }
-  }, [coldStart.hasDeficit, currentStrategy]);
+  }, [coldStart.hasDeficit, currentStrategy, handleSelectStrategy]);
 
-  const simOptions = {
+  const simOptions = useMemo(() => ({
     strategy: simulationStrategy,
     survivalQuota: coldStart.catchUpMonthlyQuota,
     survivalMonthsCount: coldStart.survivalMonthsCount,
     survivalSchedule: coldStart.survivalSchedule,
     bufferRequired: coldStart.initialBufferRequired,
-  };
+  }), [simulationStrategy, coldStart]);
 
   return (
     <div className="budget-tab-container">
@@ -69,4 +74,4 @@ export function BudgetTab({
       />
     </div>
   );
-}
+});

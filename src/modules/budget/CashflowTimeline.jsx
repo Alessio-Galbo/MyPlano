@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { usePersistentState } from '../../hooks/usePersistentState';
 import { useI18n } from '../../core/i18n';
-import { generateCashflowTimeline } from './budgetCalculations';
 import { TimelineHorizonSelector } from './TimelineHorizonSelector';
 import { TimelineCategoryPills } from './TimelineCategoryPills';
 import { CategoryPieChart } from './CategoryPieChart';
 import { CashflowTableRow } from './CashflowTableRow';
 import { CashflowGroupedRow } from './CashflowGroupedRow';
-import { groupTimelineByCategory } from './calculations/timelineGroupingHelper';
-import { calculateHorizonTotals } from './calculations/horizonTotalsHelper';
+import { useCashflowData } from './useCashflowData';
 import './CashflowTimeline.css';
+
+const isPlainObject = (v) => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
 
 export function CashflowTimeline({
   expenses,
@@ -17,22 +18,15 @@ export function CashflowTimeline({
   simOptions = {},
 }) {
   const { t } = useI18n();
-  const [horizon, setHorizon] = useState(12);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [viewMode, setViewMode] = useState('timeline');
+  const [horizon, setHorizon] = usePersistentState('budget.horizon', 12, (v) => Number.isInteger(v) && v > 0 && v <= 120);
+  const [categoryByProfile, setCategoryByProfile] = usePersistentState('budget.categoryByProfile', {}, isPlainObject);
+  const selectedCategory = categoryByProfile[selectedProfileId] || 'all';
+  const setSelectedCategory = (cat) => setCategoryByProfile((prev) => ({ ...prev, [selectedProfileId]: cat }));
+  const [viewMode, setViewMode] = usePersistentState('budget.timelineView', 'timeline', (v) => v === 'timeline' || v === 'pie');
 
-  useEffect(() => { setSelectedCategory('all'); }, [selectedProfileId]);
-
-  const profileExpenses = selectedProfileId === 'all'
-    ? expenses
-    : expenses.filter((e) => e.profileId === selectedProfileId);
-
-  const categories = Array.from(new Set(profileExpenses.map((e) => e.category).filter(Boolean)));
-  const effectiveCategory = (selectedCategory === 'all' || categories.includes(selectedCategory)) ? selectedCategory : 'all';
-  const effectiveSimOptions = { ...simOptions, categoryFilter: effectiveCategory };
-  const timeline = generateCashflowTimeline(expenses, selectedProfileId, horizon, initialBalance, effectiveSimOptions);
-  const displayItems = groupTimelineByCategory(timeline, effectiveCategory);
-  const { catMap: horizonCatMap, total: horizonTotal } = calculateHorizonTotals(expenses, selectedProfileId, horizon);
+  const { categories, effectiveCategory, displayItems, horizonCatMap, horizonTotal } = useCashflowData(
+    expenses, selectedProfileId, horizon, initialBalance, simOptions, selectedCategory,
+  );
 
   return (
     <div className="cashflow-container">

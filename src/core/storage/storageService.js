@@ -3,68 +3,37 @@ import { exportAllAppData, importAllAppData } from './exportImportService';
 import { profileFinanceStorage } from './profileFinanceStorage';
 import { normalizeProfileFinances } from './profileMigrationHelper';
 import { storageResetService } from './storageResetService';
-import { ensureItemIds } from './idMigrationHelper';
+import { DATA_KEYS } from './storageKeys';
+import { isPlainObject, readJSON, readRaw, writeJSON, writeRaw } from './safeStorage';
 
-const KEYS = {
-  PROFILES: 'myplano_profiles',
-  DOCUMENTS: 'myplano_documents',
-  EXPENSES: 'myplano_expenses',
-  MUTE: 'myplano_notifications_muted',
-  INITIAL_BALANCE: 'myplano_initial_balance',
-  MONTHLY_INCOME: 'myplano_monthly_income',
-};
+// Missing key → demo/default data; corrupt key → empty list (the raw value is
+// backed up by readJSON, never replaced with demo data).
+function readList(key, initial) {
+  if (readRaw(key) === null) return initial;
+  return readJSON(key, [], Array.isArray);
+}
+
+function readNumber(key) {
+  const n = parseFloat(readRaw(key));
+  return Number.isFinite(n) ? n : 0;
+}
 
 export const storageService = {
   getProfiles() {
-    const raw = localStorage.getItem(KEYS.PROFILES);
-    const parsed = raw !== null ? JSON.parse(raw) : INITIAL_PROFILES;
-    return normalizeProfileFinances(parsed, this.getInitialBalance(), this.getMonthlyIncome());
+    const list = readList(DATA_KEYS.PROFILES, INITIAL_PROFILES);
+    return normalizeProfileFinances(list, this.getInitialBalance(), this.getMonthlyIncome());
   },
-  saveProfiles(profiles) {
-    localStorage.setItem(KEYS.PROFILES, JSON.stringify(profiles));
-  },
-  getDocuments() {
-    const raw = localStorage.getItem(KEYS.DOCUMENTS);
-    if (raw === null) return INITIAL_DOCUMENTS;
-    const docs = JSON.parse(raw);
-    const fixed = ensureItemIds(docs, 'doc');
-    if (fixed !== docs) this.saveDocuments(fixed);
-    return fixed;
-  },
-  saveDocuments(docs) {
-    localStorage.setItem(KEYS.DOCUMENTS, JSON.stringify(docs));
-  },
-  getExpenses() {
-    const raw = localStorage.getItem(KEYS.EXPENSES);
-    if (raw === null) return INITIAL_EXPENSES;
-    const expenses = JSON.parse(raw);
-    const fixed = ensureItemIds(expenses, 'exp');
-    if (fixed !== expenses) this.saveExpenses(fixed);
-    return fixed;
-  },
-  saveExpenses(expenses) {
-    localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
-  },
-  getGlobalMute() {
-    return localStorage.getItem(KEYS.MUTE) === 'true';
-  },
-  saveGlobalMute(muted) {
-    localStorage.setItem(KEYS.MUTE, muted ? 'true' : 'false');
-  },
-  getInitialBalance() {
-    const raw = localStorage.getItem(KEYS.INITIAL_BALANCE);
-    return raw ? parseFloat(raw) : 0;
-  },
-  saveInitialBalance(val) {
-    localStorage.setItem(KEYS.INITIAL_BALANCE, String(val || 0));
-  },
-  getMonthlyIncome() {
-    const raw = localStorage.getItem(KEYS.MONTHLY_INCOME);
-    return raw ? parseFloat(raw) : 0;
-  },
-  saveMonthlyIncome(val) {
-    localStorage.setItem(KEYS.MONTHLY_INCOME, String(val || 0));
-  },
+  saveProfiles: (profiles) => writeJSON(DATA_KEYS.PROFILES, profiles),
+  getDocuments: () => readList(DATA_KEYS.DOCUMENTS, INITIAL_DOCUMENTS),
+  saveDocuments: (docs) => writeJSON(DATA_KEYS.DOCUMENTS, docs),
+  getExpenses: () => readList(DATA_KEYS.EXPENSES, INITIAL_EXPENSES),
+  saveExpenses: (expenses) => writeJSON(DATA_KEYS.EXPENSES, expenses),
+  getGlobalMute: () => readRaw(DATA_KEYS.NOTIFICATIONS_MUTED) === 'true',
+  saveGlobalMute: (muted) => writeRaw(DATA_KEYS.NOTIFICATIONS_MUTED, muted ? 'true' : 'false'),
+  getInitialBalance: () => readNumber(DATA_KEYS.INITIAL_BALANCE),
+  saveInitialBalance: (val) => writeRaw(DATA_KEYS.INITIAL_BALANCE, String(val || 0)),
+  getMonthlyIncome: () => readNumber(DATA_KEYS.MONTHLY_INCOME),
+  saveMonthlyIncome: (val) => writeRaw(DATA_KEYS.MONTHLY_INCOME, String(val || 0)),
   getProfileFunds: () => profileFinanceStorage.getProfileFunds(),
   saveProfileFunds: (f) => profileFinanceStorage.saveProfileFunds(f),
   getProfileFundConfigs: () => profileFinanceStorage.getProfileFundConfigs(),
@@ -73,21 +42,13 @@ export const storageService = {
   saveProfileIncomes: (i) => profileFinanceStorage.saveProfileIncomes(i),
   getProfileIncomeConfigs: () => profileFinanceStorage.getProfileIncomeConfigs(),
   saveProfileIncomeConfigs: (c) => profileFinanceStorage.saveProfileIncomeConfigs(c),
-  getProfileStrategies() {
-    try {
-      const raw = localStorage.getItem('myplano_budget_strategies');
-      return raw ? JSON.parse(raw) : {};
-    } catch { return {}; }
-  },
+  getProfileStrategies: () => readJSON(DATA_KEYS.BUDGET_STRATEGIES, {}, isPlainObject),
   getProfileStrategy(profileId) {
     return this.getProfileStrategies()[profileId] || 'standard';
   },
   saveProfileStrategy(profileId, strategy) {
-    try {
-      const map = this.getProfileStrategies();
-      map[profileId] = strategy;
-      localStorage.setItem('myplano_budget_strategies', JSON.stringify(map));
-    } catch { /* ignore */ }
+    const map = { ...this.getProfileStrategies(), [profileId]: strategy };
+    return writeJSON(DATA_KEYS.BUDGET_STRATEGIES, map);
   },
   exportAllData() { return exportAllAppData(this); },
   importAllData(json) { return importAllAppData(this, json); },

@@ -6,9 +6,10 @@ import { useApp } from '../../core/state';
 import { SettingsBackupCard } from './SettingsBackupCard';
 import { SettingsArchiveCard } from './SettingsArchiveCard';
 import { SettingsResetCard } from './SettingsResetCard';
+import { InstallmentKeyFixCard } from './InstallmentKeyFixCard';
 import './SettingsView.css';
 
-export function SettingsView({ documents, expenses, onDataRestored }) {
+export function SettingsView({ documents, expenses, onDataRestored, onSaveExpense }) {
   const { language, setLanguage, t } = useI18n();
   const { isGlobalMuted, toggleGlobalMute } = useApp();
 
@@ -43,6 +44,8 @@ export function SettingsView({ documents, expenses, onDataRestored }) {
           <Toggle checked={isGlobalMuted} onChange={toggleGlobalMute} />
         </div>
       </div>
+
+      <InstallmentKeyFixCard expenses={expenses} onSaveExpense={onSaveExpense} />
 
       <SettingsArchiveCard />
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layers, Plus, Check } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { Modal, Button } from '../../components/ui';
 import { calculateItemAnnualCost } from '../budget/budgetCalculations';
 import { ProfileManagementItem } from './ProfileManagementItem';
@@ -24,7 +24,7 @@ export function ProfileManagementModal({
   };
 
   const formatCompact = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    formatCurrency(v, { maximumFractionDigits: 0 });
 
   const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
   const totalAnnual = getProfileAnnual('all');

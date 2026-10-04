@@ -1,0 +1,40 @@
+/* Avviso aggiornamento: in basso a sinistra (i toast stanno a destra), sopra le modali. */
+.pwa-update {
+  position: fixed;
+  left: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(440px, calc(100vw - 2rem));
+  padding: 0.75rem 0.875rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+.pwa-update-icon { color: var(--color-primary); flex-shrink: 0; }
+
+.pwa-update-text { flex: 1; min-width: 0; }
+
+.pwa-update-title { margin: 0; font-size: 0.875rem; font-weight: 600; }
+
+.pwa-update-warning { margin: 0.25rem 0 0; font-size: 0.78rem; color: var(--color-warning); }
+
+.pwa-update-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+@media (max-width: 640px) {
+  .pwa-update {
+    left: 1rem;
+    right: 1rem;
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .pwa-update-actions { width: 100%; justify-content: flex-end; }
+}

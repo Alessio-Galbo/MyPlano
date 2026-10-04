@@ -11,13 +11,16 @@
     "residualDiscretionaryDesc": "Entrate al netto della quota accantonata",
     "currentFund": "Fondo Attuale",
     "currentFundDesc": "Liquidità iniziale del profilo",
-    "upcomingDeadlines": "Scadenze Imminenti (30gg)",
+    "upcomingDeadlines": "Scadenze Imminenti",
     "upcomingDeadlinesDesc": "Uscite e documenti con scadenza a breve",
-    "noUpcoming": "Tutto in ordine: nessuna spesa o documento in scadenza nei prossimi 30 giorni",
+    "noUpcoming": "Tutto in ordine: nessuna spesa o documento in scadenza a breve",
     "noUpcomingDesc": "Nessun pagamento o rinnovo previsto a breve",
     "inDays": "tra {days} gg",
     "dueToday": "Scade oggi",
     "overdue": "Scaduto da {days} gg",
+    "overdueBy": "In ritardo di {days} gg",
+    "overdueGroup": "Scaduti / in ritardo",
+    "upcomingGroup": "In arrivo",
     "viewDetails": "Dettagli scadenza",
     "upcomingCountPill": "{count} in scadenza",
     "moreUpcoming": "+ altri {count} in scadenza"
@@ -59,6 +62,8 @@
     "surgeAlert": "Quota iniziale consigliata: per i primi {months} mesi versa {amount}/mese per superare il primo picco."
   },
   "coldStart": {
+    "strategySurvivalAria": "Sopravvivenza",
+    "planBShort": "Piano B",
     "title": "Verifica Resilienza & Momento Più Critico",
     "criticalMonthLabel": "Momento più impegnativo",
     "safetyMarginLabel": "Margine di Sicurezza Minimo",
@@ -110,6 +115,7 @@
     "planBActivate": "Attiva Piano B"
   },
   "simulation": {
+    "filterCategoryAria": "Filtra categoria timeline",
     "title": "Timeline Cashflow & Picchi di Spesa",
     "subtitle": "Confronto tra uscite effettive e andamento della riserva",
     "horizonLabel": "Orizzonte temporale",

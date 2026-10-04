@@ -39,3 +39,30 @@ export async function removeDbItem(key) {
     tx.onerror = () => reject(tx.error);
   });
 }
+
+// All [key, value] pairs whose key starts with `prefix` (e.g. 'blob_' for receipts).
+export async function getDbEntries(prefix) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readonly');
+    const store = tx.objectStore(STORE_NAME);
+    const keysReq = store.getAllKeys();
+    const valsReq = store.getAll();
+    tx.oncomplete = () => {
+      const pairs = keysReq.result.map((k, i) => [k, valsReq.result[i]]);
+      resolve(pairs.filter(([k]) => typeof k === 'string' && k.startsWith(prefix)));
+    };
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function removeDbItemsByPrefix(prefix) {
+  const entries = await getDbEntries(prefix);
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    entries.forEach(([k]) => tx.objectStore(STORE_NAME).delete(k));
+    tx.oncomplete = () => resolve(entries.length);
+    tx.onerror = () => reject(tx.error);
+  });
+}

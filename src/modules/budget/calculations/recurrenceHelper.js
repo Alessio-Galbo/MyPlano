@@ -1,34 +1,30 @@
-export function isExpenseDueInMonth(item, targetYear, targetMonthIndex) {
-  if (!item.nextDueDate) return false;
-  const due = new Date(item.nextDueDate);
-  const startYear = due.getFullYear();
-  const startMonthIndex = due.getMonth();
+import { daysInMonth, toISODate } from '../../../core/dates/isoDate';
+import { getOccurrences } from '../../../core/dates/recurrence';
+import { getInstallmentStatus } from '../../expenses/expenseInstallmentHelpers';
 
-  const deltaMonths = (targetYear - startYear) * 12 + (targetMonthIndex - startMonthIndex);
-  if (deltaMonths < 0) return false;
-
-  const dateStr = `${targetYear}-${String(targetMonthIndex + 1).padStart(2, '0')}-${String(due.getDate()).padStart(2, '0')}`;
-  const isPaid = item.installments?.[dateStr]?.status === 'paid' || (deltaMonths === 0 && item.status === 'paid');
-
-  if (deltaMonths === 0) return !isPaid;
-
-  let isDueByFreq = false;
-  switch (item.frequency) {
-    case 'monthly': isDueByFreq = true; break;
-    case 'bimonthly': isDueByFreq = deltaMonths % 2 === 0; break;
-    case 'quarterly': isDueByFreq = deltaMonths % 3 === 0; break;
-    case 'semiannual': isDueByFreq = deltaMonths % 6 === 0; break;
-    case 'annual': isDueByFreq = deltaMonths % 12 === 0; break;
-    case 'biennial': isDueByFreq = deltaMonths % 24 === 0; break;
-    case 'custom': {
-      const interval = Math.max(1, Number(item.customInterval) || 1);
-      isDueByFreq = deltaMonths % interval === 0;
-      break;
-    }
-    case 'oneOff':
-    default: isDueByFreq = false; break;
-  }
-
-  return isDueByFreq && !isPaid;
+function monthBounds(targetYear, targetMonthIndex) {
+  const first = toISODate(new Date(targetYear, targetMonthIndex, 1));
+  const last = toISODate(new Date(targetYear, targetMonthIndex, daysInMonth(targetYear, targetMonthIndex)));
+  return [first, last];
 }
 
+// Unpaid due dates of an expense in [fromIso, toIso]
+// (respects endDate, excludedDates, custom days/months, extra installments).
+export function getUnpaidDueDates(item, fromIso, toIso) {
+  if (!item?.nextDueDate) return [];
+  return getOccurrences(item, fromIso, toIso).filter((d) => getInstallmentStatus(item, d) !== 'paid');
+}
+
+// How many unpaid installments of the expense fall in the month (0, 1, or more for short day intervals).
+export function getDueDatesInMonth(item, targetYear, targetMonthIndex) {
+  const [first, last] = monthBounds(targetYear, targetMonthIndex);
+  return getUnpaidDueDates(item, first, last);
+}
+
+export function countDueInMonth(item, targetYear, targetMonthIndex) {
+  return getDueDatesInMonth(item, targetYear, targetMonthIndex).length;
+}
+
+export function isExpenseDueInMonth(item, targetYear, targetMonthIndex) {
+  return countDueInMonth(item, targetYear, targetMonthIndex) > 0;
+}

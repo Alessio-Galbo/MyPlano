@@ -1,5 +1,5 @@
 import React from 'react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { ColdStartSuccessView } from './ColdStartSuccessView';
 import { ColdStartDeficitList } from './ColdStartDeficitList';
 import { ColdStartActionsCarousel } from './ColdStartActionsCarousel';
@@ -18,7 +18,7 @@ export function ColdStartCard({
 }) {
   const { t } = useI18n();
   const formatCurr = (val) =>
-    Number(val || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(val);
 
   const worstMonthLabel = analysis.worstMonth
     ? `${analysis.worstMonth.monthLongName || analysis.worstMonth.monthNameKey} ${analysis.worstMonth.year}`

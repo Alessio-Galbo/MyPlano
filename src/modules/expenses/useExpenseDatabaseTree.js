@@ -1,6 +1,9 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
+import { usePersistentState } from '../../hooks/usePersistentState';
 import { getAllExpenseInstallmentDates } from './expenseHistoryHelpers';
 import { buildExpenseTreeData } from './expenseTreeBuilder';
+
+const isIdOrNull = (v) => v === null || typeof v === 'string';
 
 export function useExpenseDatabaseTree({
   expenses = [],
@@ -10,8 +13,16 @@ export function useExpenseDatabaseTree({
   hidePastYears = false,
 }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedExpenseId, setSelectedExpenseId] = useState(initialExpenseId || expenses[0]?.id);
-  const [expandedYears, setExpandedYears] = useState(new Set());
+  const [storedExpenseId, setSelectedExpenseId] = usePersistentState('hub.selectedExpense', null, isIdOrNull);
+  const selectedExpenseId = storedExpenseId || initialExpenseId || expenses[0]?.id;
+  const [expandedYearList, setExpandedYearList] = usePersistentState('hub.expandedYears', [], Array.isArray);
+  const expandedYears = useMemo(() => new Set(expandedYearList), [expandedYearList]);
+  const setExpandedYears = useCallback((updater) => {
+    setExpandedYearList((prev) => {
+      const next = Array.from(updater(new Set(prev)));
+      return next.length === prev.length && next.every((y, i) => y === prev[i]) ? prev : next;
+    });
+  }, [setExpandedYearList]);
 
   useEffect(() => {
     if (initialExpenseId) {
@@ -20,7 +31,7 @@ export function useExpenseDatabaseTree({
       const year = target?.nextDueDate?.split('-')[0] || new Date().getFullYear().toString();
       setExpandedYears((prev) => new Set([...prev, year]));
     }
-  }, [initialExpenseId, expenses]);
+  }, [initialExpenseId, expenses, setSelectedExpenseId, setExpandedYears]);
 
   const expenseYearMap = useMemo(() => {
     const map = new Map();

@@ -1,4 +1,4 @@
-import { calculateBudgetMetrics, getUpcomingDeadlines } from './budgetCalculations';
+import { calculateBudgetMetrics } from './budgetCalculations';
 
 export function calculateDiscretionaryMargin(income, monthlyQuota) {
   return income > 0 ? Math.round((income - monthlyQuota) * 100) / 100 : 0;
@@ -7,7 +7,6 @@ export function calculateDiscretionaryMargin(income, monthlyQuota) {
 export function getBudgetOverviewState({
   profiles,
   expenses,
-  documents = [],
   selectedProfileId,
   simulationStrategy,
   coldStart,
@@ -15,7 +14,6 @@ export function getBudgetOverviewState({
   const profile = profiles.find((p) => p.id === selectedProfileId);
   const isProfileMode = selectedProfileId !== 'all';
   const metrics = calculateBudgetMetrics(expenses, selectedProfileId);
-  const upcomingItems = getUpcomingDeadlines(expenses, documents, selectedProfileId);
   const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
   const totalIncome = profiles.reduce((s, p) => s + (Number(p.monthlyIncome) || 0), 0);
   const isSurvivalActive = simulationStrategy === 'survival' && coldStart?.hasDeficit;
@@ -27,7 +25,6 @@ export function getBudgetOverviewState({
     profile,
     isProfileMode,
     metrics,
-    upcomingItems,
     totalLiquidity,
     totalIncome,
     effectiveQuota,

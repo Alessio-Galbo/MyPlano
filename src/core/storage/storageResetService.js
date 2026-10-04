@@ -1,40 +1,41 @@
 import { INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES } from './initialData';
+import { DATA_KEYS as K, ALL_DATA_KEYS } from './storageKeys';
+import { removeDbItemsByPrefix } from './indexedDbHelper';
+import { runMigrations } from './migrations';
+import { writeRaw } from './safeStorage';
 
-const ALL_STORAGE_KEYS = [
-  'myplano_profiles',
-  'myplano_documents',
-  'myplano_expenses',
-  'myplano_notifications_muted',
-  'myplano_initial_balance',
-  'myplano_monthly_income',
-  'myplano_profile_funds',
-  'myplano_profile_fund_configs',
-  'myplano_profile_incomes',
-  'myplano_profile_income_configs',
-  'myplano_budget_strategies',
-];
+// Both resets wipe every DATA key (storageKeys.ALL_DATA_KEYS) and the receipts stored
+// in IndexedDB (`blob_*`). They keep interface preferences (language, `myplano_ui_*`),
+// the `myplano_corrupt_*` safety copies and the connected PC archive folder: those are
+// settings or recovery copies, and the files already in that folder belong to the user.
+function wipeDataKeys() {
+  ALL_DATA_KEYS.forEach((key) => localStorage.removeItem(key));
+}
+
+function clearStoredAttachments() {
+  if (typeof indexedDB === 'undefined') return Promise.resolve(0);
+  return removeDbItemsByPrefix('blob_').catch(() => 0);
+}
+
+function finish() {
+  runMigrations({ fromVersion: 0 });
+  return { success: true, done: clearStoredAttachments() };
+}
 
 export const storageResetService = {
-  clearAllData(storage) {
-    ALL_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
-    localStorage.setItem('myplano_profiles', JSON.stringify([]));
-    localStorage.setItem('myplano_expenses', JSON.stringify([]));
-    localStorage.setItem('myplano_documents', JSON.stringify([]));
-    localStorage.setItem('myplano_initial_balance', '0');
-    localStorage.setItem('myplano_monthly_income', '0');
-    localStorage.setItem('myplano_profile_funds', JSON.stringify({}));
-    localStorage.setItem('myplano_profile_fund_configs', JSON.stringify({}));
-    localStorage.setItem('myplano_profile_incomes', JSON.stringify({}));
-    localStorage.setItem('myplano_profile_income_configs', JSON.stringify({}));
-    localStorage.setItem('myplano_budget_strategies', JSON.stringify({}));
-    return { success: true };
+  clearAllData() {
+    wipeDataKeys();
+    [K.PROFILES, K.EXPENSES, K.DOCUMENTS].forEach((key) => writeRaw(key, '[]'));
+    writeRaw(K.INITIAL_BALANCE, '0');
+    writeRaw(K.MONTHLY_INCOME, '0');
+    return finish();
   },
 
-  resetToFactoryDefaults(storage) {
-    ALL_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
-    localStorage.setItem('myplano_profiles', JSON.stringify(INITIAL_PROFILES));
-    localStorage.setItem('myplano_expenses', JSON.stringify(INITIAL_EXPENSES));
-    localStorage.setItem('myplano_documents', JSON.stringify(INITIAL_DOCUMENTS));
+  resetToFactoryDefaults() {
+    wipeDataKeys();
+    writeRaw(K.PROFILES, JSON.stringify(INITIAL_PROFILES));
+    writeRaw(K.EXPENSES, JSON.stringify(INITIAL_EXPENSES));
+    writeRaw(K.DOCUMENTS, JSON.stringify(INITIAL_DOCUMENTS));
 
     const funds = {};
     const incomes = {};
@@ -42,17 +43,13 @@ export const storageResetService = {
       funds[p.id] = p.initialBalance || 0;
       incomes[p.id] = p.monthlyIncome || 0;
     });
-
     const totFund = INITIAL_PROFILES.reduce((s, p) => s + (p.initialBalance || 0), 0);
     const totIncome = INITIAL_PROFILES.reduce((s, p) => s + (p.monthlyIncome || 0), 0);
 
-    localStorage.setItem('myplano_profile_funds', JSON.stringify(funds));
-    localStorage.setItem('myplano_profile_fund_configs', JSON.stringify({}));
-    localStorage.setItem('myplano_profile_incomes', JSON.stringify(incomes));
-    localStorage.setItem('myplano_profile_income_configs', JSON.stringify({}));
-    localStorage.setItem('myplano_budget_strategies', JSON.stringify({}));
-    localStorage.setItem('myplano_initial_balance', String(totFund));
-    localStorage.setItem('myplano_monthly_income', String(totIncome));
-    return { success: true };
+    writeRaw(K.PROFILE_FUNDS, JSON.stringify(funds));
+    writeRaw(K.PROFILE_INCOMES, JSON.stringify(incomes));
+    writeRaw(K.INITIAL_BALANCE, String(totFund));
+    writeRaw(K.MONTHLY_INCOME, String(totIncome));
+    return finish();
   },
 };

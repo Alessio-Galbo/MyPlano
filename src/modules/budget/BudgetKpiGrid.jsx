@@ -18,7 +18,7 @@ export function BudgetKpiGrid({
   const [isCenterOpen, setIsCenterOpen] = useState(false);
   const [detailItem, setDetailItem] = useState(null);
 
-  const { allUpcoming, activeList, dismissedIds, toggleItem, restoreAll } =
+  const { allUpcoming, activeList, isDismissed, dismissedCount, toggleItem, restoreAll } =
     useNotifications(expenses, documents, selectedProfileId);
 
   if (!showDiscretionary) {
@@ -39,19 +39,22 @@ export function BudgetKpiGrid({
         onOpenNotificationCenter={() => setIsCenterOpen(true)}
       />
 
-      <NotificationCenterModal
-        isOpen={isCenterOpen}
-        onClose={() => setIsCenterOpen(false)}
-        items={allUpcoming}
-        profiles={profiles}
-        dismissedIds={dismissedIds}
-        onToggleVisibility={toggleItem}
-        onRestoreAll={restoreAll}
-        onViewDetails={(item) => {
-          setIsCenterOpen(false);
-          setDetailItem(item);
-        }}
-      />
+      {isCenterOpen && (
+        <NotificationCenterModal
+          isOpen
+          onClose={() => setIsCenterOpen(false)}
+          items={allUpcoming}
+          profiles={profiles}
+          isDismissed={isDismissed}
+          dismissedCount={dismissedCount}
+          onToggleVisibility={toggleItem}
+          onRestoreAll={restoreAll}
+          onViewDetails={(item) => {
+            setIsCenterOpen(false);
+            setDetailItem(item);
+          }}
+        />
+      )}
 
       <UpcomingDetailModal
         item={detailItem}

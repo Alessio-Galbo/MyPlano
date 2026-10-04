@@ -13,13 +13,13 @@ import { useExpenseDeleteHandler } from './useExpenseDeleteHandler';
 import '../documents/DocumentList.css';
 
 export function ExpenseList({
-  expenses, profiles, selectedProfileId, onSaveExpense, onDeleteExpense, onUpdateProfileBalance,
+  expenses, profiles, selectedProfileId, onSaveExpense, onDeleteExpense, onUpdateProfileBalance, onAdjustProfileBalance,
 }) {
   const { t } = useI18n();
   const state = useExpenseListState(selectedProfileId);
   const filterData = useExpenseFilterData(expenses, selectedProfileId, state);
-  const paymentHandler = useExpensePaymentHandler({ profiles, onSaveExpense, onUpdateProfileBalance });
-  const deleteHandler = useExpenseDeleteHandler({ onSaveExpense, onDeleteExpense });
+  const paymentHandler = useExpensePaymentHandler({ profiles, onSaveExpense, onUpdateProfileBalance, onAdjustProfileBalance });
+  const deleteHandler = useExpenseDeleteHandler({ expenses, onSaveExpense, onDeleteExpense });
 
   const handleNavigateYear = (targetYear, expId) => {
     const sec = document.getElementById(`year-section-${targetYear}`);

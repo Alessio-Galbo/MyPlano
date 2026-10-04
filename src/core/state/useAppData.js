@@ -1,82 +1,82 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { storageService } from '../storage';
 import { createItemId } from '../storage/idMigrationHelper';
 import { useProfileFinance } from './useProfileFinance';
 import { useProfileState } from './useProfileState';
+import { usePersistedSlice } from './usePersistedSlice';
+import { useStorageSync } from './useStorageSync';
+
+const readDocuments = () => storageService.getDocuments();
+const writeDocuments = (v) => storageService.saveDocuments(v);
+const readExpenses = () => storageService.getExpenses();
+const writeExpenses = (v) => storageService.saveExpenses(v);
+const readInitialBalance = () => storageService.getInitialBalance();
+const writeInitialBalance = (v) => storageService.saveInitialBalance(v);
+const readMonthlyIncome = () => storageService.getMonthlyIncome();
+const writeMonthlyIncome = (v) => storageService.saveMonthlyIncome(v);
+
+// Upsert: replaces the item with the same id, or inserts it on top when the id
+// is new or no longer in the list (e.g. "undo" after a delete).
+const upsert = (list, item) => (list.some((x) => x.id === item.id)
+  ? list.map((x) => (x.id === item.id ? item : x))
+  : [item, ...list]);
+const withId = (item, prefix) => (item.id ? item : { ...item, id: createItemId(prefix) });
 
 export function useAppData() {
   const profileFinance = useProfileFinance();
   const profileState = useProfileState(profileFinance);
-  const { profiles, addProfile, updateProfileBalance, depositQuotaToProfile, updateProfileIncome, reloadProfiles } = profileState;
+  const { profiles, reloadProfiles } = profileState;
+  const { reloadProfileFinance } = profileFinance;
 
-  const [documents, setDocuments] = useState(() => storageService.getDocuments());
-  const [expenses, setExpenses] = useState(() => storageService.getExpenses());
-  const [initialBalance, setInitialBalance] = useState(() => storageService.getInitialBalance());
-  const [monthlyIncome, setMonthlyIncome] = useState(() => storageService.getMonthlyIncome());
+  const [documents, setDocuments, reloadDocuments] = usePersistedSlice(readDocuments, writeDocuments);
+  const [expenses, setExpenses, reloadExpenses] = usePersistedSlice(readExpenses, writeExpenses);
+  const [initialBalance, setInitialBalance, reloadInitialBalance] = usePersistedSlice(readInitialBalance, writeInitialBalance);
+  const [monthlyIncome, setMonthlyIncome, reloadMonthlyIncome] = usePersistedSlice(readMonthlyIncome, writeMonthlyIncome);
 
-  const updateInitialBalance = (amount) => {
-    const val = parseFloat(amount) || 0;
-    setInitialBalance(val);
-    storageService.saveInitialBalance(val);
-  };
+  // Stable handlers (useCallback, setters never change): memoised tabs skip unrelated re-renders.
+  const updateInitialBalance = useCallback((amount) => setInitialBalance(parseFloat(amount) || 0), [setInitialBalance]);
+  const updateMonthlyIncome = useCallback((amount) => setMonthlyIncome(parseFloat(amount) || 0), [setMonthlyIncome]);
 
-  const updateMonthlyIncome = (amount) => {
-    const val = parseFloat(amount) || 0;
-    setMonthlyIncome(val);
-    storageService.saveMonthlyIncome(val);
-  };
+  const removeProfile = profileState.deleteProfile;
+  const deleteProfile = useCallback((profileId) => {
+    removeProfile(profileId);
+    setExpenses((prev) => prev.filter((e) => e.profileId !== profileId));
+    setDocuments((prev) => prev.filter((d) => d.profileId !== profileId));
+  }, [removeProfile, setExpenses, setDocuments]);
 
-  const deleteProfile = (profileId) => {
-    profileState.deleteProfile(profileId);
-    const nextExpenses = expenses.filter((e) => e.profileId !== profileId);
-    setExpenses(nextExpenses);
-    storageService.saveExpenses(nextExpenses);
-    const nextDocs = documents.filter((d) => d.profileId !== profileId);
-    setDocuments(nextDocs);
-    storageService.saveDocuments(nextDocs);
-  };
+  const saveDocument = useCallback((doc) => {
+    const item = withId(doc, 'doc');
+    setDocuments((prev) => upsert(prev, item));
+    return item;
+  }, [setDocuments]);
+  const deleteDocument = useCallback((id) => setDocuments((prev) => prev.filter((d) => d.id !== id)), [setDocuments]);
 
-  const saveDocument = (doc) => {
-    const item = doc.id ? doc : { ...doc, id: createItemId('doc') };
-    const next = doc.id ? documents.map((d) => (d.id === item.id ? item : d)) : [item, ...documents];
-    setDocuments(next);
-    storageService.saveDocuments(next);
-  };
+  const saveExpense = useCallback((exp) => {
+    const item = withId(exp, 'exp');
+    setExpenses((prev) => upsert(prev, item));
+    return item;
+  }, [setExpenses]);
+  const deleteExpense = useCallback((id) => setExpenses((prev) => prev.filter((e) => e.id !== id)), [setExpenses]);
 
-  const deleteDocument = (id) => {
-    const next = documents.filter((d) => d.id !== id);
-    setDocuments(next);
-    storageService.saveDocuments(next);
-  };
-
-  const saveExpense = (exp) => {
-    const item = exp.id ? exp : { ...exp, id: createItemId('exp') };
-    const next = exp.id ? expenses.map((e) => (e.id === item.id ? item : e)) : [item, ...expenses];
-    setExpenses(next);
-    storageService.saveExpenses(next);
-  };
-
-  const deleteExpense = (id) => {
-    const next = expenses.filter((e) => e.id !== id);
-    setExpenses(next);
-    storageService.saveExpenses(next);
-  };
-
-  const reloadAll = () => {
+  const reloadAll = useCallback(() => {
     reloadProfiles();
-    setDocuments(storageService.getDocuments());
-    setExpenses(storageService.getExpenses());
-    setInitialBalance(storageService.getInitialBalance());
-    setMonthlyIncome(storageService.getMonthlyIncome());
-    profileFinance.reloadProfileFinance();
-  };
+    reloadDocuments();
+    reloadExpenses();
+    reloadInitialBalance();
+    reloadMonthlyIncome();
+    reloadProfileFinance();
+  }, [reloadProfiles, reloadDocuments, reloadExpenses, reloadInitialBalance, reloadMonthlyIncome, reloadProfileFinance]);
 
+  useStorageSync(reloadAll);
+
+  const { updateProfileBalance, adjustProfileBalance, depositQuotaToProfile, updateProfileIncome, addProfile } = profileState;
   return {
     profiles, documents, expenses, initialBalance, monthlyIncome, ...profileFinance,
     updateInitialBalance, onUpdateInitialBalance: updateInitialBalance,
     updateMonthlyIncome, onUpdateMonthlyIncome: updateMonthlyIncome,
-    updateProfileBalance, updateProfileIncome, depositQuotaToProfile,
-    addProfile, deleteProfile, saveDocument, deleteDocument,
-    saveExpense, deleteExpense, reloadAll,
+    updateProfileBalance, adjustProfileBalance, onAdjustProfileBalance: adjustProfileBalance,
+    updateProfileIncome, onUpdateProfileIncome: updateProfileIncome, depositQuotaToProfile,
+    addProfile, deleteProfile, saveDocument, deleteDocument, saveExpense, deleteExpense,
+    restoreDocument: saveDocument, restoreExpense: saveExpense, reloadAll,
   };
 }

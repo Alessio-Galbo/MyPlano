@@ -1,6 +1,15 @@
 {
   "appName": "MyPlano",
   "appSubtitle": "Scadenze & Bilancio Preventivo",
+  "loadingTab": "Caricamento…",
+  "pwa": {
+    "updateAvailable": "Nuova versione disponibile",
+    "updatedElsewhere": "MyPlano è stato aggiornato in un'altra finestra",
+    "updateAction": "Aggiorna",
+    "updateAnyway": "Aggiorna comunque",
+    "later": "Più tardi",
+    "unsavedWarning": "Hai una finestra aperta: le modifiche non salvate andranno perse."
+  },
   "nav": {
     "dashboard": "Panoramica",
     "documents": "Documenti",
@@ -9,6 +18,9 @@
     "settings": "Impostazioni"
   },
   "actions": {
+    "slideN": "Scheda {n}",
+    "yearsPlusOne": "+{n} anno",
+    "yearsPlusMany": "+{n} anni",
     "add": "Aggiungi",
     "edit": "Modifica",
     "delete": "Elimina",
@@ -67,6 +79,12 @@
     "hideNotification": "Nascondi notifica",
     "showNotification": "Mostra notifica",
     "hidden": "Nascosta",
+    "mutedNotice": "Notifiche silenziate: il contatore è nascosto, l'elenco resta consultabile",
+    "alertOff": "Avviso disattivato",
+    "icsDocSummary": "Scadenza documento: {title}",
+    "icsExpenseSummary": "Pagamento: {title} ({amount})",
+    "icsDocAlarm": "{title} scade tra {days} giorni",
+    "icsExpenseAlarm": "Promemoria pagamento: {title} tra {days} giorni",
     "manageAll": "Gestisci notifiche",
     "manageAllCount": "Gestisci tutte ({count})",
     "viewMore": "Mostra di più",
@@ -88,7 +106,7 @@
     "confirmFactoryTitle": "Ripristinare i Dati di Fabbrica?",
     "confirmFactoryDesc": "Questa operazione sostituirà tutti i dati correnti con il database d'esempio di default (3 profili bilanciati, spese e documenti d'esempio).",
     "confirmWipeTitle": "Azzerare Completamente il Database?",
-    "confirmWipeDesc": "ATTENZIONE: Questa azione cancellerà TUTTI i profili, le spese e i documenti memorizzati. Il database diventerà completamente vuoto.",
+    "confirmWipeDesc": "ATTENZIONE: Questa azione cancellerà TUTTI i profili, le spese e i documenti memorizzati. Anche le ricevute salvate nel browser verranno eliminate. Il database diventerà completamente vuoto.",
     "confirmWipeButton": "Sì, azzera tutto definitivamente",
     "confirmFactoryButton": "Sì, ripristina dati di fabbrica"
   },
@@ -101,5 +119,73 @@
     "fallbackNotice": "I file vengono temporaneamente salvati nel database locale protetto IndexedDB.",
     "selectFolder": "Collega Cartella PC",
     "disconnect": "Scollega"
+  },
+  "errorBoundary": {
+    "title": "Qualcosa è andato storto",
+    "message": "MyPlano ha incontrato un errore imprevisto e non può mostrare questa schermata.",
+    "dataSafe": "I tuoi dati non sono stati cancellati. Puoi scaricarne una copia grezza prima di ricaricare.",
+    "download": "Scarica dati grezzi (JSON)",
+    "reload": "Ricarica"
+  },
+  "toast": {
+    "region": "Notifiche",
+    "dismiss": "Chiudi notifica",
+    "undo": "Annulla",
+    "restored": "Ripristinato",
+    "expenseSaved": "Spesa salvata",
+    "documentSaved": "Documento salvato",
+    "expenseDeleted": "Spesa \"{title}\" eliminata",
+    "documentDeleted": "Documento \"{title}\" eliminato",
+    "installmentSkipped": "Scadenza di \"{title}\" saltata",
+    "expenseTerminated": "\"{title}\" terminata da questa scadenza",
+    "storageFull": "Spazio esaurito: le ultime modifiche potrebbero non essere salvate. Esporta un backup.",
+    "storageError": "Salvataggio non riuscito: le ultime modifiche potrebbero non essere salvate. Esporta un backup."
+  },
+  "a11y": {
+    "mainNav": "Navigazione principale",
+    "closeDialog": "Chiudi finestra"
+  },
+  "backup": {
+    "lastBackupDays": "Ultimo backup: {days} giorni fa",
+    "lastBackupToday": "Ultimo backup: oggi",
+    "lastBackupYesterday": "Ultimo backup: ieri",
+    "lastBackupNever": "Nessun backup esportato finora",
+    "reminder": "Ti consigliamo di esportare un backup almeno una volta al mese.",
+    "includeAttachments": "Includi allegati (ricevute)",
+    "attachmentsDesc": "Ricevute salvate nel browser: {count} file, circa {size} MB. Il file di backup sarà più grande; le ricevute nella cartella PC collegata non sono incluse.",
+    "confirmTitle": "Ripristinare questo backup?",
+    "confirmMessage": "Backup del {date}: {profiles} profili, {expenses} spese, {documents} documenti, {attachments} allegati. Tutti i dati attuali verranno sostituiti (le preferenze dell'interfaccia restano).",
+    "unknownDate": "data sconosciuta",
+    "confirmButton": "Sì, ripristina",
+    "exported": "Backup esportato.",
+    "restored": "Backup ripristinato correttamente.",
+    "errInvalidJson": "Il file non è un JSON valido. Nessun dato è stato modificato.",
+    "errInvalidFormat": "Il file non è un backup MyPlano riconosciuto. Nessun dato è stato modificato.",
+    "errNewerVersion": "Il backup viene da una versione più recente di MyPlano: aggiorna l'app prima di ripristinarlo.",
+    "errMissingProfiles": "Il backup non contiene l'elenco dei profili. Nessun dato è stato modificato.",
+    "errInvalidData": "Il backup contiene dati non validi o danneggiati. Nessun dato è stato modificato.",
+    "errInvalidAttachments": "Gli allegati nel backup sono danneggiati. Nessun dato è stato modificato.",
+    "errWriteFailed": "Spazio di archiviazione insufficiente: il ripristino è stato annullato e i dati precedenti sono intatti.",
+    "errAttachmentsFailed": "Impossibile salvare gli allegati: nessun dato è stato modificato.",
+    "errReadFailed": "Impossibile leggere il file selezionato.",
+    "errExportFailed": "Esportazione del backup non riuscita.",
+    "errRestoreFailed": "Memoria piena: il ripristino è fallito e non è stato possibile rimettere tutti i dati precedenti. Scarica subito la copia dei dati precedenti e reimportala dopo aver liberato spazio.",
+    "downloadRecovery": "Scarica copia dei dati precedenti",
+    "legacyWarning": "Backup di versione precedente: alcune impostazioni (strategie, notifiche nascoste, silenzia notifiche) torneranno ai valori predefiniti."
+  },
+  "installmentFix": {
+    "banner": "Ci sono {n} rate pagate con una data da correggere: finché non le correggi la rata giusta risulta non pagata.",
+    "bannerOne": "C'è 1 rata pagata con una data da correggere: finché non la correggi la rata giusta risulta non pagata.",
+    "review": "Rivedi",
+    "applyOne": "Correggi la rata selezionata",
+    "confirmMessageOne": "La rata selezionata verrà spostata alla data corretta, mantenendo stato, data di pagamento e allegati.",
+    "title": "Rate pagate con la data sbagliata",
+    "desc": "Un vecchio errore di fuso orario ha registrato alcune rate pagate con il giorno precedente, per cui compaiono come riga in più accanto alla rata corretta. Controlla l'elenco e correggi solo le voci che riconosci.",
+    "untitled": "Spesa senza titolo",
+    "apply": "Correggi le {n} selezionate",
+    "confirmTitle": "Correggere le date delle rate?",
+    "confirmMessage": "Le {n} rate selezionate verranno spostate alla data corretta, mantenendo stato, data di pagamento e allegati.",
+    "confirmButton": "Sì, correggi",
+    "done": "Date delle rate corrette."
   }
 }

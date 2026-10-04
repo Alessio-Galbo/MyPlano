@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from '../../components/ui';
+import { Modal, Button, useToast } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { DocumentFormFields } from './DocumentFormFields';
 import '../profiles/AddProfileModal.css';
@@ -19,6 +19,7 @@ const DEFAULT_DOC = {
 
 export function DocumentFormModal({ isOpen, onClose, onSave, editingDoc, profiles, documents = [] }) {
   const { t } = useI18n();
+  const toast = useToast();
   const [formData, setFormData] = useState(DEFAULT_DOC);
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export function DocumentFormModal({ isOpen, onClose, onSave, editingDoc, profile
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(formData);
+    toast.show({ message: t('common.toast.documentSaved'), variant: 'success' });
     onClose();
   };
 

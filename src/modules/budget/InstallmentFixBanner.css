@@ -1,0 +1,41 @@
+.ifb-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: var(--radius-lg);
+  color: var(--text-main);
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.ifb-icon {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.ifb-text {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.ifb-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: #f59e0b;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ifb-action:hover,
+.ifb-action:focus-visible {
+  background: rgba(245, 158, 11, 0.15);
+}

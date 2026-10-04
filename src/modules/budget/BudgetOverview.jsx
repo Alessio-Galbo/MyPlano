@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useI18n } from '../../core/i18n';
 import {
   getBudgetOverviewState,
@@ -9,6 +9,7 @@ import { BudgetKpiGrid } from './BudgetKpiGrid';
 import { ColdStartCard } from './ColdStartCard';
 import { GlobalIncomeHub } from './GlobalIncomeHub';
 import { ConsolidatedProfilesGrid } from './ConsolidatedProfilesGrid';
+import { InstallmentFixBanner } from './InstallmentFixBanner';
 import './BudgetOverview.css';
 
 export function BudgetOverview({
@@ -25,16 +26,15 @@ export function BudgetOverview({
   onSelectStrategy,
 }) {
   const { t } = useI18n();
-  const state = getBudgetOverviewState({
+  const state = useMemo(() => getBudgetOverviewState({
     profiles,
     expenses,
-    documents,
     selectedProfileId,
     simulationStrategy,
     coldStart,
-  });
+  }), [profiles, expenses, selectedProfileId, simulationStrategy, coldStart]);
 
-  const { profile, isProfileMode, metrics, upcomingItems, totalLiquidity, totalIncome, effectiveQuota, currentIncome, margin } = state;
+  const { profile, isProfileMode, metrics, totalLiquidity, totalIncome, effectiveQuota, currentIncome, margin } = state;
 
   const profileTitle = profile?.name
     ? t('budget.incomeHub.profileHubTitle').replace('{name}', profile.name)
@@ -42,6 +42,7 @@ export function BudgetOverview({
 
   return (
     <div className="budget-overview">
+      <InstallmentFixBanner expenses={expenses} />
       {isProfileMode ? (
         <GlobalIncomeHub
           title={profileTitle}

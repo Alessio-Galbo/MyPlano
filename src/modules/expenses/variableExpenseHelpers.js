@@ -8,12 +8,8 @@ export function getActiveContractPayments(expense) {
     return expense.paymentHistory;
   }
 
-  const startTimestamp = new Date(startDate).setHours(0, 0, 0, 0);
-  return expense.paymentHistory.filter((p) => {
-    if (!p.date) return true;
-    const pTime = new Date(p.date).setHours(0, 0, 0, 0);
-    return pTime >= startTimestamp;
-  });
+  const start = String(startDate).slice(0, 10);
+  return expense.paymentHistory.filter((p) => !p.date || String(p.date).slice(0, 10) >= start);
 }
 
 export function calculateActiveContractAverage(expense) {
@@ -34,7 +30,7 @@ export function calculateTrendForecastAmount(expense) {
   if (activePayments.length === 1) return Number(activePayments[0].amount || 0);
 
   const sorted = [...activePayments].sort(
-    (a, b) => new Date(a.date || 0) - new Date(b.date || 0)
+    (a, b) => String(a.date || '').slice(0, 10).localeCompare(String(b.date || '').slice(0, 10))
   );
 
   let weightedSum = 0;

@@ -1,0 +1,54 @@
+/* Group labels + "overdue" highlight shared by the Budget cards, the bell dropdown and the center. */
+.upcoming-group-label {
+  display: flex; align-items: center; gap: 0.35rem; margin-top: 0.15rem;
+  font-size: 0.66rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.upcoming-group-label.is-overdue { color: #f87171; }
+
+.upcoming-item-row.is-overdue,
+.notif-center-item.is-overdue,
+.nav-notif-item.is-overdue {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.07);
+  box-shadow: inset 3px 0 0 #ef4444;
+}
+.upcoming-item-row.is-overdue .upcoming-item-days,
+.notif-center-item.is-overdue .notif-days-val,
+.nav-notif-item.is-overdue .nav-notif-item-date {
+  color: #f87171; font-weight: 700;
+}
+.upcoming-item-row.is-overdue .upcoming-item-days {
+  background: rgba(239, 68, 68, 0.14); border-color: rgba(239, 68, 68, 0.35);
+}
+
+/* Rows rendered as real <button>s: reset the native look. */
+button.upcoming-item-row,
+.nav-notif-item-main,
+.notif-center-main {
+  width: 100%; font: inherit; color: inherit; text-align: left;
+}
+.nav-notif-item-main,
+.notif-center-main {
+  flex: 1; min-width: 0; display: flex; align-items: center;
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
+.nav-notif-item-main { gap: 0.5rem; }
+.notif-center-main { gap: 0.75rem; }
+button.upcoming-item-row:focus-visible,
+.nav-notif-item-main:focus-visible,
+.notif-center-main:focus-visible {
+  outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: var(--radius-sm);
+}
+.notif-alert-off {
+  font-size: 0.62rem; font-weight: 700; padding: 0.05rem 0.35rem; border-radius: var(--radius-sm);
+  color: var(--text-muted); border: 1px dashed var(--border-subtle); white-space: nowrap;
+}
+.nav-notif-muted {
+  padding: 0.35rem 0.75rem; font-size: 0.7rem; color: #fbbf24;
+  background: rgba(245, 158, 11, 0.08); border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+@media (max-width: 640px) {
+  .notif-center-main { gap: 0.55rem; }
+}

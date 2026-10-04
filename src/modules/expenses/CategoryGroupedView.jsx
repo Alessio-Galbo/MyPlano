@@ -26,7 +26,7 @@ export function CategoryGroupedView(props) {
         const unique = Array.from(new Map(items.map((it) => [it.id, it])).values());
         const annualRate = unique.reduce((sum, it) => sum + calculateItemAnnualCost(it), 0);
         const periodTotal = items.reduce((sum, it) => sum + (Number(it.amount) || 0), 0);
-        const isMulti = new Set(items.map((it) => it.dueYear || new Date(it.dueDate).getFullYear())).size > 1;
+        const isMulti = new Set(items.map((it) => it.dueYear || Number(String(it.dueDate).slice(0, 4)))).size > 1;
 
         const countText = items.length === 1
           ? t('expenses.viewMode.itemsCountOne')

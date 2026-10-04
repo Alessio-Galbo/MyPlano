@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
+import { todayISO } from '../../core/dates/isoDate';
 
 export function NewContractForm({ currentContract, onSaveContract, onCancel }) {
   const { t } = useI18n();
   const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
+  const [startDate, setStartDate] = useState(todayISO);
   const [estAmount, setEstAmount] = useState(String(currentContract?.estimatedAmount || ''));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSaveContract({
-      name: name.trim() || 'Nuovo Contratto',
+      name: name.trim() || t('expenses.variable.defaultContractName'),
       startDate,
       estimatedAmount: parseFloat(estAmount) || 0,
     });
@@ -28,7 +29,7 @@ export function NewContractForm({ currentContract, onSaveContract, onCancel }) {
           type="text"
           required
           className="form-input"
-          placeholder="es. Octopus Energy / Edison"
+          placeholder={t('expenses.variable.newProviderPlaceholder')}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />

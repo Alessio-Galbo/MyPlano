@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
+import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { calculateNextFutureOccurrence } from './pastDateHelpers';
 import { formatDate } from '../documents/documentHelpers';
 import './PastDateNotice.css';
 
-export function PastDateNotice({ pastDate, frequency, onApplyDate }) {
+export function PastDateNotice({ pastDate, frequency, customInterval, customUnit, onApplyDate }) {
   const { t } = useI18n();
   const [wasPaid, setWasPaid] = useState(false);
 
-  const projectedDate = calculateNextFutureOccurrence(pastDate, frequency);
+  const projectedDate = calculateNextFutureOccurrence(pastDate, frequency, customInterval, customUnit);
 
   return (
     <div className="past-date-notice">

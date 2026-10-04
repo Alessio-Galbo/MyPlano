@@ -3,6 +3,7 @@ import { Calendar, ShieldCheck } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { UpcomingDeadlinesRow } from './UpcomingDeadlinesRow';
 import { UpcomingDetailModal } from './UpcomingDetailModal';
+import { UpcomingGroupedList } from './UpcomingGroupedList';
 import './UpcomingDeadlinesCard.css';
 
 export function UpcomingDeadlinesCard({ items = [], profiles = [] }) {
@@ -35,14 +36,17 @@ export function UpcomingDeadlinesCard({ items = [], profiles = [] }) {
         </div>
 
         <div className="upcoming-items-list">
-          {items.map((item) => (
-            <UpcomingDeadlinesRow
-              key={item.id}
-              item={item}
-              profile={profiles.find((p) => p.id === item.profileId)}
-              onSelect={setActiveItem}
-            />
-          ))}
+          <UpcomingGroupedList
+            items={items}
+            renderItem={(item) => (
+              <UpcomingDeadlinesRow
+                key={item.id}
+                item={item}
+                profile={profiles.find((p) => p.id === item.profileId)}
+                onSelect={setActiveItem}
+              />
+            )}
+          />
         </div>
       </div>
 

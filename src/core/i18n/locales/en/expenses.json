@@ -69,6 +69,15 @@
     "perMonth": "/ mo"
   },
   "variable": {
+    "billsHistoryTitle": "Recorded bills history",
+    "contractColumn": "Contract",
+    "contractActive": "Active",
+    "contractPrevious": "Previous",
+    "billsCountOne": "1 bill",
+    "billsCount": "{count} bills",
+    "defaultContractName": "New contract",
+    "providerPlaceholder": "e.g. Octopus / Enel",
+    "newProviderPlaceholder": "e.g. Octopus Energy / Edison",
     "isVariableLabel": "Variable expense / usage-based utility",
     "isVariableHint": "Calculates the real average of bills under the active contract",
     "contractName": "Provider / Active contract",

@@ -62,6 +62,7 @@ export function ExpenseFormFields({ formData, setFormData, expenses = [] }) {
       {isDateInPast(formData.nextDueDate) && (
         <PastDateNotice
           pastDate={formData.nextDueDate} frequency={formData.frequency}
+          customInterval={formData.customInterval} customUnit={formData.customUnit}
           onApplyDate={(d) => setFormData({ ...formData, nextDueDate: d })}
         />
       )}

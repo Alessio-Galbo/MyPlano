@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RotateCcw } from 'lucide-react';
 import { Modal, Button } from '../ui';
 import { useI18n } from '../../core/i18n';
+import { usePersistentState } from '../../hooks/usePersistentState';
+import { UpcomingGroupedList } from '../../modules/budget/UpcomingGroupedList';
 import { NotificationCenterItem } from './NotificationCenterItem';
 import { NotificationCenterTabs } from './NotificationCenterTabs';
 import './NotificationCenterModal.css';
+
+const TABS = ['all', 'expenses', 'documents'];
 
 export function NotificationCenterModal({
   isOpen,
   onClose,
   items = [],
   profiles = [],
-  dismissedIds = [],
+  isDismissed = () => false,
+  dismissedCount = 0,
   onToggleVisibility,
   onRestoreAll,
   onViewDetails,
 }) {
   const { t } = useI18n();
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = usePersistentState(
+    'notificationCenterTab', 'all', (v) => TABS.includes(v),
+  );
 
   if (!isOpen) return null;
 
@@ -27,9 +34,8 @@ export function NotificationCenterModal({
     return true;
   });
 
-  const activeCount = items.filter((it) => !dismissedIds.includes(it.id)).length;
-  const activeCountText = t('common.notifications.activeCount').replace('{count}', activeCount);
-  const dismissedCountText = t('common.notifications.dismissedCount').replace('{count}', dismissedIds.length);
+  const activeCountText = t('common.notifications.activeCount').replace('{count}', items.length - dismissedCount);
+  const dismissedCountText = t('common.notifications.dismissedCount').replace('{count}', dismissedCount);
 
   return (
     <Modal
@@ -42,7 +48,7 @@ export function NotificationCenterModal({
       <div className="notif-center-body">
         <div className="notif-center-status-bar">
           <span>{activeCountText} • {dismissedCountText}</span>
-          {dismissedIds.length > 0 && (
+          {dismissedCount > 0 && (
             <button type="button" className="notif-restore-btn" onClick={onRestoreAll}>
               <RotateCcw size={12} /> {t('common.notifications.restoreAll')}
             </button>
@@ -59,16 +65,19 @@ export function NotificationCenterModal({
           {filtered.length === 0 ? (
             <div className="nav-notif-empty">{t('common.notifications.empty')}</div>
           ) : (
-            filtered.map((item) => (
-              <NotificationCenterItem
-                key={item.id}
-                item={item}
-                profiles={profiles}
-                isHidden={dismissedIds.includes(item.id)}
-                onViewDetails={onViewDetails}
-                onToggleVisibility={onToggleVisibility}
-              />
-            ))
+            <UpcomingGroupedList
+              items={filtered}
+              renderItem={(item) => (
+                <NotificationCenterItem
+                  key={item.id}
+                  item={item}
+                  profiles={profiles}
+                  isHidden={isDismissed(item)}
+                  onViewDetails={onViewDetails}
+                  onToggleVisibility={onToggleVisibility}
+                />
+              )}
+            />
           )}
         </div>
 

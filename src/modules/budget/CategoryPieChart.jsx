@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { getCategoryLabel } from '../expenses/expenseHelpers';
 import { getCategoryColor, ensureCategoryClass } from '../../core/theme/dynamicThemeService';
 import './CategoryPieChart.css';
@@ -9,7 +9,7 @@ export function CategoryPieChart({ categoryTotals = {}, totalAmount = 0 }) {
   const [hoveredCat, setHoveredCat] = useState(null);
 
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    formatCurrency(v, { maximumFractionDigits: 0 });
 
   const slices = Object.entries(categoryTotals)
     .filter(([_, c]) => c > 0)

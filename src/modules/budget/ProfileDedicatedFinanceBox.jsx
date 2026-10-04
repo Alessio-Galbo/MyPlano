@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Check } from 'lucide-react';
 import { Button, Toggle } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 
 export function ProfileDedicatedFinanceBox({
   icon,
@@ -30,7 +30,7 @@ export function ProfileDedicatedFinanceBox({
   };
 
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   const toggleId = `toggle-dedicated-${label.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`;
 

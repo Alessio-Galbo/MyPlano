@@ -1,44 +1,48 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { storageService } from '../storage';
+import { usePersistedSlice } from './usePersistedSlice';
+
+const readFunds = () => storageService.getProfileFunds();
+const writeFunds = (v) => storageService.saveProfileFunds(v);
+const readFundConfigs = () => storageService.getProfileFundConfigs();
+const writeFundConfigs = (v) => storageService.saveProfileFundConfigs(v);
+const readIncomes = () => storageService.getProfileIncomes();
+const writeIncomes = (v) => storageService.saveProfileIncomes(v);
+const readIncomeConfigs = () => storageService.getProfileIncomeConfigs();
+const writeIncomeConfigs = (v) => storageService.saveProfileIncomeConfigs(v);
+
+// Functional update of one or more map entries; keeps the same object when nothing changes.
+const patchMap = (setter, entries) => setter((prev) => {
+  let next = prev;
+  entries.forEach(([id, val]) => {
+    if (next[id] !== val) next = { ...next, [id]: val };
+  });
+  return next;
+});
 
 export function useProfileFinance() {
-  const [profileFunds, setProfileFunds] = useState(() => storageService.getProfileFunds());
-  const [profileFundConfigs, setProfileFundConfigs] = useState(() => storageService.getProfileFundConfigs());
-  const [profileIncomes, setProfileIncomes] = useState(() => storageService.getProfileIncomes());
-  const [profileIncomeConfigs, setProfileIncomeConfigs] = useState(() => storageService.getProfileIncomeConfigs());
+  const [profileFunds, setProfileFunds, reloadFunds] = usePersistedSlice(readFunds, writeFunds);
+  const [profileFundConfigs, setFundConfigs, reloadFundConfigs] = usePersistedSlice(readFundConfigs, writeFundConfigs);
+  const [profileIncomes, setProfileIncomes, reloadIncomes] = usePersistedSlice(readIncomes, writeIncomes);
+  const [profileIncomeConfigs, setIncomeConfigs, reloadIncomeConfigs] = usePersistedSlice(readIncomeConfigs, writeIncomeConfigs);
 
-  const updateProfileFund = (profileId, amount) => {
-    const val = parseFloat(amount) || 0;
-    const next = { ...profileFunds, [profileId]: val };
-    setProfileFunds(next);
-    storageService.saveProfileFunds(next);
-  };
+  const updateProfileFund = (profileId, amount) => patchMap(setProfileFunds, [[profileId, parseFloat(amount) || 0]]);
+  const setProfileUsesDedicatedFund = (profileId, usesDedicated) => patchMap(setFundConfigs, [[profileId, usesDedicated]]);
+  const updateProfileIncome = (profileId, amount) => patchMap(setProfileIncomes, [[profileId, parseFloat(amount) || 0]]);
+  const setProfileUsesDedicatedIncome = (profileId, usesDedicated) => patchMap(setIncomeConfigs, [[profileId, usesDedicated]]);
 
-  const setProfileUsesDedicatedFund = (profileId, usesDedicated) => {
-    const next = { ...profileFundConfigs, [profileId]: usesDedicated };
-    setProfileFundConfigs(next);
-    storageService.saveProfileFundConfigs(next);
-  };
+  // Funds/incomes mirror each profile's initialBalance/monthlyIncome.
+  const syncFromProfiles = useCallback((profiles) => {
+    patchMap(setProfileFunds, profiles.map((p) => [p.id, Number(p.initialBalance) || 0]));
+    patchMap(setProfileIncomes, profiles.map((p) => [p.id, Number(p.monthlyIncome) || 0]));
+  }, [setProfileFunds, setProfileIncomes]);
 
-  const updateProfileIncome = (profileId, amount) => {
-    const val = parseFloat(amount) || 0;
-    const next = { ...profileIncomes, [profileId]: val };
-    setProfileIncomes(next);
-    storageService.saveProfileIncomes(next);
-  };
-
-  const setProfileUsesDedicatedIncome = (profileId, usesDedicated) => {
-    const next = { ...profileIncomeConfigs, [profileId]: usesDedicated };
-    setProfileIncomeConfigs(next);
-    storageService.saveProfileIncomeConfigs(next);
-  };
-
-  const reloadProfileFinance = () => {
-    setProfileFunds(storageService.getProfileFunds());
-    setProfileFundConfigs(storageService.getProfileFundConfigs());
-    setProfileIncomes(storageService.getProfileIncomes());
-    setProfileIncomeConfigs(storageService.getProfileIncomeConfigs());
-  };
+  const reloadProfileFinance = useCallback(() => {
+    reloadFunds();
+    reloadFundConfigs();
+    reloadIncomes();
+    reloadIncomeConfigs();
+  }, [reloadFunds, reloadFundConfigs, reloadIncomes, reloadIncomeConfigs]);
 
   return {
     profileFunds,
@@ -53,6 +57,7 @@ export function useProfileFinance() {
     onUpdateProfileIncome: updateProfileIncome,
     setProfileUsesDedicatedIncome,
     onSetProfileUsesDedicatedIncome: setProfileUsesDedicatedIncome,
+    syncFromProfiles,
     reloadProfileFinance,
   };
 }

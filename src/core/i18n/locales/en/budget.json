@@ -11,13 +11,16 @@
     "residualDiscretionaryDesc": "Income net of set-aside quota",
     "currentFund": "Current Fund",
     "currentFundDesc": "Profile initial available liquidity",
-    "upcomingDeadlines": "Upcoming Deadlines (30d)",
+    "upcomingDeadlines": "Upcoming Deadlines",
     "upcomingDeadlinesDesc": "Expenses and documents due soon",
-    "noUpcoming": "All on track: no expenses or documents due in the next 30 days",
+    "noUpcoming": "All on track: no expenses or documents due soon",
     "noUpcomingDesc": "No payments or renewals scheduled soon",
     "inDays": "in {days} d",
     "dueToday": "Due today",
-    "overdue": "Overdue by {days} d",
+    "overdue": "Expired {days} d ago",
+    "overdueBy": "Overdue by {days} d",
+    "overdueGroup": "Overdue",
+    "upcomingGroup": "Coming up",
     "viewDetails": "Deadline details",
     "upcomingCountPill": "{count} due",
     "moreUpcoming": "+ {count} more due"
@@ -59,6 +62,8 @@
     "surgeAlert": "Recommended initial rate: for the first {months} months save {amount}/mo to meet the first major peak."
   },
   "coldStart": {
+    "strategySurvivalAria": "Survival",
+    "planBShort": "Plan B",
     "title": "Resilience & Critical Moment Analysis",
     "criticalMonthLabel": "Most demanding moment",
     "safetyMarginLabel": "Minimum Safety Margin",
@@ -108,6 +113,7 @@
     "planBActivate": "Activate Plan B"
   },
   "simulation": {
+    "filterCategoryAria": "Filter timeline by category",
     "title": "Cashflow Timeline & Peaks",
     "subtitle": "Comparison of expected outflows versus accumulated reserve",
     "horizonLabel": "Time horizon",

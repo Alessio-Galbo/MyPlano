@@ -19,7 +19,7 @@ export function YearGroupedExpenseGrid({
   const { t } = useI18n();
 
   const groupedByYear = expenses.reduce((acc, exp) => {
-    const y = exp.dueYear || (exp.dueDate ? new Date(exp.dueDate).getFullYear() : 'other');
+    const y = exp.dueYear || (exp.dueDate ? Number(String(exp.dueDate).slice(0, 4)) : 'other');
     if (!acc[y]) acc[y] = [];
     acc[y].push(exp);
     return acc;

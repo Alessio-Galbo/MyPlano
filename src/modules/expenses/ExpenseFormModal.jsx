@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from '../../components/ui';
+import { Modal, Button, useToast } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { ExpenseFormFields } from './ExpenseFormFields';
 import './ExpenseFormModal.css';
@@ -17,6 +17,7 @@ const DEFAULT_EXP = {
 
 export function ExpenseFormModal({ isOpen, onClose, onSave, editingExp, profiles, expenses = [] }) {
   const { t } = useI18n();
+  const toast = useToast();
   const [formData, setFormData] = useState(DEFAULT_EXP);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ export function ExpenseFormModal({ isOpen, onClose, onSave, editingExp, profiles
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave({ ...formData, amount: parseFloat(formData.amount) || 0 });
+    toast.show({ message: t('common.toast.expenseSaved'), variant: 'success' });
     onClose();
   };
 

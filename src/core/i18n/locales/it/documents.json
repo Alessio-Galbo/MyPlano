@@ -4,6 +4,10 @@
   "addDocument": "Nuovo Documento",
   "editDocument": "Modifica Documento",
   "fields": {
+    "quickDurationLabel": "Calcolo rapido durata:",
+    "identifierPlaceholder": "es. CA12345AA",
+    "issuerPlaceholder": "es. Comune di Roma / MIT - UCO",
+    "notesPlaceholder": "es. Rinnovo da prenotare su CIE Online",
     "title": "Titolo documento",
     "type": "Tipo",
     "owner": "Intestatario / Profilo",
@@ -43,5 +47,7 @@
     "newExpiry": "Nuova Data di Scadenza",
     "chooseDuration": "Aggiungi durata:",
     "confirm": "Conferma Rinnovo"
-  }
+  },
+  "deleteConfirmTitle": "Eliminare il documento?",
+  "deleteConfirmMessage": "Il documento \"{title}\" verrà eliminato. Potrai annullare subito dopo."
 }

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BudgetTab } from '../../modules/budget';
-import { DocumentList } from '../../modules/documents';
-import { ExpenseList } from '../../modules/expenses';
-import { SettingsView } from '../../modules/settings';
+import { DocumentList, ExpenseList, SettingsView } from './lazyTabs';
+import { TabLoading } from './TabLoading';
 
+// Budget stays eager (default first tab); the others are lazy chunks.
 export function TabContent(props) {
+  return (
+    <Suspense fallback={<TabLoading />}>
+      <TabSwitch {...props} />
+    </Suspense>
+  );
+}
+
+function TabSwitch(props) {
   const {
     activeTab, selectedProfileId, onSelectProfile, expenses, documents, profiles,
     saveDocument, deleteDocument, saveExpense, deleteExpense, reloadAll,
@@ -13,6 +21,7 @@ export function TabContent(props) {
   const onUpdateProfileBalance = props.onUpdateProfileBalance || props.updateProfileBalance;
   const onUpdateProfileIncome = props.onUpdateProfileIncome || props.updateProfileIncome;
   const onDepositProfileQuota = props.onDepositProfileQuota || props.depositQuotaToProfile;
+  const onAdjustProfileBalance = props.onAdjustProfileBalance || props.adjustProfileBalance;
 
   switch (activeTab) {
     case 'budget':
@@ -47,6 +56,7 @@ export function TabContent(props) {
           onSaveExpense={saveExpense}
           onDeleteExpense={deleteExpense}
           onUpdateProfileBalance={onUpdateProfileBalance}
+          onAdjustProfileBalance={onAdjustProfileBalance}
         />
       );
     case 'settings':
@@ -54,6 +64,7 @@ export function TabContent(props) {
         <SettingsView
           documents={documents}
           expenses={expenses}
+          onSaveExpense={saveExpense}
           onDataRestored={reloadAll}
         />
       );

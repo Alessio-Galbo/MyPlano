@@ -1,6 +1,6 @@
 import React from 'react';
 import { PieChart, Table } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { getCategoryLabel } from '../expenses/expenseHelpers';
 import { ensureCategoryClass } from '../../core/theme/dynamicThemeService';
 import './TimelineCategoryPills.css';
@@ -16,7 +16,7 @@ export function TimelineCategoryPills({
 }) {
   const { t } = useI18n();
   const formatCompact = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    formatCurrency(v, { maximumFractionDigits: 0 });
 
   return (
     <div className="timeline-category-bar">

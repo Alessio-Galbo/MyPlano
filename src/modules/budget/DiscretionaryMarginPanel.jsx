@@ -1,5 +1,5 @@
 import React from 'react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import './DiscretionaryMarginPanel.css';
 
 export function DiscretionaryMarginPanel({ monthlyIncome, safeMonthlyQuota }) {
@@ -10,7 +10,7 @@ export function DiscretionaryMarginPanel({ monthlyIncome, safeMonthlyQuota }) {
 
   const discretionary = Math.max(0, incomeNum - safeMonthlyQuota);
   const formatCurr = (v) =>
-    v.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   return (
     <div className="discretionary-panel">

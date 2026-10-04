@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { storageService } from '../../core/storage/storageService';
 import { calculateBudgetMetrics, calculateColdStartAnalysis } from './budgetCalculations';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
@@ -17,7 +17,7 @@ export function ConsolidatedProfileCard({
 }) {
   const { t } = useI18n();
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   const metrics = calculateBudgetMetrics(expenses, profile.id);
   const analysis = calculateColdStartAnalysis(expenses, profile.id, profile.initialBalance);

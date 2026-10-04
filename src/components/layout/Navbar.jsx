@@ -41,7 +41,7 @@ export function Navbar({
           />
         </div>
 
-        <nav className="navbar-tabs" aria-label="Main Navigation">
+        <nav className="navbar-tabs" aria-label={t('common.a11y.mainNav')}>
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -50,6 +50,7 @@ export function Navbar({
               onClick={() => setActiveTab(item.id)}
               title={item.label}
               aria-label={item.label}
+              aria-current={activeTab === item.id ? 'page' : undefined}
             >
               {item.icon}
               <span>{item.label}</span>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 
 export function CashflowTableRow({ month: m }) {
   const { t } = useI18n();
   const formatCurr = (val) =>
-    val.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(val);
 
   return (
     <tr className={m.isShortage ? 'cashflow-row-shortage' : ''}>
@@ -21,6 +21,7 @@ export function CashflowTableRow({ month: m }) {
             <div className="timeline-due-list">
               {m.dueExpenses?.map((de) => (
                 <div key={de.id} className="timeline-due-item">
+                  {de.dueDates?.length > 0 && `${de.dueDates.map((d) => Number(d.slice(8, 10))).join(', ')} · `}
                   {de.title} ({formatCurr(de.amount)})
                 </div>
               ))}

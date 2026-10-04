@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from '../../components/ui';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import './DepositAllConfirmModal.css';
 
 export function DepositAllConfirmModal({
@@ -12,7 +12,7 @@ export function DepositAllConfirmModal({
 }) {
   const { t } = useI18n();
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={t('budget.depositAllModal.title')}>

@@ -3,6 +3,7 @@ import { Receipt, FileText, Eye, EyeOff } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { formatCurrency } from '../../modules/expenses/expenseHelpers';
 import { formatDate } from '../../modules/documents/documentHelpers';
+import { getUpcomingDaysLabel } from '../../modules/budget/upcomingDaysLabel';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 
 export function NotificationCenterItem({
@@ -14,51 +15,53 @@ export function NotificationCenterItem({
 }) {
   const { t } = useI18n();
   const isExp = item.itemType === 'expense';
-  const inDaysText = t('common.notifications.inDays').replace('{days}', item.diffDays);
   const profile = profiles.find((p) => p.id === item.profileId);
   const profileTheme = profile ? ensureProfileClass(profile.id) : '';
+  const toggleLabel = isHidden
+    ? t('common.notifications.showNotification')
+    : t('common.notifications.hideNotification');
 
   return (
     <div
-      className={`notif-center-item ${isHidden ? 'is-hidden' : ''}`}
-      onClick={() => onViewDetails(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && onViewDetails(item)}
+      className={`notif-center-item ${isHidden ? 'is-hidden' : ''} ${item.isOverdue ? 'is-overdue' : ''}`}
+      data-notif-id={item.id}
     >
-      <div className={`notif-center-icon-pill ${isExp ? 'expense' : 'document'}`}>
-        {isExp ? <Receipt size={16} /> : <FileText size={16} />}
-      </div>
+      <button type="button" className="notif-center-main" onClick={() => onViewDetails(item)}>
+        <span className={`notif-center-icon-pill ${isExp ? 'expense' : 'document'}`}>
+          {isExp ? <Receipt size={16} /> : <FileText size={16} />}
+        </span>
 
-      <div className="notif-center-content">
-        <div className="notif-center-row-top">
-          <span className="notif-center-item-title">{item.title}</span>
-          {isExp && <span className="notif-center-amount">{formatCurrency(item.amount)}</span>}
-        </div>
+        <span className="notif-center-content">
+          <span className="notif-center-row-top">
+            <span className="notif-center-item-title">{item.title}</span>
+            {isExp && <span className="notif-center-amount">{formatCurrency(item.amount)}</span>}
+          </span>
 
-        <div className="notif-center-row-bottom">
-          {profile && (
-            <span className="notif-profile-badge">
-              <span className={`dynamic-color-dot ${profileTheme}`} />
-              <span>{profile.name}</span>
-              <span className="notif-dot-sep">•</span>
-            </span>
-          )}
-          <span className="notif-date-val">{formatDate(item.date)}</span>
-          <span className="notif-dot-sep">•</span>
-          <span className="notif-days-val">{inDaysText}</span>
-        </div>
-      </div>
+          <span className="notif-center-row-bottom">
+            {profile && (
+              <span className="notif-profile-badge">
+                <span className={`dynamic-color-dot ${profileTheme}`} />
+                <span>{profile.name}</span>
+                <span className="notif-dot-sep">•</span>
+              </span>
+            )}
+            <span className="notif-date-val">{formatDate(item.date)}</span>
+            <span className="notif-dot-sep">•</span>
+            <span className="notif-days-val">{getUpcomingDaysLabel(t, item)}</span>
+            {!item.alertEnabled && (
+              <span className="notif-alert-off">{t('common.notifications.alertOff')}</span>
+            )}
+          </span>
+        </span>
+      </button>
 
       <button
         type="button"
         className={`notif-visibility-btn ${isHidden ? 'is-hidden' : ''}`}
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggleVisibility(item.id);
-        }}
-        title={isHidden ? t('common.notifications.showNotification') : t('common.notifications.hideNotification')}
-        aria-label={isHidden ? t('common.notifications.showNotification') : t('common.notifications.hideNotification')}
+        onClick={() => onToggleVisibility(item)}
+        title={toggleLabel}
+        aria-label={toggleLabel}
+        aria-pressed={isHidden}
       >
         {isHidden ? <EyeOff size={15} /> : <Eye size={15} />}
       </button>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useI18n } from '../../core/i18n';
+import { createItemId } from '../../core/storage/idMigrationHelper';
 import { DocumentCard } from './DocumentCard';
 import { DocumentFormModal } from './DocumentFormModal';
 import { DocumentRenewModal } from './DocumentRenewModal';
 import { DocumentListHeader } from './DocumentListHeader';
+import { useDocumentDeleteWithUndo } from './useDocumentDeleteWithUndo';
+import { todayISO } from '../../core/dates/isoDate';
 import './DocumentList.css';
 
 export function DocumentList({
@@ -17,6 +20,7 @@ export function DocumentList({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingDoc, setEditingDoc] = useState(null);
   const [renewingDoc, setRenewingDoc] = useState(null);
+  const handleDelete = useDocumentDeleteWithUndo({ documents, onDeleteDocument, onSaveDocument });
 
   const filtered = selectedProfileId === 'all'
     ? documents
@@ -51,7 +55,7 @@ export function DocumentList({
               document={doc}
               profile={profiles.find((p) => p.id === doc.profileId)}
               onEdit={handleEdit}
-              onDelete={onDeleteDocument}
+              onDelete={handleDelete}
               onToggleAlert={handleToggleAlert}
               onQuickRenew={(d) => setRenewingDoc(d)}
             />
@@ -74,8 +78,8 @@ export function DocumentList({
         document={renewingDoc}
         onConfirmRenew={(doc, date) => {
           const rec = {
-            id: `ren-${Date.now()}`,
-            renewedAt: new Date().toISOString().split('T')[0],
+            id: createItemId('ren'),
+            renewedAt: todayISO(),
             previousExpiryDate: doc.expiryDate,
             newExpiryDate: date,
           };

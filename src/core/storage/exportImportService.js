@@ -1,33 +1,49 @@
-export function exportAllAppData(storage) {
-  return JSON.stringify({
-    version: 2,
-    exportedAt: new Date().toISOString(),
-    profiles: storage.getProfiles(),
-    documents: storage.getDocuments(),
-    expenses: storage.getExpenses(),
-    initialBalance: storage.getInitialBalance(),
-    monthlyIncome: storage.getMonthlyIncome(),
-    profileFunds: storage.getProfileFunds(),
-    profileFundConfigs: storage.getProfileFundConfigs(),
-    profileIncomes: storage.getProfileIncomes(),
-    profileIncomeConfigs: storage.getProfileIncomeConfigs(),
-  }, null, 2);
+import { buildBackup, parseBackup, readAllDataKeys } from './backupFormat';
+import { collectAttachments, restoreAttachments } from './backupAttachments';
+import { writeDataAtomically, rollback } from './backupWriter';
+import { runMigrations } from './migrations';
+
+export { parseBackup, snapshotToBackupJson } from './backupFormat';
+export { writeDataAtomically } from './backupWriter';
+
+// An older backup is brought up to the current schema right after the import
+// (every step is idempotent, so they are all re-applied).
+function runPostImportMigrations() {
+  runMigrations({ fromVersion: 0 });
 }
 
-export function importAllAppData(storage, jsonString) {
+// Sync export without attachments (kept for storageService.exportAllData).
+export function exportAllAppData() {
+  return JSON.stringify(buildBackup(), null, 2);
+}
+
+export async function exportBackupJson({ includeAttachments = false } = {}) {
+  const attachments = includeAttachments ? await collectAttachments() : undefined;
+  return JSON.stringify(buildBackup(attachments), null, 2);
+}
+
+// Sync import without attachments (kept for storageService.importAllData).
+export function importAllAppData(_storage, jsonString) {
+  const parsed = parseBackup(jsonString);
+  if (!parsed.ok) return { success: false, error: parsed.error };
+  const res = writeDataAtomically(parsed.data);
+  if (res.success) runPostImportMigrations();
+  return res;
+}
+
+// Applies a backup already checked by parseBackup: data keys first (all-or-nothing),
+// then the attachments. If an attachment cannot be saved, restoreAttachments puts the
+// previous receipts back and the data keys are rolled back to the snapshot.
+export async function applyParsedBackup(parsed) {
+  if (!parsed?.ok) return { success: false, error: parsed?.error || 'invalidFormat' };
+  const snapshot = readAllDataKeys();
+  const res = writeDataAtomically(parsed.data, snapshot);
+  if (!res.success) return res;
   try {
-    const data = JSON.parse(jsonString);
-    if (data.profiles) storage.saveProfiles(data.profiles);
-    if (data.documents) storage.saveDocuments(data.documents);
-    if (data.expenses) storage.saveExpenses(data.expenses);
-    if (data.initialBalance !== undefined) storage.saveInitialBalance(data.initialBalance);
-    if (data.monthlyIncome !== undefined) storage.saveMonthlyIncome(data.monthlyIncome);
-    if (data.profileFunds) storage.saveProfileFunds(data.profileFunds);
-    if (data.profileFundConfigs) storage.saveProfileFundConfigs(data.profileFundConfigs);
-    if (data.profileIncomes) storage.saveProfileIncomes(data.profileIncomes);
-    if (data.profileIncomeConfigs) storage.saveProfileIncomeConfigs(data.profileIncomeConfigs);
-    return { success: true };
-  } catch (err) {
-    return { success: false, error: err.message };
+    await restoreAttachments(parsed.attachments);
+  } catch {
+    return rollback(snapshot, 'attachmentsFailed');
   }
+  runPostImportMigrations();
+  return res;
 }

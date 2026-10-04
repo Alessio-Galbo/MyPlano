@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layers, Plus, Trash2 } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { Button } from '../../components/ui';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 import './ProfileBar.css';
@@ -15,7 +15,7 @@ export function ProfileBar({
   const { t } = useI18n();
 
   const formatCompact = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    formatCurrency(v, { maximumFractionDigits: 0 });
 
   const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);
 

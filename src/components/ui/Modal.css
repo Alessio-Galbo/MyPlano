@@ -24,6 +24,8 @@
   animation: modalIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.modal-content:focus { outline: none; }
+
 @keyframes modalIn {
   from {
     opacity: 0;

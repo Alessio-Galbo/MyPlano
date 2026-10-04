@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layers, ChevronDown } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import { calculateItemAnnualCost } from '../../modules/budget/budgetCalculations';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 import { NavbarNotificationsBtn } from './NavbarNotificationsBtn';
@@ -21,7 +21,7 @@ export function NavbarProfileSelector({
   };
 
   const formatCompact = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    formatCurrency(v, { maximumFractionDigits: 0 });
 
   const activeProfile = profiles.find((p) => p.id === selectedProfileId);
   const isMaster = selectedProfileId === 'all';

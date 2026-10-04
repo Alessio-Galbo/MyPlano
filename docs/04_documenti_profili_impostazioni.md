@@ -24,9 +24,11 @@ Per ogni documento è possibile registrare:
 3. **Numero Identificativo**: codice alfanumerico (es. *CA12345AA* o numero patente).
 4. **Ente Emittente**: comune, prefettura, motorizzazione, banca o ente di rilascio.
 5. **Data di Rilascio & Data di Scadenza**: con selettore rapido di durata.
-6. **Giorni di Preavviso**: soglia di allerta personalizzabile (default 30 giorni).
+6. **Giorni di Preavviso**: soglia di allerta personalizzabile (default 30 giorni): è la finestra con cui il documento compare tra le scadenze imminenti e nelle notifiche.
 7. **Note Opzionali**: visualizzate direttamente nella card in corsivo elegante (es. *Rinnovo da prenotare su CIE Online* o *Visita medica richiesta*).
-8. **Interruttore Promemoria**: toggle per attivare o disattivare gli avvisi.
+8. **Interruttore Promemoria**: toggle per attivare o disattivare gli avvisi. Con il promemoria spento il documento non va nella campanella (resta nel centro notifiche con l'etichetta *Avviso disattivato*) e non viene esportato nel calendario.
+
+L'**eliminazione di un documento** chiede sempre conferma, e dopo l'eliminazione compare un avviso con *Annulla*.
 
 ### Badge di Stato & Anti-Wrapping
 Ogni card mostra un badge sintetico a colori vivaci con calcolo dei giorni rimanenti:
@@ -67,21 +69,32 @@ MyPlano consente di organizzare le finanze e le scadenze dell'intero nucleo fami
 
 Garantisce piena interoperabilità con gli strumenti di produttività quotidiani e sovranità totale sui dati:
 
-### Esportazione Calendario Universale iCalendar (`.ics`)
-- Genera un file `.ics` standard contenente tutte le scadenze di documenti e spese per le quali è attivo il flag *"Includi in calendario"*.
-- **Configurazione Granulare degli Avvisi**: promemoria impostabile per il giorno stesso dell'evento, oppure con 1, 3 o 7 giorni di anticipo.
-- **Compatibilità Totale**: importabile con un click in **Google Calendar**, **Apple Calendar**, **Microsoft Outlook**, **Thunderbird** o qualsiasi app di calendario per smartphone.
+### Notifiche & Centro Notifiche
+- La campanella nella navbar conta le scadenze imminenti (spese: 30 giorni; documenti: i giorni di preavviso del documento) e mette in rosso, in cima, il gruppo *Scaduti / in ritardo* (fino a 60 giorni indietro).
+- Ogni scadenza è una notifica a sé e le rate pagate sono escluse.
+- *Silenzia tutte*: il badge sparisce e la campanella appare barrata; la lista resta consultabile con un avviso.
+- Il centro notifiche ricorda l'ultima scheda aperta; `Esc` chiude il menu della campanella.
+- Limite: senza un server, MyPlano non può avvisarti ad app chiusa. Per avere avvisi sul telefono usa l'export `.ics` qui sotto.
 
-### Backup & Ripristino JSON Istantaneo
-- **Esporta Backup**: genera un file `.json` completo con l'intero snapshot locale (profili, documenti, spese, storico bollette, fondi e preferenze).
-- **Ripristina Backup**: permette di ricaricare il file JSON su qualsiasi altro computer o browser, con validazione automatica dello schema per garantire l'integrità dei dati.
+### Esportazione Calendario Universale iCalendar (`.ics`)
+- Genera un file `.ics` standard con le **spese** (se *Includi in calendario* non è spento) e i **documenti** (se il promemoria è attivo).
+- **Serie ricorrenti**: per ogni spesa ricorrente viene scritta una sola serie (con fine, esclusioni e date aggiunte) invece di una voce per ogni rata.
+- **Promemoria**: 3 giorni prima per le spese, i giorni di preavviso del documento per i documenti.
+- **Compatibilità**: importabile in **Google Calendar**, **Apple Calendar**, **Microsoft Outlook**, **Thunderbird** o qualsiasi app di calendario. Nota: Google Calendar ignora i promemoria dei file importati; Apple Calendar e Outlook li rispettano.
+
+### Backup & Ripristino JSON (formato v3)
+- **Esporta Backup**: genera un file `.json` con profili, documenti, spese, storico bollette, fondi e notifiche nascoste. Non include preferenze dell'interfaccia, lingua e copie di sicurezza di dati corrotti.
+- **Includi allegati**: opzione per inserire nel file anche le ricevute salvate nel browser (le ricevute nella cartella del PC non sono incluse). Il file diventa più grande.
+- **Ripristina Backup**: validazione del file, poi una finestra di riepilogo (data, profili, spese, documenti, allegati) che chiede conferma. La scrittura è tutto-o-niente: se qualcosa fallisce, i dati precedenti vengono ripristinati. I backup v2 si importano ancora; le chiavi assenti nel backup tornano ai valori predefiniti; gli errori sono mostrati e lo stesso file può essere riprovato.
+- **Ultimo backup**: *oggi / ieri / N giorni fa*, evidenziato se sono passati più di 30 giorni o non l'hai mai fatto.
+- **Correggi date delle rate**: se in passato alcune rate pagate sono state salvate col giorno prima (vecchio difetto), in *Impostazioni* compare questa card con l'elenco e le caselle da spuntare; nulla cambia finché non confermi.
 
 ### Manutenzione & Reset Database
 - **Ripristina Dati di Esempio (Demo)**: carica un set di dati dimostrativi bilanciati per esplorare le funzionalità dell'applicazione.
-- **Azzera Tutto il Database**: cancella ogni traccia per iniziare con un'installazione pulita da zero, protetto da doppia conferma esplicita.
+- **Azzera Tutto il Database**: cancella tutti i dati (anche le notifiche nascoste) e le ricevute salvate nel browser, protetto da doppia conferma esplicita. Restano preferenze, lingua e cartella del PC collegata.
 
 ### Switch Lingua Immediato (Italiano / Inglese)
-- Supporto bilingue nativo completo: testi, etichette, formati numerici e descrizioni disponibili in italiano e inglese, commutabili con un click dalle Impostazioni.
+- Supporto bilingue nativo completo: testi, etichette, valute e date disponibili in italiano e inglese, commutabili con un click dalle Impostazioni (l'inglese usa giorno/mese ed euro). I campi data/numero nativi del browser seguono la lingua del browser e i dati demo restano in italiano.
 
 ---
 
@@ -91,8 +104,15 @@ MyPlano adotta la filosofia **Local-First**:
 - Nessun account o registrazione richiesta.
 - Nessun tracciamento, analytics o telemetria.
 - Nessun server cloud che legge le tue informazioni personali o le tue ricevute bancarie.
-- Tutti i dati risiedono esclusivamente nel browser e nella cartella del tuo computer.
+- Tutti i dati risiedono esclusivamente nel browser e nella cartella del tuo computer. Nessun font o risorsa viene caricato da server esterni (niente Google Fonts).
+- I dati sono legati all'indirizzo da cui apri l'app: cambiando indirizzo o dominio ripartiresti da zero, quindi fai prima un backup.
 
 ### Integrità dei Dati
 - Ogni spesa e documento ha un identificativo univoco assegnato al salvataggio: modifica, eliminazione e notifiche agiscono sempre sull'elemento giusto.
 - Gli elementi salvati da versioni precedenti senza identificativo vengono corretti automaticamente al primo caricamento (`idMigrationHelper.js`), senza toccare i contenuti inseriti.
+- **Nessun salvataggio perso**: con azioni rapide (doppio click, pagamenti ravvicinati) ogni modifica viene salvata, e il saldo del profilo si aggiorna senza sovrascritture.
+- **Dati corrotti**: se una chiave risulta illeggibile l'app parte comunque (con la lista vuota) e conserva una copia di sicurezza (`myplano_corrupt_<chiave>_<data>`).
+- **Memoria piena**: compare l'avviso *Spazio esaurito: esporta un backup*.
+- **Versione dei dati**: lo schema è versionato (versione 2); le migrazioni girano una sola volta all'avvio (profili, id mancanti o duplicati).
+- **Più schede aperte**: si aggiornano a vicenda.
+- **Schermata di errore**: in caso di errore imprevisto compaiono *Scarica dati grezzi (JSON)* e *Ricarica*, senza alcun reset.

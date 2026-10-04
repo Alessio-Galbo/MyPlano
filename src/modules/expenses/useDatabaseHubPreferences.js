@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { UI_KEYS } from '../../core/storage/storageKeys';
 
-const STORAGE_KEY = 'myplano_database_hub_prefs';
+const STORAGE_KEY = UI_KEYS.DATABASE_HUB_PREFS;
 
 const DEFAULT_PREFS = {
   yearSort: 'desc',

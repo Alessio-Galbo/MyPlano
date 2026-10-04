@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Edit2, Trash2, RefreshCw } from 'lucide-react';
-import { Badge, Toggle } from '../../components/ui';
+import { Badge, Toggle, ConfirmModal } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { getDocumentStatus } from './documentHelpers';
 import { DocumentCardMeta } from './DocumentCardMeta';
@@ -15,6 +15,7 @@ export function DocumentCard({
   onQuickRenew,
 }) {
   const { t } = useI18n();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const { status, daysRemaining, variant } = getDocumentStatus(document.expiryDate);
 
   const statusLabel = status === 'expired'
@@ -37,7 +38,7 @@ export function DocumentCard({
 
       <div className="doc-card-footer">
         <Toggle
-          checked={document.enableAlert}
+          checked={document.enableAlert !== false}
           onChange={(checked) => onToggleAlert(document.id, checked)}
           label={t('documents.fields.enableAlert')}
           id={`alert-doc-${document.id}`}
@@ -64,12 +65,21 @@ export function DocumentCard({
             type="button"
             className="btn btn-ghost btn-sm"
             title={t('common.actions.delete')}
-            onClick={() => onDelete(document.id)}
+            aria-label={t('common.actions.delete')}
+            onClick={() => setIsConfirmOpen(true)}
           >
             <Trash2 size={15} />
           </button>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={() => onDelete(document.id)}
+        title={t('documents.deleteConfirmTitle')}
+        message={t('documents.deleteConfirmMessage').replace('{title}', document.title || '')}
+      />
     </div>
   );
 }

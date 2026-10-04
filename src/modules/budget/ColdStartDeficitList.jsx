@@ -45,7 +45,7 @@ export function ColdStartDeficitList({
       </div>
 
       <div className="standard-plan-value">
-        {formatCurr(standardMonthlyQuota)} <small className="text-subtle">/ mese</small>
+        {formatCurr(standardMonthlyQuota)} <small className="text-subtle">{t('expenses.viewMode.perMonth')}</small>
       </div>
 
       <div className="deficit-shield-notice">

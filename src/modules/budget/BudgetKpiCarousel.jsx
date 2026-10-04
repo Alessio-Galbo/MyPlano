@@ -51,13 +51,13 @@ export function BudgetKpiCarousel({
             type="button"
             className={`carousel-dot ${activeIdx === 0 ? 'active' : ''}`}
             onClick={() => setActiveIdx(0)}
-            aria-label="Card 1"
+            aria-label={t('common.actions.slideN', { n: 1 })}
           />
           <button
             type="button"
             className={`carousel-dot ${activeIdx === 1 ? 'active' : ''}`}
             onClick={() => setActiveIdx(1)}
-            aria-label="Card 2"
+            aria-label={t('common.actions.slideN', { n: 2 })}
           />
         </div>
 

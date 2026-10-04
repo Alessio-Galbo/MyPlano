@@ -10,14 +10,17 @@ export function SettingsResetCard({ onDataRestored }) {
   const { t } = useI18n();
   const [modalType, setModalType] = useState(null);
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    let res = null;
     if (modalType === 'wipe') {
-      storageService.clearAllData();
+      res = storageService.clearAllData();
     } else if (modalType === 'factory') {
-      storageService.resetToFactoryDefaults();
+      res = storageService.resetToFactoryDefaults();
     }
     setModalType(null);
+    // Reload state right away: a save during the IndexedDB cleanup must not write old data back.
     if (onDataRestored) onDataRestored();
+    await res?.done; // receipts stored in IndexedDB are removed too
   };
 
   return (

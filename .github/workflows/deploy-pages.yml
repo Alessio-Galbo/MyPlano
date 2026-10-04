@@ -1,0 +1,56 @@
+# Build di MyPlano e pubblicazione su GitHub Pages (https://alessio-galbo.github.io/MyPlano/) a ogni push su main.
+# Prerequisito una tantum: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo deploy alla volta; quello in corso non viene interrotto.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      # Controlli di progetto: un deploy non parte se una regola fallisce.
+      - run: python Tools/check_line_limits.py
+      - run: python Tools/check_i18n_keys.py
+      - run: python Tools/test_logic.py
+      - run: node Tools/test_dates.mjs
+      - run: node Tools/test_notifications.mjs
+      - name: Build (base /MyPlano/)
+        run: npx vite build
+        env:
+          MYPLANO_BASE: /${{ github.event.repository.name }}/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

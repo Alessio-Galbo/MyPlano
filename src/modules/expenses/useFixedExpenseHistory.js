@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { toggleInstallmentStatus } from './expenseInstallmentHelpers';
 import { getAllExpenseInstallmentDates, getInstallmentDetails } from './expenseHistoryHelpers';
+import { todayISO } from '../../core/dates/isoDate';
 
 export function useFixedExpenseHistory({
   expense,
@@ -13,7 +14,7 @@ export function useFixedExpenseHistory({
 
   const rawDates = useMemo(() => getAllExpenseInstallmentDates(expense), [expense]);
   const installmentsObj = expense.installments || {};
-  const today = new Date().toISOString().split('T')[0];
+  const today = todayISO();
 
   const dates = useMemo(() => {
     let list = [...rawDates];

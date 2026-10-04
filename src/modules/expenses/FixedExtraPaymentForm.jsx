@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
+import { todayISO } from '../../core/dates/isoDate';
 
 export function FixedExtraPaymentForm({ defaultAmount, onSave, onCancel }) {
   const { t } = useI18n();
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(todayISO);
   const [amount, setAmount] = useState(defaultAmount || '');
   const [note, setNote] = useState('');
 

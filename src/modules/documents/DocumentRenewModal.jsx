@@ -47,7 +47,7 @@ export function DocumentRenewModal({ isOpen, onClose, document, onConfirmRenew }
                 className="renew-preset-btn"
                 onClick={() => handlePreset(yr)}
               >
-                +{yr} {yr === 1 ? 'anno' : 'anni'}
+                {yr === 1 ? t('common.actions.yearsPlusOne', { n: yr }) : t('common.actions.yearsPlusMany', { n: yr })}
               </button>
             ))}
           </div>

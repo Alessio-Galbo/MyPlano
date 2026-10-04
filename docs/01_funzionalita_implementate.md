@@ -12,12 +12,12 @@ La documentazione dell'applicazione è organizzata nelle seguenti guide tematich
 
 | Guida | Argomento | Contenuti Principali |
 | :--- | :--- | :--- |
-| [00 - Idea Base](file:///d:/Git%20Repositories/MyPlano/docs/00_idea_base.md) | Visione & Filosofia | Concetto fondante di MyPlano, superamento dello "shock da spese periodiche" e pianificazione del nucleo. |
-| [01 - Panoramica Funzionalità](file:///d:/Git%20Repositories/MyPlano/docs/01_funzionalita_implementate.md) | Indice & Architettura Funzionale | Mappa generale, pilastri dell'esperienza utente, design responsive e interoperabilità. |
-| [02 - Bilancio & Sinking Funds](file:///d:/Git%20Repositories/MyPlano/docs/02_bilancio_e_sinking_funds.md) | Finanze, Quote & Previsioni | Metodo Sinking Funds, Fondo & Introito, Visione d'Insieme del Nucleo, Algoritmo Cold Start e Timeline Cashflow. |
-| [03 - Spese, Timeline & Database](file:///d:/Git%20Repositories/MyPlano/docs/03_spese_archivio_database.md) | Scadenziario & Archivio Ricevute | Vista multi-anno con timeline, bollette a consumo, Hub Archivio a 3 colonne, foto/webcam e tag nativi EXIF nei file. |
-| [04 - Documenti, Profili & Sicurezza](file:///d:/Git%20Repositories/MyPlano/docs/04_documenti_profili_impostazioni.md) | Carte, Identità & Sovranità Dati | Monitoraggio documenti con rinnovo guidato, gestione multi-profilo, export iCalendar (.ics), backup JSON e bilinguismo. |
-| [Release Notes](file:///d:/Git%20Repositories/MyPlano/docs/RELEASE_NOTES.md) | Note di Rilascio GitHub | Sintesi delle novità e changelog orientato agli utenti per i rilasci su GitHub. |
+| [00 - Idea Base](00_idea_base.md) | Visione & Filosofia | Concetto fondante di MyPlano, superamento dello "shock da spese periodiche" e pianificazione del nucleo. |
+| [01 - Panoramica Funzionalità](01_funzionalita_implementate.md) | Indice & Architettura Funzionale | Mappa generale, pilastri dell'esperienza utente, design responsive e interoperabilità. |
+| [02 - Bilancio & Sinking Funds](02_bilancio_e_sinking_funds.md) | Finanze, Quote & Previsioni | Metodo Sinking Funds, Fondo & Introito, Visione d'Insieme del Nucleo, Algoritmo Cold Start e Timeline Cashflow. |
+| [03 - Spese, Timeline & Database](03_spese_archivio_database.md) | Scadenziario & Archivio Ricevute | Vista multi-anno con timeline, bollette a consumo, Hub Archivio a 3 colonne, foto/webcam e tag nativi EXIF nei file. |
+| [04 - Documenti, Profili & Sicurezza](04_documenti_profili_impostazioni.md) | Carte, Identità & Sovranità Dati | Monitoraggio documenti con rinnovo guidato, gestione multi-profilo, notifiche, export iCalendar (.ics) con ricorrenze e promemoria, backup JSON v3 con allegati e bilinguismo. |
+| [Release Notes](RELEASE_NOTES.md) | Note di Rilascio GitHub | Sintesi delle novità e changelog orientato agli utenti per i rilasci su GitHub. |
 
 ---
 
@@ -43,12 +43,16 @@ Controllo costante sulla validità di carte d'identità, patenti, passaporti, ca
 - **Navbar Dinamica per Smartphone**: su dispositivi mobili, le schede non attive si contraggono a sole icone mentre la scheda selezionata espande testo e icona, eliminando testi troncati e garantendo navigazione immediata.
 - **Pulsanti di Azione Rapida Integrati**: controlli compatti nelle intestazioni su mobile (pulsante *Nuova Spesa* allineato ai comandi di vista, pulsante *Nuovo Documento* compatto con icona `+`).
 - **Nessun Pop-up di Sistema Fastidioso**: ogni azione di sicurezza (cancellazione spesa, rimozione allegato o ripristino dati) è protetta da eleganti modali personalizzate con chiara indicazione delle conseguenze.
-- **Bilingue Nativo (Italiano & Inglese)**: commutazione istantanea della lingua da Impostazioni con salvataggio permanente delle preferenze.
+- **Bilingue Nativo (Italiano & Inglese)**: commutazione istantanea della lingua da Impostazioni; la lingua cambia anche il formato di valute e date (l'inglese usa giorno/mese ed euro). I campi data/numero nativi del browser seguono invece la lingua del browser e i dati demo restano in italiano.
+- **Preferenze Ricordate**: scheda attiva, profilo selezionato (anche "tutti"), vista spese, filtro categoria, intervallo anni, orizzonte della timeline e le altre scelte di visualizzazione restano come le hai lasciate alla sessione successiva.
+- **Avvisi con "Annulla"**: dopo ogni salvataggio compare un breve avviso (al massimo 3 insieme); dopo eliminazione, "salta rata" o "interrompi" puoi annullare.
+- **Accessibilità**: nei modali la tastiera resta all'interno della finestra, Esc chiude solo quella in primo piano, la navbar indica la scheda attiva ai lettori di schermo.
+- **Installabile e Offline (PWA)**: si installa dal browser come un'app, funziona anche senza connessione e non carica font né risorse da server esterni. Vedi il [README](../README.md).
 
 ---
 
 ## Sovranità dei Dati e Privacy Totale
 
 - **Zero Cloud & Zero Tracciamento**: i tuoi dati finanziari, documenti e spese rimangono esclusivamente sul tuo dispositivo.
-- **Esportazione & Backup Totale**: salvataggio e ripristino istantaneo dell'intero archivio in formato standard JSON.
-- **Sincronizzazione con Calendari Esterni**: generazione di file universali `.ics` compatibili con Google Calendar, Apple Calendar, Microsoft Outlook e Thunderbird.
+- **Esportazione & Backup Totale**: salvataggio e ripristino dell'intero archivio in formato JSON (v3), con le ricevute salvate nel browser se lo desideri; l'import mostra un riepilogo e chiede conferma prima di scrivere.
+- **Sincronizzazione con Calendari Esterni**: generazione di file universali `.ics` (serie ricorrenti e promemoria inclusi) compatibili con Google Calendar, Apple Calendar, Microsoft Outlook e Thunderbird.

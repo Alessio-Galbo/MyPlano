@@ -4,6 +4,10 @@
   "addDocument": "New Document",
   "editDocument": "Edit Document",
   "fields": {
+    "quickDurationLabel": "Quick duration:",
+    "identifierPlaceholder": "e.g. CA12345AA",
+    "issuerPlaceholder": "e.g. City council / DVLA",
+    "notesPlaceholder": "e.g. Book the renewal online",
     "title": "Document title",
     "type": "Type",
     "owner": "Owner / Profile",
@@ -43,5 +47,7 @@
     "newExpiry": "New Expiration Date",
     "chooseDuration": "Add duration:",
     "confirm": "Confirm Renewal"
-  }
+  },
+  "deleteConfirmTitle": "Delete document?",
+  "deleteConfirmMessage": "The document \"{title}\" will be deleted. You can undo right after."
 }

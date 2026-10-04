@@ -21,7 +21,7 @@ export function TimelineCategoryFilter({
           className="timeline-category-select"
           value={selectedCategory}
           onChange={(e) => onSelectCategory(e.target.value)}
-          aria-label="Filtra categoria timeline"
+          aria-label={t('budget.simulation.filterCategoryAria')}
         >
           <option value="all">{t('common.actions.all')} ({t('expenses.title')})</option>
           {categories.map((cat) => (

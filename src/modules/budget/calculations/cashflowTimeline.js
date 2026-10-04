@@ -1,6 +1,7 @@
 import { calculateBudgetMetrics } from './coreMetrics';
-import { isExpenseDueInMonth } from './recurrenceHelper';
+import { getDueDatesInMonth } from './recurrenceHelper';
 import { getExpenseEffectiveAmount } from '../../expenses/variableExpenseHelpers';
+import { formatMonthName } from '../../../core/i18n/formatters';
 
 export function generateCashflowTimeline(
   expenses,
@@ -30,10 +31,11 @@ export function generateCashflowTimeline(
     const catFilter = simOptions.categoryFilter;
 
     const monthOutflow = filtered.reduce((sum, item) => {
-      if (isExpenseDueInMonth(item, year, monthIndex)) {
-        const amt = getExpenseEffectiveAmount(item);
+      const dueDates = getDueDatesInMonth(item, year, monthIndex);
+      if (dueDates.length > 0) {
+        const amt = getExpenseEffectiveAmount(item) * dueDates.length;
         if (!catFilter || catFilter === 'all' || item.category === catFilter) {
-          dueExpenses.push({ id: item.id, title: item.title, amount: amt, category: item.category });
+          dueExpenses.push({ id: item.id, title: item.title, amount: amt, category: item.category, dueDates });
         } else {
           excludedOutflow += amt;
         }
@@ -56,10 +58,9 @@ export function generateCashflowTimeline(
 
     accumulatedReserve += (appliedQuota - monthOutflow);
 
-    const rawShort = targetMonthDate.toLocaleString('default', { month: 'short' });
-    const capShort = rawShort.charAt(0).toUpperCase() + rawShort.slice(1);
-    const rawLong = targetMonthDate.toLocaleString('default', { month: 'long' });
-    const capLong = rawLong.charAt(0).toUpperCase() + rawLong.slice(1);
+    // Month names follow the UI language (it/en), capitalized.
+    const capShort = formatMonthName(targetMonthDate, 'short');
+    const capLong = formatMonthName(targetMonthDate, 'long');
 
     months.push({
       date: targetMonthDate,

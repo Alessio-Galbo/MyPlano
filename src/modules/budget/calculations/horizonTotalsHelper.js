@@ -1,4 +1,4 @@
-import { isExpenseDueInMonth } from './recurrenceHelper';
+import { countDueInMonth } from './recurrenceHelper';
 import { getExpenseEffectiveAmount } from '../../expenses/variableExpenseHelpers';
 
 export function calculateHorizonTotals(expenses, profileId = 'all', horizonMonths = 12) {
@@ -17,8 +17,9 @@ export function calculateHorizonTotals(expenses, profileId = 'all', horizonMonth
     const year = targetDate.getFullYear();
 
     filtered.forEach((item) => {
-      if (isExpenseDueInMonth(item, year, monthIndex)) {
-        const amt = getExpenseEffectiveAmount(item);
+      const dueCount = countDueInMonth(item, year, monthIndex);
+      if (dueCount > 0) {
+        const amt = getExpenseEffectiveAmount(item) * dueCount;
         const cat = item.category || 'other';
         catMap[cat] = (catMap[cat] || 0) + amt;
         total += amt;

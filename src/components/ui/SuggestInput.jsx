@@ -27,7 +27,15 @@ export function SuggestInput({
     setIsOpen(false);
   };
 
-  const filtered = options.filter((opt) =>
+  // Options carry a key (value) and a translated label: show the label, store the key.
+  const selectedOpt = options.find((opt) => opt.value === value);
+  const displayValue = selectedOpt ? selectedOpt.label : value;
+  const handleType = (text) => {
+    const match = options.find((opt) => opt.label.toLowerCase() === text.trim().toLowerCase());
+    onChange(match ? match.value : text);
+  };
+
+  const filtered = selectedOpt ? options : options.filter((opt) =>
     opt.label.toLowerCase().includes(String(value || '').toLowerCase())
   );
   const displayOptions = filtered.length > 0 ? filtered : options;
@@ -38,8 +46,8 @@ export function SuggestInput({
         <input
           type="text"
           className="form-input suggest-input-field"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          value={displayValue}
+          onChange={(e) => handleType(e.target.value)}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
           required={required}

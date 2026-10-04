@@ -2,19 +2,25 @@ import { useState } from 'react';
 import { getInstallmentStatus } from './expenseInstallmentHelpers';
 import { recordInstallmentPayment, revertInstallmentPayment } from './expensePaymentFundHelper';
 
-export function useExpensePaymentHandler({ profiles = [], onSaveExpense, onUpdateProfileBalance }) {
+const round2 = (n) => Math.round(n * 100) / 100;
+
+// Fund changes are applied as deltas on the latest balance (never on the
+// `profiles` of this render), so quick consecutive payments are all counted.
+export function useExpensePaymentHandler({ onSaveExpense, onUpdateProfileBalance, onAdjustProfileBalance }) {
   const [pendingPayment, setPendingPayment] = useState(null);
+
+  const adjustFund = (profileId, delta) => {
+    if (!profileId || !delta) return;
+    if (onAdjustProfileBalance) onAdjustProfileBalance(profileId, delta);
+    else onUpdateProfileBalance?.(profileId, (cur) => round2(cur + delta));
+  };
 
   const handleTogglePaid = (expense, dueDate) => {
     const isPaid = getInstallmentStatus(expense, dueDate) === 'paid';
 
     if (isPaid) {
       const { updatedExpense, refundAmount, profileId } = revertInstallmentPayment(expense, dueDate);
-      if (refundAmount > 0 && onUpdateProfileBalance) {
-        const target = profiles.find((p) => p.id === profileId);
-        const cur = Number(target?.initialBalance || 0);
-        onUpdateProfileBalance(profileId, Math.round((cur + refundAmount) * 100) / 100);
-      }
+      if (refundAmount > 0) adjustFund(profileId, refundAmount);
       onSaveExpense(updatedExpense);
       return;
     }
@@ -28,12 +34,7 @@ export function useExpensePaymentHandler({ profiles = [], onSaveExpense, onUpdat
     const amount = Number(expense.amount || 0);
 
     const updated = recordInstallmentPayment(expense, dueDate, { deductFromFund, amount });
-
-    if (deductFromFund && onUpdateProfileBalance && expense.profileId) {
-      const target = profiles.find((p) => p.id === expense.profileId);
-      const cur = Number(target?.initialBalance || 0);
-      onUpdateProfileBalance(expense.profileId, Math.round((cur - amount) * 100) / 100);
-    }
+    if (deductFromFund) adjustFund(expense.profileId, -amount);
 
     onSaveExpense(updated);
     setPendingPayment(null);

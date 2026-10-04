@@ -1,12 +1,12 @@
 import React from 'react';
 import { AlertTriangle, Clock } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import './CashflowGroupedRow.css';
 
 export function CashflowGroupedRow({ item }) {
   const { t } = useI18n();
   const formatCurr = (val) =>
-    Number(val || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(val);
 
   const durationText = item.isSingleMonth
     ? t('budget.simulation.interimPeriod')

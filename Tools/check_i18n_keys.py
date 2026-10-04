@@ -1,3 +1,4 @@
+import sys
 import os
 import re
 import json
@@ -61,3 +62,5 @@ if missing_en:
 
 if not missing_it and not missing_en:
     print("ALL KEYS RESOLVE PERFECTLY IN BOTH IT AND EN!")
+else:
+    sys.exit(1)

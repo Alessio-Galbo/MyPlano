@@ -24,7 +24,7 @@ export function DocumentAlertFields({ formData, setFormData }) {
         <textarea
           className="form-input"
           rows="2"
-          placeholder="es. Rinnovo da prenotare su CIE Online"
+          placeholder={t('documents.fields.notesPlaceholder')}
           value={formData.notes || ''}
           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
         />

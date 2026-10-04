@@ -9,7 +9,7 @@ export function expandExpensesForRange(expenses, range) {
   } else if (range.mode === 'range') {
     for (let y = range.fromYear; y <= range.toYear; y++) years.push(y);
   } else {
-    const baseYears = expenses.map((e) => new Date(e.nextDueDate).getFullYear()).filter(Boolean);
+    const baseYears = expenses.map((e) => Number(String(e.nextDueDate || '').slice(0, 4))).filter(Boolean);
     const min = Math.min(...baseYears, 2026);
     const max = Math.max(...baseYears, 2030);
     for (let y = min; y <= max; y++) years.push(y);

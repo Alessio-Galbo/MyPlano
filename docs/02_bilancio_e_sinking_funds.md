@@ -14,7 +14,7 @@ Versando ogni mese questa quota nella riserva (il **Fondo**), il conto sarà sem
 
 ## 2. Gestione Profilo Singolo (Vista Chiara e Simmetrica)
 
-Quando si seleziona un profilo specifico (es. *Personale* o *Famiglia*), la schermata di bilancio offre una configurazione minimale e intuitiva:
+Quando si seleziona un profilo specifico (es. *Personale* o *Famiglia*), la schermata di bilancio offre una configurazione minimale e intuitiva. Il profilo selezionato (o "Visione d'Insieme") viene ricordato alla riapertura. Quota mensile, totale annuo, cashflow e Cold Start tengono conto di spese interrotte (`endDate`, inclusiva) e rate saltate:
 
 ### Box Fondo (€)
 - Mostra il saldo attuale accantonato nel fondo di riserva per quel profilo.
@@ -31,11 +31,14 @@ Quando si seleziona un profilo specifico (es. *Personale* o *Famiglia*), la sche
   - Calcolata in tempo reale: $\text{Disponibilità Residua} = \text{Introito Mensile} - \text{Quota Mensile Sinking Fund}$.
   - Evidenziata con testo in gradiente violaceo/ciano e indicatore `/mese`. Indica con precisione assoluta quanto denaro è liberamente spendibile ogni mese per svago, spesa quotidiana e risparmio libero, sapendo che tutte le scadenze future sono già coperte.
 
-### Card Scadenze Imminenti (30gg)
-- Posizionata sotto ai riquadri finanziari, riporta a colpo d'occhio il conteggio esatto delle rate e dei pagamenti che scadranno entro i prossimi 30 giorni.
-- Elenca sia le **spese** (in base alla prossima scadenza) sia i **documenti** (in base alla data di scadenza), ordinati per data, con importo, profilo e badge `tra N gg`; un click apre il dettaglio (`UpcomingDetailModal`).
-- Le scadenze oltre i 30 giorni non compaiono qui ma restano visibili nella scheda *Spese & Scadenze* e in *Documenti*.
-- Le voci nascoste dal *Centro Gestione Notifiche* (campanella in alto) restano nascoste anche qui finché non vengono ripristinate.
+### Card Scadenze Imminenti
+- Posizionata sotto ai riquadri finanziari, riporta a colpo d'occhio le scadenze vicine, con un conteggio e un'etichetta per ogni voce.
+- Elenca sia le **spese** sia i **documenti**, ordinati per data, con importo, profilo e badge `tra N gg`; un click apre il dettaglio (`UpcomingDetailModal`).
+- **Finestra temporale**: per le spese è di 30 giorni; per i documenti è il *giorno di preavviso* impostato su ciascun documento (default 30), quindi non c'è una soglia fissa uguale per tutti. Le scadenze di **oggi** contano tra le imminenti.
+- In cima, in rosso, il gruppo **Scaduti / in ritardo** (fino a 60 giorni indietro). Le rate già pagate non compaiono.
+- Ogni scadenza è una voce a sé: nascondere la bolletta di ottobre non nasconde quella di novembre.
+- Le voci nascoste dal *Centro Gestione Notifiche* (campanella in alto) restano nascoste anche qui. Se per una voce il *Promemoria* è spento, resta in questa card e nel centro notifiche con l'etichetta *Avviso disattivato*, ma non finisce nella campanella.
+- Campanella e Bilancio mostrano sempre le stesse voci, anche con più schede aperte.
 
 ---
 
@@ -66,7 +69,7 @@ Cosa succede se un utente inizia a usare MyPlano con un fondo iniziale basso (o 
 Con una quota ordinaria piatta andrebbe inevitabilmente in rosso. MyPlano risolve questo scenario con un **algoritmo predittivo intelligente**:
 
 ### Identificazione del Mese Critico
-Il sistema simula l'andamento del saldo giorno per giorno, individua il primo mese in cui il conto andrebbe in deficit e segnala chiaramente quali spese provocano lo scoperto.
+Il sistema simula l'andamento del saldo giorno per giorno (le spese interrotte con "interrompi da questa data" o saltate con "salta rata" non vengono più conteggiate), individua il primo mese in cui il conto andrebbe in deficit e segnala chiaramente quali spese provocano lo scoperto.
 
 ### Opzione 1: Integrazione Rapida Una Tantum
 Un pulsante ben visibile nel banner di avviso permette di integrare con un click l'esatto importo mancante nel fondo (es. `+ Integra 350,00 € nel fondo`), portando istantaneamente il piano a regime.
@@ -82,7 +85,8 @@ Se l'utente non dispone subito della liquidità da integrare, l'algoritmo calcol
 ## 5. Timeline Interattiva del Cashflow
 
 Per consentire la massima trasparenza, MyPlano offre una proiezione cronologica dettagliata:
-- **Orizzonte Flessibile**: selezione dell'intervallo temporale desiderato da **1 a 120 mesi** (fino a 10 anni).
+- **Orizzonte Flessibile**: selezione dell'intervallo temporale desiderato da **1 a 120 mesi** (fino a 10 anni). Orizzonte, categoria e vista scelti vengono ricordati tra una sessione e l'altra.
+- **Date esatte**: le rate cadono sempre nel giorno giusto (anche dopo il cambio ora legale); a fine mese una scadenza del 31 va al 28/02, 31/03, 30/04, e un 29/02 annuale va al 28/02; una frequenza "ogni N giorni" è davvero in giorni.
 - **Tabella Mese per Mese**:
   - *Mese di riferimento* (es. ott 2026, nov 2026).
   - *Quota versata* (con badge distintivo se opera in regime di sopravvivenza).

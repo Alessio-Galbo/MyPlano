@@ -10,7 +10,9 @@ Ogni voce di spesa viene registrata con estrema flessibilità:
 - **Periodicità Canoniche**: *Mensile*, *Bimestrale*, *Trimestrale*, *Semestrale*, *Annuale*, *Biennale*, *Una tantum*.
 - **Periodicità Personalizzate**:
   - Intervallo libero in **Mesi** (es. ogni 5 mesi).
-  - Intervallo libero in **Giorni** (es. ogni 45 giorni).
+  - Intervallo libero in **Giorni** (es. ogni 45 giorni): è davvero in giorni anche in timeline e quota mensile.
+- **Date Sempre Esatte**: le rate cadono nel giorno giusto (nessun slittamento col fuso orario o l'ora legale); le scadenze di fine mese seguono il mese (31/01 mensile → 28/02, 31/03, 30/04; 29/02 annuale → 28/02).
+- **Interrompi da questa data & Salta rata**: *interrompi* chiude la spesa da una data in poi (inclusiva), *salta rata* esclude una sola occorrenza. Entrambi riducono quota mensile, totale annuo, cashflow e Cold Start e offrono "Annulla" nell'avviso.
 - **Assistente Scadenza Rapida (`+1 ciclo / ✨`)**:
   - Sia in creazione che in modifica spesa, un pulsante assistente calcola istantaneamente e compila la data della scadenza successiva in base alla frequenza scelta, senza dover consultare manualmente il calendario.
 - **Rilevamento Intelligente Scadenze Pregresse**:
@@ -70,7 +72,7 @@ Cliccando sul pulsante archivio di una spesa si apre un centro di controllo a sc
 - **Controlli di Ordinamento & Visibilità**: ordinamento per data o alfabetico, e pulsante minimal con icona occhio (`Eye` / `EyeOff`) per nascondere gli anni precedenti all'anno corrente.
 
 ### Colonna 2: Rate & Pagamenti Registrati
-- **Elenco Dettagliato delle Rate**: mostra data, importo e stato di ciascuna rata passata o programmata.
+- **Elenco Dettagliato delle Rate**: mostra data, importo e stato di ciascuna rata passata o programmata. Lo storico parte dalla data di inizio; se manca, dalla rata registrata più vecchia; se mancano anche le rate, dalla prossima scadenza (nessuna rata viene inventata).
 - **Avanzamento Stato Immediato**: un clic sull'icona della riga commuta istantaneamente lo stato tra *Da saldare* (icona orologio) e *Saldato* (icona spunta verde) senza ricaricare la pagina o spostare elementi.
 - **Modifica Puntuale della Scadenza**: permette di correggere la data di una specifica rata (es. slittamento concordato) con opzione di aggiornare o preservare la catena delle scadenze future.
 - **Registrazione Rate Extra**: pulsante compatto `[ + Spesa extra ]` per inserire pagamenti straordinari o integrazioni fuori ciclo.
@@ -83,6 +85,8 @@ Cliccando sul pulsante archivio di una spesa si apre un centro di controllo a sc
 - **Galleria Ricevute**: visualizzazione delle anteprime collegate alla specifica rata selezionata.
 - **Anteprima a Schermo Intero & Zoom**: visualizzatore integrato con controlli di ingrandimento/riduzione.
 - **Download & Eliminazione Protetta**: salvataggio locale della ricevuta o eliminazione sicura con modale di conferma per prevenire cancellazioni accidentali.
+- **Ricevute mai sovrascritte**: ogni ricevuta ha una chiave univoca; nella cartella del PC un nome già presente diventa `nome (2).ext`.
+- **Preferenze ricordate**: la spesa selezionata e gli anni aperti nell'Hub si ritrovano alla riapertura.
 
 ---
 
@@ -108,4 +112,4 @@ Quando si acquisisce o si salva una ricevuta in formato JPEG, MyPlano **scrive d
 - È possibile cercare, filtrare o raggruppare le ricevute per tag direttamente da **Esplora Risorse di Windows**, anche a browser chiuso.
 
 ### Massima Sicurezza & Fallback Locale
-Se non viene collegata una cartella del PC, i file vengono conservati nel database protetto locale del browser (IndexedDB), garantendo che nessun allegato vada mai perso.
+Se non viene collegata una cartella del PC, i file vengono conservati nel database protetto locale del browser (IndexedDB). Queste ricevute possono essere incluse nel backup (opzione *Includi allegati*); quelle nella cartella del PC no, perché sono già file tuoi.

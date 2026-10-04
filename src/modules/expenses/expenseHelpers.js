@@ -1,58 +1,21 @@
-export function formatCurrency(amount) {
-  return Number(amount || 0).toLocaleString('it-IT', {
-    style: 'currency',
-    currency: 'EUR',
-  });
-}
+import { diffDays, todayISO } from '../../core/dates/isoDate';
+import { getRecurrenceStep, stepDate } from '../../core/dates/recurrence';
+
+// Locale-aware (follows the UI language): see core/i18n/formatters.js
+export { formatCurrency } from '../../core/i18n/formatters';
 
 export function advanceNextDueDate(currentDateStr, frequency, customInterval = 1, customUnit = 'months') {
-  const date = currentDateStr ? new Date(currentDateStr) : new Date();
-
-  switch (frequency) {
-    case 'monthly':
-      date.setMonth(date.getMonth() + 1);
-      break;
-    case 'bimonthly':
-      date.setMonth(date.getMonth() + 2);
-      break;
-    case 'quarterly':
-      date.setMonth(date.getMonth() + 3);
-      break;
-    case 'semiannual':
-      date.setMonth(date.getMonth() + 6);
-      break;
-    case 'annual':
-      date.setFullYear(date.getFullYear() + 1);
-      break;
-    case 'biennial':
-      date.setFullYear(date.getFullYear() + 2);
-      break;
-    case 'custom':
-      if (customUnit === 'days') {
-        date.setDate(date.getDate() + (Number(customInterval) || 30));
-      } else {
-        date.setMonth(date.getMonth() + (Number(customInterval) || 1));
-      }
-      break;
-    default:
-      break;
-  }
-
-  return date.toISOString().split('T')[0];
+  const base = currentDateStr ? String(currentDateStr).slice(0, 10) : todayISO();
+  const interval = frequency === 'custom' && customUnit === 'days' ? (Number(customInterval) || 30) : customInterval;
+  return stepDate(base, getRecurrenceStep(frequency, interval, customUnit));
 }
 
 export function getExpenseUrgency(dueDateStr) {
   if (!dueDateStr) return { variant: 'neutral', label: 'due' };
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-
-  const due = new Date(dueDateStr);
-  due.setHours(0, 0, 0, 0);
-
-  const diffDays = Math.ceil((due.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-
-  if (diffDays < 0) return { variant: 'danger', label: 'overdue' };
-  if (diffDays <= 15) return { variant: 'warning', label: 'upcoming' };
+  const days = diffDays(todayISO(), String(dueDateStr).slice(0, 10));
+  if (Number.isNaN(days)) return { variant: 'neutral', label: 'due' };
+  if (days < 0) return { variant: 'danger', label: 'overdue' };
+  if (days <= 15) return { variant: 'warning', label: 'upcoming' };
   return { variant: 'neutral', label: 'due' };
 }
 

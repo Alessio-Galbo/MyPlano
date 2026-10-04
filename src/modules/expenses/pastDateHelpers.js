@@ -1,43 +1,29 @@
+import { diffDays, parseISODate, toISODate, todayISO } from '../../core/dates/isoDate';
+import { getGridDates, getRecurrenceStep } from '../../core/dates/recurrence';
+
 export function isDateInPast(dateStr) {
   if (!dateStr) return false;
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const target = new Date(dateStr);
-  target.setHours(0, 0, 0, 0);
-  return target < now;
+  const days = diffDays(todayISO(), String(dateStr).slice(0, 10));
+  return !Number.isNaN(days) && days < 0;
 }
 
+// Kept for compatibility: adds months to a Date (or ISO string), clamping to the month's end.
 export function advanceMonths(date, months) {
-  const d = new Date(date);
-  d.setMonth(d.getMonth() + months);
-  return d;
+  const base = typeof date === 'string' ? parseISODate(date) : new Date(date);
+  const total = base.getMonth() + months;
+  const year = base.getFullYear() + Math.floor(total / 12);
+  const month = ((total % 12) + 12) % 12;
+  const day = Math.min(base.getDate(), new Date(year, month + 1, 0).getDate());
+  return new Date(year, month, day);
 }
 
-export function calculateNextFutureOccurrence(pastDateStr, frequency) {
+// First date of the series (origin pastDateStr) that is today or later.
+export function calculateNextFutureOccurrence(pastDateStr, frequency, customInterval = 1, customUnit = 'months') {
   if (!pastDateStr) return '';
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-
-  let current = new Date(pastDateStr);
-  current.setHours(0, 0, 0, 0);
-
-  if (current >= now) return pastDateStr;
-
-  let stepMonths = 12;
-  switch (frequency) {
-    case 'monthly': stepMonths = 1; break;
-    case 'bimonthly': stepMonths = 2; break;
-    case 'quarterly': stepMonths = 3; break;
-    case 'semiannual': stepMonths = 6; break;
-    case 'annual': stepMonths = 12; break;
-    case 'biennial': stepMonths = 24; break;
-    case 'oneOff': return pastDateStr;
-    default: stepMonths = 12; break;
-  }
-
-  while (current < now) {
-    current = advanceMonths(current, stepMonths);
-  }
-
-  return current.toISOString().split('T')[0];
+  const origin = String(pastDateStr).slice(0, 10);
+  const today = todayISO();
+  if (origin >= today || frequency === 'oneOff') return pastDateStr;
+  const step = getRecurrenceStep(frequency, customInterval, customUnit) || { unit: 'months', n: 12 };
+  const end = toISODate(new Date(parseISODate(today).getFullYear() + 3, 0, 1));
+  return getGridDates(origin, step, today, end)[0] || pastDateStr;
 }

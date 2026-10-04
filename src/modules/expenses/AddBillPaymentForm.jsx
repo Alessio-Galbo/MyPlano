@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
+import { createItemId } from '../../core/storage/idMigrationHelper';
+import { todayISO } from '../../core/dates/isoDate';
 
 export function AddBillPaymentForm({ onAddPayment }) {
   const { t } = useI18n();
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(todayISO);
   const [amount, setAmount] = useState('');
   const [note, setNote] = useState('');
 
@@ -13,7 +15,7 @@ export function AddBillPaymentForm({ onAddPayment }) {
     e.preventDefault();
     if (!amount) return;
     onAddPayment({
-      id: `bill-${Date.now()}`,
+      id: createItemId('bill'),
       date,
       amount: parseFloat(amount) || 0,
       note: note.trim(),

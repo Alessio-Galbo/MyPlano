@@ -21,8 +21,8 @@ export function ExpenseCard({
   const badgeInfo = getExpenseBadgeInfo(isPaid, isFromFund, urgency, t);
 
   const nextDate = findNextInstallmentDate(expense, effDate);
-  const nextY = nextDate ? new Date(nextDate).getFullYear() : null;
-  const curY = effDate ? new Date(effDate).getFullYear() : null;
+  const nextY = nextDate ? Number(nextDate.slice(0, 4)) : null;
+  const curY = effDate ? Number(String(effDate).slice(0, 4)) : null;
   const showNext = nextY && nextY !== curY && onNavigateYear;
 
   return (
@@ -64,7 +64,7 @@ export function ExpenseCard({
 
       <div className="expense-toggles-row">
         <Toggle
-          checked={expense.enableAlert} onChange={(val) => onToggleAlert(expense.id, val)}
+          checked={expense.enableAlert !== false} onChange={(val) => onToggleAlert(expense.id, val)}
           label={t('expenses.fields.enableAlert')} id={`exp-alert-${expense.id}-${effDate}`}
         />
         <Toggle

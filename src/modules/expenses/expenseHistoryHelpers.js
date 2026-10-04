@@ -1,32 +1,21 @@
-import { getExpenseDatesInYear } from './expenseInstallmentHelpers';
+import { getOccurrences, isISODate, isOccurrenceActive } from '../../core/dates/recurrence';
+
+const yearOf = (iso) => Number(String(iso).slice(0, 4));
 
 export function getAllExpenseInstallmentDates(expense) {
   if (!expense) return [];
-  const instKeys = Object.keys(expense.installments || {});
-  const instYears = instKeys.map((d) => new Date(d).getFullYear()).filter((y) => !isNaN(y));
-  const baseYear = new Date(expense.startDate || expense.nextDueDate || '2026-01-01').getFullYear();
-  const nextDueYear = new Date(expense.nextDueDate || '2026-01-01').getFullYear();
-
+  const instKeys = Object.keys(expense.installments || {}).filter(isISODate);
+  const instYears = instKeys.map(yearOf);
+  const baseYear = yearOf(expense.startDate || expense.nextDueDate || '2026-01-01') || 2026;
+  const nextDueYear = yearOf(expense.nextDueDate || '2026-01-01') || 2026;
   const startYear = Math.min(baseYear, ...instYears, 2025);
   let endYear = Math.max(nextDueYear + 2, ...instYears, 2027);
-  if (expense.endDate) {
-    endYear = Math.min(endYear, new Date(expense.endDate).getFullYear());
-  }
+  if (isISODate(expense.endDate)) endYear = Math.min(endYear, yearOf(expense.endDate));
 
-  const allDates = new Set(instKeys);
-  if (expense.nextDueDate && !expense.excludedDates?.includes(expense.nextDueDate)) {
-    allDates.add(expense.nextDueDate);
-  }
-
-  for (let y = startYear; y <= endYear; y++) {
-    const datesInYear = getExpenseDatesInYear(expense, y);
-    datesInYear.forEach((d) => allDates.add(d));
-  }
-
-  return Array.from(allDates)
-    .filter((d) => !expense.excludedDates?.includes(d) && (!expense.endDate || d <= expense.endDate))
-    .sort()
-    .reverse();
+  const allDates = new Set(getOccurrences(expense, `${startYear}-01-01`, `${endYear}-12-31`, { backfill: 'history' }));
+  instKeys.forEach((d) => allDates.add(d));
+  if (isISODate(expense.nextDueDate)) allDates.add(expense.nextDueDate);
+  return [...allDates].filter((d) => isOccurrenceActive(expense, d)).sort().reverse();
 }
 
 export function getInstallmentDetails(expense, dateStr) {

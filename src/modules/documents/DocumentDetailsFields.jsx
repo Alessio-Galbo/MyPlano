@@ -11,7 +11,7 @@ export function DocumentDetailsFields({ formData, setFormData }) {
         <input
           type="text"
           className="form-input"
-          placeholder="es. CA12345AA"
+          placeholder={t('documents.fields.identifierPlaceholder')}
           value={formData.identifier || ''}
           onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
         />
@@ -22,7 +22,7 @@ export function DocumentDetailsFields({ formData, setFormData }) {
         <input
           type="text"
           className="form-input"
-          placeholder="es. Comune di Roma / MIT - UCO"
+          placeholder={t('documents.fields.issuerPlaceholder')}
           value={formData.issuer || ''}
           onChange={(e) => setFormData({ ...formData, issuer: e.target.value })}
         />

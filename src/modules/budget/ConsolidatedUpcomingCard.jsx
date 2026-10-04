@@ -3,6 +3,7 @@ import { ChevronRight, ShieldCheck } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { UpcomingDeadlinesRow } from './UpcomingDeadlinesRow';
 import { UpcomingDetailModal } from './UpcomingDetailModal';
+import { UpcomingGroupedList } from './UpcomingGroupedList';
 import './ConsolidatedUpcomingCard.css';
 
 export function ConsolidatedUpcomingCard({
@@ -44,14 +45,17 @@ export function ConsolidatedUpcomingCard({
         </div>
       ) : (
         <div className="consolidated-upcoming-list">
-          {items.slice(0, 2).map((item) => (
-            <UpcomingDeadlinesRow
-              key={item.id}
-              item={item}
-              profile={profiles.find((p) => p.id === item.profileId)}
-              onSelect={setActiveItem}
-            />
-          ))}
+          <UpcomingGroupedList
+            items={items.slice(0, 2)}
+            renderItem={(item) => (
+              <UpcomingDeadlinesRow
+                key={item.id}
+                item={item}
+                profile={profiles.find((p) => p.id === item.profileId)}
+                onSelect={setActiveItem}
+              />
+            )}
+          />
           {items.length > 2 && onOpenNotificationCenter && (
             <button
               type="button"

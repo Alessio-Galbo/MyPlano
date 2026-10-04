@@ -39,7 +39,9 @@ export function VariableExpenseHistoryView({ expense, onUpdateExpense }) {
           </div>
           <div className="text-subtle">
             {t('expenses.variable.contractStartDate')}: {formatDate(expense.contract?.startDate)} |{' '}
-            {t('expenses.variable.activeAverage')}: <strong>{formatCurrency(activeAvg)}</strong> ({activePayments.length} bollette)
+            {t('expenses.variable.activeAverage')}: <strong>{formatCurrency(activeAvg)}</strong> ({activePayments.length === 1
+              ? t('expenses.variable.billsCountOne')
+              : t('expenses.variable.billsCount', { count: activePayments.length })})
           </div>
         </div>
         <Button
@@ -63,7 +65,7 @@ export function VariableExpenseHistoryView({ expense, onUpdateExpense }) {
       <AddBillPaymentForm onAddPayment={handleAddPayment} />
 
       <div className="payments-list-section">
-        <h5 className="payments-list-title">Storico Bollette Registrate</h5>
+        <h5 className="payments-list-title">{t('expenses.variable.billsHistoryTitle')}</h5>
         <BillPaymentsTable
           allPayments={allPayments}
           activePayments={activePayments}

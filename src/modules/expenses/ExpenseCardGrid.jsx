@@ -5,7 +5,7 @@ import { YearGroupedExpenseGrid } from './YearGroupedExpenseGrid';
 export function ExpenseCardGrid(props) {
   const { expenses = [], profiles } = props;
   const distinctYears = new Set(
-    expenses.map((e) => e.dueYear || (e.dueDate ? new Date(e.dueDate).getFullYear() : null)).filter(Boolean)
+    expenses.map((e) => e.dueYear || (e.dueDate ? Number(String(e.dueDate).slice(0, 4)) : null)).filter(Boolean)
   );
 
   if (distinctYears.size > 1) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layers } from 'lucide-react';
-import { useI18n } from '../../core/i18n';
+import { useI18n, formatCurrency } from '../../core/i18n';
 import './ConsolidatedOverview.css';
 
 export function ConsolidatedOverviewCard({
@@ -10,7 +10,7 @@ export function ConsolidatedOverviewCard({
 }) {
   const { t } = useI18n();
   const formatCurr = (v) =>
-    Number(v || 0).toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    formatCurrency(v);
 
   const totalMargin = Math.round((totalIncome - totalMonthlyQuota) * 100) / 100;
 
