@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { storageService } from '../storage';
+import { createItemId } from '../storage/idMigrationHelper';
 import { useProfileFinance } from './useProfileFinance';
 import { useProfileState } from './useProfileState';
 
@@ -36,8 +37,8 @@ export function useAppData() {
   };
 
   const saveDocument = (doc) => {
-    const id = doc.id || `doc-${Date.now()}`;
-    const next = doc.id ? documents.map((d) => (d.id === id ? doc : d)) : [doc, ...documents];
+    const item = doc.id ? doc : { ...doc, id: createItemId('doc') };
+    const next = doc.id ? documents.map((d) => (d.id === item.id ? item : d)) : [item, ...documents];
     setDocuments(next);
     storageService.saveDocuments(next);
   };
@@ -49,8 +50,8 @@ export function useAppData() {
   };
 
   const saveExpense = (exp) => {
-    const id = exp.id || `exp-${Date.now()}`;
-    const next = exp.id ? expenses.map((e) => (e.id === id ? exp : e)) : [exp, ...expenses];
+    const item = exp.id ? exp : { ...exp, id: createItemId('exp') };
+    const next = exp.id ? expenses.map((e) => (e.id === item.id ? item : e)) : [item, ...expenses];
     setExpenses(next);
     storageService.saveExpenses(next);
   };

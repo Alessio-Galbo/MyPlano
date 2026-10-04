@@ -6,6 +6,18 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 
 ---
 
+## [Non rilasciato]
+
+### Aggiunto
+- **Notifiche & Scadenze**: campanella nella navbar con conteggio delle scadenze dei prossimi 30 giorni (spese e documenti), menu rapido e *Centro Gestione Notifiche* per nascondere/mostrare le singole voci o ripristinarle tutte; pallino colore del profilo su ogni voce.
+- **Scadenze Imminenti (30gg)**: card nel Bilancio con elenco dettagliato (importo, data, giorni mancanti, profilo), modale di dettaglio, versione consolidata per la vista d'insieme del nucleo e carosello KPI scorrevole su mobile.
+
+### Corretto
+- **Scadenze aggiunte che non comparivano**: spese e documenti nuovi venivano salvati senza `id`. Tutti condividevano l'id di notifica `exp-undefined`/`doc-undefined` (nasconderne uno li nascondeva tutti), generavano chiavi React duplicate, e modifica/eliminazione agivano sull'elemento sbagliato (duplicati o cancellazioni multiple). Ora ogni nuovo elemento riceve un id univoco (`useAppData`).
+- **Migrazione automatica dei dati esistenti**: al caricamento, gli elementi salvati senza `id` ne ricevono uno e gli id di notifica non validi vengono tolti dalla lista dei nascosti (`core/storage/idMigrationHelper.js`). Titoli, date, importi e categorie restano invariati.
+
+---
+
 ## [0.1.0] - 2026-09-16 (Initial Release / Primo Commit)
 
 ### Aggiunto

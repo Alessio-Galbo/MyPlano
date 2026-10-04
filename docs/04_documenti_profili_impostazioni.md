@@ -92,3 +92,7 @@ MyPlano adotta la filosofia **Local-First**:
 - Nessun tracciamento, analytics o telemetria.
 - Nessun server cloud che legge le tue informazioni personali o le tue ricevute bancarie.
 - Tutti i dati risiedono esclusivamente nel browser e nella cartella del tuo computer.
+
+### Integrità dei Dati
+- Ogni spesa e documento ha un identificativo univoco assegnato al salvataggio: modifica, eliminazione e notifiche agiscono sempre sull'elemento giusto.
+- Gli elementi salvati da versioni precedenti senza identificativo vengono corretti automaticamente al primo caricamento (`idMigrationHelper.js`), senza toccare i contenuti inseriti.

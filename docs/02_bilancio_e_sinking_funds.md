@@ -33,6 +33,9 @@ Quando si seleziona un profilo specifico (es. *Personale* o *Famiglia*), la sche
 
 ### Card Scadenze Imminenti (30gg)
 - Posizionata sotto ai riquadri finanziari, riporta a colpo d'occhio il conteggio esatto delle rate e dei pagamenti che scadranno entro i prossimi 30 giorni.
+- Elenca sia le **spese** (in base alla prossima scadenza) sia i **documenti** (in base alla data di scadenza), ordinati per data, con importo, profilo e badge `tra N gg`; un click apre il dettaglio (`UpcomingDetailModal`).
+- Le scadenze oltre i 30 giorni non compaiono qui ma restano visibili nella scheda *Spese & Scadenze* e in *Documenti*.
+- Le voci nascoste dal *Centro Gestione Notifiche* (campanella in alto) restano nascoste anche qui finché non vengono ripristinate.
 
 ---
 

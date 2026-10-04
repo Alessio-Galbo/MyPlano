@@ -3,6 +3,7 @@ import { exportAllAppData, importAllAppData } from './exportImportService';
 import { profileFinanceStorage } from './profileFinanceStorage';
 import { normalizeProfileFinances } from './profileMigrationHelper';
 import { storageResetService } from './storageResetService';
+import { ensureItemIds } from './idMigrationHelper';
 
 const KEYS = {
   PROFILES: 'myplano_profiles',
@@ -24,14 +25,22 @@ export const storageService = {
   },
   getDocuments() {
     const raw = localStorage.getItem(KEYS.DOCUMENTS);
-    return raw !== null ? JSON.parse(raw) : INITIAL_DOCUMENTS;
+    if (raw === null) return INITIAL_DOCUMENTS;
+    const docs = JSON.parse(raw);
+    const fixed = ensureItemIds(docs, 'doc');
+    if (fixed !== docs) this.saveDocuments(fixed);
+    return fixed;
   },
   saveDocuments(docs) {
     localStorage.setItem(KEYS.DOCUMENTS, JSON.stringify(docs));
   },
   getExpenses() {
     const raw = localStorage.getItem(KEYS.EXPENSES);
-    return raw !== null ? JSON.parse(raw) : INITIAL_EXPENSES;
+    if (raw === null) return INITIAL_EXPENSES;
+    const expenses = JSON.parse(raw);
+    const fixed = ensureItemIds(expenses, 'exp');
+    if (fixed !== expenses) this.saveExpenses(fixed);
+    return fixed;
   },
   saveExpenses(expenses) {
     localStorage.setItem(KEYS.EXPENSES, JSON.stringify(expenses));
