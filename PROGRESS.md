@@ -4,6 +4,8 @@
 - [ ] Aggiornamento automatico dell'app installata: da confermare al prossimo rilascio
 - [ ] Fatto, da confermare sul telefono: campo Profilo nei form, elementi senza profilo da assegnare, profili modificabili con Annulla, primo avvio con dati di esempio, notifiche sul dispositivo (apertura + background), avvisi in coda, nuova icona, pulsante Ko-fi
 
+- [ ] Fatto, da confermare sul telefono (`08bced8`): niente scorrimento orizzontale (Nuovo profilo, barra in alto, storico bollette; script `mobile-overflow.mjs`), "Rimuovi gli esempi" quando i dati di esempio sono mescolati ai tuoi, domanda sulle notifiche dopo il primo profilo
+
 ## Prossimi
 - [ ] Preavviso configurabile per le notifiche delle spese (oggi 30 gg come la campanella)
 - [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home)
