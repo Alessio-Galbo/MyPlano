@@ -1,7 +1,8 @@
 // Rasterizza public/favicon.svg in PNG (any, maskable, apple-touch) con Chrome headless.
-import { launch } from "file:///D:/Git Repositories/MyPlano/.claude/skills/headless-chrome-cdp/scripts/cdp.mjs";
+import { launch } from "../../headless-chrome-cdp/scripts/cdp.mjs";
+import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync } from "node:fs";
-const pub = "D:/Git Repositories/MyPlano/public/";
+const pub = fileURLToPath(new URL("../../../../", import.meta.url)).split(String.fromCharCode(92)).join("/").replace(/\/$/, "") + "/public/";
 const svg = readFileSync(pub + "favicon.svg", "utf8");
 const b64 = Buffer.from(svg).toString("base64");
 const jobs = [

@@ -1,9 +1,10 @@
 // Verifica PWA completa (vedi SKILL.md): build in OUT/dist, preview :18526, SW, precache, manifest, offline, update.
-import { launch, sleep } from "file:///D:/Git Repositories/MyPlano/.claude/skills/headless-chrome-cdp/scripts/cdp.mjs";
+import { launch, sleep } from "../../headless-chrome-cdp/scripts/cdp.mjs";
+import { fileURLToPath } from "node:url";
 import { spawn, execSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
-const REPO = "D:/Git Repositories/MyPlano", OUT = (process.env.PWA_OUT || tmpdir() + "/myplano-pwa-test").split(String.fromCharCode(92)).join("/"), URL0 = "http://localhost:18526/MyPlano/";
+const REPO = fileURLToPath(new URL("../../../../", import.meta.url)).split(String.fromCharCode(92)).join("/").replace(/\/$/, ""), OUT = (process.env.PWA_OUT || tmpdir() + "/myplano-pwa-test").split(String.fromCharCode(92)).join("/"), URL0 = "http://localhost:18526/MyPlano/";
 mkdirSync(OUT, { recursive: true });
 const CSS = REPO + "/src/components/pwa/PwaUpdatePrompt.css", cssOrig = readFileSync(CSS, "utf8");
 let server = null, browser = null, fails = 0;
