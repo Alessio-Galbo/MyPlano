@@ -13,10 +13,15 @@ Ogni voce di spesa viene registrata con estrema flessibilità:
   - Intervallo libero in **Giorni** (es. ogni 45 giorni): è davvero in giorni anche in timeline e quota mensile.
 - **Date Sempre Esatte**: le rate cadono nel giorno giusto (nessun slittamento col fuso orario o l'ora legale); le scadenze di fine mese seguono il mese (31/01 mensile → 28/02, 31/03, 30/04; 29/02 annuale → 28/02).
 - **Interrompi da questa data & Salta rata**: *interrompi* chiude la spesa da una data in poi (inclusiva), *salta rata* esclude una sola occorrenza. Entrambi riducono quota mensile, totale annuo, cashflow e Cold Start e offrono "Annulla" nell'avviso.
+- **Profilo**: campo obbligatorio. Parte dal profilo selezionato in alto (il primo se sei in *Visione d'Insieme*); in modifica puoi spostare la spesa su un altro profilo. Senza profili il form non salva e propone *Crea profilo*.
 - **Assistente Scadenza Rapida (`+1 ciclo / ✨`)**:
   - Sia in creazione che in modifica spesa, un pulsante assistente calcola istantaneamente e compila la data della scadenza successiva in base alla frequenza scelta, senza dover consultare manualmente il calendario.
 - **Rilevamento Intelligente Scadenze Pregresse**:
   - Se si inserisce una data nel passato, l'applicazione chiede se la spesa è già stata saldata (avanzando automaticamente la scadenza) o se costituisce un debito scaduto da segnalare con badge urgente `"DA PAGARE"`.
+
+### Stati vuoti
+- Senza profili: *Crea il tuo primo profilo*, con *Nuova spesa* disabilitato e la spiegazione del perché.
+- Lista vuota: pulsante *Aggiungi la prima spesa*, con testi diversi per *Tutti* e per un profilo; se le spese esistono ma i filtri le nascondono, un avviso lo segnala.
 
 ---
 

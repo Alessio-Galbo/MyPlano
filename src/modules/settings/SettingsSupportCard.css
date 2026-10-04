@@ -1,0 +1,17 @@
+.support-card-icon {
+  color: #f472b6;
+}
+
+.support-card-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  text-decoration: none;
+}
+
+@media (pointer: coarse) {
+  .support-card-button {
+    min-height: 44px;
+  }
+}

@@ -34,3 +34,12 @@ export function validateAttachments(list) {
   return Array.isArray(list) && list.every((a) => isPlainObject(a)
     && typeof a.key === 'string' && a.key.startsWith('blob_') && typeof a.data === 'string');
 }
+
+// Expenses/documents in the backup whose profileId is not one of the backup's profiles.
+// Informational only: the import is not blocked, the user assigns them later from Settings.
+export function countBackupOrphans(data) {
+  const ids = new Set((Array.isArray(data?.[K.PROFILES]) ? data[K.PROFILES] : []).map((p) => String(p?.id)));
+  const isOrphan = (item) => item?.profileId === '' || item?.profileId == null || !ids.has(String(item.profileId));
+  return [K.EXPENSES, K.DOCUMENTS]
+    .reduce((n, key) => n + (Array.isArray(data?.[key]) ? data[key].filter(isOrphan).length : 0), 0);
+}

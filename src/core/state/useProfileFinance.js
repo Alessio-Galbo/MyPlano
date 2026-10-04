@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { storageService } from '../storage';
 import { usePersistedSlice } from './usePersistedSlice';
 
@@ -44,6 +44,14 @@ export function useProfileFinance() {
     reloadIncomeConfigs();
   }, [reloadFunds, reloadFundConfigs, reloadIncomes, reloadIncomeConfigs]);
 
+  // Raw setters of the four per-profile maps, used to remove/restore a profile bundle.
+  const financeSetters = useMemo(() => ({
+    profileFunds: setProfileFunds,
+    profileFundConfigs: setFundConfigs,
+    profileIncomes: setProfileIncomes,
+    profileIncomeConfigs: setIncomeConfigs,
+  }), [setProfileFunds, setFundConfigs, setProfileIncomes, setIncomeConfigs]);
+
   return {
     profileFunds,
     profileFundConfigs,
@@ -59,5 +67,6 @@ export function useProfileFinance() {
     onSetProfileUsesDedicatedIncome: setProfileUsesDedicatedIncome,
     syncFromProfiles,
     reloadProfileFinance,
+    financeSetters,
   };
 }

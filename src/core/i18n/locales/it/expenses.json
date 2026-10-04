@@ -218,5 +218,11 @@
     "sortDate": "Data",
     "sortAlpha": "A-Z"
   },
-  "emptyState": "Nessuna spesa periodica registrata."
+  "empty": {
+    "title": "Ancora nessuna spesa",
+    "all": "Non hai ancora registrato spese periodiche in nessun profilo.",
+    "profile": "Il profilo {name} non ha ancora spese periodiche.",
+    "action": "Aggiungi la prima spesa",
+    "filtered": "Nessuna spesa corrisponde all'anno o alla categoria scelti."
+  }
 }

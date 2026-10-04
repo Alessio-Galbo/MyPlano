@@ -1,0 +1,80 @@
+<!-- hub:map:start -->
+# Mappa: src/modules/expenses/
+Torna al [router](../../AGENTS.md) · 90 file
+- [AddBillPaymentForm.jsx](../../src/modules/expenses/AddBillPaymentForm.jsx): AddBillPaymentForm
+- [BillPaymentsTable.jsx](../../src/modules/expenses/BillPaymentsTable.jsx): BillPaymentsTable
+- [CategoryGroupedView.css](../../src/modules/expenses/CategoryGroupedView.css)
+- [CategoryGroupedView.jsx](../../src/modules/expenses/CategoryGroupedView.jsx): CategoryGroupedView
+- [ContractSectionFields.jsx](../../src/modules/expenses/ContractSectionFields.jsx): ContractSectionFields
+- [DeductFundModal.css](../../src/modules/expenses/DeductFundModal.css)
+- [DeductFundModal.jsx](../../src/modules/expenses/DeductFundModal.jsx): DeductFundModal
+- [DeleteExpenseConfirmModal.css](../../src/modules/expenses/DeleteExpenseConfirmModal.css)
+- [DeleteExpenseConfirmModal.jsx](../../src/modules/expenses/DeleteExpenseConfirmModal.jsx): DeleteExpenseConfirmModal
+- [ExpenseAttachmentCard.css](../../src/modules/expenses/ExpenseAttachmentCard.css)
+- [ExpenseAttachmentCard.jsx](../../src/modules/expenses/ExpenseAttachmentCard.jsx): ExpenseAttachmentCard
+- [ExpenseAttachmentUploadBox.jsx](../../src/modules/expenses/ExpenseAttachmentUploadBox.jsx): ExpenseAttachmentUploadBox
+- [ExpenseAttachmentsCol.css](../../src/modules/expenses/ExpenseAttachmentsCol.css)
+- [ExpenseAttachmentsCol.jsx](../../src/modules/expenses/ExpenseAttachmentsCol.jsx): ExpenseAttachmentsCol
+- [ExpenseCard.css](../../src/modules/expenses/ExpenseCard.css)
+- [ExpenseCard.jsx](../../src/modules/expenses/ExpenseCard.jsx): ExpenseCard
+- [ExpenseCardFooter.jsx](../../src/modules/expenses/ExpenseCardFooter.jsx): ExpenseCardFooter
+- [ExpenseCardGrid.jsx](../../src/modules/expenses/ExpenseCardGrid.jsx): ExpenseCardGrid
+- [ExpenseCategoryFilter.css](../../src/modules/expenses/ExpenseCategoryFilter.css)
+- [ExpenseCategoryFilter.jsx](../../src/modules/expenses/ExpenseCategoryFilter.jsx): ExpenseCategoryFilter
+- [ExpenseDatabaseHub.css](../../src/modules/expenses/ExpenseDatabaseHub.css)
+- [ExpenseDatabaseMainCol.jsx](../../src/modules/expenses/ExpenseDatabaseMainCol.jsx): ExpenseDatabaseMainCol
+- [ExpenseDatabaseTreeItem.jsx](../../src/modules/expenses/ExpenseDatabaseTreeItem.jsx): ExpenseDatabaseTreeItem
+- [ExpenseDatabaseTreeSidebar.css](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.css)
+- [ExpenseDatabaseTreeSidebar.jsx](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.jsx): ExpenseDatabaseTreeSidebar
+- [ExpenseDatabaseYearGroup.css](../../src/modules/expenses/ExpenseDatabaseYearGroup.css)
+- [ExpenseDatabaseYearGroup.jsx](../../src/modules/expenses/ExpenseDatabaseYearGroup.jsx): ExpenseDatabaseYearGroup
+- [ExpenseFormFields.jsx](../../src/modules/expenses/ExpenseFormFields.jsx): ExpenseFormFields
+- [ExpenseFormModal.css](../../src/modules/expenses/ExpenseFormModal.css)
+- [ExpenseFormModal.jsx](../../src/modules/expenses/ExpenseFormModal.jsx): ExpenseFormModal
+- [ExpenseFrequencyField.css](../../src/modules/expenses/ExpenseFrequencyField.css)
+- [ExpenseFrequencyField.jsx](../../src/modules/expenses/ExpenseFrequencyField.jsx): ExpenseFrequencyField
+- [ExpenseHistoryModal.css](../../src/modules/expenses/ExpenseHistoryModal.css)
+- [ExpenseHistoryModal.jsx](../../src/modules/expenses/ExpenseHistoryModal.jsx): ExpenseHistoryModal
+- [ExpenseHistoryModalContent.jsx](../../src/modules/expenses/ExpenseHistoryModalContent.jsx): ExpenseHistoryModalContent
+- [ExpenseList.jsx](../../src/modules/expenses/ExpenseList.jsx): ExpenseList
+- [ExpenseListHeader.css](../../src/modules/expenses/ExpenseListHeader.css)
+- [ExpenseListHeader.jsx](../../src/modules/expenses/ExpenseListHeader.jsx): ExpenseListHeader
+- [ExpenseModalsContainer.jsx](../../src/modules/expenses/ExpenseModalsContainer.jsx): ExpenseModalsContainer
+- [ExpenseTags.css](../../src/modules/expenses/ExpenseTags.css)
+- [ExpenseTags.jsx](../../src/modules/expenses/ExpenseTags.jsx): ExpenseTags
+- [ExpenseVariableBadge.css](../../src/modules/expenses/ExpenseVariableBadge.css)
+- [ExpenseVariableBadge.jsx](../../src/modules/expenses/ExpenseVariableBadge.jsx): ExpenseVariableBadge
+- [ExpenseYearSelector.css](../../src/modules/expenses/ExpenseYearSelector.css)
+- [ExpenseYearSelector.jsx](../../src/modules/expenses/ExpenseYearSelector.jsx): ExpenseYearSelector
+- [FixedExpenseHistoryView.css](../../src/modules/expenses/FixedExpenseHistoryView.css)
+- [FixedExpenseHistoryView.jsx](../../src/modules/expenses/FixedExpenseHistoryView.jsx): FixedExpenseHistoryView
+- [FixedExtraPaymentForm.jsx](../../src/modules/expenses/FixedExtraPaymentForm.jsx): FixedExtraPaymentForm
+- [FixedHistoryTopBar.jsx](../../src/modules/expenses/FixedHistoryTopBar.jsx): FixedHistoryTopBar
+- [FixedInstallmentRow.css](../../src/modules/expenses/FixedInstallmentRow.css)
+- [FixedInstallmentRow.jsx](../../src/modules/expenses/FixedInstallmentRow.jsx): FixedInstallmentRow
+- [FixedInstallmentsHeader.jsx](../../src/modules/expenses/FixedInstallmentsHeader.jsx): FixedInstallmentsHeader
+- [FixedInstallmentsTable.jsx](../../src/modules/expenses/FixedInstallmentsTable.jsx): FixedInstallmentsTable
+- [FixedNextDueEditor.css](../../src/modules/expenses/FixedNextDueEditor.css)
+- [FixedNextDueEditor.jsx](../../src/modules/expenses/FixedNextDueEditor.jsx): FixedNextDueEditor
+- [InstallmentAttTrigger.jsx](../../src/modules/expenses/InstallmentAttTrigger.jsx): InstallmentAttTrigger
+- [InstallmentAttachmentItem.jsx](../../src/modules/expenses/InstallmentAttachmentItem.jsx): InstallmentAttachmentItem
+- [InstallmentAttachmentsButton.jsx](../../src/modules/expenses/InstallmentAttachmentsButton.jsx): InstallmentAttachmentsButton
+- [InstallmentAttachmentsModal.css](../../src/modules/expenses/InstallmentAttachmentsModal.css)
+- [InstallmentAttachmentsModal.jsx](../../src/modules/expenses/InstallmentAttachmentsModal.jsx): InstallmentAttachmentsModal
+- [InstallmentDateCell.jsx](../../src/modules/expenses/InstallmentDateCell.jsx): InstallmentDateCell
+- [InstallmentInlineAttachments.css](../../src/modules/expenses/InstallmentInlineAttachments.css)
+- [InstallmentInlineAttachments.jsx](../../src/modules/expenses/InstallmentInlineAttachments.jsx): InstallmentInlineAttachments
+- [InstallmentStatusButton.jsx](../../src/modules/expenses/InstallmentStatusButton.jsx): InstallmentStatusButton
+- [NewContractForm.jsx](../../src/modules/expenses/NewContractForm.jsx): NewContractForm
+- [PastDateNotice.css](../../src/modules/expenses/PastDateNotice.css)
+- [PastDateNotice.jsx](../../src/modules/expenses/PastDateNotice.jsx): PastDateNotice
+- [ReceiptAttachmentButton.css](../../src/modules/expenses/ReceiptAttachmentButton.css)
+- [ReceiptAttachmentButton.jsx](../../src/modules/expenses/ReceiptAttachmentButton.jsx): ReceiptAttachmentButton
+- [VariableExpenseHistoryView.jsx](../../src/modules/expenses/VariableExpenseHistoryView.jsx): VariableExpenseHistoryView
+- [YearGroupedExpenseGrid.css](../../src/modules/expenses/YearGroupedExpenseGrid.css)
+- [YearGroupedExpenseGrid.jsx](../../src/modules/expenses/YearGroupedExpenseGrid.jsx): YearGroupedExpenseGrid
+- [expenseExpansionHelper.js](../../src/modules/expenses/expenseExpansionHelper.js): expandExpensesForRange
+- [expenseHelpers.js](../../src/modules/expenses/expenseHelpers.js): advanceNextDueDate, getExpenseUrgency, getCategoryLabel, getExpenseBadgeInfo, formatCurrency
+- [expenseHistoryHelpers.js](../../src/modules/expenses/expenseHistoryHelpers.js): getAllExpenseInstallmentDates, getInstallmentDetails
+- [continua](src-modules-expenses-2.md): parte 2
+<!-- hub:map:end -->

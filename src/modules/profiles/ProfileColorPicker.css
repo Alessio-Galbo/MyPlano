@@ -1,0 +1,24 @@
+/* Swatches of the profile colour picker (hues mirror PROFILE_HUES in profileColors.js). */
+.profile-color-picker { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.profile-swatch {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: var(--radius-full);
+  background: var(--swatch); border: 2px solid transparent;
+  color: #0b0b14; font-size: 0.65rem; font-weight: 700; cursor: pointer;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+.profile-swatch:hover { transform: scale(1.08); }
+.profile-swatch.selected { border-color: var(--text-main); box-shadow: 0 0 0 2px var(--border-active); }
+.profile-swatch-auto { --swatch: var(--bg-input); color: var(--text-main); border-color: var(--border-subtle); }
+
+.profile-swatch-hue-0 { --swatch: hsl(0, 78%, 62%); }
+.profile-swatch-hue-28 { --swatch: hsl(28, 78%, 62%); }
+.profile-swatch-hue-48 { --swatch: hsl(48, 78%, 62%); }
+.profile-swatch-hue-140 { --swatch: hsl(140, 78%, 62%); }
+.profile-swatch-hue-175 { --swatch: hsl(175, 78%, 62%); }
+.profile-swatch-hue-205 { --swatch: hsl(205, 78%, 62%); }
+.profile-swatch-hue-235 { --swatch: hsl(235, 78%, 62%); }
+.profile-swatch-hue-270 { --swatch: hsl(270, 78%, 62%); }
+.profile-swatch-hue-300 { --swatch: hsl(300, 78%, 62%); }
+.profile-swatch-hue-330 { --swatch: hsl(330, 78%, 62%); }

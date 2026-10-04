@@ -9,6 +9,15 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Supporta MyPlano**: card in Impostazioni con il pulsante per offrire un caffè su Ko-fi (si apre in una nuova scheda).
+- **Primo avvio**: il banner "Stai vedendo dati di esempio" compare solo finché profili, spese e documenti sono ancora quelli di esempio, con "Inizia con i miei dati" (dice cosa si perde, poi apre Nuovo profilo) e "Tieni gli esempi" (ricordato).
+- **Stati vuoti guidati**: senza profili "Crea il tuo primo profilo" in Bilancio, Spese e Documenti (Nuova spesa/Nuovo documento disabilitati con spiegazione); liste vuote con "Aggiungi la prima spesa / il primo documento" e avviso se sono nascoste dai filtri.
+- **Campo Profilo nel form spesa** (obbligatorio, prima ogni spesa finiva nel primo profilo); nel form documento il profilo è preselezionato come quello scelto in alto (il primo con "Visione d'Insieme").
+- **Elementi senza profilo**: banner in Bilancio "N elementi senza profilo - Rivedi" e card in Impostazioni per assegnarli uno a uno o con "Assegna tutti a...", applicato solo dopo conferma; l'import segnala quanti ce ne sono; nel centro notifiche compaiono come "Senza profilo".
+- **Profili modificabili**: matita in Gestione profili per cambiare nome e colore (10 colori o Auto), avviso per nomi duplicati; card "Profili" in Impostazioni con Gestisci e Nuovo profilo.
+- **Eliminazione profilo con "Annulla"**: dopo la conferma un avviso permette di ripristinare profilo, spese, documenti, finanze e strategia di budget.
+- **Notifiche sul dispositivo** (Impostazioni): interruttore (il permesso si chiede solo al tocco), stato Attive/Disattivate/Bloccate/Non supportate, riga "cosa funziona su questo dispositivo" e "Invia notifica di prova". Una notifica riassuntiva ("MyPlano - 3 scadenze"), una volta per fase (in arrivo, oggi, in ritardo), stessa selezione della campanella; il tocco apre il centro notifiche. In background (Chrome/Edge con app installata) a cura del sistema, circa 1-2 volte al giorno.
+- **Nuova icona MyPlano** (scudo con spunta) al posto del logo Vite.
 - **Notifiche & Scadenze**: campanella nella navbar con conteggio delle scadenze imminenti (spese: 30 giorni; documenti: i giorni di preavviso di ciascun documento), menu rapido e *Centro Gestione Notifiche* per nascondere/mostrare le singole voci o ripristinarle tutte; pallino colore del profilo su ogni voce.
 - **Scadenze Imminenti**: card nel Bilancio con elenco dettagliato (importo, data, giorni mancanti, profilo), modale di dettaglio, versione consolidata per la vista d'insieme del nucleo e carosello KPI scorrevole su mobile.
 - **Installabile e offline (PWA)**: si installa dal browser, funziona senza connessione, usa font locali (nessuna richiesta esterna) e avvisa con "Nuova versione disponibile - Più tardi / Aggiorna". Indirizzo previsto: `https://alessio-galbo.github.io/MyPlano/`; chiede al browser l'archiviazione persistente.
@@ -23,6 +32,13 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 - **Schermata di errore** con "Scarica dati grezzi (JSON)" e "Ricarica", senza reset.
 
 ### Modificato
+- **Impostazioni su telefono**: le righe vanno a capo, i pulsanti larghi scendono sotto il testo invece di comprimerlo in una colonna stretta.
+- **Avvisi**: in coda (nessuno perso), al massimo 3 visibili (2 su telefono), errori in testa, "Spazio esaurito" fisso; su telefono in alto, si chiudono scorrendo.
+- **Reset** rinominato: "Ricarica i dati di esempio" e "Cancella tutto e inizia da zero", entrambi con l'elenco di cosa si perde.
+- **Documenti su telefono**: pulsanti di almeno 44 px e "Rinnova" con testo; pulsanti disabilitati con stile riconoscibile.
+- **Grafico a torta**: percentuali nel formato della lingua ("12,5%").
+- Preferenze e strategie del Bilancio allineate tra schede aperte; in Hub Archivio, se la spesa selezionata viene eliminata si passa alla prima.
+- Se il profilo selezionato sparisce si passa all'unico profilo o a "Tutti"; se ritorna (import o Annulla) viene riselezionato.
 - **Lingua**: valute e date seguono la lingua scelta (l'inglese usa giorno/mese ed euro); tradotti i testi rimasti in italiano (tabella bollette, durata documenti, etichette accessibili, placeholder).
 - **Scadenze imminenti**: i documenti usano i propri giorni di preavviso (non più 30 fissi); la scadenza di oggi conta; con "Promemoria" spento la voce resta nella card e nel centro notifiche con "Avviso disattivato" ma non nella campanella.
 - **Prestazioni**: JS iniziale da 486 a 321 kB (gzip 140 → 96 kB), CSS da 100 a 63 kB (Documenti, Spese e Impostazioni si caricano quando servono); salvataggio dell'introito da ~110 a ~10 ms con 300 spese.

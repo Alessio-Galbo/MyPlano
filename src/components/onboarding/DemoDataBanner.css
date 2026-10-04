@@ -1,0 +1,54 @@
+.demo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.demo-banner-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.demo-banner-text {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.demo-banner-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.demo-banner-desc {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.demo-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .demo-banner-actions,
+  .demo-banner-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (pointer: coarse) {
+  .demo-banner-actions .btn {
+    min-height: 44px;
+  }
+}

@@ -6,6 +6,7 @@ import { DocumentDetailsFields } from './DocumentDetailsFields';
 import { DocumentAlertFields } from './DocumentAlertFields';
 
 import { SuggestInput } from '../../components/ui';
+import { ProfileSelectField } from '../../core/profiles';
 import { getDocumentTypeLabel } from './documentHelpers';
 
 export function DocumentFormFields({ formData, setFormData, profiles, documents = [] }) {
@@ -44,18 +45,13 @@ export function DocumentFormFields({ formData, setFormData, profiles, documents 
         />
       </div>
 
-      <div className="form-group">
-        <label className="form-label">{t('documents.fields.owner')}</label>
-        <select
-          className="form-input"
-          value={formData.profileId}
-          onChange={(e) => setFormData({ ...formData, profileId: e.target.value })}
-        >
-          {profiles.map((p) => (
-            <option key={p.id} value={p.id}>{p.name}</option>
-          ))}
-        </select>
-      </div>
+      <ProfileSelectField
+        value={formData.profileId}
+        onChange={(profileId) => setFormData({ ...formData, profileId })}
+        profiles={profiles}
+        label={t('documents.fields.owner')}
+        id="document-profile"
+      />
 
       <DocumentDetailsFields formData={formData} setFormData={setFormData} />
 

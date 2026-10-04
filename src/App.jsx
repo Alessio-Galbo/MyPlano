@@ -1,36 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navbar, TabContent } from './components/layout';
-import { ProfileModalsContainer, ProfileManagementModal } from './modules/profiles';
+import {
+  ProfileModalsContainer, ProfileManagementModal,
+  useProfileDialogs, useProfileSelectionGuard, useProfileColorStyles,
+} from './modules/profiles';
 import { useApp, useAppData } from './core/state';
+import { useAddProfileRequest, useManageProfilesRequest } from './core/state/profileActions';
 import { ToastProvider } from './components/ui';
 
 export function App() {
   const { activeTab, selectedProfileId, setSelectedProfileId, reloadPreferences } = useApp();
-  const [isAddProfileOpen, setIsAddProfileOpen] = useState(false);
-  const [isManageProfilesOpen, setIsManageProfilesOpen] = useState(false);
-  const [profileToDelete, setProfileToDelete] = useState(null);
+  const dialogs = useProfileDialogs();
+  // "New profile" / "Manage profiles" can be requested from anywhere (settings, empty states, onboarding).
+  useAddProfileRequest(dialogs.openAdd);
+  useManageProfilesRequest(dialogs.openManage);
 
   const appData = useAppData();
-  const { profiles, documents, expenses, addProfile, deleteProfile } = appData;
+  const { profiles, documents, expenses } = appData;
   // Import/reset also refreshes in-memory preferences (global mute).
   const reloadAll = () => { appData.reloadAll(); reloadPreferences(); };
 
-  useEffect(() => {
-    if (profiles?.length === 1 && selectedProfileId === 'all') {
-      setSelectedProfileId(profiles[0].id);
-    } else if (selectedProfileId !== 'all' && profiles && !profiles.some((p) => p.id === selectedProfileId)) {
-      // Remembered profile no longer exists (deleted, reset, import): fall back.
-      setSelectedProfileId(profiles.length === 1 ? profiles[0].id : 'all');
-    }
-  }, [profiles, selectedProfileId, setSelectedProfileId]);
-
-  const handleDeleteProfile = (profileId) => {
-    deleteProfile(profileId);
-    if (selectedProfileId === profileId) {
-      const remaining = profiles.filter((p) => p.id !== profileId);
-      setSelectedProfileId(remaining.length === 1 ? remaining[0].id : 'all');
-    }
-  };
+  useProfileSelectionGuard(profiles, selectedProfileId, setSelectedProfileId);
+  useProfileColorStyles(profiles);
 
   return (
     <ToastProvider>
@@ -39,7 +30,7 @@ export function App() {
           profiles={profiles}
           expenses={expenses}
           documents={documents}
-          onOpenManageModal={() => setIsManageProfilesOpen(true)}
+          onOpenManageModal={dialogs.openManage}
         />
 
         <main className="main-content">
@@ -48,28 +39,34 @@ export function App() {
             selectedProfileId={selectedProfileId}
             onSelectProfile={setSelectedProfileId}
             {...appData}
-          reloadAll={reloadAll}
+            reloadAll={reloadAll}
           />
         </main>
 
         <ProfileManagementModal
-          isOpen={isManageProfilesOpen}
-          onClose={() => setIsManageProfilesOpen(false)}
+          isOpen={dialogs.isManageOpen}
+          onClose={dialogs.closeManage}
           profiles={profiles}
           selectedProfileId={selectedProfileId}
           expenses={expenses}
           onSelectProfile={setSelectedProfileId}
-          onOpenAddModal={() => setIsAddProfileOpen(true)}
-          onRequestDeleteProfile={(p) => setProfileToDelete(p)}
+          onOpenAddModal={dialogs.openAdd}
+          onRequestDeleteProfile={dialogs.setProfileToDelete}
+          onRequestEditProfile={dialogs.setProfileToEdit}
         />
 
         <ProfileModalsContainer
-          isAddOpen={isAddProfileOpen}
-          onCloseAdd={() => setIsAddProfileOpen(false)}
-          onAddProfile={addProfile}
-          profileToDelete={profileToDelete}
-          onCloseDelete={() => setProfileToDelete(null)}
-          onConfirmDelete={handleDeleteProfile}
+          isAddOpen={dialogs.isAddOpen}
+          onCloseAdd={dialogs.closeAdd}
+          onAddProfile={appData.addProfile}
+          profileToEdit={dialogs.profileToEdit}
+          onCloseEdit={dialogs.closeEdit}
+          onUpdateProfile={appData.updateProfile}
+          profileToDelete={dialogs.profileToDelete}
+          onCloseDelete={dialogs.closeDelete}
+          deleteProfile={appData.deleteProfile}
+          restoreProfileBundle={appData.restoreProfileBundle}
+          profiles={profiles}
           expenses={expenses}
           documents={documents}
         />

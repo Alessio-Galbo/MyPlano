@@ -39,6 +39,17 @@ export function useProfileState(profileFinance) {
     [setProfiles],
   );
 
+  // Edit name/colour (hue: number 0-359, or null for the automatic colour).
+  const updateProfile = useCallback((profileId, changes) => patchProfile(profileId, () => changes), [patchProfile]);
+
+  // Undo of a delete: puts the profile back at its original position.
+  const restoreProfile = useCallback((profile, index) => setProfiles((prev) => {
+    if (prev.some((p) => p.id === profile.id)) return prev;
+    const next = [...prev];
+    next.splice(Math.min(index, next.length), 0, profile);
+    return next;
+  }), [setProfiles]);
+
   // amount: number/string, or (currentBalance) => newBalance for atomic updates.
   const updateProfileBalance = useCallback((profileId, amount) => patchProfile(profileId, (p) => ({
     initialBalance: typeof amount === 'function'
@@ -66,6 +77,8 @@ export function useProfileState(profileFinance) {
     profiles,
     addProfile,
     deleteProfile,
+    updateProfile,
+    restoreProfile,
     updateProfileBalance,
     adjustProfileBalance,
     depositQuotaToProfile,

@@ -7,8 +7,9 @@ import { PastDateNotice } from './PastDateNotice';
 import { ContractSectionFields } from './ContractSectionFields';
 import { ExpenseFrequencyField } from './ExpenseFrequencyField';
 import { getCategoryLabel } from './expenseHelpers';
+import { ProfileSelectField } from '../../core/profiles';
 
-export function ExpenseFormFields({ formData, setFormData, expenses = [] }) {
+export function ExpenseFormFields({ formData, setFormData, expenses = [], profiles = [] }) {
   const { t } = useI18n();
 
   const allCats = Array.from(new Set([...EXPENSE_CATEGORIES, ...expenses.map((e) => e.category).filter(Boolean)]));
@@ -25,6 +26,11 @@ export function ExpenseFormFields({ formData, setFormData, expenses = [] }) {
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         />
       </div>
+
+      <ProfileSelectField
+        value={formData.profileId} profiles={profiles} id="expense-profile"
+        onChange={(profileId) => setFormData({ ...formData, profileId })}
+      />
 
       <div className="form-row">
         <div className="form-group">

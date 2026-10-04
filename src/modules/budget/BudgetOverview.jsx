@@ -10,6 +10,7 @@ import { ColdStartCard } from './ColdStartCard';
 import { GlobalIncomeHub } from './GlobalIncomeHub';
 import { ConsolidatedProfilesGrid } from './ConsolidatedProfilesGrid';
 import { InstallmentFixBanner } from './InstallmentFixBanner';
+import { OrphanItemsBanner } from './OrphanItemsBanner';
 import './BudgetOverview.css';
 
 export function BudgetOverview({
@@ -43,6 +44,7 @@ export function BudgetOverview({
   return (
     <div className="budget-overview">
       <InstallmentFixBanner expenses={expenses} />
+      <OrphanItemsBanner expenses={expenses} documents={documents} profiles={profiles} />
       {isProfileMode ? (
         <GlobalIncomeHub
           title={profileTitle}

@@ -3,6 +3,8 @@
 > **Scadenze, Sinking Funds & Archivio Ricevute**  
 > *Web Application reattiva, moderna e orientata alla privacy per la pianificazione finanziaria e la gestione delle scadenze del tuo nucleo.*
 
+[![Supporta su Ko-fi](https://img.shields.io/badge/Ko--fi-Offrimi%20un%20caff%C3%A8-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/devangel)
+
 ---
 
 ## ✨ Cos'è MyPlano?
@@ -17,7 +19,8 @@
 ## 🚀 Caratteristiche Principali
 
 - 💰 **Sinking Funds Intelligenti**: quota mensile a regime, saldo minimo della riserva e algoritmo predittivo *"Piano B"* (Cold Start) per superare i mesi critici senza deficit.
-- 👨‍👩‍👧‍👦 **Visione d'Insieme del Nucleo**: gestione multi-profilo (Personale, Famiglia, Veicoli) con versamento collettivo delle quote in un solo click.
+- 👨‍👩‍👧‍👦 **Visione d'Insieme del Nucleo**: gestione multi-profilo (Personale, Famiglia, Veicoli) con versamento collettivo delle quote in un solo click. I profili si modificano (nome e colore) e, se ne elimini uno per errore, "Annulla" ripristina tutto.
+- 🚀 **Primo avvio guidato**: parti con dati di esempio e, quando vuoi, "Inizia con i miei dati" ti dice cosa si perde e ti porta a creare il tuo primo profilo.
 - 🗄️ **Hub Database Scadenze (3 Colonne)**: naviga l'albero delle spese per anno, gestisci lo stato dei pagamenti e acquisisci ricevute con caricamento file o scatto fotografico diretto da fotocamera/webcam.
 - 🏷️ **Tag Nativi nei File (EXIF)**: salvataggio ordinato sul tuo PC in `[Anno]/[Categoria]/` con metadati EXIF inseriti direttamente nelle immagini JPEG.
 - 📅 **Timeline Pluriennale Dinamica**: sezioni annuali con header sticky in glassmorphism, totale di spesa dell'anno e collegamenti inter-annuali veloci.
@@ -27,6 +30,7 @@
 - 🔒 **100% Privacy & Local-First**: zero cloud, zero tracking. Tutti i dati e i documenti rimangono esclusivamente sui tuoi dispositivi.
 - 🔄 **Interoperabilità Completa**: esportazione calendari `.ics` con ricorrenze e promemoria (Google Calendar, Apple Calendar, Outlook), backup/ripristino JSON v3 anche con allegati e bilinguismo (Italiano / Inglese) con valute e date nel formato della lingua.
 - 📲 **Installabile & Offline (PWA)**: si installa dal browser come un'app e funziona anche senza connessione.
+- 📳 **Notifiche sul dispositivo**: un avviso riassuntivo delle scadenze, attivabile da Impostazioni (dove funziona: vedi tabella nella sezione PWA).
 
 ---
 
@@ -57,7 +61,15 @@ MyPlano è pubblicato online all'indirizzo previsto **https://alessio-galbo.gith
 - **A tutto schermo**: installata, l'app non ha bordi. Sul PC (Chrome/Edge) la barra del titolo lascia il posto alla navbar; su Android è a schermo intero; su iPhone arriva fino al bordo superiore con la barra di stato trasparente. Le app installate prima di questa versione si aggiornano da sole su Chrome (entro circa un giorno); su iPhone vanno rimosse e aggiunte di nuovo alla Home.
 - **Aggiornamenti automatici**: l'app controlla le novità all'apertura e ogni ora, e si aggiorna da sola quando non la stai usando (appena aperta o quando passa in secondo piano, senza moduli aperti); poi mostra *Aggiornato alla nuova versione*. Solo se stai lavorando a lungo compare l'avviso *Nuova versione disponibile* con *Più tardi / Aggiorna*.
 - **I dati restano solo nel tuo dispositivo** e sono legati all'indirizzo da cui apri l'app (il browser li separa per indirizzo). Se l'indirizzo cambia (nuovo nome del repository, nuovo dominio), i dati restano sul vecchio indirizzo: **fai un backup da Impostazioni prima** e ripristinalo dopo. L'app chiede al browser l'archiviazione persistente per ridurre il rischio che i dati vengano rimossi.
-- **Notifiche ad app chiusa**: senza un server non sono possibili; per avvisi sul telefono usa l'export `.ics` nel tuo calendario.
+- **Notifiche sul dispositivo**: si attivano da *Impostazioni → Notifiche sul dispositivo* (il permesso si chiede solo quando le accendi). Ad app chiusa funziona solo in modo *best effort* su Chrome/Edge con app installata: decide il sistema, di solito 1-2 volte al giorno, quindi non è garantito. Per avvisi puntuali usa anche l'export `.ics` nel tuo calendario.
+
+| Dispositivo | All'apertura / ritorno nell'app | Ad app chiusa | Note |
+| :--- | :--- | :--- | :--- |
+| Android, Chrome, app installata | Sì | Sì (best effort) | Caso migliore |
+| Android, scheda del browser | Sì | No | Installa l'app |
+| iPhone/iPad (iOS 16.4+), aggiunta alla Home | Sì | No | Non ancora verificato su iPhone reale |
+| iPhone, Safari in scheda | No | No | Solo la campanella nell'app |
+| PC, Chrome/Edge | Sì | Solo se installata (best effort) | |
 
 ---
 
@@ -83,4 +95,10 @@ Il deploy è automatico (`.github/workflows/deploy-pages.yml`). Passi manuali, u
 3. Fai **push su `main`**: il workflow costruisce e pubblica il sito.
 4. Se richiesto, **approva l'ambiente `github-pages`** nella scheda *Actions*.
 
-In build la base è `/MyPlano/`; in sviluppo resta `/` (`avvia_myplano.bat` e `Tools/launch_with_qr.py` non cambiano). L'icona dell'app è generata da `favicon.svg` (oggi il logo Vite): da sostituire con un logo MyPlano.
+In build la base è `/MyPlano/`; in sviluppo resta `/` (`avvia_myplano.bat` e `Tools/launch_with_qr.py` non cambiano). L'icona dell'app (scudo con spunta) è generata da `favicon.svg`.
+
+---
+
+## ☕ Supporta il progetto
+
+MyPlano è gratuito, senza pubblicità e senza tracciamento. Se ti è utile puoi offrire un caffè su **[Ko-fi](https://ko-fi.com/devangel)** (c'è anche il pulsante in *Impostazioni → Supporta MyPlano*).

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useI18n } from './i18nContext';
 import {
-  formatCurrency, formatDate, formatShortDate, formatMonthName, formatMonthYear, formatDateTime, getFormatLocale,
+  formatCurrency, formatDate, formatShortDate, formatMonthName, formatMonthYear, formatDateTime, formatPercent,
+  getFormatLocale,
 } from './formatters';
 
 // Formatters bound to the current UI language (re-created when the language changes).
@@ -15,5 +16,6 @@ export function useFormatters() {
     formatMonthName: (v, style) => formatMonthName(v, style, language),
     formatMonthYear: (v, style) => formatMonthYear(v, style, language),
     formatDateTime: (v) => formatDateTime(v, language),
+    formatPercent: (v, digits) => formatPercent(v, digits, language),
   }), [language]);
 }

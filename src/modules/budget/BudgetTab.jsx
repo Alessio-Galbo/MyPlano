@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { storageService } from '../../core/storage/storageService';
+import { DATA_KEYS } from '../../core/storage/storageKeys';
 import { BudgetOverview } from './BudgetOverview';
 import { CashflowTimeline } from './CashflowTimeline';
 import { calculateColdStartAnalysis } from './budgetCalculations';
@@ -17,6 +18,15 @@ export const BudgetTab = memo(function BudgetTab({
   onDepositProfileQuota,
 }) {
   const [strategies, setStrategies] = useState(() => storageService.getProfileStrategies());
+
+  // Another tab changed a strategy: reload the map (the `storage` event never fires in the writing tab).
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === DATA_KEYS.BUDGET_STRATEGIES || e.key === null) setStrategies(storageService.getProfileStrategies());
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
 
   const profile = profiles.find((p) => p.id === selectedProfileId);
   const totalLiquidity = profiles.reduce((s, p) => s + (Number(p.initialBalance) || 0), 0);

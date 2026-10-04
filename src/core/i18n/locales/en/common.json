@@ -38,8 +38,8 @@
     "exportCalendar": "Export Calendar (.ics)",
     "backup": "Backup JSON",
     "restore": "Restore JSON",
-    "factoryReset": "Restore Sample Data",
-    "wipeDatabase": "Clear Entire Database",
+    "factoryReset": "Reload the sample data",
+    "wipeDatabase": "Delete everything and start from scratch",
     "close": "Close"
   },
   "profiles": {
@@ -55,7 +55,7 @@
     "deleteProfile": "Delete Profile",
     "deleteConfirmTitle": "Delete Profile and Linked Data",
     "deleteConfirmDesc": "Are you sure you want to delete profile \"{name}\"?",
-    "deleteCascadeWarning": "This will also permanently delete {expensesCount} expenses and {documentsCount} documents linked to this profile.",
+    "deleteCascadeWarning": "This will also delete {expensesCount} expenses and {documentsCount} documents linked to this profile. You can undo right after.",
     "deleteButton": "Delete Profile & Data",
     "perYear": "/yr",
     "modalTitle": "Manage Profiles & Household",
@@ -63,7 +63,23 @@
     "viewAllDesc": "Consolidated view with all combined expenses & finances",
     "editProfile": "Edit profile",
     "active": "Active",
-    "fund": "Fund"
+    "fund": "Fund",
+    "color": "Colour",
+    "colorAuto": "Automatic colour",
+    "colorAutoShort": "Auto",
+    "colorOption": "Colour {n}",
+    "duplicateName": "A profile with this name already exists: you can still save it, but they will be hard to tell apart.",
+    "editHint": "Fund and monthly income are edited in the Budget tab.",
+    "deletedToast": "Profile \"{name}\" deleted with {expenses} and {documents}",
+    "expensesCountOne": "{n} expense",
+    "expensesCountMany": "{n} expenses",
+    "documentsCountOne": "{n} document",
+    "documentsCountMany": "{n} documents",
+    "restoredToast": "Profile \"{name}\" restored with its expenses and documents",
+    "settingsTitle": "Profiles",
+    "settingsDesc": "People or areas (home, car, family) to link expenses and documents to.",
+    "settingsEmpty": "No profiles yet: create one to get started.",
+    "manageButton": "Manage"
   },
   "notifications": {
     "title": "Notifications & Deadlines",
@@ -94,22 +110,73 @@
     "remindMe": "Reminder",
     "daysBefore": "days before"
   },
+  "onboarding": {
+    "demoTitle": "You are looking at sample data",
+    "demoDesc": "The profiles, expenses and documents you see are made up, to show you how MyPlano works. Start with your own data whenever you like.",
+    "startFresh": "Start with my data",
+    "keepSamples": "Keep the samples",
+    "confirmTitle": "Delete the sample data?",
+    "confirmMessage": "The sample profiles will be deleted with all their expenses, documents, the receipts stored in the browser, the Budget strategies and the fund and income settings. Language and app preferences stay. Right after, you can create your first profile.",
+    "confirmMixed": "Warning: besides the sample data there is data you added or changed. It will be permanently deleted too: all profiles, expenses, documents, receipts stored in the browser, Budget strategies and profile settings. To keep it, cancel and make a backup from Settings first.",
+    "confirmButton": "Yes, delete and start",
+    "firstProfileTitle": "Create your first profile",
+    "firstProfileDesc": "A profile is a separate wallet (for example Personal, Home, Work) with its own balance, income, expenses and documents.",
+    "firstProfileButton": "Create the first profile",
+    "firstProfileOrphans": "There are already {n} expenses or documents waiting for a profile: once it exists you can assign them from Settings.",
+    "firstProfileOrphansOne": "There is already 1 expense or document waiting for a profile: once it exists you can assign it from Settings.",
+    "needProfile": "Create a profile first"
+  },
+  "systemNotifications": {
+    "title": "Device notifications",
+    "toggleLabel": "Get alerts on this device",
+    "toggleDesc": "Phone or computer alerts for deadlines due today, overdue and coming up",
+    "status": {
+      "active": "On",
+      "off": "Off",
+      "denied": "Blocked by the browser",
+      "unsupported": "Not supported by this browser"
+    },
+    "deniedHelp": "The browser blocked notifications for MyPlano. To unblock them open the site settings (icon next to the address, or phone Settings → Apps → MyPlano → Notifications), allow notifications and come back here.",
+    "mutedNote": "You muted all notifications: while they stay muted no alert reaches the device.",
+    "capability": {
+      "background": "On this device: alerts when you open the app and also while it is closed (background check about once or twice a day, decided by the system).",
+      "installForBackground": "On this device: alerts when you open MyPlano. Install the app (browser menu → Install app) to get them while it is closed too.",
+      "iosAddToHome": "On iPhone and iPad notifications work only with MyPlano added to the Home Screen (Share → Add to Home Screen, iOS 16.4 or later) and arrive when you open the app.",
+      "iosOpenOnly": "On iPhone and iPad alerts arrive when you open MyPlano or bring it back to the foreground: iOS does not allow checks while the app is closed without a server.",
+      "openOnly": "On this device: alerts when you open MyPlano or bring it back to the foreground (this browser does not check while the app is closed).",
+      "bellOnly": "This browser does not support system notifications: the bell and the in-app notification center still work."
+    },
+    "testButton": "Send test notification",
+    "testTitle": "MyPlano",
+    "testBody": "Notifications work: upcoming deadlines will show up here.",
+    "testError": "Could not show the test notification",
+    "push": {
+      "titleOne": "MyPlano · 1 deadline",
+      "titleMany": "MyPlano · {count} deadlines",
+      "today": "{title} today",
+      "tomorrow": "{title} tomorrow",
+      "soon": "{title} in {days} days",
+      "overdue": "{title} {days} days overdue",
+      "more": "+{count} more",
+      "sep": ", "
+    }
+  },
   "settings": {
     "languageLabel": "Interface Language",
     "languageDesc": "Select your preferred language for text and labels",
     "muteDesc": "Temporarily silence all due date alerts",
     "calendarDesc": "Generate .ics file for Google Calendar, Outlook, or Apple Calendar",
     "backupDesc": "Save a local security backup of all your data or restore from file",
-    "databaseMaintenance": "Database Maintenance & Reset",
-    "databaseMaintenanceDesc": "Restore factory sample data or completely clear your local database",
-    "factoryResetDesc": "Restore default sample profiles, expenses, and documents",
-    "wipeDatabaseDesc": "Permanently delete all stored data to start fresh with a clean slate",
-    "confirmFactoryTitle": "Restore Sample Data?",
-    "confirmFactoryDesc": "This action will replace all existing data with default sample data (3 balanced profiles, demo expenses, and documents).",
-    "confirmWipeTitle": "Clear Entire Database?",
-    "confirmWipeDesc": "CAUTION: This will permanently delete ALL stored profiles, expenses, and documents. Receipts stored in the browser are deleted too. Your database will become completely empty.",
-    "confirmWipeButton": "Yes, wipe everything permanently",
-    "confirmFactoryButton": "Yes, restore sample data"
+    "databaseMaintenance": "App data",
+    "databaseMaintenanceDesc": "Go back to the sample data or start again with an empty app. Language and interface preferences stay.",
+    "factoryResetDesc": "Replaces your data with 3 sample profiles with made-up expenses and documents",
+    "wipeDatabaseDesc": "Permanently deletes profiles, expenses, documents and receipts stored in the browser",
+    "confirmFactoryTitle": "Reload the sample data?",
+    "confirmFactoryDesc": "You will lose all your profiles, expenses, documents and the receipts stored in the browser: the 3 sample profiles come back instead. To keep them, make a backup first.",
+    "confirmWipeTitle": "Delete everything and start from scratch?",
+    "confirmWipeDesc": "You will permanently lose all profiles, expenses, documents and receipts stored in the browser. The app will be empty. To keep them, make a backup first.",
+    "confirmWipeButton": "Yes, delete everything",
+    "confirmFactoryButton": "Yes, reload the samples"
   },
   "archive": {
     "title": "Local Receipts & Attachments Archive",
@@ -147,6 +214,8 @@
     "closeDialog": "Close dialog"
   },
   "backup": {
+    "orphans": "{n} items without a profile: you can assign them from Settings.",
+    "orphansOne": "1 item without a profile: you can assign it from Settings.",
     "lastBackupDays": "Last backup: {days} days ago",
     "lastBackupToday": "Last backup: today",
     "lastBackupYesterday": "Last backup: yesterday",
@@ -177,6 +246,8 @@
   "installmentFix": {
     "banner": "There are {n} paid installments with a date to fix: until you fix them the right installment shows as unpaid.",
     "bannerOne": "There is 1 paid installment with a date to fix: until you fix it the right installment shows as unpaid.",
+    "bannerShort": "{n} paid installments with a date to fix",
+    "bannerShortOne": "1 paid installment with a date to fix",
     "review": "Review",
     "applyOne": "Fix the selected one",
     "confirmMessageOne": "The selected installment will be moved to the correct date, keeping status, payment date and attachments.",
@@ -188,5 +259,37 @@
     "confirmMessage": "The {n} selected installments will be moved to the correct date, keeping status, payment date and attachments.",
     "confirmButton": "Yes, fix them",
     "done": "Installment dates fixed."
+  },
+  "profileField": {
+    "label": "Profile",
+    "choose": "Choose a profile…",
+    "none": "No profile",
+    "noProfiles": "There is no profile yet: create one to be able to save.",
+    "createProfile": "Create profile"
+  },
+  "orphans": {
+    "title": "Items without a profile",
+    "desc": "These expenses and documents do not belong to any existing profile, so they do not appear in the profile views. Choose which profile to assign them to: nothing changes until you confirm.",
+    "banner": "{n} items without a profile",
+    "bannerOne": "1 item without a profile",
+    "review": "Review",
+    "assignAll": "Assign all to…",
+    "chooseFor": "Profile for {title}",
+    "expense": "Expense",
+    "document": "Document",
+    "untitled": "(untitled)",
+    "apply": "Assign {n} items",
+    "applyOne": "Assign 1 item",
+    "confirmTitle": "Assign the profiles?",
+    "confirmMessage": "{n} items will be moved to the chosen profiles.",
+    "confirmMessageOne": "1 item will be moved to the chosen profile.",
+    "confirmButton": "Yes, assign",
+    "done": "Profiles assigned."
+  },
+  "support": {
+    "title": "Support MyPlano",
+    "desc": "MyPlano is free, with no ads and no tracking: your data stays on your device. If you find it useful, you can buy me a coffee on Ko-fi.",
+    "button": "Buy me a coffee on Ko-fi",
+    "buttonAria": "Buy me a coffee on Ko-fi (opens in a new tab)"
   }
 }

@@ -3,9 +3,21 @@
 //   il SW vecchio continuerebbe a dare al browser il manifest vecchio e un'app installata non vedrebbe mai le
 //   modifiche (display, icone, nome). Il manifest va in rete prima, cache solo offline (NetworkFirst).
 //   I dati utente restano in localStorage/IndexedDB/File System Access, mai nel SW.
-// - registerType "prompt": il SW nuovo resta in attesa finché l'utente non tocca "Aggiorna" (niente reload a metà form).
+// - registerType "prompt" + skipWaiting false: il SW nuovo resta in attesa e lo attiva la pagina
+//   (src/components/pwa/autoUpdate.js): da solo se l'utente non sta lavorando, altrimenti dal banner "Aggiorna".
 // - Percorsi relativi (scope/start_url "./"): funzionano sia con base /MyPlano/ (GitHub Pages) sia con base /.
+// - Notifiche di sistema: public/sw-notify-core.js + sw-notify.js importati nel SW con ?v=<hash del contenuto>:
+//   cambiano i file -> cambia sw.js -> il browser installa il SW nuovo e riscarica gli import (niente cache HTTP
+//   vecchia). Fuori dalla precache: li conserva già il SW stesso come script importati.
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+
 const THEME = '#0b0f19'
+const SW_IMPORTS = ['sw-notify-core.js', 'sw-notify.js']
+const swImportUrl = (name) => {
+  const hash = createHash('sha256').update(readFileSync(new URL(`./public/${name}`, import.meta.url))).digest('hex')
+  return `${name}?v=${hash.slice(0, 10)}`
+}
 
 export const pwaOptions = {
   registerType: 'prompt',
@@ -32,6 +44,8 @@ export const pwaOptions = {
   },
   workbox: {
     globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+    globIgnores: ['**/node_modules/**/*', ...SW_IMPORTS],
+    importScripts: SW_IMPORTS.map(swImportUrl),
     // SPA: ogni navigazione dentro lo scope riceve index.html dalla precache (anche offline).
     navigateFallback: 'index.html',
     cleanupOutdatedCaches: true,

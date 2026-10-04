@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Bell, BellOff } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { useApp } from '../../core/state';
@@ -6,6 +6,7 @@ import { UpcomingDetailModal } from '../../modules/budget/UpcomingDetailModal';
 import { NotificationCenterModal } from './NotificationCenterModal';
 import { NavbarNotificationsDropdown } from './NavbarNotificationsDropdown';
 import { useNotifications } from './useNotifications';
+import { useNavbarNotificationsBehavior } from './useNavbarNotificationsBehavior';
 import './NavbarNotificationsBtn.css';
 
 export function NavbarNotificationsBtn({
@@ -23,23 +24,7 @@ export function NavbarNotificationsBtn({
     useNotifications(expenses, documents, selectedProfileId);
   const badgeCount = isGlobalMuted ? 0 : count;
 
-  useEffect(() => {
-    if (!isOpen) return undefined;
-    const handleOutsideClick = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) setIsOpen(false);
-    };
-    const handleKey = (e) => {
-      if (e.key !== 'Escape') return;
-      setIsOpen(false);
-      bellRef.current?.focus();
-    };
-    document.addEventListener('mousedown', handleOutsideClick);
-    document.addEventListener('keydown', handleKey);
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.removeEventListener('keydown', handleKey);
-    };
-  }, [isOpen]);
+  useNavbarNotificationsBehavior({ isOpen, setIsOpen, setIsCenterOpen, containerRef, bellRef, isGlobalMuted });
 
   const handleItemClick = (item) => {
     setActiveItem(item);

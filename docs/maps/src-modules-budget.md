@@ -1,0 +1,80 @@
+<!-- hub:map:start -->
+# Mappa: src/modules/budget/
+Torna al [router](../../AGENTS.md) · 79 file
+- [BudgetKpiCarousel.jsx](../../src/modules/budget/BudgetKpiCarousel.jsx): BudgetKpiCarousel
+- [BudgetKpiGrid.css](../../src/modules/budget/BudgetKpiGrid.css)
+- [BudgetKpiGrid.jsx](../../src/modules/budget/BudgetKpiGrid.jsx): BudgetKpiGrid
+- [BudgetOverview.css](../../src/modules/budget/BudgetOverview.css)
+- [BudgetOverview.jsx](../../src/modules/budget/BudgetOverview.jsx): BudgetOverview
+- [BudgetTab.jsx](../../src/modules/budget/BudgetTab.jsx): BudgetTab
+- [CashflowGroupedRow.css](../../src/modules/budget/CashflowGroupedRow.css)
+- [CashflowGroupedRow.jsx](../../src/modules/budget/CashflowGroupedRow.jsx): CashflowGroupedRow
+- [CashflowTableRow.jsx](../../src/modules/budget/CashflowTableRow.jsx): CashflowTableRow
+- [CashflowTimeline.css](../../src/modules/budget/CashflowTimeline.css)
+- [CashflowTimeline.jsx](../../src/modules/budget/CashflowTimeline.jsx): CashflowTimeline
+- [CategoryPieChart.css](../../src/modules/budget/CategoryPieChart.css)
+- [CategoryPieChart.jsx](../../src/modules/budget/CategoryPieChart.jsx): CategoryPieChart
+- [ColdStartActionCard.css](../../src/modules/budget/ColdStartActionCard.css)
+- [ColdStartActionsCarousel.css](../../src/modules/budget/ColdStartActionsCarousel.css)
+- [ColdStartActionsCarousel.jsx](../../src/modules/budget/ColdStartActionsCarousel.jsx): ColdStartActionsCarousel
+- [ColdStartCard.css](../../src/modules/budget/ColdStartCard.css)
+- [ColdStartCard.jsx](../../src/modules/budget/ColdStartCard.jsx): ColdStartCard
+- [ColdStartDeficitBanner.jsx](../../src/modules/budget/ColdStartDeficitBanner.jsx): ColdStartDeficitBanner
+- [ColdStartDeficitList.css](../../src/modules/budget/ColdStartDeficitList.css)
+- [ColdStartDeficitList.jsx](../../src/modules/budget/ColdStartDeficitList.jsx): ColdStartDeficitList
+- [ColdStartOptionCard.css](../../src/modules/budget/ColdStartOptionCard.css)
+- [ColdStartOptionCard.jsx](../../src/modules/budget/ColdStartOptionCard.jsx): ColdStartOptionCard
+- [ColdStartPlanBCard.jsx](../../src/modules/budget/ColdStartPlanBCard.jsx): ColdStartPlanBCard
+- [ColdStartStrategyCarousel.css](../../src/modules/budget/ColdStartStrategyCarousel.css)
+- [ColdStartStrategyCarousel.jsx](../../src/modules/budget/ColdStartStrategyCarousel.jsx): ColdStartStrategyCarousel
+- [ColdStartSuccessView.jsx](../../src/modules/budget/ColdStartSuccessView.jsx): ColdStartSuccessView
+- [ColdStartTopUpCard.jsx](../../src/modules/budget/ColdStartTopUpCard.jsx): ColdStartTopUpCard
+- [ConsolidatedDiscretionaryCard.jsx](../../src/modules/budget/ConsolidatedDiscretionaryCard.jsx): ConsolidatedDiscretionaryCard
+- [ConsolidatedOverview.css](../../src/modules/budget/ConsolidatedOverview.css)
+- [ConsolidatedOverviewCard.jsx](../../src/modules/budget/ConsolidatedOverviewCard.jsx): ConsolidatedOverviewCard
+- [ConsolidatedProfileCard.css](../../src/modules/budget/ConsolidatedProfileCard.css)
+- [ConsolidatedProfileCard.jsx](../../src/modules/budget/ConsolidatedProfileCard.jsx): ConsolidatedProfileCard
+- [ConsolidatedProfileStatusBar.jsx](../../src/modules/budget/ConsolidatedProfileStatusBar.jsx): ConsolidatedProfileStatusBar
+- [ConsolidatedProfilesGrid.css](../../src/modules/budget/ConsolidatedProfilesGrid.css)
+- [ConsolidatedProfilesGrid.jsx](../../src/modules/budget/ConsolidatedProfilesGrid.jsx): ConsolidatedProfilesGrid
+- [ConsolidatedTotalCard.css](../../src/modules/budget/ConsolidatedTotalCard.css)
+- [ConsolidatedTotalCard.jsx](../../src/modules/budget/ConsolidatedTotalCard.jsx): ConsolidatedTotalCard
+- [ConsolidatedUpcomingCard.css](../../src/modules/budget/ConsolidatedUpcomingCard.css)
+- [ConsolidatedUpcomingCard.jsx](../../src/modules/budget/ConsolidatedUpcomingCard.jsx): ConsolidatedUpcomingCard
+- [DepositAllConfirmModal.css](../../src/modules/budget/DepositAllConfirmModal.css)
+- [DepositAllConfirmModal.jsx](../../src/modules/budget/DepositAllConfirmModal.jsx): DepositAllConfirmModal
+- [DepositQuotaButton.css](../../src/modules/budget/DepositQuotaButton.css)
+- [DepositQuotaButton.jsx](../../src/modules/budget/DepositQuotaButton.jsx): DepositQuotaButton
+- [DiscretionaryMarginPanel.css](../../src/modules/budget/DiscretionaryMarginPanel.css)
+- [DiscretionaryMarginPanel.jsx](../../src/modules/budget/DiscretionaryMarginPanel.jsx): DiscretionaryMarginPanel
+- [GlobalIncomeHub.jsx](../../src/modules/budget/GlobalIncomeHub.jsx): GlobalIncomeHub
+- [IncomeOverviewCard.css](../../src/modules/budget/IncomeOverviewCard.css)
+- [IncomeOverviewCard.jsx](../../src/modules/budget/IncomeOverviewCard.jsx): IncomeOverviewCard
+- [InitialBalanceCard.css](../../src/modules/budget/InitialBalanceCard.css)
+- [InitialBalanceCard.jsx](../../src/modules/budget/InitialBalanceCard.jsx): InitialBalanceCard
+- [InstallmentFixBanner.css](../../src/modules/budget/InstallmentFixBanner.css)
+- [InstallmentFixBanner.jsx](../../src/modules/budget/InstallmentFixBanner.jsx): INSTALLMENT_FIX_ANCHOR, InstallmentFixBanner
+- [MonthlyIncomeBox.jsx](../../src/modules/budget/MonthlyIncomeBox.jsx): MonthlyIncomeBox
+- [ProfileDedicatedFinanceBox.jsx](../../src/modules/budget/ProfileDedicatedFinanceBox.jsx): ProfileDedicatedFinanceBox
+- [ProfileIncomeHub.css](../../src/modules/budget/ProfileIncomeHub.css)
+- [ProfileIncomeHub.jsx](../../src/modules/budget/ProfileIncomeHub.jsx): ProfileIncomeHub
+- [StartingBalanceBox.jsx](../../src/modules/budget/StartingBalanceBox.jsx): StartingBalanceBox
+- [TimelineCategoryFilter.css](../../src/modules/budget/TimelineCategoryFilter.css)
+- [TimelineCategoryFilter.jsx](../../src/modules/budget/TimelineCategoryFilter.jsx): TimelineCategoryFilter
+- [TimelineCategoryPills.css](../../src/modules/budget/TimelineCategoryPills.css)
+- [TimelineCategoryPills.jsx](../../src/modules/budget/TimelineCategoryPills.jsx): TimelineCategoryPills
+- [TimelineHorizonSelector.css](../../src/modules/budget/TimelineHorizonSelector.css)
+- [TimelineHorizonSelector.jsx](../../src/modules/budget/TimelineHorizonSelector.jsx): TimelineHorizonSelector
+- [UpcomingDeadlinesCard.css](../../src/modules/budget/UpcomingDeadlinesCard.css)
+- [UpcomingDeadlinesCard.jsx](../../src/modules/budget/UpcomingDeadlinesCard.jsx): UpcomingDeadlinesCard
+- [UpcomingDeadlinesRow.jsx](../../src/modules/budget/UpcomingDeadlinesRow.jsx): UpcomingDeadlinesRow
+- [UpcomingDetailModal.css](../../src/modules/budget/UpcomingDetailModal.css)
+- [UpcomingDetailModal.jsx](../../src/modules/budget/UpcomingDetailModal.jsx): UpcomingDetailModal
+- [UpcomingGroupedList.css](../../src/modules/budget/UpcomingGroupedList.css): Group labels + "overdue" highlight shared by the Budget cards, the bell dropdown and the center.
+- [UpcomingGroupedList.jsx](../../src/modules/budget/UpcomingGroupedList.jsx): UpcomingGroupedList
+- [ValueSaveBox.css](../../src/modules/budget/ValueSaveBox.css)
+- [ValueSaveBox.jsx](../../src/modules/budget/ValueSaveBox.jsx): ValueSaveBox
+- [budgetCalculations.js](../../src/modules/budget/budgetCalculations.js): calculateItemAnnualCost, calculateBudgetMetrics, generateCashflowTimeline, calculateColdStartAnalys…
+- [budgetOverviewHelpers.js](../../src/modules/budget/budgetOverviewHelpers.js): calculateDiscretionaryMargin, getBudgetOverviewState, performTopUpFund, performDepositProfileQuota
+- [continua](src-modules-budget-2.md): parte 2
+<!-- hub:map:end -->

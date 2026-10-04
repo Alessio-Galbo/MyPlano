@@ -80,15 +80,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 640px) {
-  .toast-viewport {
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
-    width: auto;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .toast { animation: none; }
 }

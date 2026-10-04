@@ -73,3 +73,9 @@ export function formatDateTime(value, lang) {
   const options = { dateStyle: 'short', timeStyle: 'short' };
   return cached('d', getFormatLocale(lang), options, Intl.DateTimeFormat).format(date);
 }
+
+// formatPercent(12.5) -> "12,5%" (it) / "12.5%" (en). Input is already a percentage (0-100).
+export function formatPercent(value, digits = 1, lang) {
+  const options = { style: 'percent', minimumFractionDigits: digits, maximumFractionDigits: digits };
+  return cached('n', getFormatLocale(lang), options, Intl.NumberFormat).format(Number(value || 0) / 100);
+}

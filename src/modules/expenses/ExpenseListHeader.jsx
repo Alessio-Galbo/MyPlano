@@ -4,8 +4,9 @@ import { Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import './ExpenseListHeader.css';
 
-export function ExpenseListHeader({ viewMode, onToggleViewMode, onCreate }) {
+export function ExpenseListHeader({ viewMode, onToggleViewMode, onCreate, disabled = false }) {
   const { t } = useI18n();
+  const reason = disabled ? t('common.onboarding.needProfile') : undefined;
 
   return (
     <div className="section-header expense-section-header">
@@ -36,7 +37,10 @@ export function ExpenseListHeader({ viewMode, onToggleViewMode, onCreate }) {
           </button>
         </div>
 
-        <Button icon={<Plus size={16} />} onClick={onCreate} className="expense-create-btn">
+        <Button
+          icon={<Plus size={16} />} onClick={onCreate} className="expense-create-btn"
+          disabled={disabled} title={reason} aria-label={reason && `${t('expenses.addExpense')}: ${reason}`}
+        >
           <span>{t('expenses.addExpense')}</span>
         </Button>
       </div>

@@ -1,0 +1,52 @@
+<!-- hub:map:start -->
+# Mappa: src/components/
+Torna al [router](../../AGENTS.md) · 48 file
+- [ErrorBoundary.css](../../src/components/ErrorBoundary.css)
+- [ErrorBoundary.jsx](../../src/components/ErrorBoundary.jsx): ErrorBoundary
+- [layout/DisplayModes.css](../../src/components/layout/DisplayModes.css): App installata senza bordi (manifest display_override: window-controls-overlay → fullscreen → stand…
+- [layout/Navbar.css](../../src/components/layout/Navbar.css)
+- [layout/Navbar.jsx](../../src/components/layout/Navbar.jsx): Navbar
+- [layout/NavbarNotificationsBtn.css](../../src/components/layout/NavbarNotificationsBtn.css)
+- [layout/NavbarNotificationsBtn.jsx](../../src/components/layout/NavbarNotificationsBtn.jsx): NavbarNotificationsBtn
+- [layout/NavbarNotificationsDropdown.jsx](../../src/components/layout/NavbarNotificationsDropdown.jsx): NavbarNotificationsDropdown
+- [layout/NavbarProfileSelector.css](../../src/components/layout/NavbarProfileSelector.css)
+- [layout/NavbarProfileSelector.jsx](../../src/components/layout/NavbarProfileSelector.jsx): NavbarProfileSelector
+- [layout/NotificationCenterItem.jsx](../../src/components/layout/NotificationCenterItem.jsx): NotificationCenterItem
+- [layout/NotificationCenterModal.css](../../src/components/layout/NotificationCenterModal.css)
+- [layout/NotificationCenterModal.jsx](../../src/components/layout/NotificationCenterModal.jsx): NotificationCenterModal
+- [layout/NotificationCenterTabs.jsx](../../src/components/layout/NotificationCenterTabs.jsx): NotificationCenterTabs
+- [layout/TabContent.jsx](../../src/components/layout/TabContent.jsx): TabContent
+- [layout/TabLoading.css](../../src/components/layout/TabLoading.css)
+- [layout/TabLoading.jsx](../../src/components/layout/TabLoading.jsx): TabLoading
+- [layout/index.js](../../src/components/layout/index.js): Navbar, TabContent
+- [layout/lazyTabs.js](../../src/components/layout/lazyTabs.js): DocumentList, ExpenseList, SettingsView
+- [layout/notificationDismissal.js](../../src/components/layout/notificationDismissal.js): isItemDismissed, pruneDismissedIds
+- [layout/useNotifications.js](../../src/components/layout/useNotifications.js): useNotifications
+- [pwa/PwaUpdatePrompt.css](../../src/components/pwa/PwaUpdatePrompt.css): Avviso aggiornamento: in basso a sinistra (i toast stanno a destra), sopra le modali.
+- [pwa/PwaUpdatePrompt.jsx](../../src/components/pwa/PwaUpdatePrompt.jsx): PwaUpdatePrompt
+- [pwa/PwaUpdatedToast.jsx](../../src/components/pwa/PwaUpdatedToast.jsx): PwaUpdatedToast
+- [pwa/autoUpdate.js](../../src/components/pwa/autoUpdate.js): Aggiornamento automatico SICURO: una versione nuova (SW in attesa, o attivata da un'altra scheda) s…
+- [pwa/busyState.js](../../src/components/pwa/busyState.js): L'utente sta lavorando? Una finestra di dialogo aperta (form di spesa/documento, impostazioni, conf…
+- [pwa/chunkReload.js](../../src/components/pwa/chunkReload.js): Chunk di una versione vecchia non più scaricabile (dopo un deploy le schede lazy di lazyTabs.js pun…
+- [pwa/mountUpdatePrompt.jsx](../../src/components/pwa/mountUpdatePrompt.jsx): mountUpdatePrompt, mountUpdatedToast
+- [pwa/persistStorage.js](../../src/components/pwa/persistStorage.js): Archiviazione persistente: chiede al browser di non cancellare localStorage/IndexedDB sotto pressio…
+- [pwa/registerPwa.js](../../src/components/pwa/registerPwa.js): Entry PWA (caricato da index.html, separato da main.jsx): registra il Service Worker generato da
+- [ui/Badge.css](../../src/components/ui/Badge.css)
+- [ui/Badge.jsx](../../src/components/ui/Badge.jsx): Badge
+- [ui/Button.css](../../src/components/ui/Button.css)
+- [ui/Button.jsx](../../src/components/ui/Button.jsx): Button
+- [ui/ConfirmModal.css](../../src/components/ui/ConfirmModal.css)
+- [ui/ConfirmModal.jsx](../../src/components/ui/ConfirmModal.jsx): ConfirmModal
+- [ui/Modal.css](../../src/components/ui/Modal.css)
+- [ui/Modal.jsx](../../src/components/ui/Modal.jsx): Modal
+- [ui/SuggestInput.css](../../src/components/ui/SuggestInput.css)
+- [ui/SuggestInput.jsx](../../src/components/ui/SuggestInput.jsx): SuggestInput
+- [ui/Toast.css](../../src/components/ui/Toast.css)
+- [ui/Toast.jsx](../../src/components/ui/Toast.jsx): Toast
+- [ui/ToastContext.js](../../src/components/ui/ToastContext.js): ToastContext, useToast
+- [ui/ToastProvider.jsx](../../src/components/ui/ToastProvider.jsx): ToastProvider
+- [ui/Toggle.css](../../src/components/ui/Toggle.css)
+- [ui/Toggle.jsx](../../src/components/ui/Toggle.jsx): Toggle
+- [ui/index.js](../../src/components/ui/index.js): Button, Badge, Modal, Toggle, SuggestInput (+3)
+- [ui/useModalA11y.js](../../src/components/ui/useModalA11y.js): useModalA11y
+<!-- hub:map:end -->

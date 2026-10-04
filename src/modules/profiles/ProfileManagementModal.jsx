@@ -15,6 +15,7 @@ export function ProfileManagementModal({
   onSelectProfile,
   onOpenAddModal,
   onRequestDeleteProfile,
+  onRequestEditProfile,
 }) {
   const { t } = useI18n();
 
@@ -70,6 +71,7 @@ export function ProfileManagementModal({
               onSelect={() => { onSelectProfile(p.id); onClose(); }}
               canDelete={profiles.length > 1}
               onDelete={() => { onClose(); onRequestDeleteProfile(p); }}
+              onEdit={() => { onClose(); onRequestEditProfile(p); }}
               formatCompact={formatCompact}
             />
           ))}
@@ -79,7 +81,7 @@ export function ProfileManagementModal({
           <Button variant="secondary" icon={<Plus size={16} />} onClick={() => { onClose(); onOpenAddModal(); }}>
             {t('common.profiles.addProfile')}
           </Button>
-          <Button variant="ghost" onClick={onClose}>{t('common.actions.cancel')}</Button>
+          <Button variant="ghost" onClick={onClose}>{t('common.actions.close')}</Button>
         </div>
       </div>
     </Modal>

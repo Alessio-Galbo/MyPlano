@@ -5,6 +5,7 @@ import { formatCurrency } from '../../modules/expenses/expenseHelpers';
 import { formatDate } from '../../modules/documents/documentHelpers';
 import { getUpcomingDaysLabel } from '../../modules/budget/upcomingDaysLabel';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
+import '../../core/profiles/profileField.css';
 
 export function NotificationCenterItem({
   item,
@@ -38,13 +39,11 @@ export function NotificationCenterItem({
           </span>
 
           <span className="notif-center-row-bottom">
-            {profile && (
-              <span className="notif-profile-badge">
-                <span className={`dynamic-color-dot ${profileTheme}`} />
-                <span>{profile.name}</span>
-                <span className="notif-dot-sep">•</span>
-              </span>
-            )}
+            <span className="notif-profile-badge">
+              <span className={`dynamic-color-dot ${profile ? profileTheme : 'profile-dot-missing'}`} />
+              <span>{profile ? profile.name : t('common.profileField.none')}</span>
+              <span className="notif-dot-sep">•</span>
+            </span>
             <span className="notif-date-val">{formatDate(item.date)}</span>
             <span className="notif-dot-sep">•</span>
             <span className="notif-days-val">{getUpcomingDaysLabel(t, item)}</span>

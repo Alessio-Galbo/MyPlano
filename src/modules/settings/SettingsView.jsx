@@ -7,9 +7,13 @@ import { SettingsBackupCard } from './SettingsBackupCard';
 import { SettingsArchiveCard } from './SettingsArchiveCard';
 import { SettingsResetCard } from './SettingsResetCard';
 import { InstallmentKeyFixCard } from './InstallmentKeyFixCard';
+import { SystemNotificationsCard } from './SystemNotificationsCard';
+import { OrphanItemsCard } from './OrphanItemsCard';
+import { SettingsProfilesCard } from '../profiles/SettingsProfilesCard';
+import { SettingsSupportCard } from './SettingsSupportCard';
 import './SettingsView.css';
 
-export function SettingsView({ documents, expenses, onDataRestored, onSaveExpense }) {
+export function SettingsView({ documents, expenses, onDataRestored, onSaveExpense, profiles, onSaveDocument }) {
   const { language, setLanguage, t } = useI18n();
   const { isGlobalMuted, toggleGlobalMute } = useApp();
 
@@ -45,6 +49,13 @@ export function SettingsView({ documents, expenses, onDataRestored, onSaveExpens
         </div>
       </div>
 
+      <SystemNotificationsCard />
+
+      <SettingsProfilesCard profiles={profiles} />
+
+      <OrphanItemsCard expenses={expenses} documents={documents} profiles={profiles}
+        onSaveExpense={onSaveExpense} onSaveDocument={onSaveDocument} />
+
       <InstallmentKeyFixCard expenses={expenses} onSaveExpense={onSaveExpense} />
 
       <SettingsArchiveCard />
@@ -62,6 +73,8 @@ export function SettingsView({ documents, expenses, onDataRestored, onSaveExpens
         expenses={expenses}
         onDataRestored={onDataRestored}
       />
+
+      <SettingsSupportCard />
 
       <SettingsResetCard onDataRestored={onDataRestored} />
     </div>

@@ -38,7 +38,12 @@
     "subscription": "Personal Pass",
     "other": "Other Document"
   },
-  "emptyState": "No documents found for this profile.",
+  "empty": {
+    "title": "No documents yet",
+    "all": "You have no documents with an expiry date in any profile yet.",
+    "profile": "The profile {name} has no documents with an expiry date yet.",
+    "action": "Add the first document"
+  },
   "quickRenew": "Renew Expiration",
   "newExpiryPrompt": "Select the new expiration date",
   "renew": {

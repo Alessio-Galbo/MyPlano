@@ -40,6 +40,10 @@ Quando si seleziona un profilo specifico (es. *Personale* o *Famiglia*), la sche
 - Le voci nascoste dal *Centro Gestione Notifiche* (campanella in alto) restano nascoste anche qui. Se per una voce il *Promemoria* è spento, resta in questa card e nel centro notifiche con l'etichetta *Avviso disattivato*, ma non finisce nella campanella.
 - Campanella e Bilancio mostrano sempre le stesse voci, anche con più schede aperte.
 
+### Elementi senza profilo e primo profilo
+- Se esistono spese o documenti senza profilo valido (ad esempio creati dopo un azzeramento con una versione precedente), nel Bilancio compare il banner *"N elementi senza profilo - Rivedi"*: porta alla card in Impostazioni dove scegli il profilo di ciascuno (o *Assegna tutti a...*). Nulla cambia finché non confermi.
+- Senza alcun profilo il Bilancio mostra la guida *Crea il tuo primo profilo* con il pulsante *Crea profilo*.
+
 ---
 
 ## 3. Visione d'Insieme del Nucleo (Consolidato Multi-Profilo)

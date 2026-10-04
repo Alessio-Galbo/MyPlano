@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, AlertTriangle, Info, X } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
+import { useToastSwipe } from './useToastSwipe';
 
 const ICONS = { success: CheckCircle2, error: AlertTriangle, info: Info };
 
@@ -20,6 +21,7 @@ export function Toast({ toast, onDismiss }) {
     };
   }, [id, duration, paused, onDismiss]);
 
+  const [swipeRef, swipeHandlers] = useToastSwipe(() => onDismiss(id), setPaused);
   const Icon = ICONS[variant] || Info;
   const handleAction = () => {
     action.onClick();
@@ -28,6 +30,8 @@ export function Toast({ toast, onDismiss }) {
 
   return (
     <div
+      ref={swipeRef}
+      {...swipeHandlers}
       className={`toast toast-${variant}`}
       role={variant === 'error' ? 'alert' : 'status'}
       onMouseEnter={() => setPaused(true)}

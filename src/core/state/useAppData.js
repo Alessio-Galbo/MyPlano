@@ -1,15 +1,17 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { storageService } from '../storage';
 import { createItemId } from '../storage/idMigrationHelper';
 import { useProfileFinance } from './useProfileFinance';
 import { useProfileState } from './useProfileState';
+import { useProfileBundle } from './useProfileBundle';
 import { usePersistedSlice } from './usePersistedSlice';
 import { useStorageSync } from './useStorageSync';
+import { announceDataChange } from './uiActions';
 
 const readDocuments = () => storageService.getDocuments();
-const writeDocuments = (v) => storageService.saveDocuments(v);
+const writeDocuments = (v) => announceDataChange(storageService.saveDocuments(v));
 const readExpenses = () => storageService.getExpenses();
-const writeExpenses = (v) => storageService.saveExpenses(v);
+const writeExpenses = (v) => announceDataChange(storageService.saveExpenses(v));
 const readInitialBalance = () => storageService.getInitialBalance();
 const writeInitialBalance = (v) => storageService.saveInitialBalance(v);
 const readMonthlyIncome = () => storageService.getMonthlyIncome();
@@ -26,7 +28,7 @@ export function useAppData() {
   const profileFinance = useProfileFinance();
   const profileState = useProfileState(profileFinance);
   const { profiles, reloadProfiles } = profileState;
-  const { reloadProfileFinance } = profileFinance;
+  const { reloadProfileFinance, financeSetters, ...financeData } = profileFinance;
 
   const [documents, setDocuments, reloadDocuments] = usePersistedSlice(readDocuments, writeDocuments);
   const [expenses, setExpenses, reloadExpenses] = usePersistedSlice(readExpenses, writeExpenses);
@@ -37,12 +39,15 @@ export function useAppData() {
   const updateInitialBalance = useCallback((amount) => setInitialBalance(parseFloat(amount) || 0), [setInitialBalance]);
   const updateMonthlyIncome = useCallback((amount) => setMonthlyIncome(parseFloat(amount) || 0), [setMonthlyIncome]);
 
-  const removeProfile = profileState.deleteProfile;
-  const deleteProfile = useCallback((profileId) => {
-    removeProfile(profileId);
-    setExpenses((prev) => prev.filter((e) => e.profileId !== profileId));
-    setDocuments((prev) => prev.filter((d) => d.profileId !== profileId));
-  }, [removeProfile, setExpenses, setDocuments]);
+  // deleteProfile(id) -> snapshot (or null); restoreProfileBundle(snapshot) undoes it.
+  const { profileFunds, profileFundConfigs, profileIncomes, profileIncomeConfigs } = profileFinance;
+  const bundleState = useMemo(() => ({
+    profiles, expenses, documents, profileFunds, profileFundConfigs, profileIncomes, profileIncomeConfigs,
+  }), [profiles, expenses, documents, profileFunds, profileFundConfigs, profileIncomes, profileIncomeConfigs]);
+  const { deleteProfile, restoreProfileBundle } = useProfileBundle({
+    state: bundleState, setExpenses, setDocuments, financeSetters,
+    removeProfile: profileState.deleteProfile, restoreProfile: profileState.restoreProfile,
+  });
 
   const saveDocument = useCallback((doc) => {
     const item = withId(doc, 'doc');
@@ -69,14 +74,14 @@ export function useAppData() {
 
   useStorageSync(reloadAll);
 
-  const { updateProfileBalance, adjustProfileBalance, depositQuotaToProfile, updateProfileIncome, addProfile } = profileState;
+  const { updateProfileBalance, adjustProfileBalance, depositQuotaToProfile, updateProfileIncome, addProfile, updateProfile } = profileState;
   return {
-    profiles, documents, expenses, initialBalance, monthlyIncome, ...profileFinance,
+    profiles, documents, expenses, initialBalance, monthlyIncome, ...financeData,
     updateInitialBalance, onUpdateInitialBalance: updateInitialBalance,
     updateMonthlyIncome, onUpdateMonthlyIncome: updateMonthlyIncome,
     updateProfileBalance, adjustProfileBalance, onAdjustProfileBalance: adjustProfileBalance,
     updateProfileIncome, onUpdateProfileIncome: updateProfileIncome, depositQuotaToProfile,
-    addProfile, deleteProfile, saveDocument, deleteDocument, saveExpense, deleteExpense,
+    addProfile, updateProfile, deleteProfile, restoreProfileBundle, saveDocument, deleteDocument, saveExpense, deleteExpense,
     restoreDocument: saveDocument, restoreExpense: saveExpense, reloadAll,
   };
 }

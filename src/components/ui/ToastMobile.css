@@ -1,0 +1,42 @@
+/* Swipe to dismiss (useToastSwipe sets --toast-dx while dragging). */
+.toast {
+  transform: translateX(var(--toast-dx, 0px));
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  touch-action: pan-y;
+}
+
+.toast-dragging {
+  transition: none;
+  opacity: 0.85;
+}
+
+/* Phone: the bottom of the screen hosts the primary buttons of full-screen modals and forms,
+ * so toasts move to the top, below the notch/status bar (safe-area-inset-top, also in fullscreen
+ * mode), compact and centred. Swipe sideways or tap X to close; successes close after 3 s. */
+@media (max-width: 640px) {
+  .toast-viewport {
+    top: calc(0.5rem + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    left: calc(0.75rem + env(safe-area-inset-left, 0px));
+    right: calc(0.75rem + env(safe-area-inset-right, 0px));
+    width: auto;
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 0.375rem;
+  }
+
+  .toast {
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    animation-name: toastInTop;
+  }
+}
+
+@keyframes toastInTop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: none; }
+}

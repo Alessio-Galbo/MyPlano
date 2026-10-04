@@ -1,0 +1,17 @@
+.doc-actions {
+  display: flex;
+  gap: 0.375rem;
+  margin-left: auto;
+}
+
+.doc-renew-btn {
+  gap: 0.375rem;
+}
+
+/* Touch screens: at least 44x44 px per button. */
+@media (pointer: coarse) {
+  .doc-action-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

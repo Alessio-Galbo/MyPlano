@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2, Check } from 'lucide-react';
+import { Trash2, Check, Pencil } from 'lucide-react';
 import { useI18n } from '../../core/i18n';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 
@@ -11,6 +11,7 @@ export function ProfileManagementItem({
   onSelect,
   canDelete,
   onDelete,
+  onEdit,
   formatCompact,
 }) {
   const { t } = useI18n();
@@ -41,11 +42,21 @@ export function ProfileManagementItem({
           </span>
         </div>
       </button>
+      <button
+        type="button"
+        className="profile-mgmt-icon-btn profile-mgmt-edit-btn"
+        title={t('common.profiles.editProfile')}
+        aria-label={`${t('common.profiles.editProfile')}: ${profile?.name || ''}`}
+        onClick={onEdit}
+      >
+        <Pencil size={15} />
+      </button>
       {canDelete && (
         <button
           type="button"
-          className="profile-mgmt-delete-btn"
+          className="profile-mgmt-icon-btn profile-mgmt-delete-btn"
           title={t('common.profiles.deleteProfile')}
+          aria-label={`${t('common.profiles.deleteProfile')}: ${profile?.name || ''}`}
           onClick={onDelete}
         >
           <Trash2 size={15} />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useI18n } from '../../core/i18n';
 import { createItemId } from '../../core/storage/idMigrationHelper';
-import { DocumentCard } from './DocumentCard';
+import { DocumentListBody } from './DocumentListBody';
 import { DocumentFormModal } from './DocumentFormModal';
 import { DocumentRenewModal } from './DocumentRenewModal';
 import { DocumentListHeader } from './DocumentListHeader';
@@ -16,7 +15,6 @@ export function DocumentList({
   onSaveDocument,
   onDeleteDocument,
 }) {
-  const { t } = useI18n();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingDoc, setEditingDoc] = useState(null);
   const [renewingDoc, setRenewingDoc] = useState(null);
@@ -43,25 +41,13 @@ export function DocumentList({
 
   return (
     <div className="doc-list-view">
-      <DocumentListHeader onCreate={handleCreate} />
+      <DocumentListHeader onCreate={handleCreate} disabled={!profiles?.length} />
 
-      {filtered.length === 0 ? (
-        <div className="empty-state">{t('documents.emptyState')}</div>
-      ) : (
-        <div className="grid-cards">
-          {filtered.map((doc) => (
-            <DocumentCard
-              key={doc.id}
-              document={doc}
-              profile={profiles.find((p) => p.id === doc.profileId)}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onToggleAlert={handleToggleAlert}
-              onQuickRenew={(d) => setRenewingDoc(d)}
-            />
-          ))}
-        </div>
-      )}
+      <DocumentListBody
+        documents={filtered} profiles={profiles} selectedProfileId={selectedProfileId} onCreate={handleCreate}
+        onEdit={handleEdit} onDelete={handleDelete} onToggleAlert={handleToggleAlert}
+        onQuickRenew={(d) => setRenewingDoc(d)}
+      />
 
       <DocumentFormModal
         isOpen={isModalOpen}

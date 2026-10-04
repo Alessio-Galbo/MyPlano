@@ -38,7 +38,12 @@
     "subscription": "Abbonamento Personale",
     "other": "Altro Documento"
   },
-  "emptyState": "Nessun documento trovato per questo profilo.",
+  "empty": {
+    "title": "Ancora nessun documento",
+    "all": "Non hai ancora documenti con scadenza in nessun profilo.",
+    "profile": "Il profilo {name} non ha ancora documenti con scadenza.",
+    "action": "Aggiungi il primo documento"
+  },
   "quickRenew": "Rinnova Scadenza",
   "newExpiryPrompt": "Seleziona la nuova data di scadenza",
   "renew": {

@@ -218,5 +218,11 @@
     "sortDate": "Date",
     "sortAlpha": "A-Z"
   },
-  "emptyState": "No recurring expenses recorded."
+  "empty": {
+    "title": "No expenses yet",
+    "all": "You have not recorded any recurring expense in any profile yet.",
+    "profile": "The profile {name} has no recurring expenses yet.",
+    "action": "Add the first expense",
+    "filtered": "No expense matches the chosen year or category."
+  }
 }

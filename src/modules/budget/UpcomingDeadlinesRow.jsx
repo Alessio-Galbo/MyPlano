@@ -5,6 +5,7 @@ import { formatCurrency } from '../expenses/expenseHelpers';
 import { formatDate } from '../documents/documentHelpers';
 import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 import { getUpcomingDaysLabel } from './upcomingDaysLabel';
+import '../../core/profiles/profileField.css';
 
 export function UpcomingDeadlinesRow({ item, profile, onSelect }) {
   const { t } = useI18n();
@@ -25,13 +26,11 @@ export function UpcomingDeadlinesRow({ item, profile, onSelect }) {
         <span className="upcoming-item-info">
           <span className="upcoming-item-title">{item.title}</span>
           <span className="upcoming-item-sub">
-            {profile && (
-              <span className="notif-profile-badge">
-                <span className={`dynamic-color-dot ${profileTheme}`} />
-                <span>{profile.name}</span>
-                <span>•</span>
-              </span>
-            )}
+            <span className="notif-profile-badge">
+              <span className={`dynamic-color-dot ${profile ? profileTheme : 'profile-dot-missing'}`} />
+              <span>{profile ? profile.name : t('common.profileField.none')}</span>
+              <span>•</span>
+            </span>
             <span>{formatDate(item.date)}</span>
           </span>
         </span>

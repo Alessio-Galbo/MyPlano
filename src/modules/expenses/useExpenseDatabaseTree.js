@@ -14,7 +14,9 @@ export function useExpenseDatabaseTree({
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [storedExpenseId, setSelectedExpenseId] = usePersistentState('hub.selectedExpense', null, isIdOrNull);
-  const selectedExpenseId = storedExpenseId || initialExpenseId || expenses[0]?.id;
+  // The persisted id may point to a deleted expense: ignore it then (fall back to the first one).
+  const exists = (id) => !!id && expenses.some((e) => e.id === id);
+  const selectedExpenseId = [storedExpenseId, initialExpenseId].find(exists) || expenses[0]?.id || null;
   const [expandedYearList, setExpandedYearList] = usePersistentState('hub.expandedYears', [], Array.isArray);
   const expandedYears = useMemo(() => new Set(expandedYearList), [expandedYearList]);
   const setExpandedYears = useCallback((updater) => {

@@ -5,6 +5,7 @@ import { ensureProfileClass } from '../../core/theme/dynamicThemeService';
 import { formatDate } from '../../modules/documents/documentHelpers';
 import { getUpcomingDaysLabel } from '../../modules/budget/upcomingDaysLabel';
 import { UpcomingGroupedList } from '../../modules/budget/UpcomingGroupedList';
+import '../../core/profiles/profileField.css';
 
 export function NavbarNotificationsDropdown({
   items = [],
@@ -30,7 +31,10 @@ export function NavbarNotificationsDropdown({
           <span className="nav-notif-text">
             <span className="nav-notif-item-title">{item.title}</span>
             <span className="nav-notif-item-sub">
-              {profile && <span className={`dynamic-color-dot nav-notif-profile-dot ${profileTheme}`} title={profile.name} />}
+              {profile
+                ? <span className={`dynamic-color-dot nav-notif-profile-dot ${profileTheme}`} title={profile.name} />
+                : <span className="dynamic-color-dot nav-notif-profile-dot profile-dot-missing" aria-hidden="true" />}
+              {!profile && <span className="nav-notif-item-date">{t('common.profileField.none')} •</span>}
               <span className="nav-notif-item-date">
                 {formatDate(item.date)} • {getUpcomingDaysLabel(t, item)}
               </span>

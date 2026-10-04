@@ -2,13 +2,19 @@ import React, { Suspense } from 'react';
 import { BudgetTab } from '../../modules/budget';
 import { DocumentList, ExpenseList, SettingsView } from './lazyTabs';
 import { TabLoading } from './TabLoading';
+import { DemoDataBanner, FirstProfileGuide } from '../onboarding';
 
 // Budget stays eager (default first tab); the others are lazy chunks.
 export function TabContent(props) {
   return (
-    <Suspense fallback={<TabLoading />}>
-      <TabSwitch {...props} />
-    </Suspense>
+    <>
+      <DemoDataBanner
+        profiles={props.profiles} expenses={props.expenses} documents={props.documents} onDataReset={props.reloadAll}
+      />
+      <Suspense fallback={<TabLoading />}>
+        <TabSwitch {...props} />
+      </Suspense>
+    </>
   );
 }
 
@@ -25,6 +31,7 @@ function TabSwitch(props) {
 
   switch (activeTab) {
     case 'budget':
+      if (!profiles?.length) return <FirstProfileGuide />;
       return (
         <BudgetTab
           expenses={expenses}
@@ -65,6 +72,8 @@ function TabSwitch(props) {
           documents={documents}
           expenses={expenses}
           onSaveExpense={saveExpense}
+          profiles={profiles}
+          onSaveDocument={saveDocument}
           onDataRestored={reloadAll}
         />
       );

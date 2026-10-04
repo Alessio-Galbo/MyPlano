@@ -3,6 +3,7 @@ import { usePersistentState } from '../../hooks/usePersistentState';
 import { todayISO } from '../../core/dates/isoDate';
 import { exportBackupJson, parseBackup, applyParsedBackup, snapshotToBackupJson } from '../../core/storage/exportImportService';
 import { getAttachmentsSize } from '../../core/storage/backupAttachments';
+import { countBackupOrphans } from '../../core/storage/backupValidation';
 import { downloadFile } from './icsExportHelper';
 
 // 'invalidJson' -> 'errInvalidJson' (common.backup.err*)
@@ -52,7 +53,7 @@ export function useBackupActions(onDataRestored) {
       setMessage(errorMessage(parsed.error));
       return;
     }
-    setPending(parsed);
+    setPending({ ...parsed, orphans: countBackupOrphans(parsed.data) });
   };
 
   const confirmImport = async () => {

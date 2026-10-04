@@ -7,6 +7,7 @@ import { requestPersistentStorage } from './persistStorage.js';
 import { offerUpdate, consumeUpdatedFlag } from './autoUpdate.js';
 import { mountUpdatePrompt, mountUpdatedToast } from './mountUpdatePrompt.jsx';
 import './chunkReload.js';
+import { startSystemNotifications } from '../../core/notifications';
 
 const CHECK_EVERY_MS = 60 * 60 * 1000;
 let updating = false;
@@ -37,6 +38,9 @@ const updateSW = registerSW({
 });
 
 if (consumeUpdatedFlag()) mountUpdatedToast();
+
+// Notifiche di sistema (scadenze): mirror in IndexedDB per il SW + controllo all'apertura/ritorno in primo piano.
+startSystemNotifications();
 
 if ('serviceWorker' in navigator) {
   // Controller seguito a ogni cambio: una scheda aperta alla prima installazione (nessun controller, poi

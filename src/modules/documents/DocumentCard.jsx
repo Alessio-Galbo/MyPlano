@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Edit2, Trash2, RefreshCw } from 'lucide-react';
 import { Badge, Toggle, ConfirmModal } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { getDocumentStatus } from './documentHelpers';
 import { DocumentCardMeta } from './DocumentCardMeta';
+import { DocumentCardActions } from './DocumentCardActions';
 import './DocumentCard.css';
 
 export function DocumentCard({
@@ -44,33 +44,12 @@ export function DocumentCard({
           id={`alert-doc-${document.id}`}
         />
 
-        <div className="doc-actions">
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            title={t('documents.quickRenew')}
-            onClick={() => onQuickRenew(document)}
-          >
-            <RefreshCw size={15} />
-          </button>
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            title={t('common.actions.edit')}
-            onClick={() => onEdit(document)}
-          >
-            <Edit2 size={15} />
-          </button>
-          <button
-            type="button"
-            className="btn btn-ghost btn-sm"
-            title={t('common.actions.delete')}
-            aria-label={t('common.actions.delete')}
-            onClick={() => setIsConfirmOpen(true)}
-          >
-            <Trash2 size={15} />
-          </button>
-        </div>
+        <DocumentCardActions
+          title={document.title}
+          onRenew={() => onQuickRenew(document)}
+          onEdit={() => onEdit(document)}
+          onDelete={() => setIsConfirmOpen(true)}
+        />
       </div>
 
       <ConfirmModal

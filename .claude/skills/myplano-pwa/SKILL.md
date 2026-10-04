@@ -1,6 +1,6 @@
 ---
 name: myplano-pwa
-description: PWA di MyPlano (vite-plugin-pwa/Workbox, GitHub Pages sotto /MyPlano/, avviso "Nuova versione disponibile", font self-hosted, icone) - comandi, file, scelte e verifica headless completa. Usala quando tocchi vite.config.js/vite.pwa.js, index.html, public/, src/components/pwa/, il workflow Pages, o quando chiedono "funziona offline?", "pubblica", "aggiorna le icone", "il banner di aggiornamento".
+description: PWA di MyPlano (vite-plugin-pwa/Workbox, GitHub Pages sotto /MyPlano/, avviso "Nuova versione disponibile", notifiche di sistema senza server, font self-hosted, icone) - comandi, file, scelte e verifica headless completa. Usala quando tocchi vite.config.js/vite.pwa.js, index.html, public/, src/components/pwa/, il workflow Pages, o quando chiedono "funziona offline?", "pubblica", "aggiorna le icone", "il banner di aggiornamento", "notifiche sul telefono".
 ---
 
 # MyPlano PWA
@@ -16,6 +16,9 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 - Modalità senza bordi (WCO desktop simulato, fullscreen telefono con notch, modale): `node .claude/skills/myplano-pwa/scripts/display-modes.mjs`.
 - Due schede + chunk lazy mancante dopo un deploy: `node .claude/skills/myplano-pwa/scripts/pwa-update-tabs.mjs`.
 - Icone da `public/favicon.svg` (Chrome headless): `node .claude/skills/myplano-pwa/scripts/icons.mjs`.
+- Notifiche di sistema (≈1 min, preview :18528, CDP 19528): `node .claude/skills/myplano-pwa/scripts/notify-scenario.mjs`
+  → `ALL OK`; screenshot `card-desktop.png`, `card-mobile*.png`, `center.png` in `%TEMP%/myplano-notify-test/`.
+- Test puro (mirror + riassunto + registro): `node Tools/test_system_notifications.mjs`.
 
 ## Dove stanno le cose
 - `vite.config.js`: `base` (build e preview `/MyPlano/` o `MYPLANO_BASE`, dev `/`). `vite.pwa.js`: manifest + Workbox.
@@ -24,6 +27,12 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
   propria con `I18nProvider`, creata solo quando serve), `PwaUpdatePrompt.jsx/.css`, `persistStorage.js`, `chunkReload.js` (`vite:preloadError`),
   `autoUpdate.js` (aggiornamento automatico sicuro), `busyState.js` (dialog aperto / campo con fuoco), `PwaUpdatedToast.jsx`.
 - Aspetto installato: `src/components/layout/DisplayModes.css` (importato da `Navbar.jsx`): safe area, modali, WCO.
+- Notifiche di sistema (senza server): `src/core/notifications/` (`buildMirror.js` puro sopra `getUpcomingDeadlines`,
+  `scheduleMirror.js` → IndexedDB `myplano_notify`/`kv` chiave `mirror`, `notifyLifecycle.js` avviato da `registerPwa.js`,
+  `swBridge.js`, `periodicSync.js`, `environment.js`); eventi in `src/core/state/uiActions.js`
+  (`announceDataChange` da `useAppData` e dal mute della navbar, `requestOpenNotificationCenter` ascoltato da `NavbarNotificationsBtn`); SW: `public/sw-notify-core.js`
+  (puro: `summarize`, `markNotified`) + `public/sw-notify.js` (IDB, `periodicsync`, `message`, `notificationclick`);
+  card `src/modules/settings/SystemNotificationsCard.jsx` + `useSystemNotifications.js`; testi `common.systemNotifications.*`.
 - Testi: `common.pwa.*` in `src/core/i18n/locales/{it,en}/common.json`.
 - Font: `src/styles/fonts.css` (@fontsource-variable Outfit + Plus Jakarta Sans, solo latin/latin-ext, nomi famiglia
   invariati). Icone: `public/pwa-192.png`, `pwa-512.png`, `pwa-maskable-512.png`, `apple-touch-icon-180.png`.
@@ -43,6 +52,10 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 | Altre schede | `controllerchange` non richiesto → banner "aggiornato in un'altra finestra — Aggiorna" | i chunk vecchi non sono più in cache |
 | Chunk vecchio | `vite:preloadError` → un solo ricarico (flag `myplano_pwa_chunk_reload_at` in sessionStorage, 60 s) | dopo un deploy le schede lazy puntano a file spariti |
 | Controlli | `registration.update()` a `visibilitychange` e ogni ora, solo online | sw.js scavalca la cache HTTP (max-age=600) |
+| Notifiche | una notifica riassuntiva (tag `myplano-deadlines`); fasi per occorrenza `soon`/`today`/`overdue`, ognuna una volta sola (registro IDB `log`, `id@data#fase` → giorno, pulito dopo 60 gg) | max 1 avviso al giorno per occorrenza, niente spam quotidiano |
+| Notifiche: chi mostra | sempre il SW (pagina → `postMessage` `myplano-notify-check`; background → `periodicsync`) | una sola logica; `new Notification()` su Android lancia eccezione |
+| Notifiche: mirror | ricalcolato subito a ogni salvataggio (`myplano:data-changed`, notifiche nascoste), più all'avvio, a `visibilitychange` e `storage` come rete di sicurezza; occorrenze da oggi e da oggi+30 (valido ~30 gg), testi già tradotti | il SW non legge localStorage |
+| sw-notify*.js | `workbox.importScripts` con `?v=<sha256>` calcolato in `vite.pwa.js`, `globIgnores` (fuori precache) | file cambiato → sw.js cambiato → SW nuovo, niente cache HTTP vecchia |
 | Persistenza | `storage.persist()`: Chromium a ogni avvio; Firefox una volta, solo installata (`myplano_ui_pwa_persist_asked`) | evitare il popup in scheda normale |
 
 ## Verifica prima di dire "fatto"
@@ -50,6 +63,12 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
 2. `pwa-scenario.mjs` → `ALL OK` e leggi gli screenshot (`2-offline.png`, `3-banner-mobile.png`, `4-warning.png`).
 
 ## Trappole già incontrate
+- Notifiche headless: `Browser.grantPermissions` (`notifications`, `periodicBackgroundSync`), poi
+  `registration.getNotifications()`; `ServiceWorker.dispatchPeriodicSyncEvent` (registrationId da
+  `ServiceWorker.workerRegistrationUpdated`) simula il background; il click di sistema non si simula (`waitUntil` e
+  `openWindow` vogliono un evento vero): si provano i due percorsi pagina (`postMessage` dal target SW e `?notifications=open`).
+  "Installata" = `matchMedia` sovrascritto con `Page.addScriptToEvaluateOnNewDocument`.
+- Le spese di test devono avere il `profileId` del profilo selezionato (`myplano_ui_selectedProfile`), o la lista resta vuota.
 - La UI del banner caricata con `import()` lazy: dopo l'update fatto da un'altra scheda quel chunk non c'è più, il
   banner "ricarica" falliva e `vite:preloadError` ricaricava la pagina senza chiedere → import statico.
 - Headless: `Emulation.setEmulatedMedia` con `display-mode` non fa scattare la media query e le env(titlebar-area-*)

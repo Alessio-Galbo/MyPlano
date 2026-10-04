@@ -38,8 +38,8 @@
     "exportCalendar": "Esporta Calendario (.ics)",
     "backup": "Backup JSON",
     "restore": "Ripristina JSON",
-    "factoryReset": "Ripristina Dati di Esempio",
-    "wipeDatabase": "Azzera Tutto il Database",
+    "factoryReset": "Ricarica i dati di esempio",
+    "wipeDatabase": "Cancella tutto e inizia da zero",
     "close": "Chiudi"
   },
   "profiles": {
@@ -55,7 +55,7 @@
     "deleteProfile": "Elimina profilo",
     "deleteConfirmTitle": "Elimina Profilo e Dati Annessi",
     "deleteConfirmDesc": "Sei sicuro di voler eliminare il profilo \"{name}\"?",
-    "deleteCascadeWarning": "Verranno eliminati definitivamente anche {expensesCount} spese e {documentsCount} documenti associati a questo profilo.",
+    "deleteCascadeWarning": "Verranno eliminati anche {expensesCount} spese e {documentsCount} documenti associati a questo profilo. Subito dopo potrai annullare.",
     "deleteButton": "Elimina Profilo e Dati",
     "perYear": "/a",
     "modalTitle": "Gestione Profili & Nucleo",
@@ -63,7 +63,23 @@
     "viewAllDesc": "Vista d'insieme con tutte le spese e finanze aggregate",
     "editProfile": "Modifica profilo",
     "active": "Attivo",
-    "fund": "Fondo"
+    "fund": "Fondo",
+    "color": "Colore",
+    "colorAuto": "Colore automatico",
+    "colorAutoShort": "Auto",
+    "colorOption": "Colore {n}",
+    "duplicateName": "Esiste già un profilo con questo nome: puoi salvarlo lo stesso, ma sarà difficile distinguerli.",
+    "editHint": "Fondo e introito mensile si modificano nella scheda Bilancio.",
+    "deletedToast": "Profilo \"{name}\" eliminato con {expenses} e {documents}",
+    "expensesCountOne": "{n} spesa",
+    "expensesCountMany": "{n} spese",
+    "documentsCountOne": "{n} documento",
+    "documentsCountMany": "{n} documenti",
+    "restoredToast": "Profilo \"{name}\" ripristinato con le sue spese e i suoi documenti",
+    "settingsTitle": "Profili",
+    "settingsDesc": "Persone o ambiti (casa, auto, famiglia) a cui collegare spese e documenti.",
+    "settingsEmpty": "Nessun profilo: creane uno per iniziare.",
+    "manageButton": "Gestisci"
   },
   "notifications": {
     "title": "Notifiche & Scadenze",
@@ -94,22 +110,73 @@
     "remindMe": "Promemoria",
     "daysBefore": "giorni prima"
   },
+  "onboarding": {
+    "demoTitle": "Stai guardando dati di esempio",
+    "demoDesc": "Profili, spese e documenti che vedi sono inventati, per mostrarti come funziona MyPlano. Quando vuoi, inizia con i tuoi dati.",
+    "startFresh": "Inizia con i miei dati",
+    "keepSamples": "Tieni gli esempi",
+    "confirmTitle": "Cancellare i dati di esempio?",
+    "confirmMessage": "Verranno cancellati i profili di esempio con tutte le loro spese, i documenti, le ricevute salvate nel browser, le strategie del Bilancio e le impostazioni di fondi ed entrate. Lingua e preferenze dell'app restano. Subito dopo potrai creare il tuo primo profilo.",
+    "confirmMixed": "Attenzione: oltre ai dati di esempio ci sono dati inseriti o modificati da te. Verranno cancellati per sempre anche quelli: tutti i profili, le spese, i documenti, le ricevute salvate nel browser, le strategie del Bilancio e le impostazioni dei profili. Se vuoi conservarli, annulla e fai prima un backup da Impostazioni.",
+    "confirmButton": "Sì, cancella e inizia",
+    "firstProfileTitle": "Crea il tuo primo profilo",
+    "firstProfileDesc": "Un profilo è un portafoglio separato (ad esempio Personale, Casa, Lavoro) con il suo saldo, le sue entrate, spese e documenti.",
+    "firstProfileButton": "Crea il primo profilo",
+    "firstProfileOrphans": "Ci sono già {n} spese o documenti in attesa di un profilo: dopo averlo creato potrai assegnarli da Impostazioni.",
+    "firstProfileOrphansOne": "C'è già 1 spesa o documento in attesa di un profilo: dopo averlo creato potrai assegnarlo da Impostazioni.",
+    "needProfile": "Crea prima un profilo"
+  },
+  "systemNotifications": {
+    "title": "Notifiche sul dispositivo",
+    "toggleLabel": "Ricevi avvisi su questo dispositivo",
+    "toggleDesc": "Avvisi del telefono o del computer per le scadenze di oggi, in ritardo e in arrivo",
+    "status": {
+      "active": "Attive",
+      "off": "Disattivate",
+      "denied": "Bloccate dal browser",
+      "unsupported": "Non supportate da questo browser"
+    },
+    "deniedHelp": "Il browser ha bloccato le notifiche per MyPlano. Per sbloccarle apri le impostazioni del sito (icona accanto all'indirizzo, oppure Impostazioni del telefono → App → MyPlano → Notifiche), consenti le notifiche e torna qui.",
+    "mutedNote": "Hai silenziato tutte le notifiche: finché resta così non arriva nessun avviso sul dispositivo.",
+    "capability": {
+      "background": "Su questo dispositivo: avvisi all'apertura dell'app e anche ad app chiusa (controllo in background circa una o due volte al giorno, deciso dal sistema).",
+      "installForBackground": "Su questo dispositivo: avvisi quando apri MyPlano. Installa l'app (menu del browser → Installa app) per riceverli anche ad app chiusa.",
+      "iosAddToHome": "Su iPhone e iPad le notifiche funzionano solo con MyPlano aggiunto alla schermata Home (Condividi → Aggiungi alla schermata Home, iOS 16.4 o successivo) e arrivano quando apri l'app.",
+      "iosOpenOnly": "Su iPhone e iPad gli avvisi arrivano quando apri MyPlano o lo riporti in primo piano: iOS non consente controlli ad app chiusa senza un server.",
+      "openOnly": "Su questo dispositivo: avvisi quando apri MyPlano o lo riporti in primo piano (questo browser non fa controlli ad app chiusa).",
+      "bellOnly": "Questo browser non supporta le notifiche di sistema: restano la campanella e il centro notifiche dell'app."
+    },
+    "testButton": "Invia notifica di prova",
+    "testTitle": "MyPlano",
+    "testBody": "Le notifiche funzionano: qui vedrai le scadenze in arrivo.",
+    "testError": "Impossibile mostrare la notifica di prova",
+    "push": {
+      "titleOne": "MyPlano · 1 scadenza",
+      "titleMany": "MyPlano · {count} scadenze",
+      "today": "{title} oggi",
+      "tomorrow": "{title} domani",
+      "soon": "{title} tra {days} gg",
+      "overdue": "{title} in ritardo di {days} gg",
+      "more": "+{count} altre",
+      "sep": ", "
+    }
+  },
   "settings": {
     "languageLabel": "Lingua dell'Interfaccia",
     "languageDesc": "Seleziona la lingua per testi ed etichette",
     "muteDesc": "Disattiva temporaneamente tutti i promemoria",
     "calendarDesc": "Genera file .ics per Google Calendar, Outlook o Apple Calendar",
     "backupDesc": "Salva una copia di sicurezza di tutti i tuoi dati o ripristina un file",
-    "databaseMaintenance": "Manutenzione & Reset Database",
-    "databaseMaintenanceDesc": "Ripristina i dati di fabbrica di esempio oppure azzera completamente l'archivio",
-    "factoryResetDesc": "Ripristina i profili, le spese e i documenti di default di esempio",
-    "wipeDatabaseDesc": "Elimina definitivamente tutti i dati inseriti per iniziare da zero",
-    "confirmFactoryTitle": "Ripristinare i Dati di Fabbrica?",
-    "confirmFactoryDesc": "Questa operazione sostituirà tutti i dati correnti con il database d'esempio di default (3 profili bilanciati, spese e documenti d'esempio).",
-    "confirmWipeTitle": "Azzerare Completamente il Database?",
-    "confirmWipeDesc": "ATTENZIONE: Questa azione cancellerà TUTTI i profili, le spese e i documenti memorizzati. Anche le ricevute salvate nel browser verranno eliminate. Il database diventerà completamente vuoto.",
-    "confirmWipeButton": "Sì, azzera tutto definitivamente",
-    "confirmFactoryButton": "Sì, ripristina dati di fabbrica"
+    "databaseMaintenance": "Dati dell'app",
+    "databaseMaintenanceDesc": "Torna ai dati di esempio oppure ricomincia con l'app vuota. Lingua e preferenze dell'interfaccia restano.",
+    "factoryResetDesc": "Sostituisce i tuoi dati con 3 profili di esempio, con spese e documenti inventati",
+    "wipeDatabaseDesc": "Elimina per sempre profili, spese, documenti e ricevute salvate nel browser",
+    "confirmFactoryTitle": "Ricaricare i dati di esempio?",
+    "confirmFactoryDesc": "Perderai tutti i tuoi profili, spese, documenti e le ricevute salvate nel browser: al loro posto torneranno i 3 profili di esempio. Se vuoi conservarli, fai prima un backup.",
+    "confirmWipeTitle": "Cancellare tutto e iniziare da zero?",
+    "confirmWipeDesc": "Perderai per sempre tutti i profili, le spese, i documenti e le ricevute salvate nel browser. L'app resterà vuota. Se vuoi conservarli, fai prima un backup.",
+    "confirmWipeButton": "Sì, cancella tutto",
+    "confirmFactoryButton": "Sì, ricarica gli esempi"
   },
   "archive": {
     "title": "Archivio Locale Ricevute & Allegati",
@@ -147,6 +214,8 @@
     "closeDialog": "Chiudi finestra"
   },
   "backup": {
+    "orphans": "{n} elementi senza profilo: potrai assegnarli da Impostazioni.",
+    "orphansOne": "1 elemento senza profilo: potrai assegnarlo da Impostazioni.",
     "lastBackupDays": "Ultimo backup: {days} giorni fa",
     "lastBackupToday": "Ultimo backup: oggi",
     "lastBackupYesterday": "Ultimo backup: ieri",
@@ -177,6 +246,8 @@
   "installmentFix": {
     "banner": "Ci sono {n} rate pagate con una data da correggere: finché non le correggi la rata giusta risulta non pagata.",
     "bannerOne": "C'è 1 rata pagata con una data da correggere: finché non la correggi la rata giusta risulta non pagata.",
+    "bannerShort": "{n} rate pagate con data da correggere",
+    "bannerShortOne": "1 rata pagata con data da correggere",
     "review": "Rivedi",
     "applyOne": "Correggi la rata selezionata",
     "confirmMessageOne": "La rata selezionata verrà spostata alla data corretta, mantenendo stato, data di pagamento e allegati.",
@@ -188,5 +259,37 @@
     "confirmMessage": "Le {n} rate selezionate verranno spostate alla data corretta, mantenendo stato, data di pagamento e allegati.",
     "confirmButton": "Sì, correggi",
     "done": "Date delle rate corrette."
+  },
+  "profileField": {
+    "label": "Profilo",
+    "choose": "Scegli un profilo…",
+    "none": "Senza profilo",
+    "noProfiles": "Non c'è ancora nessun profilo: creane uno per poter salvare.",
+    "createProfile": "Crea profilo"
+  },
+  "orphans": {
+    "title": "Elementi senza profilo",
+    "desc": "Queste spese e questi documenti non appartengono a nessun profilo esistente, quindi non compaiono nelle viste per profilo. Scegli a quale profilo assegnarli: nulla cambia finché non confermi.",
+    "banner": "{n} elementi senza profilo",
+    "bannerOne": "1 elemento senza profilo",
+    "review": "Rivedi",
+    "assignAll": "Assegna tutti a…",
+    "chooseFor": "Profilo per {title}",
+    "expense": "Spesa",
+    "document": "Documento",
+    "untitled": "(senza titolo)",
+    "apply": "Assegna {n} elementi",
+    "applyOne": "Assegna 1 elemento",
+    "confirmTitle": "Assegnare i profili?",
+    "confirmMessage": "{n} elementi verranno spostati nei profili scelti.",
+    "confirmMessageOne": "1 elemento verrà spostato nel profilo scelto.",
+    "confirmButton": "Sì, assegna",
+    "done": "Profili assegnati."
+  },
+  "support": {
+    "title": "Supporta MyPlano",
+    "desc": "MyPlano è gratuito, senza pubblicità e senza tracciamento: i tuoi dati restano sul tuo dispositivo. Se ti è utile, puoi offrirmi un caffè su Ko-fi.",
+    "button": "Offrimi un caffè su Ko-fi",
+    "buttonAria": "Offrimi un caffè su Ko-fi (si apre in una nuova scheda)"
   }
 }

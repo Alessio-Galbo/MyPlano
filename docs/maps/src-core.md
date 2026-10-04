@@ -1,0 +1,60 @@
+<!-- hub:map:start -->
+# Mappa: src/core/
+Torna al [router](../../AGENTS.md) · 56 file
+- [dates/installmentKeyAudit.js](../../src/core/dates/installmentKeyAudit.js): Detects (and, only on explicit request, fixes) installment keys saved one day early by the
+- [dates/isoDate.js](../../src/core/dates/isoDate.js): Calendar dates as 'YYYY-MM-DD' strings, always in LOCAL time.
+- [dates/recurrence.js](../../src/core/dates/recurrence.js): Due dates of an expense: series grid (see recurrenceGrid.js) + installments - excluded - after endD…
+- [dates/recurrenceGrid.js](../../src/core/dates/recurrenceGrid.js): Series grid: recurring due dates computed from the ORIGIN (startDate // nextDueDate) as origin + k·…
+- [i18n/formatters.js](../../src/core/i18n/formatters.js): Locale-aware formatters (Intl). Pure functions: pass `lang` explicitly, or omit it
+- [i18n/i18nContext.jsx](../../src/core/i18n/i18nContext.jsx): I18nProvider, useI18n
+- [i18n/index.js](../../src/core/i18n/index.js): I18nProvider, useI18n, translations, useFormatters
+- [i18n/locales/en/budget.json](../../src/core/i18n/locales/en/budget.json): chiavi: title, subtitle, metrics, incomeHub, initialBalance, zeroDeficit
+- [i18n/locales/en/common.json](../../src/core/i18n/locales/en/common.json): chiavi: appName, appSubtitle, loadingTab, pwa, nav, actions
+- [i18n/locales/en/documents.json](../../src/core/i18n/locales/en/documents.json): chiavi: title, subtitle, addDocument, editDocument, fields, status
+- [i18n/locales/en/expenses.json](../../src/core/i18n/locales/en/expenses.json): chiavi: title, subtitle, addExpense, editExpense, fields, frequencies
+- [i18n/locales/it/budget.json](../../src/core/i18n/locales/it/budget.json): chiavi: title, subtitle, metrics, incomeHub, initialBalance, zeroDeficit
+- [i18n/locales/it/common.json](../../src/core/i18n/locales/it/common.json): chiavi: appName, appSubtitle, loadingTab, pwa, nav, actions
+- [i18n/locales/it/documents.json](../../src/core/i18n/locales/it/documents.json): chiavi: title, subtitle, addDocument, editDocument, fields, status
+- [i18n/locales/it/expenses.json](../../src/core/i18n/locales/it/expenses.json): chiavi: title, subtitle, addExpense, editExpense, fields, frequencies
+- [i18n/translations.js](../../src/core/i18n/translations.js): translations
+- [i18n/useFormatters.js](../../src/core/i18n/useFormatters.js): useFormatters
+- [state/AppContext.jsx](../../src/core/state/AppContext.jsx): AppProvider, useApp
+- [state/index.js](../../src/core/state/index.js): AppProvider, useApp, useAppData
+- [state/useAppData.js](../../src/core/state/useAppData.js): useAppData
+- [state/usePersistedSlice.js](../../src/core/state/usePersistedSlice.js): usePersistedSlice
+- [state/useProfileFinance.js](../../src/core/state/useProfileFinance.js): useProfileFinance
+- [state/useProfileState.js](../../src/core/state/useProfileState.js): useProfileState
+- [state/useStorageSync.js](../../src/core/state/useStorageSync.js): useStorageSync
+- [storage/archiveDirectory.js](../../src/core/storage/archiveDirectory.js): selectArchiveDirectory, getConnectedDirectoryName, disconnectArchiveDirectory, appendRootIndex
+- [storage/archiveNaming.js](../../src/core/storage/archiveNaming.js): uniqueId, receiptBlobKey, freeFileName
+- [storage/archiveService.js](../../src/core/storage/archiveService.js): saveReceiptToArchive, openReceiptFromArchive, selectArchiveDirectory, getConnectedDirectoryName, di…
+- [storage/backupAttachments.js](../../src/core/storage/backupAttachments.js): getAttachmentsSize, collectAttachments, restoreAttachments
+- [storage/backupFormat.js](../../src/core/storage/backupFormat.js): BACKUP_FORMAT, BACKUP_VERSION, APP_VERSION, readAllDataKeys, buildBackup (+2)
+- [storage/backupValidation.js](../../src/core/storage/backupValidation.js): validateBackupData, validateAttachments
+- [storage/backupWriter.js](../../src/core/storage/backupWriter.js): restoreSnapshot, rollback, writeDataAtomically
+- [storage/exportImportService.js](../../src/core/storage/exportImportService.js): exportAllAppData, exportBackupJson, importAllAppData, applyParsedBackup, parseBackup (+2)
+- [storage/idMigrationHelper.js](../../src/core/storage/idMigrationHelper.js): createItemId, ensureItemIds
+- [storage/imageOptimizer.js](../../src/core/storage/imageOptimizer.js): optimizeReceiptImage
+- [storage/index.js](../../src/core/storage/index.js): storageService, INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES
+- [storage/indexedDbHelper.js](../../src/core/storage/indexedDbHelper.js): setDbItem, getDbItem, removeDbItem, getDbEntries, removeDbItemsByPrefix
+- [storage/initialData.js](../../src/core/storage/initialData.js): INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES
+- [storage/jpegExifWriter.js](../../src/core/storage/jpegExifWriter.js): injectJpegExifTags
+- [storage/migrations.js](../../src/core/storage/migrations.js): MIGRATIONS, CURRENT_SCHEMA_VERSION, getSchemaVersion, runMigrations
+- [storage/notificationStorage.js](../../src/core/storage/notificationStorage.js): getDismissedNotificationIds, setDismissedNotificationIds, subscribeDismissedNotifications, dismissN…
+- [storage/profileFinanceStorage.js](../../src/core/storage/profileFinanceStorage.js): profileFinanceStorage
+- [storage/profileMigrationHelper.js](../../src/core/storage/profileMigrationHelper.js): normalizeProfileFinances
+- [storage/safeStorage.js](../../src/core/storage/safeStorage.js): Defensive localStorage access: corrupt JSON never crashes the app (the raw
+- [storage/seedData/seedDocuments.js](../../src/core/storage/seedData/seedDocuments.js): INITIAL_DOCUMENTS
+- [storage/seedData/seedExpenses.js](../../src/core/storage/seedData/seedExpenses.js): INITIAL_EXPENSES
+- [storage/seedData/seedHomeExpenses.js](../../src/core/storage/seedData/seedHomeExpenses.js): SEED_HOME_EXPENSES
+- [storage/seedData/seedPersonalExpenses.js](../../src/core/storage/seedData/seedPersonalExpenses.js): SEED_PERSONAL_EXPENSES
+- [storage/seedData/seedProfiles.js](../../src/core/storage/seedData/seedProfiles.js): INITIAL_PROFILES
+- [storage/seedData/seedWorkExpenses.js](../../src/core/storage/seedData/seedWorkExpenses.js): SEED_WORK_EXPENSES
+- [storage/storageKeys.js](../../src/core/storage/storageKeys.js): Single registry of every localStorage key used by MyPlano.
+- [storage/storageResetService.js](../../src/core/storage/storageResetService.js): storageResetService
+- [storage/storageService.js](../../src/core/storage/storageService.js): storageService
+- [theme/colorHelpers.js](../../src/core/theme/colorHelpers.js): PALETTE, getProfileColorIndex, getCategoryColorIndex, getHexColor, getGoldenHexColor (+2)
+- [theme/colors.css](../../src/core/theme/colors.css)
+- [theme/dynamicThemeService.js](../../src/core/theme/dynamicThemeService.js): getGoldenHue, getCategoryHue, getCategoryColor, ensureCategoryClass, getProfileHue (+4)
+- [types/constants.js](../../src/core/types/constants.js): FREQUENCY_MULTIPLIERS, DOCUMENT_TYPES, EXPENSE_CATEGORIES, ALERT_THRESHOLDS
+<!-- hub:map:end -->

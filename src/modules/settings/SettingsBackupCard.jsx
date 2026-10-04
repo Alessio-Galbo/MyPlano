@@ -12,6 +12,8 @@ export function SettingsBackupCard({ documents, expenses, onDataRestored }) {
   const fileInputRef = useRef(null);
   const b = useBackupActions(onDataRestored);
   const last = lastBackupText(t, b.lastBackupAt);
+  const nOrphans = b.pending?.orphans || 0; // items whose profile is not in the backup
+  const orphanText = nOrphans ? ` ${t(nOrphans === 1 ? 'common.backup.orphansOne' : 'common.backup.orphans', { n: nOrphans })}` : '';
 
   const handleExportIcs = () => {
     const ics = generateIcsCalendar(documents, expenses);
@@ -82,7 +84,7 @@ export function SettingsBackupCard({ documents, expenses, onDataRestored }) {
         onClose={b.cancelImport}
         onConfirm={b.confirmImport}
         title={t('common.backup.confirmTitle')}
-        message={b.pending ? importSummaryText(t, b.pending.meta, language) : ''}
+        message={b.pending ? importSummaryText(t, b.pending.meta, language) + orphanText : ''}
         confirmText={t('common.backup.confirmButton')}
         variant="primary"
       />

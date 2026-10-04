@@ -30,7 +30,8 @@ export function InstallmentFixBanner({ expenses }) {
   return (
     <div className="ifb-banner" role="status">
       <AlertTriangle size={18} className="ifb-icon" aria-hidden="true" />
-      <span className="ifb-text">{t(count === 1 ? 'common.installmentFix.bannerOne' : 'common.installmentFix.banner', { n: count })}</span>
+      <span className="ifb-text ifb-text-long">{t(count === 1 ? 'common.installmentFix.bannerOne' : 'common.installmentFix.banner', { n: count })}</span>
+      <span className="ifb-text ifb-text-short">{t(count === 1 ? 'common.installmentFix.bannerShortOne' : 'common.installmentFix.bannerShort', { n: count })}</span>
       <button type="button" className="ifb-action" onClick={handleReview}>
         {t('common.installmentFix.review')}
         <ArrowRight size={14} aria-hidden="true" />

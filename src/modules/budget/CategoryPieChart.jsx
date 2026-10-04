@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
-import { useI18n, formatCurrency } from '../../core/i18n';
+import { useI18n, useFormatters } from '../../core/i18n';
 import { getCategoryLabel } from '../expenses/expenseHelpers';
 import { getCategoryColor, ensureCategoryClass } from '../../core/theme/dynamicThemeService';
 import './CategoryPieChart.css';
 
 export function CategoryPieChart({ categoryTotals = {}, totalAmount = 0 }) {
   const { t } = useI18n();
+  const { formatCurrency, formatPercent } = useFormatters();
   const [hoveredCat, setHoveredCat] = useState(null);
 
   const formatCurr = (v) =>
     formatCurrency(v, { maximumFractionDigits: 0 });
 
+  // Each slice starts where the previous ones end (offset computed up front, not during render).
   const slices = Object.entries(categoryTotals)
-    .filter(([_, c]) => c > 0)
+    .filter(([, c]) => c > 0)
     .sort((a, b) => b[1] - a[1])
-    .map(([cat, cost]) => ({
-      cat,
-      cost,
-      percent: totalAmount > 0 ? (cost / totalAmount) * 100 : 0,
-      color: getCategoryColor(cat),
-      themeClass: ensureCategoryClass(cat),
-    }));
-
-  let accumulatedPercent = 0;
+    .reduce((acc, [cat, cost]) => {
+      const start = acc.length ? acc[acc.length - 1].start + acc[acc.length - 1].percent : 0;
+      const percent = totalAmount > 0 ? (cost / totalAmount) * 100 : 0;
+      acc.push({ cat, cost, percent, start, color: getCategoryColor(cat), themeClass: ensureCategoryClass(cat) });
+      return acc;
+    }, []);
 
   return (
     <div className="donut-chart-container">
@@ -32,8 +31,7 @@ export function CategoryPieChart({ categoryTotals = {}, totalAmount = 0 }) {
           <circle className="donut-ring" cx="21" cy="21" r="15.9155" />
           {slices.map((slice) => {
             const dashArray = `${slice.percent} ${100 - slice.percent}`;
-            const dashOffset = 100 - accumulatedPercent + 25;
-            accumulatedPercent += slice.percent;
+            const dashOffset = 100 - slice.start + 25;
             const isHovered = hoveredCat === slice.cat;
             return (
               <circle
@@ -71,7 +69,7 @@ export function CategoryPieChart({ categoryTotals = {}, totalAmount = 0 }) {
           >
             <span className={`donut-legend-dot dynamic-color-dot ${slice.themeClass}`} />
             <span className="donut-legend-name">{getCategoryLabel(slice.cat, t)}</span>
-            <span className="donut-legend-percent">{slice.percent.toFixed(1)}%</span>
+            <span className="donut-legend-percent">{formatPercent(slice.percent)}</span>
             <span className="donut-legend-val">{formatCurr(slice.cost)}</span>
           </div>
         ))}

@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
 import { Modal, Button } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
+import { ProfileNameField } from './ProfileNameField';
+import { isDuplicateName } from './profileNames';
+import { ProfileColorPicker } from './ProfileColorPicker';
+import { ProfileFinanceFields } from './ProfileFinanceFields';
 import './AddProfileModal.css';
 
-export function AddProfileModal({ isOpen, onClose, onAddProfile }) {
-  const [name, setName] = useState('');
+// Create a profile, or edit name/colour of `profile` when given (fund and income
+// stay in the Budget tab). Mount it only while open so the fields start fresh.
+export function AddProfileModal({ isOpen, onClose, onAddProfile, onUpdateProfile, profile = null, profiles = [] }) {
+  const { t } = useI18n();
+  const isEdit = Boolean(profile);
+  const [name, setName] = useState(profile?.name || '');
+  const [hue, setHue] = useState(Number.isFinite(profile?.hue) ? profile.hue : null);
   const [initialBalance, setInitialBalance] = useState('');
   const [monthlyIncome, setMonthlyIncome] = useState('');
-  const { t } = useI18n();
+  const isDuplicate = isDuplicateName(name, profiles, profile?.id ?? null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onAddProfile({
-      name: name.trim(),
-      initialBalance: parseFloat(initialBalance) || 0,
-      monthlyIncome: parseFloat(monthlyIncome) || 0,
-    });
-    setName('');
-    setInitialBalance('');
-    setMonthlyIncome('');
+    if (isEdit) {
+      onUpdateProfile(profile.id, { name: name.trim(), hue });
+    } else {
+      onAddProfile({
+        name: name.trim(),
+        ...(hue !== null && { hue }),
+        initialBalance: parseFloat(initialBalance) || 0,
+        monthlyIncome: parseFloat(monthlyIncome) || 0,
+      });
+    }
     onClose();
   };
 
@@ -27,58 +38,21 @@ export function AddProfileModal({ isOpen, onClose, onAddProfile }) {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={t('common.profiles.addProfile')}
+      title={t(isEdit ? 'common.profiles.editProfile' : 'common.profiles.addProfile')}
     >
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="profile-name-input" className="form-label">
-            {t('common.profiles.profileName')}
-          </label>
-          <input
-            id="profile-name-input"
-            type="text"
-            className="form-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={t('common.profiles.profileName')}
-            autoFocus
-            required
+        <ProfileNameField value={name} onChange={setName} isDuplicate={isDuplicate} />
+        <ProfileColorPicker value={hue} onChange={setHue} />
+        {isEdit ? (
+          <p className="profile-edit-hint">{t('common.profiles.editHint')}</p>
+        ) : (
+          <ProfileFinanceFields
+            initialBalance={initialBalance}
+            monthlyIncome={monthlyIncome}
+            onChangeBalance={setInitialBalance}
+            onChangeIncome={setMonthlyIncome}
           />
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="profile-balance-input" className="form-label">
-              {t('common.profiles.initialFund')}
-            </label>
-            <input
-              id="profile-balance-input"
-              type="number"
-              step="0.01"
-              min="0"
-              className="form-input"
-              value={initialBalance}
-              onChange={(e) => setInitialBalance(e.target.value)}
-              placeholder="0.00"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="profile-income-input" className="form-label">
-              {t('common.profiles.monthlyIncome')}
-            </label>
-            <input
-              id="profile-income-input"
-              type="number"
-              step="0.01"
-              min="0"
-              className="form-input"
-              value={monthlyIncome}
-              onChange={(e) => setMonthlyIncome(e.target.value)}
-              placeholder="0.00"
-            />
-          </div>
-        </div>
+        )}
 
         <div className="form-actions">
           <Button variant="secondary" onClick={onClose}>

@@ -1,21 +1,17 @@
 import React from 'react';
-import { useI18n } from '../../core/i18n';
 import { ExpenseListHeader } from './ExpenseListHeader';
-import { ExpenseCardGrid } from './ExpenseCardGrid';
-import { CategoryGroupedView } from './CategoryGroupedView';
-import { ExpenseCategoryFilter } from './ExpenseCategoryFilter';
-import { ExpenseYearSelector } from './ExpenseYearSelector';
+import { ExpenseListBody } from './ExpenseListBody';
 import { ExpenseModalsContainer } from './ExpenseModalsContainer';
 import { useExpenseListState } from './useExpenseListState';
 import { useExpenseFilterData } from './useExpenseFilterData';
 import { useExpensePaymentHandler } from './useExpensePaymentHandler';
 import { useExpenseDeleteHandler } from './useExpenseDeleteHandler';
+import { FirstProfileGuide } from '../../components/onboarding';
 import '../documents/DocumentList.css';
 
 export function ExpenseList({
   expenses, profiles, selectedProfileId, onSaveExpense, onDeleteExpense, onUpdateProfileBalance, onAdjustProfileBalance,
 }) {
-  const { t } = useI18n();
   const state = useExpenseListState(selectedProfileId);
   const filterData = useExpenseFilterData(expenses, selectedProfileId, state);
   const paymentHandler = useExpensePaymentHandler({ profiles, onSaveExpense, onUpdateProfileBalance, onAdjustProfileBalance });
@@ -48,23 +44,19 @@ export function ExpenseList({
     onOpenHistory: (e) => state.setHistoryModalExp(e),
   };
 
+  const handleCreate = () => { state.setEditingExp(null); state.setIsModalOpen(true); };
+  const noProfiles = !profiles?.length;
+
   return (
     <div className="doc-list-view">
       <ExpenseListHeader
-        viewMode={state.viewMode} onToggleViewMode={state.setViewMode}
-        onCreate={() => { state.setEditingExp(null); state.setIsModalOpen(true); }}
+        viewMode={state.viewMode} onToggleViewMode={state.setViewMode} onCreate={handleCreate} disabled={noProfiles}
       />
-      <ExpenseYearSelector selectedRange={state.selectedYearRange} onSelectRange={state.setSelectedYearRange} />
-      <ExpenseCategoryFilter
-        categories={filterData.categories} selectedCategory={filterData.effectiveCategory}
-        onSelectCategory={state.setSelectedCategory} counts={filterData.counts}
-      />
-      {filterData.displayedExpenses.length === 0 ? (
-        <div className="empty-state">{t('expenses.emptyState')}</div>
-      ) : state.viewMode === 'grouped' ? (
-        <CategoryGroupedView {...commonProps} />
-      ) : (
-        <ExpenseCardGrid {...commonProps} />
+      {noProfiles ? <FirstProfileGuide /> : (
+        <ExpenseListBody
+          state={state} filterData={filterData} commonProps={commonProps} expenses={expenses}
+          profiles={profiles} selectedProfileId={selectedProfileId} onCreate={handleCreate}
+        />
       )}
       <ExpenseModalsContainer
         isFormOpen={state.isModalOpen} onCloseForm={() => state.setIsModalOpen(false)}

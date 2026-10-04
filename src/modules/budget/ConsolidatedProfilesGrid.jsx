@@ -45,6 +45,7 @@ export function ConsolidatedProfilesGrid({
   };
 
   const showTotalCard = profiles.length >= 2;
+  if (profiles.length === 0) return null; // the first-profile guide is shown instead
 
   return (
     <div className="consolidated-profiles-section">

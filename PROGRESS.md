@@ -1,21 +1,34 @@
 # MyPlano — Avanzamento lavori
 
 ## Ora
+- [ ] Aggiornamento automatico dell'app installata: da confermare al prossimo rilascio
+- [ ] Fatto, da confermare sul telefono: campo Profilo nei form, elementi senza profilo da assegnare, profili modificabili con Annulla, primo avvio con dati di esempio, notifiche sul dispositivo (apertura + background), avvisi in coda, nuova icona, pulsante Ko-fi
 
 ## Prossimi
-- [ ] Sostituire l'icona PWA (generata da `favicon.svg`, logo Vite) con un logo MyPlano
-- [ ] Toast: oggi massimo 3 visibili (valutare coda/impilamento)
-- [ ] Percentuali del grafico a torta (`CategoryPieChart.jsx`) con il punto anche in italiano
-- [ ] Minori dall'audit: preferenze `myplano_ui_*` e strategie del Bilancio non sincronizzate tra schede (`BudgetTab.jsx`); `hub.selectedExpense` non validato; fondi/entrate dei profili eliminati restano in storage (`useProfileState.js`); dopo "azzera" + import il profilo selezionato torna a "Tutti"; su mobile i toast coprono il fondo pagina
+- [ ] Preavviso configurabile per le notifiche delle spese (oggi 30 gg come la campanella)
+- [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home)
+- [~] Sostituire l'icona PWA (generata da `favicon.svg`, logo Vite) con un logo MyPlano → implementato, in attesa di conferma
+- [~] Toast: oggi massimo 3 visibili (valutare coda/impilamento) → implementato, in attesa di conferma
+- [~] Percentuali del grafico a torta (`CategoryPieChart.jsx`) con il punto anche in italiano → implementato, in attesa di conferma
+- [~] Minori dall'audit: preferenze `myplano_ui_*` e strategie del Bilancio non sincronizzate tra schede (`BudgetTab.jsx`); `hub.selectedExpense` non validato; fondi/entrate dei profili eliminati restano in storage (`useProfileState.js`); dopo "azzera" + import il profilo selezionato torna a "Tutti"; su mobile i toast coprono il fondo pagina → implementato, in attesa di conferma
+- [x] [approvato per l'AI] Generare le mappe: `hub maps apply "MyPlano" --apply` — da proposta `3c8e9294` (2026-10-04) — fatto: 16 mappe in `docs/maps/`
+
+- [~] Profili nei form: la spesa nuova non ha la scelta del profilo e va sempre nel primo (verificato); il documento parte dal primo profilo invece di quello selezionato — `ExpenseFormModal.jsx:29`, `ExpenseFormFields.jsx`, `DocumentFormModal.jsx:34` → implementato, in attesa di conferma
+- [~] Profilo modificabile (oggi solo crea/elimina) e scheda "Profili" in Impostazioni — `src/modules/profiles/`, `SettingsView.jsx` → implementato, in attesa di conferma
+- [~] Primo avvio: avviso "Stai vedendo dati di esempio → Inizia da zero / Tienili" e guida al primo profilo; con 0 profili blocchi + "Crea il tuo primo profilo" — `storageService.js`, `App.jsx`, `ConsolidatedProfilesGrid.jsx`, `BudgetOverview.jsx` → implementato, in attesa di conferma
+- [~] Import: controllare spese/documenti con profili inesistenti — `backupValidation.js` → implementato, in attesa di conferma
+- [~] Eliminazione profilo con "Annulla" o conferma col nome — `DeleteProfileModal.jsx` → implementato, in attesa di conferma
+- [~] Stati vuoti con pulsante "Aggiungi", azioni dei documenti più grandi su mobile, testi più chiari ("Dati di Fabbrica"), codice morto `ProfileBar.jsx` → implementato, in attesa di conferma
 
 ## Per il futuro
 - [ ] Ricerca globale (Ctrl+K) e filtri/ordinamento documenti
 - [ ] Vista calendario mensile e grafico del fondo previsto
-- [ ] Notifiche del browser all'apertura dell'app (senza server non funzionano ad app chiusa: oggi l'alternativa è l'export `.ics`)
+- [~] Notifiche del browser all'apertura dell'app (senza server non funzionano ad app chiusa: oggi l'alternativa è l'export `.ics`) → implementato, in attesa di conferma
 - [ ] Snapshot di backup automatico (oggi il backup è solo manuale)
 
 ## Fatto
-- [x] Pubblicazione su GitHub Pages (repo pubblico, Source: GitHub Actions) e app installata senza bordi con aggiornamento automatico — `vite.pwa.js`, `src/components/pwa/`, `.github/workflows/deploy-pages.yml`
+- [x] App installata senza bordi (confermato dall'utente su S25 Ultra/Chrome dopo reinstallazione; manifest fuori precache, `890b5c5`)
+- [x] Pubblicazione su GitHub Pages (repo pubblico, Source: GitHub Actions) — `.github/workflows/deploy-pages.yml`
 - [x] **Date e ricorrenze**: rate nel giorno giusto (fuso orario/ora legale), fine mese, frequenze "ogni N giorni", `endDate`/`excludedDates` nel bilancio — `src/core/dates/`, `expenseInstallmentHelpers.js`, `budget/calculations/*`
 - [x] **Notifiche**: rispetto di promemoria/preavviso/silenzioso, gruppo "Scaduti", id per occorrenza, stato condiviso tra campanella e Bilancio, ICS con promemoria e ricorrenze — `upcomingHelper.js`, `useNotifications.js`, `icsExportHelper.js`
 - [x] **Robustezza dati**: niente perdite con salvataggi ravvicinati, dati corrotti/memoria piena gestiti, schema versionato, sincronizzazione tra schede, Error Boundary — `useAppData.js`, `safeStorage.js`, `migrations.js`
