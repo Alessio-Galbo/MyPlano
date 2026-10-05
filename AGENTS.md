@@ -29,7 +29,7 @@
 ## Regole
 - globali: `~/.claude/CLAUDE.md` e `~/.gemini/GEMINI.md` (generate da AI-hub)
 ## Skill attive
-- per tag: app-icon-generation, headless-chrome-cdp, modern-web-guidance, pwa-service-worker-checklist, service-troubleshooting
+- per tag: app-icon-generation, headless-chrome-cdp, modern-web-guidance, pwa-service-worker-checklist, service-troubleshooting, web-share-social-preview
 - del progetto: myplano-pwa
 ## Non qui
 - `.agents/`, `.claude/`, `.github/`: config dei tool AI
