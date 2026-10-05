@@ -20,6 +20,8 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
   Verifica e regole (maschere simulate, bordi neri, aggiornamento sul telefono): skill AI-hub `app-icon-generation`.
 - Notifiche di sistema (≈1 min, preview :18528, CDP 19528): `node .claude/skills/myplano-pwa/scripts/notify-scenario.mjs`
   → `ALL OK`; screenshot `card-desktop.png`, `card-mobile*.png`, `center.png` in `%TEMP%/myplano-notify-test/`.
+  Passi 1-5 nel runner, passi 6-9 (centro notifiche, card Impostazioni, app installata, permesso negato) in
+  `notify-scenario-ui.mjs`; preview, snippet IDB/notifiche, dati di prova e screenshot card in `notify-scenario-lib.mjs`.
 - Test puro (mirror + riassunto + registro): `node Tools/test_system_notifications.mjs`.
 
 ## Dove stanno le cose

@@ -1,31 +1,9 @@
 // Recurrence/date tests, no dependencies: `node Tools/test_dates.mjs` (runs itself in Rome and New York TZ).
-import { registerHooks } from 'node:module';
-import { spawnSync } from 'node:child_process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { loaderFor, runInTimezones } from './test_harness.mjs';
 
-if (!process.env.MYPLANO_TZ_CHILD) {
-  let failed = false;
-  for (const tz of ['Europe/Rome', 'America/New_York']) {
-    const r = spawnSync(process.execPath, [fileURLToPath(import.meta.url)], {
-      env: { ...process.env, TZ: tz, MYPLANO_TZ_CHILD: '1' }, stdio: 'inherit',
-    });
-    failed = failed || r.status !== 0;
-  }
-  process.exit(failed ? 1 : 0);
-}
+runInTimezones(import.meta.url);
 
-// Vite-style extensionless imports -> try '.js'.
-registerHooks({
-  resolve(spec, ctx, next) {
-    try { return next(spec, ctx); } catch (e) {
-      if (spec.startsWith('.') && !/\.[cm]?js$/.test(spec)) return next(`${spec}.js`, ctx);
-      throw e;
-    }
-  },
-});
-
-const src = new URL('../src/', import.meta.url);
-const load = (p) => import(pathToFileURL(fileURLToPath(new URL(p, src))).href);
+const load = loaderFor(new URL('../src/', import.meta.url));
 const { getOccurrences } = await load('core/dates/recurrence.js');
 const { todayISO, addDays } = await load('core/dates/isoDate.js');
 const inst = await load('modules/expenses/expenseInstallmentHelpers.js');

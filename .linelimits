@@ -2,4 +2,4 @@
 # Esclusioni predefinite dell'hub già attive: node_modules, .git, dist, build, vendor, *.min.*, lock file...
 limit = 100
 warn = 90
-include = *.py *.js *.jsx *.css *.html
+include = *.py *.js *.jsx *.css *.html *.mjs

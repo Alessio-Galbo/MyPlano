@@ -1,19 +1,7 @@
 // Profile ownership tests, no dependencies: `node Tools/test_profiles.mjs`.
-import { registerHooks } from 'node:module';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { loaderFor } from './test_harness.mjs';
 
-// Vite-style extensionless imports -> try '.js'.
-registerHooks({
-  resolve(spec, ctx, next) {
-    try { return next(spec, ctx); } catch (e) {
-      if (spec.startsWith('.') && !/\.[cm]?js$/.test(spec)) return next(`${spec}.js`, ctx);
-      throw e;
-    }
-  },
-});
-
-const src = new URL('../src/', import.meta.url);
-const load = (p) => import(pathToFileURL(fileURLToPath(new URL(p, src))).href);
+const load = loaderFor(new URL('../src/', import.meta.url));
 const { findOrphanItems, pickInitialProfileId, hasProfile, assignOrphanItems, orphanKey } =
   await load('core/profiles/orphanItems.js');
 const { countBackupOrphans } = await load('core/storage/backupValidation.js');
