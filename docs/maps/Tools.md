@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: Tools/
-Torna al [router](../../AGENTS.md) · 12 file
+Torna al [router](../../AGENTS.md) · 13 file
 - [README.md](../../Tools/README.md): Registro Strumenti & Script di Utilità (/Tools)
 - [check_i18n_keys.py](../../Tools/check_i18n_keys.py): load_json(), resolve_key()
 - [check_line_limits.py](../../Tools/check_line_limits.py): Controllo del limite di righe per file: richiama lo strumento unico di AI-hub.
@@ -10,6 +10,7 @@ Torna al [router](../../AGENTS.md) · 12 file
 - [test_demo_data.mjs](../../Tools/test_demo_data.mjs): Node test for the sample-data detection (src/components/onboarding/demoCompare.js).
 - [test_logic.py](../../Tools/test_logic.py): TestMyPlanoLogic
 - [test_notifications.mjs](../../Tools/test_notifications.mjs): Notification tests, no dependencies: `node Tools/test_notifications.mjs` (runs itself in Rome and N…
+- [test_notifications_alert.mjs](../../Tools/test_notifications_alert.mjs): Per-expense notice (`alertDays`) and the global default, loaded by test_notifications.mjs (not a st…
 - [test_notifications_ics.mjs](../../Tools/test_notifications_ics.mjs): .ics export cases, loaded by test_notifications.mjs (not a standalone runner).
 - [test_profiles.mjs](../../Tools/test_profiles.mjs): Profile ownership tests, no dependencies: `node Tools/test_profiles.mjs`.
 - [test_system_notifications.mjs](../../Tools/test_system_notifications.mjs): System notification tests, no dependencies: `node Tools/test_system_notifications.mjs`.

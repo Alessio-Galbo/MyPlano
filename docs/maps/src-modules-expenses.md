@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/expenses/
-Torna al [router](../../AGENTS.md) · 93 file
+Torna al [router](../../AGENTS.md) · 95 file
 - [AddBillPaymentForm.jsx](../../src/modules/expenses/AddBillPaymentForm.jsx): AddBillPaymentForm
 - [BillPaymentsTable.css](../../src/modules/expenses/BillPaymentsTable.css): Storico bollette su telefono: 5 colonne non stanno in 360 px → ogni bolletta diventa una scheda su…
 - [BillPaymentsTable.jsx](../../src/modules/expenses/BillPaymentsTable.jsx): BillPaymentsTable
@@ -11,6 +11,8 @@ Torna al [router](../../AGENTS.md) · 93 file
 - [DeductFundModal.jsx](../../src/modules/expenses/DeductFundModal.jsx): DeductFundModal
 - [DeleteExpenseConfirmModal.css](../../src/modules/expenses/DeleteExpenseConfirmModal.css)
 - [DeleteExpenseConfirmModal.jsx](../../src/modules/expenses/DeleteExpenseConfirmModal.jsx): DeleteExpenseConfirmModal
+- [ExpenseAlertFields.css](../../src/modules/expenses/ExpenseAlertFields.css)
+- [ExpenseAlertFields.jsx](../../src/modules/expenses/ExpenseAlertFields.jsx): ExpenseAlertFields
 - [ExpenseAttachmentCard.css](../../src/modules/expenses/ExpenseAttachmentCard.css)
 - [ExpenseAttachmentCard.jsx](../../src/modules/expenses/ExpenseAttachmentCard.jsx): ExpenseAttachmentCard
 - [ExpenseAttachmentUploadBox.jsx](../../src/modules/expenses/ExpenseAttachmentUploadBox.jsx): ExpenseAttachmentUploadBox
@@ -74,7 +76,5 @@ Torna al [router](../../AGENTS.md) · 93 file
 - [ReceiptAttachmentButton.css](../../src/modules/expenses/ReceiptAttachmentButton.css)
 - [ReceiptAttachmentButton.jsx](../../src/modules/expenses/ReceiptAttachmentButton.jsx): ReceiptAttachmentButton
 - [VariableExpenseHistoryView.jsx](../../src/modules/expenses/VariableExpenseHistoryView.jsx): VariableExpenseHistoryView
-- [YearGroupedExpenseGrid.css](../../src/modules/expenses/YearGroupedExpenseGrid.css)
-- [YearGroupedExpenseGrid.jsx](../../src/modules/expenses/YearGroupedExpenseGrid.jsx): YearGroupedExpenseGrid
 - [continua](src-modules-expenses-2.md): parte 2
 <!-- hub:map:end -->

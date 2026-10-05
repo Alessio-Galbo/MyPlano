@@ -1,16 +1,7 @@
 # MyPlano — Avanzamento lavori
 
 ## Ora
-- [ ] Icona dell'app senza bordi neri (maskable a tutto campo, apple-touch opaca) + skill generica AI-hub `app-icon-generation` — fatto, da confermare sul telefono
-- [ ] Tolta la card "Profili" da Impostazioni (doppione del selettore in alto) — fatto, da confermare
 - [ ] Preavviso configurabile per le spese ("Avvisami N giorni prima" + predefinito in Impostazioni) — fatto, da confermare — `alertDays.js`, `ExpenseAlertFields.jsx`, `ExpenseAlertDefaultRow.jsx`
-
-## Da confermare (implementato, in attesa di prova)
-- [ ] Aggiornamento automatico dell'app installata ("Aggiornato alla nuova versione")
-- [ ] Notifiche sul dispositivo (Impostazioni → Notifiche sul dispositivo, notifica di prova, avvisi in background su Android)
-- [ ] Elementi senza profilo: banner in Bilancio + card in Impostazioni + riepilogo all'import — `src/core/profiles/`, `OrphanItemsCard.jsx`
-- [ ] Preferenze e strategie del Bilancio allineate tra schede aperte; selezione Hub di spesa eliminata
-- [ ] Pulsante Ko-fi in Impostazioni ("Supporta MyPlano")
 
 ## Prossimi
 - [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home)
@@ -21,6 +12,8 @@
 - [ ] Snapshot di backup automatico (oggi il backup è solo manuale)
 
 ## Fatto
+- [x] [approvato per l'AI] Strumento per `python Tools/check_line_limits.py` (proposta `06d7eda7`): usa AI-hub se c'è, altrimenti `Tools/line_limits_fallback.py` con le regole di `.linelimits` — prova: stessi risultati nei due modi (404 file, 0 oltre, 14 in avviso), exit 1 con un file da 101 righe, deploy GitHub verde
+- [x] Confermati dall'utente il 2026-10-05 (2): icona senza bordi neri (+ skill `app-icon-generation`), card Profili tolta da Impostazioni, aggiornamento automatico dell'app installata, notifiche sul dispositivo, elementi senza profilo, preferenze e strategie tra schede, pulsante Ko-fi — commit `902021d`, `c37675a`
 - [x] Confermati dall'utente il 2026-10-05: avvisi in coda (toast), percentuali della torta, profilo corrente nella nuova spesa, primo avvio e onboarding (anche domanda notifiche), eliminazione profilo con Annulla, profilo modificabile, niente scorrimento orizzontale su telefono, "Rimuovi gli esempi" — commit `902021d`, `08bced8`
 - [x] [approvato per l'AI] Mappe del progetto: `hub maps apply "MyPlano" --apply` — 16 mappe in `docs/maps/`
 - [x] App installata senza bordi (confermato dall'utente su S25 Ultra/Chrome dopo reinstallazione; manifest fuori precache, `890b5c5`)

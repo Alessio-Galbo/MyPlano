@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/profiles/
-Torna al [router](../../AGENTS.md) · 19 file
+Torna al [router](../../AGENTS.md) · 17 file
 - [AddProfileModal.css](../../src/modules/profiles/AddProfileModal.css)
 - [AddProfileModal.jsx](../../src/modules/profiles/AddProfileModal.jsx): AddProfileModal
 - [DeleteProfileModal.jsx](../../src/modules/profiles/DeleteProfileModal.jsx): DeleteProfileModal
@@ -12,9 +12,7 @@ Torna al [router](../../AGENTS.md) · 19 file
 - [ProfileManagementModal.jsx](../../src/modules/profiles/ProfileManagementModal.jsx): ProfileManagementModal
 - [ProfileModalsContainer.jsx](../../src/modules/profiles/ProfileModalsContainer.jsx): ProfileModalsContainer
 - [ProfileNameField.jsx](../../src/modules/profiles/ProfileNameField.jsx): ProfileNameField
-- [SettingsProfilesCard.css](../../src/modules/profiles/SettingsProfilesCard.css)
-- [SettingsProfilesCard.jsx](../../src/modules/profiles/SettingsProfilesCard.jsx): SettingsProfilesCard
-- [index.js](../../src/modules/profiles/index.js): AddProfileModal, DeleteProfileModal, ProfileModalsContainer, ProfileManagementModal, SettingsProfil…
+- [index.js](../../src/modules/profiles/index.js): AddProfileModal, DeleteProfileModal, ProfileModalsContainer, ProfileManagementModal, useProfileDial…
 - [profileColors.js](../../src/modules/profiles/profileColors.js): PROFILE_HUES, hasCustomHue, useProfileColorStyles
 - [profileNames.js](../../src/modules/profiles/profileNames.js): isDuplicateName
 - [useProfileDeleteWithUndo.js](../../src/modules/profiles/useProfileDeleteWithUndo.js): useProfileDeleteWithUndo

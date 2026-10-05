@@ -1,6 +1,7 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/settings/
-Torna al [router](../../AGENTS.md) · 25 file
+Torna al [router](../../AGENTS.md) · 26 file
+- [ExpenseAlertDefaultRow.jsx](../../src/modules/settings/ExpenseAlertDefaultRow.jsx): ExpenseAlertDefaultRow
 - [InstallmentKeyFixCard.css](../../src/modules/settings/InstallmentKeyFixCard.css)
 - [InstallmentKeyFixCard.jsx](../../src/modules/settings/InstallmentKeyFixCard.jsx): InstallmentKeyFixCard
 - [OrphanItemsAnchor.js](../../src/modules/settings/OrphanItemsAnchor.js): ORPHAN_ITEMS_ANCHOR, scrollToOrphanItemsCard

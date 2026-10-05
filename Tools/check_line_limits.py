@@ -1,41 +1,25 @@
+"""Controllo del limite di righe per file: richiama lo strumento unico di AI-hub.
+
+Uso: python Tools/check_line_limits.py [CARTELLA ...]   (default: tutto il progetto)
+Regole del progetto (limite, avviso, estensioni, esclusioni) nel file `.linelimits` alla radice.
+Hub: variabile d'ambiente AI_HUB_PATH (se manca: D:\\Git Repositories\\AI-hub).
+Exit: 0 tutto in regola, 1 almeno un file oltre il limite.
+Senza AI-hub usa Tools/line_limits_fallback.py (stesse regole, nessuna dipendenza).
+Altre opzioni passate allo strumento: --json, --quiet, --limit N, --warn N.
+"""
+
 import os
+import subprocess
 import sys
 
-TARGET_EXTENSIONS = {'.py', '.js', '.jsx', '.css', '.html'}
-EXCLUDED_DIRS = {'node_modules', '.git', 'dist', 'build'}
-LINE_LIMIT = 100
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HUB = os.environ.get("AI_HUB_PATH") or r"D:\Git Repositories\AI-hub"
+TOOL = os.path.join(HUB, "tools", "check_line_limits.py")
 
-def check_files(root_dir):
-    violations = []
-    total_checked = 0
-
-    for root, dirs, files in os.walk(root_dir):
-        dirs[:] = [d for d in dirs if d not in EXCLUDED_DIRS]
-        for f in files:
-            ext = os.path.splitext(f)[1]
-            if ext in TARGET_EXTENSIONS:
-                file_path = os.path.join(root, f)
-                total_checked += 1
-                try:
-                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as fp:
-                        lines = fp.readlines()
-                        count = len(lines)
-                        if count > LINE_LIMIT:
-                            violations.append((file_path, count))
-                except Exception as e:
-                    print(f"Error reading {file_path}: {e}")
-
-    print(f"Total files checked: {total_checked}")
-    if violations:
-        print(f"Found {len(violations)} files exceeding {LINE_LIMIT} lines:")
-        for path, count in violations:
-            print(f"  - {path}: {count} lines")
-        return False
-    else:
-        print(f"All {total_checked} files are strictly <= {LINE_LIMIT} lines! PASSED.")
-        return True
-
-if __name__ == '__main__':
-    target = sys.argv[1] if len(sys.argv) > 1 else '.'
-    success = check_files(target)
-    sys.exit(0 if success else 1)
+if __name__ == "__main__":
+    if not os.path.isfile(TOOL):
+        # Senza AI-hub (es. GitHub Actions): controllo autonomo con le stesse regole di `.linelimits`.
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from line_limits_fallback import main
+        sys.exit(main(ROOT))
+    sys.exit(subprocess.call([sys.executable, TOOL, "--root", ROOT, *sys.argv[1:]]))

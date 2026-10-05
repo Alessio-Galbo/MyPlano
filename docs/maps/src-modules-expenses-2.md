@@ -1,6 +1,8 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/expenses/
-Torna al [router](../../AGENTS.md) · 93 file
+Torna al [router](../../AGENTS.md) · 95 file
+- [YearGroupedExpenseGrid.css](../../src/modules/expenses/YearGroupedExpenseGrid.css)
+- [YearGroupedExpenseGrid.jsx](../../src/modules/expenses/YearGroupedExpenseGrid.jsx): YearGroupedExpenseGrid
 - [expenseExpansionHelper.js](../../src/modules/expenses/expenseExpansionHelper.js): expandExpensesForRange
 - [expenseHelpers.js](../../src/modules/expenses/expenseHelpers.js): advanceNextDueDate, getExpenseUrgency, getCategoryLabel, getExpenseBadgeInfo, formatCurrency
 - [expenseHistoryHelpers.js](../../src/modules/expenses/expenseHistoryHelpers.js): getAllExpenseInstallmentDates, getInstallmentDetails

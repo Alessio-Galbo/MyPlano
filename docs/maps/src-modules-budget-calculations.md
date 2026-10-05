@@ -8,6 +8,6 @@ Torna al [router](../../AGENTS.md) · 9 file
 - [recurrenceHelper.js](../../src/modules/budget/calculations/recurrenceHelper.js): getUnpaidDueDates, getDueDatesInMonth, countDueInMonth, isExpenseDueInMonth
 - [survivalPhasesHelper.js](../../src/modules/budget/calculations/survivalPhasesHelper.js): computeAdaptiveSurvivalPhases
 - [timelineGroupingHelper.js](../../src/modules/budget/calculations/timelineGroupingHelper.js): groupTimelineByCategory
-- [upcomingHelper.js](../../src/modules/budget/calculations/upcomingHelper.js): OVERDUE_HORIZON_DAYS, EXPENSE_WINDOW_DAYS, DEFAULT_DOC_ALERT_DAYS, expenseNotifId, documentNotifId…
+- [upcomingHelper.js](../../src/modules/budget/calculations/upcomingHelper.js): OVERDUE_HORIZON_DAYS, DEFAULT_DOC_ALERT_DAYS, expenseNotifId, documentNotifId, getDocumentAlertDays…
 - [zeroDeficitFormula.js](../../src/modules/budget/calculations/zeroDeficitFormula.js): calculateZeroDeficitQuota
 <!-- hub:map:end -->

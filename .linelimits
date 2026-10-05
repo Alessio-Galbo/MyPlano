@@ -1,0 +1,5 @@
+# Limite di righe per file: letto da AI-hub tools/check_line_limits.py (Tools/check_line_limits.py lo richiama).
+# Esclusioni predefinite dell'hub già attive: node_modules, .git, dist, build, vendor, *.min.*, lock file...
+limit = 100
+warn = 90
+include = *.py *.js *.jsx *.css *.html
