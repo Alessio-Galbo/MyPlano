@@ -3,20 +3,12 @@ import socket
 import subprocess
 import os
 
-try:
-    import qrcode
-except ImportError:
-    qrcode = None
+# IP LAN + QR: strumento condiviso AI-hub (tools/lan_qr.py), cartella da AI_HUB_PATH
+sys.path.append(os.path.join(os.environ.get('AI_HUB_PATH') or r'D:\Git Repositories\AI-hub', 'tools'))
+from lan_qr import lan_ip, qr_text  # noqa: E402
 
 def get_local_ip():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
-    except Exception:
-        return '127.0.0.1'
+    return lan_ip()
 
 def main():
     sys.stdout.reconfigure(encoding='utf-8')
@@ -32,12 +24,13 @@ def main():
     print(f"  📱 Smartphone:   {network_url}")
     print("=" * 54)
 
-    if qrcode:
+    try:
+        qr = qr_text(network_url)
+    except ImportError:
+        qr = None
+    if qr:
         print("\n  Inquadra il QR Code con lo smartphone (stesso hotspot):")
-        qr = qrcode.QRCode(border=1)
-        qr.add_data(network_url)
-        qr.make(fit=True)
-        qr.print_ascii(invert=True)
+        print(qr, end="")
     else:
         print("\n  (Modulo qrcode non disponibile, apri il link smartphone)")
 

@@ -1,69 +1,69 @@
 <!-- hub:map:start -->
 # Mappa: src/components/
 Torna al [router](../../AGENTS.md) · 65 file
-- [ErrorBoundary.css](../../src/components/ErrorBoundary.css)
-- [ErrorBoundary.jsx](../../src/components/ErrorBoundary.jsx): ErrorBoundary
+- [ErrorBoundary.css](../../src/components/ErrorBoundary.css): Stili della schermata di errore mostrata quando l'interfaccia va in crash
+- [ErrorBoundary.jsx](../../src/components/ErrorBoundary.jsx): Cattura i crash della UI, mostra un messaggio tradotto e scarica i dati grezzi salvati
 - [layout/DisplayModes.css](../../src/components/layout/DisplayModes.css): App installata senza bordi (manifest display_override: window-controls-overlay → fullscreen → stand…
-- [layout/Navbar.css](../../src/components/layout/Navbar.css)
-- [layout/Navbar.jsx](../../src/components/layout/Navbar.jsx): Navbar
-- [layout/NavbarNotificationsBtn.css](../../src/components/layout/NavbarNotificationsBtn.css)
-- [layout/NavbarNotificationsBtn.jsx](../../src/components/layout/NavbarNotificationsBtn.jsx): NavbarNotificationsBtn
-- [layout/NavbarNotificationsDropdown.jsx](../../src/components/layout/NavbarNotificationsDropdown.jsx): NavbarNotificationsDropdown
-- [layout/NavbarProfileSelector.css](../../src/components/layout/NavbarProfileSelector.css)
-- [layout/NavbarProfileSelector.jsx](../../src/components/layout/NavbarProfileSelector.jsx): NavbarProfileSelector
-- [layout/NotificationCenterItem.jsx](../../src/components/layout/NotificationCenterItem.jsx): NotificationCenterItem
-- [layout/NotificationCenterModal.css](../../src/components/layout/NotificationCenterModal.css)
-- [layout/NotificationCenterModal.jsx](../../src/components/layout/NotificationCenterModal.jsx): NotificationCenterModal
-- [layout/NotificationCenterTabs.jsx](../../src/components/layout/NotificationCenterTabs.jsx): NotificationCenterTabs
-- [layout/TabContent.jsx](../../src/components/layout/TabContent.jsx): TabContent
-- [layout/TabLoading.css](../../src/components/layout/TabLoading.css)
-- [layout/TabLoading.jsx](../../src/components/layout/TabLoading.jsx): TabLoading
-- [layout/index.js](../../src/components/layout/index.js): Navbar, TabContent
-- [layout/lazyTabs.js](../../src/components/layout/lazyTabs.js): DocumentList, ExpenseList, SettingsView
-- [layout/notificationDismissal.js](../../src/components/layout/notificationDismissal.js): isItemDismissed, pruneDismissedIds
-- [layout/useNavbarNotificationsBehavior.js](../../src/components/layout/useNavbarNotificationsBehavior.js): useNavbarNotificationsBehavior
-- [layout/useNotifications.js](../../src/components/layout/useNotifications.js): useNotifications
-- [onboarding/DemoDataBanner.css](../../src/components/onboarding/DemoDataBanner.css)
-- [onboarding/DemoDataBanner.jsx](../../src/components/onboarding/DemoDataBanner.jsx): DemoDataBanner
-- [onboarding/EmptyStateCard.jsx](../../src/components/onboarding/EmptyStateCard.jsx): EmptyStateCard
-- [onboarding/FirstProfileGuide.jsx](../../src/components/onboarding/FirstProfileGuide.jsx): FirstProfileGuide
-- [onboarding/NotifyPromptBody.jsx](../../src/components/onboarding/NotifyPromptBody.jsx): NotifyPromptBody
-- [onboarding/NotifyPromptCard.jsx](../../src/components/onboarding/NotifyPromptCard.jsx): NotifyPromptCard
-- [onboarding/OnboardingArea.jsx](../../src/components/onboarding/OnboardingArea.jsx): OnboardingArea
-- [onboarding/OnboardingCards.css](../../src/components/onboarding/OnboardingCards.css)
+- [layout/Navbar.css](../../src/components/layout/Navbar.css): Stili della barra in alto: logo, schede di navigazione, layout sticky
+- [layout/Navbar.jsx](../../src/components/layout/Navbar.jsx): Barra di navigazione principale con logo, selettore profilo e schede delle sezioni
+- [layout/NavbarNotificationsBtn.css](../../src/components/layout/NavbarNotificationsBtn.css): Stili della campanella notifiche: badge, menu a tendina, voci, pulsanti e footer
+- [layout/NavbarNotificationsBtn.jsx](../../src/components/layout/NavbarNotificationsBtn.jsx): Campanella notifiche con badge, apertura menu, centro notifiche e dettaglio scadenze
+- [layout/NavbarNotificationsDropdown.jsx](../../src/components/layout/NavbarNotificationsDropdown.jsx): Menu a tendina delle notifiche: elenco scadenze con profilo, data, chiusura singola
+- [layout/NavbarProfileSelector.css](../../src/components/layout/NavbarProfileSelector.css): Stili della pillola del profilo attivo nella navbar: nome, totale annuo, icona
+- [layout/NavbarProfileSelector.jsx](../../src/components/layout/NavbarProfileSelector.jsx): Pillola del profilo attivo col totale annuo delle spese; apre la gestione profili
+- [layout/NotificationCenterItem.jsx](../../src/components/layout/NotificationCenterItem.jsx): Voce del centro notifiche: tipo, importo, profilo, data e pulsante mostra/nascondi
+- [layout/NotificationCenterModal.css](../../src/components/layout/NotificationCenterModal.css): Stili del centro notifiche: barra stato, schede, lista scorrevole, voci e icone per tipo
+- [layout/NotificationCenterModal.jsx](../../src/components/layout/NotificationCenterModal.jsx): Modale centro notifiche: filtro per scheda, conteggi attive/nascoste, ripristino tutte
+- [layout/NotificationCenterTabs.jsx](../../src/components/layout/NotificationCenterTabs.jsx): Schede del centro notifiche: tutte (con totale), spese, documenti
+- [layout/TabContent.jsx](../../src/components/layout/TabContent.jsx): Contenuto della scheda attiva: Budget, documenti, spese, impostazioni + area onboarding
+- [layout/TabLoading.css](../../src/components/layout/TabLoading.css): Stili dello spinner di caricamento scheda, con animazione ridotta se richiesto
+- [layout/TabLoading.jsx](../../src/components/layout/TabLoading.jsx): Fallback Suspense con spinner e testo mentre si scarica il chunk di una scheda
+- [layout/index.js](../../src/components/layout/index.js): Aggregatore del layout: esporta Navbar e TabContent
+- [layout/lazyTabs.js](../../src/components/layout/lazyTabs.js): Caricamento lazy delle schede documenti, spese e impostazioni in chunk separati
+- [layout/notificationDismissal.js](../../src/components/layout/notificationDismissal.js): Logica notifiche nascoste: verifica e pulizia id, conversione id legacy per occorrenza
+- [layout/useNavbarNotificationsBehavior.js](../../src/components/layout/useNavbarNotificationsBehavior.js): Hook campanella navbar: chiusura su clic esterno/Esc, apertura centro, sync silenzio
+- [layout/useNotifications.js](../../src/components/layout/useNotifications.js): Hook scadenze: liste attive/avvisi, nascondi/ripristina notifiche, pulizia id
+- [onboarding/DemoDataBanner.css](../../src/components/onboarding/DemoDataBanner.css): Stili del banner dati demo: layout flessibile, azioni a tutta larghezza su mobile
+- [onboarding/DemoDataBanner.jsx](../../src/components/onboarding/DemoDataBanner.jsx): Banner dati di esempio: tienili, riparti da zero o rimuovi residui, con conferma
+- [onboarding/EmptyStateCard.jsx](../../src/components/onboarding/EmptyStateCard.jsx): Scheda per lista vuota con titolo, messaggio e pulsante opzionale "aggiungi"
+- [onboarding/FirstProfileGuide.jsx](../../src/components/onboarding/FirstProfileGuide.jsx): Guida al primo profilo quando non ce ne sono; segnala elementi orfani senza profilo
+- [onboarding/NotifyPromptBody.jsx](../../src/components/onboarding/NotifyPromptBody.jsx): Card che propone di attivare le notifiche sul dispositivo, con pulsanti Attiva/Più tardi
+- [onboarding/NotifyPromptCard.jsx](../../src/components/onboarding/NotifyPromptCard.jsx): Mostra una sola volta l'invito alle notifiche se supportate, consentite e non già attive
+- [onboarding/OnboardingArea.jsx](../../src/components/onboarding/OnboardingArea.jsx): Area in cima alle schede: banner dati di esempio e poi l'invito ad attivare le notifiche
+- [onboarding/OnboardingCards.css](../../src/components/onboarding/OnboardingCards.css): Stili delle card di onboarding: guida al primo profilo, icona, titolo, nota e pulsante
 - [onboarding/demoCompare.js](../../src/components/onboarding/demoCompare.js): Pure comparisons between the stored data and the sample (seed) data. No imports, so the
-- [onboarding/demoDataMatch.js](../../src/components/onboarding/demoDataMatch.js): readCustomProfileIds, isDemoData, getDemoLeftovers, removeDemoLeftovers
-- [onboarding/index.js](../../src/components/onboarding/index.js): OnboardingArea, FirstProfileGuide, EmptyStateCard, isDemoData
-- [onboarding/useDemoData.js](../../src/components/onboarding/useDemoData.js): useDemoData
+- [onboarding/demoDataMatch.js](../../src/components/onboarding/demoDataMatch.js): Riconosce i dati di esempio intatti e rimuove gli avanzi demo da profili, spese e documenti
+- [onboarding/index.js](../../src/components/onboarding/index.js): Esporta i componenti di onboarding e la funzione isDemoData
+- [onboarding/useDemoData.js](../../src/components/onboarding/useDemoData.js): Hook per lo stato del banner demo: tenere i dati d'esempio, ripartire da zero o rimuoverli
 - [pwa/PwaUpdatePrompt.css](../../src/components/pwa/PwaUpdatePrompt.css): Avviso aggiornamento: in basso a sinistra (i toast stanno a destra), sopra le modali.
-- [pwa/PwaUpdatePrompt.jsx](../../src/components/pwa/PwaUpdatePrompt.jsx): PwaUpdatePrompt
-- [pwa/PwaUpdatedToast.jsx](../../src/components/pwa/PwaUpdatedToast.jsx): PwaUpdatedToast
+- [pwa/PwaUpdatePrompt.jsx](../../src/components/pwa/PwaUpdatePrompt.jsx): Banner di aggiornamento PWA con avviso se ci sono finestre aperte con dati non salvati
+- [pwa/PwaUpdatedToast.jsx](../../src/components/pwa/PwaUpdatedToast.jsx): Notifica temporanea che conferma l'avvenuto aggiornamento dell'app, chiusa dopo 4 secondi
 - [pwa/autoUpdate.js](../../src/components/pwa/autoUpdate.js): Aggiornamento automatico SICURO: una versione nuova (SW in attesa, o attivata da un'altra scheda) s…
 - [pwa/busyState.js](../../src/components/pwa/busyState.js): L'utente sta lavorando? Una finestra di dialogo aperta (form di spesa/documento, impostazioni, conf…
 - [pwa/chunkReload.js](../../src/components/pwa/chunkReload.js): Chunk di una versione vecchia non più scaricabile (dopo un deploy le schede lazy di lazyTabs.js pun…
-- [pwa/mountUpdatePrompt.jsx](../../src/components/pwa/mountUpdatePrompt.jsx): mountUpdatePrompt, mountUpdatedToast
+- [pwa/mountUpdatePrompt.jsx](../../src/components/pwa/mountUpdatePrompt.jsx): Monta in una radice React separata il banner di aggiornamento o il toast di conferma
 - [pwa/persistStorage.js](../../src/components/pwa/persistStorage.js): Archiviazione persistente: chiede al browser di non cancellare localStorage/IndexedDB sotto pressio…
 - [pwa/registerPwa.js](../../src/components/pwa/registerPwa.js): Entry PWA (caricato da index.html, separato da main.jsx): registra il Service Worker generato da
-- [ui/Badge.css](../../src/components/ui/Badge.css)
-- [ui/Badge.jsx](../../src/components/ui/Badge.jsx): Badge
-- [ui/Button.css](../../src/components/ui/Button.css)
-- [ui/Button.jsx](../../src/components/ui/Button.jsx): Button
-- [ui/ConfirmModal.css](../../src/components/ui/ConfirmModal.css)
-- [ui/ConfirmModal.jsx](../../src/components/ui/ConfirmModal.jsx): ConfirmModal
-- [ui/Modal.css](../../src/components/ui/Modal.css)
-- [ui/Modal.jsx](../../src/components/ui/Modal.jsx): Modal
-- [ui/SuggestInput.css](../../src/components/ui/SuggestInput.css)
-- [ui/SuggestInput.jsx](../../src/components/ui/SuggestInput.jsx): SuggestInput
-- [ui/Toast.css](../../src/components/ui/Toast.css)
-- [ui/Toast.jsx](../../src/components/ui/Toast.jsx): Toast
-- [ui/ToastContext.js](../../src/components/ui/ToastContext.js): ToastContext, useToast
+- [ui/Badge.css](../../src/components/ui/Badge.css): Stili del badge a pillola con le varianti success, warning, danger, neutral e primary
+- [ui/Badge.jsx](../../src/components/ui/Badge.jsx): Etichetta a pillola riutilizzabile con variante di colore e icona facoltativa
+- [ui/Button.css](../../src/components/ui/Button.css): Stili dei pulsanti: dimensioni sm/md/lg, varianti primary, secondary, danger e disabilitato
+- [ui/Button.jsx](../../src/components/ui/Button.jsx): Pulsante riutilizzabile con variante, dimensione, icona facoltativa e attributi aggiuntivi
+- [ui/ConfirmModal.css](../../src/components/ui/ConfirmModal.css): Stili della finestra di conferma: contenuto centrato, icona colorata per tipo e pulsanti
+- [ui/ConfirmModal.jsx](../../src/components/ui/ConfirmModal.jsx): Modale di conferma con icona di avviso e pulsanti annulla/conferma (default elimina)
+- [ui/Modal.css](../../src/components/ui/Modal.css): Stili della modale: sfondo sfocato, contenitore, animazione d'apertura, header e chiusura
+- [ui/Modal.jsx](../../src/components/ui/Modal.jsx): Modale generica in portal con titolo, sottotitolo, pulsante chiudi e accessibilità
+- [ui/SuggestInput.css](../../src/components/ui/SuggestInput.css): Stili del campo con suggerimenti: input, pulsante a tendina, menu ed elementi
+- [ui/SuggestInput.jsx](../../src/components/ui/SuggestInput.jsx): Campo testo con menu di suggerimenti filtrati: mostra l'etichetta, salva il valore
+- [ui/Toast.css](../../src/components/ui/Toast.css): Stili delle notifiche toast: area fissa, varianti successo/errore/info, azione e chiudi
+- [ui/Toast.jsx](../../src/components/ui/Toast.jsx): Singola notifica toast con icona, azione, chiusura, timer in pausa al passaggio e swipe
+- [ui/ToastContext.js](../../src/components/ui/ToastContext.js): Contesto React dei toast e hook useToast per mostrare/chiudere notifiche
 - [ui/ToastMobile.css](../../src/components/ui/ToastMobile.css): Swipe to dismiss (useToastSwipe sets --toast-dx while dragging).
-- [ui/ToastProvider.jsx](../../src/components/ui/ToastProvider.jsx): ToastProvider
-- [ui/Toggle.css](../../src/components/ui/Toggle.css)
-- [ui/Toggle.jsx](../../src/components/ui/Toggle.jsx): Toggle
-- [ui/index.js](../../src/components/ui/index.js): Button, Badge, Modal, Toggle, SuggestInput (+3)
+- [ui/ToastProvider.jsx](../../src/components/ui/ToastProvider.jsx): Provider dei toast: coda, limite visibili, avvisi di errore storage, portal nel body
+- [ui/Toggle.css](../../src/components/ui/Toggle.css): Stili dell'interruttore on/off: binario, pallino, stato attivo ed etichetta
+- [ui/Toggle.jsx](../../src/components/ui/Toggle.jsx): Interruttore on/off basato su checkbox con etichetta opzionale e stato disabilitato
+- [ui/index.js](../../src/components/ui/index.js): Esporta i componenti UI condivisi: Button, Badge, Modal, Toggle, toast e altri
 - [ui/toastQueue.js](../../src/components/ui/toastQueue.js): Pure queue logic for the toast stack: nothing is dropped when many toasts arrive at once,
-- [ui/useModalA11y.js](../../src/components/ui/useModalA11y.js): useModalA11y
-- [ui/useToastLimit.js](../../src/components/ui/useToastLimit.js): useToastLimit
-- [ui/useToastSwipe.js](../../src/components/ui/useToastSwipe.js): useToastSwipe
+- [ui/useModalA11y.js](../../src/components/ui/useModalA11y.js): Hook accessibilità modali: pila aperte, Esc, trappola Tab, focus e blocco scroll
+- [ui/useToastLimit.js](../../src/components/ui/useToastLimit.js): Hook che limita i toast visibili: massimo 2 su telefono, altrimenti il valore standard
+- [ui/useToastSwipe.js](../../src/components/ui/useToastSwipe.js): Hook per chiudere un toast trascinandolo di lato con touch/penna, pausa durante il drag
 <!-- hub:map:end -->

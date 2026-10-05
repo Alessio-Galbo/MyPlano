@@ -1,80 +1,80 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/expenses/
 Torna al [router](../../AGENTS.md) · 95 file
-- [AddBillPaymentForm.jsx](../../src/modules/expenses/AddBillPaymentForm.jsx): AddBillPaymentForm
+- [AddBillPaymentForm.jsx](../../src/modules/expenses/AddBillPaymentForm.jsx): Form per aggiungere un pagamento bolletta: data, importo e nota
 - [BillPaymentsTable.css](../../src/modules/expenses/BillPaymentsTable.css): Storico bollette su telefono: 5 colonne non stanno in 360 px → ogni bolletta diventa una scheda su…
-- [BillPaymentsTable.jsx](../../src/modules/expenses/BillPaymentsTable.jsx): BillPaymentsTable
-- [CategoryGroupedView.css](../../src/modules/expenses/CategoryGroupedView.css)
-- [CategoryGroupedView.jsx](../../src/modules/expenses/CategoryGroupedView.jsx): CategoryGroupedView
-- [ContractSectionFields.jsx](../../src/modules/expenses/ContractSectionFields.jsx): ContractSectionFields
-- [DeductFundModal.css](../../src/modules/expenses/DeductFundModal.css)
-- [DeductFundModal.jsx](../../src/modules/expenses/DeductFundModal.jsx): DeductFundModal
-- [DeleteExpenseConfirmModal.css](../../src/modules/expenses/DeleteExpenseConfirmModal.css)
-- [DeleteExpenseConfirmModal.jsx](../../src/modules/expenses/DeleteExpenseConfirmModal.jsx): DeleteExpenseConfirmModal
-- [ExpenseAlertFields.css](../../src/modules/expenses/ExpenseAlertFields.css)
-- [ExpenseAlertFields.jsx](../../src/modules/expenses/ExpenseAlertFields.jsx): ExpenseAlertFields
-- [ExpenseAttachmentCard.css](../../src/modules/expenses/ExpenseAttachmentCard.css)
-- [ExpenseAttachmentCard.jsx](../../src/modules/expenses/ExpenseAttachmentCard.jsx): ExpenseAttachmentCard
-- [ExpenseAttachmentUploadBox.jsx](../../src/modules/expenses/ExpenseAttachmentUploadBox.jsx): ExpenseAttachmentUploadBox
-- [ExpenseAttachmentsCol.css](../../src/modules/expenses/ExpenseAttachmentsCol.css)
-- [ExpenseAttachmentsCol.jsx](../../src/modules/expenses/ExpenseAttachmentsCol.jsx): ExpenseAttachmentsCol
-- [ExpenseCard.css](../../src/modules/expenses/ExpenseCard.css)
-- [ExpenseCard.jsx](../../src/modules/expenses/ExpenseCard.jsx): ExpenseCard
-- [ExpenseCardFooter.jsx](../../src/modules/expenses/ExpenseCardFooter.jsx): ExpenseCardFooter
-- [ExpenseCardGrid.jsx](../../src/modules/expenses/ExpenseCardGrid.jsx): ExpenseCardGrid
-- [ExpenseCategoryFilter.css](../../src/modules/expenses/ExpenseCategoryFilter.css)
-- [ExpenseCategoryFilter.jsx](../../src/modules/expenses/ExpenseCategoryFilter.jsx): ExpenseCategoryFilter
-- [ExpenseDatabaseHub.css](../../src/modules/expenses/ExpenseDatabaseHub.css)
-- [ExpenseDatabaseMainCol.jsx](../../src/modules/expenses/ExpenseDatabaseMainCol.jsx): ExpenseDatabaseMainCol
-- [ExpenseDatabaseTreeItem.jsx](../../src/modules/expenses/ExpenseDatabaseTreeItem.jsx): ExpenseDatabaseTreeItem
-- [ExpenseDatabaseTreeSidebar.css](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.css)
-- [ExpenseDatabaseTreeSidebar.jsx](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.jsx): ExpenseDatabaseTreeSidebar
-- [ExpenseDatabaseYearGroup.css](../../src/modules/expenses/ExpenseDatabaseYearGroup.css)
-- [ExpenseDatabaseYearGroup.jsx](../../src/modules/expenses/ExpenseDatabaseYearGroup.jsx): ExpenseDatabaseYearGroup
-- [ExpenseEmptyState.jsx](../../src/modules/expenses/ExpenseEmptyState.jsx): ExpenseEmptyState
-- [ExpenseFormFields.jsx](../../src/modules/expenses/ExpenseFormFields.jsx): ExpenseFormFields
-- [ExpenseFormModal.css](../../src/modules/expenses/ExpenseFormModal.css)
-- [ExpenseFormModal.jsx](../../src/modules/expenses/ExpenseFormModal.jsx): ExpenseFormModal
-- [ExpenseFrequencyField.css](../../src/modules/expenses/ExpenseFrequencyField.css)
-- [ExpenseFrequencyField.jsx](../../src/modules/expenses/ExpenseFrequencyField.jsx): ExpenseFrequencyField
-- [ExpenseHistoryModal.css](../../src/modules/expenses/ExpenseHistoryModal.css)
-- [ExpenseHistoryModal.jsx](../../src/modules/expenses/ExpenseHistoryModal.jsx): ExpenseHistoryModal
-- [ExpenseHistoryModalContent.jsx](../../src/modules/expenses/ExpenseHistoryModalContent.jsx): ExpenseHistoryModalContent
-- [ExpenseList.jsx](../../src/modules/expenses/ExpenseList.jsx): ExpenseList
-- [ExpenseListBody.jsx](../../src/modules/expenses/ExpenseListBody.jsx): ExpenseListBody
-- [ExpenseListHeader.css](../../src/modules/expenses/ExpenseListHeader.css)
-- [ExpenseListHeader.jsx](../../src/modules/expenses/ExpenseListHeader.jsx): ExpenseListHeader
-- [ExpenseModalsContainer.jsx](../../src/modules/expenses/ExpenseModalsContainer.jsx): ExpenseModalsContainer
-- [ExpenseTags.css](../../src/modules/expenses/ExpenseTags.css)
-- [ExpenseTags.jsx](../../src/modules/expenses/ExpenseTags.jsx): ExpenseTags
-- [ExpenseVariableBadge.css](../../src/modules/expenses/ExpenseVariableBadge.css)
-- [ExpenseVariableBadge.jsx](../../src/modules/expenses/ExpenseVariableBadge.jsx): ExpenseVariableBadge
-- [ExpenseYearSelector.css](../../src/modules/expenses/ExpenseYearSelector.css)
-- [ExpenseYearSelector.jsx](../../src/modules/expenses/ExpenseYearSelector.jsx): ExpenseYearSelector
-- [FixedExpenseHistoryView.css](../../src/modules/expenses/FixedExpenseHistoryView.css)
-- [FixedExpenseHistoryView.jsx](../../src/modules/expenses/FixedExpenseHistoryView.jsx): FixedExpenseHistoryView
-- [FixedExtraPaymentForm.jsx](../../src/modules/expenses/FixedExtraPaymentForm.jsx): FixedExtraPaymentForm
-- [FixedHistoryTopBar.jsx](../../src/modules/expenses/FixedHistoryTopBar.jsx): FixedHistoryTopBar
-- [FixedInstallmentRow.css](../../src/modules/expenses/FixedInstallmentRow.css)
-- [FixedInstallmentRow.jsx](../../src/modules/expenses/FixedInstallmentRow.jsx): FixedInstallmentRow
-- [FixedInstallmentsHeader.jsx](../../src/modules/expenses/FixedInstallmentsHeader.jsx): FixedInstallmentsHeader
-- [FixedInstallmentsTable.jsx](../../src/modules/expenses/FixedInstallmentsTable.jsx): FixedInstallmentsTable
-- [FixedNextDueEditor.css](../../src/modules/expenses/FixedNextDueEditor.css)
-- [FixedNextDueEditor.jsx](../../src/modules/expenses/FixedNextDueEditor.jsx): FixedNextDueEditor
-- [InstallmentAttTrigger.jsx](../../src/modules/expenses/InstallmentAttTrigger.jsx): InstallmentAttTrigger
-- [InstallmentAttachmentItem.jsx](../../src/modules/expenses/InstallmentAttachmentItem.jsx): InstallmentAttachmentItem
-- [InstallmentAttachmentsButton.jsx](../../src/modules/expenses/InstallmentAttachmentsButton.jsx): InstallmentAttachmentsButton
-- [InstallmentAttachmentsModal.css](../../src/modules/expenses/InstallmentAttachmentsModal.css)
-- [InstallmentAttachmentsModal.jsx](../../src/modules/expenses/InstallmentAttachmentsModal.jsx): InstallmentAttachmentsModal
-- [InstallmentDateCell.jsx](../../src/modules/expenses/InstallmentDateCell.jsx): InstallmentDateCell
-- [InstallmentInlineAttachments.css](../../src/modules/expenses/InstallmentInlineAttachments.css)
-- [InstallmentInlineAttachments.jsx](../../src/modules/expenses/InstallmentInlineAttachments.jsx): InstallmentInlineAttachments
-- [InstallmentStatusButton.jsx](../../src/modules/expenses/InstallmentStatusButton.jsx): InstallmentStatusButton
-- [NewContractForm.jsx](../../src/modules/expenses/NewContractForm.jsx): NewContractForm
-- [PastDateNotice.css](../../src/modules/expenses/PastDateNotice.css)
-- [PastDateNotice.jsx](../../src/modules/expenses/PastDateNotice.jsx): PastDateNotice
-- [ReceiptAttachmentButton.css](../../src/modules/expenses/ReceiptAttachmentButton.css)
-- [ReceiptAttachmentButton.jsx](../../src/modules/expenses/ReceiptAttachmentButton.jsx): ReceiptAttachmentButton
-- [VariableExpenseHistoryView.jsx](../../src/modules/expenses/VariableExpenseHistoryView.jsx): VariableExpenseHistoryView
+- [BillPaymentsTable.jsx](../../src/modules/expenses/BillPaymentsTable.jsx): Tabella pagamenti bollette con stato contratto attivo/precedente ed eliminazione
+- [CategoryGroupedView.css](../../src/modules/expenses/CategoryGroupedView.css): Stili della vista spese per categoria: sezioni, header sticky, badge e totali
+- [CategoryGroupedView.jsx](../../src/modules/expenses/CategoryGroupedView.jsx): Spese raggruppate per categoria con conteggio, totale del periodo e quota annua
+- [ContractSectionFields.jsx](../../src/modules/expenses/ContractSectionFields.jsx): Interruttore spesa variabile e campi del contratto (nome, data di inizio, importo stimato)
+- [DeductFundModal.css](../../src/modules/expenses/DeductFundModal.css): Stili della finestra per scalare la spesa dal fondo: riepilogo e anteprima del saldo
+- [DeductFundModal.jsx](../../src/modules/expenses/DeductFundModal.jsx): Finestra di conferma per scalare la rata dal fondo, con il saldo prima e dopo
+- [DeleteExpenseConfirmModal.css](../../src/modules/expenses/DeleteExpenseConfirmModal.css): Stili della finestra di eliminazione spesa: riquadro della spesa e schede delle opzioni
+- [DeleteExpenseConfirmModal.jsx](../../src/modules/expenses/DeleteExpenseConfirmModal.jsx): Finestra di eliminazione: elimina una rata, termina la ricorrenza o cancella tutto
+- [ExpenseAlertFields.css](../../src/modules/expenses/ExpenseAlertFields.css): Stili dell'interruttore avviso e del campo giorni disabilitato nel form spesa
+- [ExpenseAlertFields.jsx](../../src/modules/expenses/ExpenseAlertFields.jsx): Campi del form per attivare l'avviso spesa e scegliere quanti giorni prima notificare
+- [ExpenseAttachmentCard.css](../../src/modules/expenses/ExpenseAttachmentCard.css): Stili della scheda allegato: icona PDF o immagine, nome, dimensione, pulsanti
+- [ExpenseAttachmentCard.jsx](../../src/modules/expenses/ExpenseAttachmentCard.jsx): Scheda di un allegato della rata con dimensione, apertura dall'archivio ed eliminazione
+- [ExpenseAttachmentUploadBox.jsx](../../src/modules/expenses/ExpenseAttachmentUploadBox.jsx): Riquadri per caricare allegati (PDF o immagini) o scattare una foto con la fotocamera
+- [ExpenseAttachmentsCol.css](../../src/modules/expenses/ExpenseAttachmentsCol.css): Stili della colonna allegati: stato vuoto, intestazione, contatore, riquadri di caricamento
+- [ExpenseAttachmentsCol.jsx](../../src/modules/expenses/ExpenseAttachmentsCol.jsx): Colonna degli allegati di una rata: salva i file nell'archivio e mostra l'elenco
+- [ExpenseCard.css](../../src/modules/expenses/ExpenseCard.css): Stili della scheda spesa: intestazione, importo, etichetta di frequenza, dettagli
+- [ExpenseCard.jsx](../../src/modules/expenses/ExpenseCard.jsx): Scheda spesa: stato della rata, importo, scadenza e salto alla rata dell'anno dopo
+- [ExpenseCardFooter.jsx](../../src/modules/expenses/ExpenseCardFooter.jsx): Piede della scheda spesa: segna pagata o non pagata, cronologia, modifica, elimina
+- [ExpenseCardGrid.jsx](../../src/modules/expenses/ExpenseCardGrid.jsx): Griglia di card spese; passa al raggruppamento per anno se ci sono più anni
+- [ExpenseCategoryFilter.css](../../src/modules/expenses/ExpenseCategoryFilter.css): Stili barra filtri categoria: pillole, stato attivo e contatori
+- [ExpenseCategoryFilter.jsx](../../src/modules/expenses/ExpenseCategoryFilter.jsx): Barra di pillole per filtrare le spese per categoria con conteggi
+- [ExpenseDatabaseHub.css](../../src/modules/expenses/ExpenseDatabaseHub.css): Layout del modale archivio spese: pannello dettaglio, vista mobile a schermo intero
+- [ExpenseDatabaseMainCol.jsx](../../src/modules/expenses/ExpenseDatabaseMainCol.jsx): Colonna dettaglio archivio: storico spesa variabile o rate della spesa fissa
+- [ExpenseDatabaseTreeItem.jsx](../../src/modules/expenses/ExpenseDatabaseTreeItem.jsx): Voce foglia dell'albero archivio: pallino categoria, titolo e importo
+- [ExpenseDatabaseTreeSidebar.css](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.css): Stili sidebar ad albero: ricerca, barra ordinamento, area scorrevole
+- [ExpenseDatabaseTreeSidebar.jsx](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.jsx): Sidebar archivio spese: ricerca, ordinamenti, nascondi anni passati, albero anni
+- [ExpenseDatabaseYearGroup.css](../../src/modules/expenses/ExpenseDatabaseYearGroup.css): Stili gruppi anno dell'albero e voci spesa (selezione, pallino, importo)
+- [ExpenseDatabaseYearGroup.jsx](../../src/modules/expenses/ExpenseDatabaseYearGroup.jsx): Gruppo anno espandibile nell'albero archivio con elenco spese dell'anno
+- [ExpenseEmptyState.jsx](../../src/modules/expenses/ExpenseEmptyState.jsx): Stato vuoto lista spese: invito a crearne una o avviso filtri attivi
+- [ExpenseFormFields.jsx](../../src/modules/expenses/ExpenseFormFields.jsx): Campi del form spesa: titolo, profilo, categoria, importo, frequenza, avvisi
+- [ExpenseFormModal.css](../../src/modules/expenses/ExpenseFormModal.css): Stili form spesa: righe, etichette, card spesa variabile, pulsanti azione
+- [ExpenseFormModal.jsx](../../src/modules/expenses/ExpenseFormModal.jsx): Modale crea/modifica spesa: valori predefiniti, giorni avviso, salvataggio e toast
+- [ExpenseFrequencyField.css](../../src/modules/expenses/ExpenseFrequencyField.css): Stili riga frequenza personalizzata: intervallo numerico e unità
+- [ExpenseFrequencyField.jsx](../../src/modules/expenses/ExpenseFrequencyField.jsx): Campo form per frequenza spesa, con intervallo personalizzato in mesi o giorni
+- [ExpenseHistoryModal.css](../../src/modules/expenses/ExpenseHistoryModal.css): Stili modale storico spese: barra stato contratto, form nuova bolletta, griglia
+- [ExpenseHistoryModal.jsx](../../src/modules/expenses/ExpenseHistoryModal.jsx): Modale database hub spese: albero anni, preferenze, stato e conferme eliminazione
+- [ExpenseHistoryModalContent.jsx](../../src/modules/expenses/ExpenseHistoryModalContent.jsx): Layout a tre colonne del database hub: albero spese, rate e allegati (mobile a step)
+- [ExpenseList.jsx](../../src/modules/expenses/ExpenseList.jsx): Vista principale tab spese: stato, filtri, pagamenti, eliminazioni e modali
+- [ExpenseListBody.jsx](../../src/modules/expenses/ExpenseListBody.jsx): Filtri anno/categoria e card spese (lista o raggruppate) o stato vuoto
+- [ExpenseListHeader.css](../../src/modules/expenses/ExpenseListHeader.css): Stili intestazione spese: toggle modalità vista e pulsante crea, responsive
+- [ExpenseListHeader.jsx](../../src/modules/expenses/ExpenseListHeader.jsx): Intestazione spese con titolo, toggle vista lista/raggruppata e pulsante aggiungi
+- [ExpenseModalsContainer.jsx](../../src/modules/expenses/ExpenseModalsContainer.jsx): Raccoglie le modali spese: form, storico, detrazione fondi, conferma eliminazione
+- [ExpenseTags.css](../../src/modules/expenses/ExpenseTags.css): Stili dei tag spesa: profilo con pallino colore, categoria, tipo fisso/variabile
+- [ExpenseTags.jsx](../../src/modules/expenses/ExpenseTags.jsx): Tag di una spesa: profilo, categoria e tipo fisso o variabile con icone
+- [ExpenseVariableBadge.css](../../src/modules/expenses/ExpenseVariableBadge.css): Stili del badge per spese variabili con importo medio
+- [ExpenseVariableBadge.jsx](../../src/modules/expenses/ExpenseVariableBadge.jsx): Badge spesa variabile: stima iniziale o media calcolata sulle bollette pagate
+- [ExpenseYearSelector.css](../../src/modules/expenses/ExpenseYearSelector.css): Stili selettore anni: pillole anno, intervallo da/a, layout mobile
+- [ExpenseYearSelector.jsx](../../src/modules/expenses/ExpenseYearSelector.jsx): Filtro anni delle spese: anno singolo, tutti gli anni o intervallo da/a
+- [FixedExpenseHistoryView.css](../../src/modules/expenses/FixedExpenseHistoryView.css): Stili storico spesa fissa: card prossima scadenza, sezione rate, pulsanti extra e ordina
+- [FixedExpenseHistoryView.jsx](../../src/modules/expenses/FixedExpenseHistoryView.jsx): Vista storico di una spesa fissa: barra in alto, intestazione rate, form extra, tabella
+- [FixedExtraPaymentForm.jsx](../../src/modules/expenses/FixedExtraPaymentForm.jsx): Form per aggiungere un pagamento extra con data, importo e nota
+- [FixedHistoryTopBar.jsx](../../src/modules/expenses/FixedHistoryTopBar.jsx): Card con prossima scadenza modificabile e importo/frequenza regolari della spesa
+- [FixedInstallmentRow.css](../../src/modules/expenses/FixedInstallmentRow.css): Stili tabella rate: righe, riga attiva, importi extra, icone stato, trigger allegati
+- [FixedInstallmentRow.jsx](../../src/modules/expenses/FixedInstallmentRow.jsx): Riga tabella rata: data modificabile, elimina extra, importo, stato, allegati
+- [FixedInstallmentsHeader.jsx](../../src/modules/expenses/FixedInstallmentsHeader.jsx): Intestazione elenco rate: conteggio, aggiungi extra, nascondi passate, ordinamento
+- [FixedInstallmentsTable.jsx](../../src/modules/expenses/FixedInstallmentsTable.jsx): Tabella rate con colonne data, importo, stato, allegati; una riga per data
+- [FixedNextDueEditor.css](../../src/modules/expenses/FixedNextDueEditor.css): Stili editor prossima scadenza: visualizzazione, input data, pulsanti salva/annulla
+- [FixedNextDueEditor.jsx](../../src/modules/expenses/FixedNextDueEditor.jsx): Mostra e modifica in linea la data della prossima scadenza della spesa fissa
+- [InstallmentAttTrigger.jsx](../../src/modules/expenses/InstallmentAttTrigger.jsx): Pulsante graffetta con numero allegati della rata; seleziona la rata al clic
+- [InstallmentAttachmentItem.jsx](../../src/modules/expenses/InstallmentAttachmentItem.jsx): Card allegato rata: icona PDF/immagine, nome, dimensione, apri ed elimina
+- [InstallmentAttachmentsButton.jsx](../../src/modules/expenses/InstallmentAttachmentsButton.jsx): Pulsante che apre il modale allegati: mostra conteggio o invito ad allegare
+- [InstallmentAttachmentsModal.css](../../src/modules/expenses/InstallmentAttachmentsModal.css): Stili modale allegati: box caricamento, lista, stato vuoto, card file
+- [InstallmentAttachmentsModal.jsx](../../src/modules/expenses/InstallmentAttachmentsModal.jsx): Modale per caricare nell'archivio ed eliminare ricevute allegate a una rata
+- [InstallmentDateCell.jsx](../../src/modules/expenses/InstallmentDateCell.jsx): Cella data di una rata con modifica inline della data e pill per rate extra
+- [InstallmentInlineAttachments.css](../../src/modules/expenses/InstallmentInlineAttachments.css): Stili dei chip allegati inline delle rate: icone PDF/immagine, rimozione, aggiunta
+- [InstallmentInlineAttachments.jsx](../../src/modules/expenses/InstallmentInlineAttachments.jsx): Allegati multipli di una rata: caricamento in archivio, apertura e rimozione chip
+- [InstallmentStatusButton.jsx](../../src/modules/expenses/InstallmentStatusButton.jsx): Pulsante icona che alterna lo stato pagata/da pagare di una rata
+- [NewContractForm.jsx](../../src/modules/expenses/NewContractForm.jsx): Form per nuovo contratto di spesa variabile: nome, data inizio, importo stimato
+- [PastDateNotice.css](../../src/modules/expenses/PastDateNotice.css): Stili dell'avviso giallo per data di scadenza nel passato e data proposta
+- [PastDateNotice.jsx](../../src/modules/expenses/PastDateNotice.jsx): Avviso data passata: chiede se già pagata e propone la prossima scadenza futura
+- [ReceiptAttachmentButton.css](../../src/modules/expenses/ReceiptAttachmentButton.css): Stili dei pulsanti allega/visualizza/elimina ricevuta di una scadenza
+- [ReceiptAttachmentButton.jsx](../../src/modules/expenses/ReceiptAttachmentButton.jsx): Pulsante per allegare, aprire o rimuovere una singola ricevuta di pagamento
+- [VariableExpenseHistoryView.jsx](../../src/modules/expenses/VariableExpenseHistoryView.jsx): Storico spesa variabile: contratto attivo, media bollette, aggiunta/eliminazione
 - [continua](src-modules-expenses-2.md): parte 2
 <!-- hub:map:end -->

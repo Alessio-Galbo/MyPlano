@@ -33,5 +33,5 @@
 - del progetto: myplano-pwa
 ## Non qui
 - `.agents/`, `.claude/`, `.github/`: config dei tool AI
-- `dist/`, `node_modules/`: dipendenze/generati
+- `__pycache__/`, `dist/`, `node_modules/`: dipendenze/generati
 <!-- hub:map:end -->

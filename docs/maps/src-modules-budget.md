@@ -1,80 +1,80 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/budget/
 Torna al [router](../../AGENTS.md) · 80 file
-- [BudgetKpiCarousel.jsx](../../src/modules/budget/BudgetKpiCarousel.jsx): BudgetKpiCarousel
-- [BudgetKpiGrid.css](../../src/modules/budget/BudgetKpiGrid.css)
-- [BudgetKpiGrid.jsx](../../src/modules/budget/BudgetKpiGrid.jsx): BudgetKpiGrid
-- [BudgetOverview.css](../../src/modules/budget/BudgetOverview.css)
-- [BudgetOverview.jsx](../../src/modules/budget/BudgetOverview.jsx): BudgetOverview
-- [BudgetTab.jsx](../../src/modules/budget/BudgetTab.jsx): BudgetTab
-- [CashflowGroupedRow.css](../../src/modules/budget/CashflowGroupedRow.css)
-- [CashflowGroupedRow.jsx](../../src/modules/budget/CashflowGroupedRow.jsx): CashflowGroupedRow
-- [CashflowTableRow.jsx](../../src/modules/budget/CashflowTableRow.jsx): CashflowTableRow
-- [CashflowTimeline.css](../../src/modules/budget/CashflowTimeline.css)
-- [CashflowTimeline.jsx](../../src/modules/budget/CashflowTimeline.jsx): CashflowTimeline
-- [CategoryPieChart.css](../../src/modules/budget/CategoryPieChart.css)
-- [CategoryPieChart.jsx](../../src/modules/budget/CategoryPieChart.jsx): CategoryPieChart
-- [ColdStartActionCard.css](../../src/modules/budget/ColdStartActionCard.css)
-- [ColdStartActionsCarousel.css](../../src/modules/budget/ColdStartActionsCarousel.css)
-- [ColdStartActionsCarousel.jsx](../../src/modules/budget/ColdStartActionsCarousel.jsx): ColdStartActionsCarousel
-- [ColdStartCard.css](../../src/modules/budget/ColdStartCard.css)
-- [ColdStartCard.jsx](../../src/modules/budget/ColdStartCard.jsx): ColdStartCard
-- [ColdStartDeficitBanner.jsx](../../src/modules/budget/ColdStartDeficitBanner.jsx): ColdStartDeficitBanner
-- [ColdStartDeficitList.css](../../src/modules/budget/ColdStartDeficitList.css)
-- [ColdStartDeficitList.jsx](../../src/modules/budget/ColdStartDeficitList.jsx): ColdStartDeficitList
-- [ColdStartOptionCard.css](../../src/modules/budget/ColdStartOptionCard.css)
-- [ColdStartOptionCard.jsx](../../src/modules/budget/ColdStartOptionCard.jsx): ColdStartOptionCard
-- [ColdStartPlanBCard.jsx](../../src/modules/budget/ColdStartPlanBCard.jsx): ColdStartPlanBCard
-- [ColdStartStrategyCarousel.css](../../src/modules/budget/ColdStartStrategyCarousel.css)
-- [ColdStartStrategyCarousel.jsx](../../src/modules/budget/ColdStartStrategyCarousel.jsx): ColdStartStrategyCarousel
-- [ColdStartSuccessView.jsx](../../src/modules/budget/ColdStartSuccessView.jsx): ColdStartSuccessView
-- [ColdStartTopUpCard.jsx](../../src/modules/budget/ColdStartTopUpCard.jsx): ColdStartTopUpCard
-- [ConsolidatedDiscretionaryCard.jsx](../../src/modules/budget/ConsolidatedDiscretionaryCard.jsx): ConsolidatedDiscretionaryCard
-- [ConsolidatedOverview.css](../../src/modules/budget/ConsolidatedOverview.css)
-- [ConsolidatedOverviewCard.jsx](../../src/modules/budget/ConsolidatedOverviewCard.jsx): ConsolidatedOverviewCard
-- [ConsolidatedProfileCard.css](../../src/modules/budget/ConsolidatedProfileCard.css)
-- [ConsolidatedProfileCard.jsx](../../src/modules/budget/ConsolidatedProfileCard.jsx): ConsolidatedProfileCard
-- [ConsolidatedProfileStatusBar.jsx](../../src/modules/budget/ConsolidatedProfileStatusBar.jsx): ConsolidatedProfileStatusBar
-- [ConsolidatedProfilesGrid.css](../../src/modules/budget/ConsolidatedProfilesGrid.css)
-- [ConsolidatedProfilesGrid.jsx](../../src/modules/budget/ConsolidatedProfilesGrid.jsx): ConsolidatedProfilesGrid
-- [ConsolidatedTotalCard.css](../../src/modules/budget/ConsolidatedTotalCard.css)
-- [ConsolidatedTotalCard.jsx](../../src/modules/budget/ConsolidatedTotalCard.jsx): ConsolidatedTotalCard
-- [ConsolidatedUpcomingCard.css](../../src/modules/budget/ConsolidatedUpcomingCard.css)
-- [ConsolidatedUpcomingCard.jsx](../../src/modules/budget/ConsolidatedUpcomingCard.jsx): ConsolidatedUpcomingCard
-- [DepositAllConfirmModal.css](../../src/modules/budget/DepositAllConfirmModal.css)
-- [DepositAllConfirmModal.jsx](../../src/modules/budget/DepositAllConfirmModal.jsx): DepositAllConfirmModal
-- [DepositQuotaButton.css](../../src/modules/budget/DepositQuotaButton.css)
-- [DepositQuotaButton.jsx](../../src/modules/budget/DepositQuotaButton.jsx): DepositQuotaButton
-- [DiscretionaryMarginPanel.css](../../src/modules/budget/DiscretionaryMarginPanel.css)
-- [DiscretionaryMarginPanel.jsx](../../src/modules/budget/DiscretionaryMarginPanel.jsx): DiscretionaryMarginPanel
-- [GlobalIncomeHub.jsx](../../src/modules/budget/GlobalIncomeHub.jsx): GlobalIncomeHub
-- [IncomeOverviewCard.css](../../src/modules/budget/IncomeOverviewCard.css)
-- [IncomeOverviewCard.jsx](../../src/modules/budget/IncomeOverviewCard.jsx): IncomeOverviewCard
-- [InitialBalanceCard.css](../../src/modules/budget/InitialBalanceCard.css)
-- [InitialBalanceCard.jsx](../../src/modules/budget/InitialBalanceCard.jsx): InitialBalanceCard
-- [InstallmentFixBanner.css](../../src/modules/budget/InstallmentFixBanner.css)
-- [InstallmentFixBanner.jsx](../../src/modules/budget/InstallmentFixBanner.jsx): INSTALLMENT_FIX_ANCHOR, InstallmentFixBanner
-- [MonthlyIncomeBox.jsx](../../src/modules/budget/MonthlyIncomeBox.jsx): MonthlyIncomeBox
-- [OrphanItemsBanner.jsx](../../src/modules/budget/OrphanItemsBanner.jsx): OrphanItemsBanner
-- [ProfileDedicatedFinanceBox.jsx](../../src/modules/budget/ProfileDedicatedFinanceBox.jsx): ProfileDedicatedFinanceBox
-- [ProfileIncomeHub.css](../../src/modules/budget/ProfileIncomeHub.css)
-- [ProfileIncomeHub.jsx](../../src/modules/budget/ProfileIncomeHub.jsx): ProfileIncomeHub
-- [StartingBalanceBox.jsx](../../src/modules/budget/StartingBalanceBox.jsx): StartingBalanceBox
-- [TimelineCategoryFilter.css](../../src/modules/budget/TimelineCategoryFilter.css)
-- [TimelineCategoryFilter.jsx](../../src/modules/budget/TimelineCategoryFilter.jsx): TimelineCategoryFilter
-- [TimelineCategoryPills.css](../../src/modules/budget/TimelineCategoryPills.css)
-- [TimelineCategoryPills.jsx](../../src/modules/budget/TimelineCategoryPills.jsx): TimelineCategoryPills
-- [TimelineHorizonSelector.css](../../src/modules/budget/TimelineHorizonSelector.css)
-- [TimelineHorizonSelector.jsx](../../src/modules/budget/TimelineHorizonSelector.jsx): TimelineHorizonSelector
-- [UpcomingDeadlinesCard.css](../../src/modules/budget/UpcomingDeadlinesCard.css)
-- [UpcomingDeadlinesCard.jsx](../../src/modules/budget/UpcomingDeadlinesCard.jsx): UpcomingDeadlinesCard
-- [UpcomingDeadlinesRow.jsx](../../src/modules/budget/UpcomingDeadlinesRow.jsx): UpcomingDeadlinesRow
-- [UpcomingDetailModal.css](../../src/modules/budget/UpcomingDetailModal.css)
-- [UpcomingDetailModal.jsx](../../src/modules/budget/UpcomingDetailModal.jsx): UpcomingDetailModal
+- [BudgetKpiCarousel.jsx](../../src/modules/budget/BudgetKpiCarousel.jsx): Carosello KPI budget: card scadenze e margine discrezionale con frecce e pallini
+- [BudgetKpiGrid.css](../../src/modules/budget/BudgetKpiGrid.css): Stili card KPI budget e carosello swipe su mobile (≤640px)
+- [BudgetKpiGrid.jsx](../../src/modules/budget/BudgetKpiGrid.jsx): Griglia KPI budget con centro notifiche, scadenze imminenti e modale dettaglio
+- [BudgetOverview.css](../../src/modules/budget/BudgetOverview.css): Stili panoramica budget: layout, griglia e card KPI con evidenziazione
+- [BudgetOverview.jsx](../../src/modules/budget/BudgetOverview.jsx): Panoramica budget: banner avvisi, hub reddito del profilo o griglia profili, KPI
+- [BudgetTab.jsx](../../src/modules/budget/BudgetTab.jsx): Scheda budget: strategia per profilo, analisi cold start, panoramica e timeline cassa
+- [CashflowGroupedRow.css](../../src/modules/budget/CashflowGroupedRow.css): Stili righe raggruppate della timeline di cassa: badge, icona, intervallo date
+- [CashflowGroupedRow.jsx](../../src/modules/budget/CashflowGroupedRow.jsx): Riga raggruppata del flusso di cassa: periodo di più mesi con quota, uscite e riserva
+- [CashflowTableRow.jsx](../../src/modules/budget/CashflowTableRow.jsx): Riga mensile del flusso di cassa: quota, spese in scadenza, riserva e avviso ammanco
+- [CashflowTimeline.css](../../src/modules/budget/CashflowTimeline.css): Stili della tabella cronologia del flusso di cassa, valori positivi/negativi e mobile
+- [CashflowTimeline.jsx](../../src/modules/budget/CashflowTimeline.jsx): Simulazione del flusso di cassa: orizzonte, filtro categorie, tabella o torta, persistenti
+- [CategoryPieChart.css](../../src/modules/budget/CategoryPieChart.css): Stili del grafico a ciambella per categoria: segmenti SVG, testo centrale e legenda
+- [CategoryPieChart.jsx](../../src/modules/budget/CategoryPieChart.jsx): Grafico a ciambella SVG delle spese per categoria con hover e legenda
+- [ColdStartActionCard.css](../../src/modules/budget/ColdStartActionCard.css): Stili delle schede azione di avvio a freddo: ricarica fondo e Piano B (badge, bottoni)
+- [ColdStartActionsCarousel.css](../../src/modules/budget/ColdStartActionsCarousel.css): Layout delle schede azione: griglia su desktop, carosello con frecce e punti su mobile
+- [ColdStartActionsCarousel.jsx](../../src/modules/budget/ColdStartActionsCarousel.jsx): Carosello con le schede Ricarica fondo e Piano B per coprire il deficit iniziale
+- [ColdStartCard.css](../../src/modules/budget/ColdStartCard.css): Stili della scheda avvio a freddo: varianti avviso/successo, griglia metriche, consiglio
+- [ColdStartCard.jsx](../../src/modules/budget/ColdStartCard.jsx): Scheda avvio a freddo: mostra successo o deficit con piano standard, ricarica e Piano B
+- [ColdStartDeficitBanner.jsx](../../src/modules/budget/ColdStartDeficitBanner.jsx): Banner deficit con messaggio a segnaposto, bottone ricarica rapida e attivazione Piano B
+- [ColdStartDeficitList.css](../../src/modules/budget/ColdStartDeficitList.css): Stili della scheda piano standard: pill di stato, avviso deficit ed elenco puntato
+- [ColdStartDeficitList.jsx](../../src/modules/budget/ColdStartDeficitList.jsx): Scheda piano standard con quota mensile ed elenco dei mesi in deficit (primo e peggiore)
+- [ColdStartOptionCard.css](../../src/modules/budget/ColdStartOptionCard.css): Stili della scheda opzione strategia selezionabile con pallino radio e stato attivo
+- [ColdStartOptionCard.jsx](../../src/modules/budget/ColdStartOptionCard.jsx): Card selezionabile di una strategia cold start: titolo, importo mensile, descrizione, radio
+- [ColdStartPlanBCard.jsx](../../src/modules/budget/ColdStartPlanBCard.jsx): Card Piano B: quota mensile, elenco fasi e pulsante per attivare/disattivare il piano
+- [ColdStartStrategyCarousel.css](../../src/modules/budget/ColdStartStrategyCarousel.css): Stili carosello strategie: griglia a 2 colonne, su mobile slider con frecce e pallini
+- [ColdStartStrategyCarousel.jsx](../../src/modules/budget/ColdStartStrategyCarousel.jsx): Carosello per scegliere tra strategia standard e sopravvivenza (swipe su mobile)
+- [ColdStartSuccessView.jsx](../../src/modules/budget/ColdStartSuccessView.jsx): Messaggio di copertura completa: mese peggiore e margine di sicurezza positivo
+- [ColdStartTopUpCard.jsx](../../src/modules/budget/ColdStartTopUpCard.jsx): Card azione ricarica: importo da versare, tre punti esplicativi e pulsante di ricarica
+- [ConsolidatedDiscretionaryCard.jsx](../../src/modules/budget/ConsolidatedDiscretionaryCard.jsx): KPI del margine discrezionale residuo mensile, mostrato solo se c'è un reddito
+- [ConsolidatedOverview.css](../../src/modules/budget/ConsolidatedOverview.css): Stili riepilogo consolidato: card macro, badge titolo, riga e box delle metriche
+- [ConsolidatedOverviewCard.jsx](../../src/modules/budget/ConsolidatedOverviewCard.jsx): Riepilogo di tutti i profili: liquidità, entrate, quota mensile e margine totali
+- [ConsolidatedProfileCard.css](../../src/modules/budget/ConsolidatedProfileCard.css): Stili card del singolo profilo: intestazione, pulsante apri, griglia dei tre numeri
+- [ConsolidatedProfileCard.jsx](../../src/modules/budget/ConsolidatedProfileCard.jsx): Card salute di un profilo: saldo minimo, quota effettiva (Piano B), entrate, versamento
+- [ConsolidatedProfileStatusBar.jsx](../../src/modules/budget/ConsolidatedProfileStatusBar.jsx): Barra di stato del profilo: avviso deficit con buffer di soccorso o conferma sicurezza
+- [ConsolidatedProfilesGrid.css](../../src/modules/budget/ConsolidatedProfilesGrid.css): Stili sezione griglia profili: intestazione, titolo maiuscolo, griglia responsive
+- [ConsolidatedProfilesGrid.jsx](../../src/modules/budget/ConsolidatedProfilesGrid.jsx): Griglia card dei profili con card totale e versamento di tutte le quote con conferma
+- [ConsolidatedTotalCard.css](../../src/modules/budget/ConsolidatedTotalCard.css): Stili card totale del nucleo: bordo viola, sfondo sfumato, icona e badge conteggio
+- [ConsolidatedTotalCard.jsx](../../src/modules/budget/ConsolidatedTotalCard.jsx): Card totale del nucleo: saldo minimo, quota mensile, entrate, fondo e versa tutte le quote
+- [ConsolidatedUpcomingCard.css](../../src/modules/budget/ConsolidatedUpcomingCard.css): Stili della card scadenze consolidate: badge contatore, lista compatta, riga 'altre'
+- [ConsolidatedUpcomingCard.jsx](../../src/modules/budget/ConsolidatedUpcomingCard.jsx): Card KPI prossime scadenze: prime 2 voci, stato vuoto, dettaglio e centro notifiche
+- [DepositAllConfirmModal.css](../../src/modules/budget/DepositAllConfirmModal.css): Stili della modale di conferma versamento: elenco profili, riga totale, pulsanti
+- [DepositAllConfirmModal.jsx](../../src/modules/budget/DepositAllConfirmModal.jsx): Modale di conferma per versare le quote mensili di tutti i profili con totale
+- [DepositQuotaButton.css](../../src/modules/budget/DepositQuotaButton.css): Stili del pulsante versa quota: stato versato, animazione icona, etichette mobile
+- [DepositQuotaButton.jsx](../../src/modules/budget/DepositQuotaButton.jsx): Pulsante che versa la quota mensile nel fondo, con conferma temporanea e importo
+- [DiscretionaryMarginPanel.css](../../src/modules/budget/DiscretionaryMarginPanel.css): Stili del pannello margine discrezionale: sfondo a gradiente, importo in evidenza
+- [DiscretionaryMarginPanel.jsx](../../src/modules/budget/DiscretionaryMarginPanel.jsx): Pannello margine discrezionale: entrate mensili meno quota mensile sicura
+- [GlobalIncomeHub.jsx](../../src/modules/budget/GlobalIncomeHub.jsx): Hub entrate globale: fondo principale con versamento quota, entrate mensili, margine
+- [IncomeOverviewCard.css](../../src/modules/budget/IncomeOverviewCard.css): Stili della card entrate: contenitore, intestazione, griglia a due colonne responsive
+- [IncomeOverviewCard.jsx](../../src/modules/budget/IncomeOverviewCard.jsx): Card entrate del profilo: saldo iniziale/fondo dedicato, entrate mensili e margine
+- [InitialBalanceCard.css](../../src/modules/budget/InitialBalanceCard.css): Stili della card saldo iniziale: icona, testi, form con campo numerico
+- [InitialBalanceCard.jsx](../../src/modules/budget/InitialBalanceCard.jsx): Card con form per modificare e salvare il saldo iniziale, con feedback 'salvato'
+- [InstallmentFixBanner.css](../../src/modules/budget/InstallmentFixBanner.css): Stili del banner arancione di correzione rate: icona, testo, azione, layout mobile
+- [InstallmentFixBanner.jsx](../../src/modules/budget/InstallmentFixBanner.jsx): Avviso rate con chiavi sfasate; porta alla scheda di revisione in Impostazioni
+- [MonthlyIncomeBox.jsx](../../src/modules/budget/MonthlyIncomeBox.jsx): Box per inserire e salvare il reddito mensile con conferma temporanea
+- [OrphanItemsBanner.jsx](../../src/modules/budget/OrphanItemsBanner.jsx): Avviso spese/documenti senza profilo; rimanda alla scheda in Impostazioni
+- [ProfileDedicatedFinanceBox.jsx](../../src/modules/budget/ProfileDedicatedFinanceBox.jsx): Box profilo con toggle fondo/reddito dedicato, campo importo o valore condiviso
+- [ProfileIncomeHub.css](../../src/modules/budget/ProfileIncomeHub.css): Stili dei box finanze dedicate del profilo e del valore condiviso
+- [ProfileIncomeHub.jsx](../../src/modules/budget/ProfileIncomeHub.jsx): Scheda profilo con fondo e reddito dedicati, basata su ProfileDedicatedFinanceBox
+- [StartingBalanceBox.jsx](../../src/modules/budget/StartingBalanceBox.jsx): Box riserva iniziale: fondo principale o dedicato al profilo, con salvataggio
+- [TimelineCategoryFilter.css](../../src/modules/budget/TimelineCategoryFilter.css): Stili del menu a tendina per filtrare la timeline per categoria
+- [TimelineCategoryFilter.jsx](../../src/modules/budget/TimelineCategoryFilter.jsx): Select per filtrare la timeline per categoria di spesa
+- [TimelineCategoryPills.css](../../src/modules/budget/TimelineCategoryPills.css): Stili pillole categoria, toggle vista e select mobile della timeline
+- [TimelineCategoryPills.jsx](../../src/modules/budget/TimelineCategoryPills.jsx): Pillole categoria con totali, select su mobile e toggle vista timeline/tabella
+- [TimelineHorizonSelector.css](../../src/modules/budget/TimelineHorizonSelector.css): Stili dei preset orizzonte e dello stepper mesi personalizzato
+- [TimelineHorizonSelector.jsx](../../src/modules/budget/TimelineHorizonSelector.jsx): Selettore orizzonte simulazione: preset 6-60 mesi e valore libero fino a 120
+- [UpcomingDeadlinesCard.css](../../src/modules/budget/UpcomingDeadlinesCard.css): Stili scheda prossime scadenze: righe, icone spesa/documento, giorni, importi
+- [UpcomingDeadlinesCard.jsx](../../src/modules/budget/UpcomingDeadlinesCard.jsx): Scheda prossime scadenze raggruppate con dettaglio in modale o stato vuoto
+- [UpcomingDeadlinesRow.jsx](../../src/modules/budget/UpcomingDeadlinesRow.jsx): Riga cliccabile di scadenza (spesa/documento) con profilo, data, importo e giorni mancanti
+- [UpcomingDetailModal.css](../../src/modules/budget/UpcomingDetailModal.css): Stili della modale di dettaglio scadenza: intestazione con icona, griglia celle, etichette
+- [UpcomingDetailModal.jsx](../../src/modules/budget/UpcomingDetailModal.jsx): Modale di dettaglio di una scadenza: data, importo/identificativo, giorni, categoria/ente
 - [UpcomingGroupedList.css](../../src/modules/budget/UpcomingGroupedList.css): Group labels + "overdue" highlight shared by the Budget cards, the bell dropdown and the center.
-- [UpcomingGroupedList.jsx](../../src/modules/budget/UpcomingGroupedList.jsx): UpcomingGroupedList
-- [ValueSaveBox.css](../../src/modules/budget/ValueSaveBox.css)
-- [ValueSaveBox.jsx](../../src/modules/budget/ValueSaveBox.jsx): ValueSaveBox
-- [budgetCalculations.js](../../src/modules/budget/budgetCalculations.js): calculateItemAnnualCost, calculateBudgetMetrics, generateCashflowTimeline, calculateColdStartAnalys…
+- [UpcomingGroupedList.jsx](../../src/modules/budget/UpcomingGroupedList.jsx): Lista scadenze con gruppo "Scadute" in evidenza prima delle prossime
+- [ValueSaveBox.css](../../src/modules/budget/ValueSaveBox.css): Stili del box di inserimento importo con salvataggio automatico e footer margine, responsive
+- [ValueSaveBox.jsx](../../src/modules/budget/ValueSaveBox.jsx): Campo importo in € con salvataggio al blur, formattazione a 2 decimali e spunta di conferma
+- [budgetCalculations.js](../../src/modules/budget/budgetCalculations.js): Aggregatore che riesporta le funzioni di calcolo del budget da calculations/
 - [continua](src-modules-budget-2.md): parte 2
 <!-- hub:map:end -->
