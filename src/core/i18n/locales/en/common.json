@@ -75,11 +75,7 @@
     "expensesCountMany": "{n} expenses",
     "documentsCountOne": "{n} document",
     "documentsCountMany": "{n} documents",
-    "restoredToast": "Profile \"{name}\" restored with its expenses and documents",
-    "settingsTitle": "Profiles",
-    "settingsDesc": "People or areas (home, car, family) to link expenses and documents to.",
-    "settingsEmpty": "No profiles yet: create one to get started.",
-    "manageButton": "Manage"
+    "restoredToast": "Profile \"{name}\" restored with its expenses and documents"
   },
   "notifications": {
     "title": "Notifications & Deadlines",
@@ -174,6 +170,8 @@
     "languageLabel": "Interface Language",
     "languageDesc": "Select your preferred language for text and labels",
     "muteDesc": "Temporarily silence all due date alerts",
+    "expenseAlertDaysLabel": "Default notice for expenses",
+    "expenseAlertDaysDesc": "Days in advance proposed for new expenses and used by those without their own value (bell, upcoming deadlines, notifications). In the .ics calendar the reminder is 3 days, unless set on the expense",
     "calendarDesc": "Generate .ics file for Google Calendar, Outlook, or Apple Calendar",
     "backupDesc": "Save a local security backup of all your data or restore from file",
     "databaseMaintenance": "App data",

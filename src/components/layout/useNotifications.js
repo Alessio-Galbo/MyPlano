@@ -9,6 +9,7 @@ import {
   restoreNotificationId,
   restoreAllDismissedNotifications,
 } from '../../core/storage/notificationStorage';
+import { getExpenseAlertDefault, subscribeExpenseAlertDefault } from '../../core/storage/expenseAlertDefault';
 import { isItemDismissed, pruneDismissedIds } from './notificationDismissal';
 
 // allUpcoming: every deadline (overdue + upcoming), for the notification center.
@@ -18,11 +19,14 @@ export function useNotifications(expenses = [], documents = [], selectedProfileI
   const dismissedIds = useSyncExternalStore(
     subscribeDismissedNotifications, getDismissedNotificationIds, getDismissedNotificationIds,
   );
+  const expenseAlertDays = useSyncExternalStore(
+    subscribeExpenseAlertDefault, getExpenseAlertDefault, getExpenseAlertDefault,
+  );
   const today = todayISO();
 
   const allUpcoming = useMemo(
-    () => getUpcomingDeadlines(expenses, documents, selectedProfileId, today),
-    [expenses, documents, selectedProfileId, today],
+    () => getUpcomingDeadlines(expenses, documents, selectedProfileId, today, { expenseAlertDays }),
+    [expenses, documents, selectedProfileId, today, expenseAlertDays],
   );
 
   const { activeList, alertList, isDismissed, dismissedCount } = useMemo(() => {

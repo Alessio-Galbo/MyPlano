@@ -1,7 +1,11 @@
 // Pure .ics builder (no i18n import, testable in node). `t` is the translate function.
 import { escapeText, icsDate, icsTimestamp, joinLines, expenseRecurrence } from './icsFormat';
+import { normalizeAlertDays } from '../../core/notifications/alertDays';
 
+// Calendar alarm of an expense: its own `alertDays` only when set on the expense, otherwise 3 days
+// (the global default notice is for bell/card/notifications: 30 days before a monthly bill is too early).
 export const EXPENSE_ALARM_DAYS = 3;
+
 const DEFAULT_DOC_ALERT_DAYS = 30;
 
 const fill = (text, values) => Object.entries(values)
@@ -31,6 +35,7 @@ function documentEvent(doc, t, stamp) {
 }
 
 function expenseEvent(exp, t, stamp) {
+  const days = normalizeAlertDays(exp.alertDays, EXPENSE_ALARM_DAYS);
   const amount = `${Number(exp.amount || 0).toFixed(2)} €`;
   const { dtstart, lines } = expenseRecurrence(exp);
   if (!dtstart) return [];
@@ -38,8 +43,8 @@ function expenseEvent(exp, t, stamp) {
     `${t('expenses.fields.amount')}: ${amount}`,
     t(`expenses.frequencies.${exp.frequency || 'oneOff'}`),
   ].join('\n');
-  const alarmLines = exp.enableAlert === false ? [] : alarm(EXPENSE_ALARM_DAYS,
-    fill(t('common.notifications.icsExpenseAlarm'), { title: exp.title, days: EXPENSE_ALARM_DAYS }));
+  const alarmLines = exp.enableAlert === false ? [] : alarm(days,
+    fill(t('common.notifications.icsExpenseAlarm'), { title: exp.title, days }));
   return [
     'BEGIN:VEVENT', `UID:exp-${exp.id}@myplano.app`, `DTSTAMP:${stamp}`,
     `DTSTART;VALUE=DATE:${icsDate(dtstart)}`, ...lines,
@@ -50,7 +55,7 @@ function expenseEvent(exp, t, stamp) {
 }
 
 // Documents with the reminder on (alarm `alertDays` before), expenses with includeInCalendar !== false:
-// one recurring event per expense (RRULE), alarm 3 days before when its alert is on.
+// one recurring event per expense (RRULE), alarm `alertDays` (own value, else 3) before when its alert is on.
 export function buildIcsCalendar(documents = [], expenses = [], t = (k) => k, now = new Date()) {
   const stamp = icsTimestamp(now);
   const events = [

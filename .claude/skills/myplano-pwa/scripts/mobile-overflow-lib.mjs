@@ -31,7 +31,7 @@ export async function load(page, data, w, h) {
   await page.eval(`(() => { localStorage.clear(); sessionStorage.clear(); ${/^(all|p\d)$/.test(data) ? `localStorage.setItem('myplano_ui_selectedProfile', '"${data}"');` : ""} ${data === "zero" ? "for (const k of ['profiles', 'expenses', 'documents']) localStorage.setItem('myplano_' + k, '[]');" : ""} return true; })()`);
   await page.navigate(URL0, READY); await sleep(600);
 }
-// Azione: "text:Regex" | "aria:Regex" | "css:selettore" (primo elemento visibile, l'ultimo dialog aperto ha la precedenza).
+// Azione: "text:Regex" | "aria:Regex" | "css:selettore" | "event:nome" (CustomEvent su window, es. myplano:open-add-profile di profileActions.js) (primo elemento visibile, l'ultimo dialog aperto ha la precedenza).
 export const act = (spec) => `(() => {
   const [kind, ...rest] = ${JSON.stringify(spec)}.split(':'); const q = rest.join(':');
   const vis = (e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; };
@@ -43,6 +43,7 @@ export const act = (spec) => `(() => {
 export async function run(page, steps) {
   for (const s of steps) {
     if (s.startsWith("tab:")) await page.eval(`(() => { document.querySelectorAll('.nav-tab')[${s.slice(4)}].click(); return true; })()`, { gesture: true });
+    else if (s.startsWith("event:")) await page.eval(`(() => { window.dispatchEvent(new CustomEvent(${JSON.stringify(s.slice(6))})); return true; })()`);
     else if (s.startsWith("type:")) { const [, sel, ...txt] = s.split("|"); await page.type(sel, txt.join("|")); }
     else await page.eval(act(s), { gesture: true });
     await sleep(s.startsWith("tab:") ? 1200 : 450);

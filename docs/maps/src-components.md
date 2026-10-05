@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: src/components/
-Torna al [router](../../AGENTS.md) · 48 file
+Torna al [router](../../AGENTS.md) · 65 file
 - [ErrorBoundary.css](../../src/components/ErrorBoundary.css)
 - [ErrorBoundary.jsx](../../src/components/ErrorBoundary.jsx): ErrorBoundary
 - [layout/DisplayModes.css](../../src/components/layout/DisplayModes.css): App installata senza bordi (manifest display_override: window-controls-overlay → fullscreen → stand…
@@ -21,7 +21,20 @@ Torna al [router](../../AGENTS.md) · 48 file
 - [layout/index.js](../../src/components/layout/index.js): Navbar, TabContent
 - [layout/lazyTabs.js](../../src/components/layout/lazyTabs.js): DocumentList, ExpenseList, SettingsView
 - [layout/notificationDismissal.js](../../src/components/layout/notificationDismissal.js): isItemDismissed, pruneDismissedIds
+- [layout/useNavbarNotificationsBehavior.js](../../src/components/layout/useNavbarNotificationsBehavior.js): useNavbarNotificationsBehavior
 - [layout/useNotifications.js](../../src/components/layout/useNotifications.js): useNotifications
+- [onboarding/DemoDataBanner.css](../../src/components/onboarding/DemoDataBanner.css)
+- [onboarding/DemoDataBanner.jsx](../../src/components/onboarding/DemoDataBanner.jsx): DemoDataBanner
+- [onboarding/EmptyStateCard.jsx](../../src/components/onboarding/EmptyStateCard.jsx): EmptyStateCard
+- [onboarding/FirstProfileGuide.jsx](../../src/components/onboarding/FirstProfileGuide.jsx): FirstProfileGuide
+- [onboarding/NotifyPromptBody.jsx](../../src/components/onboarding/NotifyPromptBody.jsx): NotifyPromptBody
+- [onboarding/NotifyPromptCard.jsx](../../src/components/onboarding/NotifyPromptCard.jsx): NotifyPromptCard
+- [onboarding/OnboardingArea.jsx](../../src/components/onboarding/OnboardingArea.jsx): OnboardingArea
+- [onboarding/OnboardingCards.css](../../src/components/onboarding/OnboardingCards.css)
+- [onboarding/demoCompare.js](../../src/components/onboarding/demoCompare.js): Pure comparisons between the stored data and the sample (seed) data. No imports, so the
+- [onboarding/demoDataMatch.js](../../src/components/onboarding/demoDataMatch.js): readCustomProfileIds, isDemoData, getDemoLeftovers, removeDemoLeftovers
+- [onboarding/index.js](../../src/components/onboarding/index.js): OnboardingArea, FirstProfileGuide, EmptyStateCard, isDemoData
+- [onboarding/useDemoData.js](../../src/components/onboarding/useDemoData.js): useDemoData
 - [pwa/PwaUpdatePrompt.css](../../src/components/pwa/PwaUpdatePrompt.css): Avviso aggiornamento: in basso a sinistra (i toast stanno a destra), sopra le modali.
 - [pwa/PwaUpdatePrompt.jsx](../../src/components/pwa/PwaUpdatePrompt.jsx): PwaUpdatePrompt
 - [pwa/PwaUpdatedToast.jsx](../../src/components/pwa/PwaUpdatedToast.jsx): PwaUpdatedToast
@@ -44,9 +57,13 @@ Torna al [router](../../AGENTS.md) · 48 file
 - [ui/Toast.css](../../src/components/ui/Toast.css)
 - [ui/Toast.jsx](../../src/components/ui/Toast.jsx): Toast
 - [ui/ToastContext.js](../../src/components/ui/ToastContext.js): ToastContext, useToast
+- [ui/ToastMobile.css](../../src/components/ui/ToastMobile.css): Swipe to dismiss (useToastSwipe sets --toast-dx while dragging).
 - [ui/ToastProvider.jsx](../../src/components/ui/ToastProvider.jsx): ToastProvider
 - [ui/Toggle.css](../../src/components/ui/Toggle.css)
 - [ui/Toggle.jsx](../../src/components/ui/Toggle.jsx): Toggle
 - [ui/index.js](../../src/components/ui/index.js): Button, Badge, Modal, Toggle, SuggestInput (+3)
+- [ui/toastQueue.js](../../src/components/ui/toastQueue.js): Pure queue logic for the toast stack: nothing is dropped when many toasts arrive at once,
 - [ui/useModalA11y.js](../../src/components/ui/useModalA11y.js): useModalA11y
+- [ui/useToastLimit.js](../../src/components/ui/useToastLimit.js): useToastLimit
+- [ui/useToastSwipe.js](../../src/components/ui/useToastSwipe.js): useToastSwipe
 <!-- hub:map:end -->

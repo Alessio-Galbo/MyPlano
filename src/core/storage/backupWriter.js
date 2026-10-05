@@ -6,7 +6,7 @@ import { writeRaw } from './safeStorage';
 // everything. Lists become empty (never the sample data), other keys are removed so
 // the app uses its defaults (0, {}, notifications on).
 const EMPTY_LISTS = [K.PROFILES, K.DOCUMENTS, K.EXPENSES];
-const NUMBER_KEYS = [K.INITIAL_BALANCE, K.MONTHLY_INCOME, K.SCHEMA_VERSION];
+const NUMBER_KEYS = [K.INITIAL_BALANCE, K.MONTHLY_INCOME, K.SCHEMA_VERSION, K.EXPENSE_ALERT_DAYS];
 
 function serialize(key, value) {
   if (NUMBER_KEYS.includes(key)) return String(Number(value));

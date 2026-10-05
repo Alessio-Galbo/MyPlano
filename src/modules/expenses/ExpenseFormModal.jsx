@@ -3,6 +3,8 @@ import { Modal, Button, useToast } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { ExpenseFormFields } from './ExpenseFormFields';
 import { useFormProfileReset, hasProfile } from '../../core/profiles';
+import { normalizeAlertDays } from '../../core/notifications/alertDays';
+import { getExpenseAlertDefault } from '../../core/storage/expenseAlertDefault';
 import './ExpenseFormModal.css';
 
 const DEFAULT_EXP = {
@@ -23,7 +25,7 @@ export function ExpenseFormModal({ isOpen, onClose, onSave, editingExp, profiles
 
   useFormProfileReset({
     isOpen, editingItem: editingExp, profiles, setFormData,
-    makeNew: (profileId) => ({ ...DEFAULT_EXP, profileId }),
+    makeNew: (profileId) => ({ ...DEFAULT_EXP, profileId, alertDays: getExpenseAlertDefault() }),
     makeEdit: (exp) => exp,
   });
   const canSave = hasProfile(profiles, formData.profileId);
@@ -31,7 +33,9 @@ export function ExpenseFormModal({ isOpen, onClose, onSave, editingExp, profiles
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!canSave) return;
-    onSave({ ...formData, amount: parseFloat(formData.amount) || 0 });
+    const alertDays = formData.alertDays === undefined
+      ? undefined : normalizeAlertDays(formData.alertDays, getExpenseAlertDefault());
+    onSave({ ...formData, amount: parseFloat(formData.amount) || 0, alertDays });
     toast.show({ message: t('common.toast.expenseSaved'), variant: 'success' });
     onClose();
   };

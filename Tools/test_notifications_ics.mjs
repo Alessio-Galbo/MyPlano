@@ -26,9 +26,19 @@ export async function run({ load, check, assert, exps, docs }) {
   check('ics: lines folded at 75 octets', () => {
     for (const l of ics.split('\r\n')) assert.ok(Buffer.byteLength(l) <= 75, l);
   });
-  check('ics: monthly RRULE + 3-day alarm', () => {
+  check('ics: monthly RRULE + 3-day alarm when the expense has no alertDays', () => {
     assert.match(ev('exp-m1'), /DTSTART;VALUE=DATE:20260909\r\nRRULE:FREQ=MONTHLY;INTERVAL=1\r\n/);
     assert.match(ev('exp-m1'), /TRIGGER:-P3D/);
+    assert.match(ev('exp-m1'), /DESCRIPTION:Promemoria pagamento: Luce tra 3 giorni/);
+  });
+  check('ics: expense alarm = its own alertDays, else 3 (global default ignored)', () => {
+    const two = [{ id: 'a7', title: 'A7', amount: 1, frequency: 'monthly', nextDueDate: '2026-10-14', alertDays: 7 },
+      { id: 'nd', title: 'ND', amount: 1, frequency: 'monthly', nextDueDate: '2026-10-14' }];
+    const u = buildIcsCalendar([], two, t, now).replace(/\r\n /g, '');
+    const e = (uid) => u.split('BEGIN:VEVENT').find((b) => b.includes(`UID:${uid}@`)) || '';
+    assert.match(e('exp-a7'), /TRIGGER:-P7D/);
+    assert.match(e('exp-nd'), /TRIGGER:-P3D/);
+    assert.ok(!u.includes('TRIGGER:-P30D'));
   });
   check('ics: end of month clamp, EXDATE, RDATE, escaping', () => {
     assert.match(ev('exp-eom'), /RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30,31;BYSETPOS=-1/);

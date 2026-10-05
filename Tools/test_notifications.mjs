@@ -88,5 +88,7 @@ check('unchanged list keeps identity; empty data never prunes', () => {
 
 const { run: runIcs } = await import(new URL('./test_notifications_ics.mjs', import.meta.url).href);
 await runIcs({ load, check, assert, exps, docs });
+const { run: runAlert } = await import(new URL('./test_notifications_alert.mjs', import.meta.url).href);
+await runAlert({ load, check, assert });
 console.log(`[${process.env.TZ}] test_notifications: ${fails ? `${fails} FAILED` : 'all passed'}`);
 process.exit(fails ? 1 : 0);

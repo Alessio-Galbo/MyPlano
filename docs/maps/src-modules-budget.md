@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/budget/
-Torna al [router](../../AGENTS.md) · 79 file
+Torna al [router](../../AGENTS.md) · 80 file
 - [BudgetKpiCarousel.jsx](../../src/modules/budget/BudgetKpiCarousel.jsx): BudgetKpiCarousel
 - [BudgetKpiGrid.css](../../src/modules/budget/BudgetKpiGrid.css)
 - [BudgetKpiGrid.jsx](../../src/modules/budget/BudgetKpiGrid.jsx): BudgetKpiGrid
@@ -55,6 +55,7 @@ Torna al [router](../../AGENTS.md) · 79 file
 - [InstallmentFixBanner.css](../../src/modules/budget/InstallmentFixBanner.css)
 - [InstallmentFixBanner.jsx](../../src/modules/budget/InstallmentFixBanner.jsx): INSTALLMENT_FIX_ANCHOR, InstallmentFixBanner
 - [MonthlyIncomeBox.jsx](../../src/modules/budget/MonthlyIncomeBox.jsx): MonthlyIncomeBox
+- [OrphanItemsBanner.jsx](../../src/modules/budget/OrphanItemsBanner.jsx): OrphanItemsBanner
 - [ProfileDedicatedFinanceBox.jsx](../../src/modules/budget/ProfileDedicatedFinanceBox.jsx): ProfileDedicatedFinanceBox
 - [ProfileIncomeHub.css](../../src/modules/budget/ProfileIncomeHub.css)
 - [ProfileIncomeHub.jsx](../../src/modules/budget/ProfileIncomeHub.jsx): ProfileIncomeHub
@@ -75,6 +76,5 @@ Torna al [router](../../AGENTS.md) · 79 file
 - [ValueSaveBox.css](../../src/modules/budget/ValueSaveBox.css)
 - [ValueSaveBox.jsx](../../src/modules/budget/ValueSaveBox.jsx): ValueSaveBox
 - [budgetCalculations.js](../../src/modules/budget/budgetCalculations.js): calculateItemAnnualCost, calculateBudgetMetrics, generateCashflowTimeline, calculateColdStartAnalys…
-- [budgetOverviewHelpers.js](../../src/modules/budget/budgetOverviewHelpers.js): calculateDiscretionaryMargin, getBudgetOverviewState, performTopUpFund, performDepositProfileQuota
 - [continua](src-modules-budget-2.md): parte 2
 <!-- hub:map:end -->

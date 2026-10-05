@@ -1,7 +1,8 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/expenses/
-Torna al [router](../../AGENTS.md) · 90 file
+Torna al [router](../../AGENTS.md) · 93 file
 - [AddBillPaymentForm.jsx](../../src/modules/expenses/AddBillPaymentForm.jsx): AddBillPaymentForm
+- [BillPaymentsTable.css](../../src/modules/expenses/BillPaymentsTable.css): Storico bollette su telefono: 5 colonne non stanno in 360 px → ogni bolletta diventa una scheda su…
 - [BillPaymentsTable.jsx](../../src/modules/expenses/BillPaymentsTable.jsx): BillPaymentsTable
 - [CategoryGroupedView.css](../../src/modules/expenses/CategoryGroupedView.css)
 - [CategoryGroupedView.jsx](../../src/modules/expenses/CategoryGroupedView.jsx): CategoryGroupedView
@@ -28,6 +29,7 @@ Torna al [router](../../AGENTS.md) · 90 file
 - [ExpenseDatabaseTreeSidebar.jsx](../../src/modules/expenses/ExpenseDatabaseTreeSidebar.jsx): ExpenseDatabaseTreeSidebar
 - [ExpenseDatabaseYearGroup.css](../../src/modules/expenses/ExpenseDatabaseYearGroup.css)
 - [ExpenseDatabaseYearGroup.jsx](../../src/modules/expenses/ExpenseDatabaseYearGroup.jsx): ExpenseDatabaseYearGroup
+- [ExpenseEmptyState.jsx](../../src/modules/expenses/ExpenseEmptyState.jsx): ExpenseEmptyState
 - [ExpenseFormFields.jsx](../../src/modules/expenses/ExpenseFormFields.jsx): ExpenseFormFields
 - [ExpenseFormModal.css](../../src/modules/expenses/ExpenseFormModal.css)
 - [ExpenseFormModal.jsx](../../src/modules/expenses/ExpenseFormModal.jsx): ExpenseFormModal
@@ -37,6 +39,7 @@ Torna al [router](../../AGENTS.md) · 90 file
 - [ExpenseHistoryModal.jsx](../../src/modules/expenses/ExpenseHistoryModal.jsx): ExpenseHistoryModal
 - [ExpenseHistoryModalContent.jsx](../../src/modules/expenses/ExpenseHistoryModalContent.jsx): ExpenseHistoryModalContent
 - [ExpenseList.jsx](../../src/modules/expenses/ExpenseList.jsx): ExpenseList
+- [ExpenseListBody.jsx](../../src/modules/expenses/ExpenseListBody.jsx): ExpenseListBody
 - [ExpenseListHeader.css](../../src/modules/expenses/ExpenseListHeader.css)
 - [ExpenseListHeader.jsx](../../src/modules/expenses/ExpenseListHeader.jsx): ExpenseListHeader
 - [ExpenseModalsContainer.jsx](../../src/modules/expenses/ExpenseModalsContainer.jsx): ExpenseModalsContainer
@@ -73,8 +76,5 @@ Torna al [router](../../AGENTS.md) · 90 file
 - [VariableExpenseHistoryView.jsx](../../src/modules/expenses/VariableExpenseHistoryView.jsx): VariableExpenseHistoryView
 - [YearGroupedExpenseGrid.css](../../src/modules/expenses/YearGroupedExpenseGrid.css)
 - [YearGroupedExpenseGrid.jsx](../../src/modules/expenses/YearGroupedExpenseGrid.jsx): YearGroupedExpenseGrid
-- [expenseExpansionHelper.js](../../src/modules/expenses/expenseExpansionHelper.js): expandExpensesForRange
-- [expenseHelpers.js](../../src/modules/expenses/expenseHelpers.js): advanceNextDueDate, getExpenseUrgency, getCategoryLabel, getExpenseBadgeInfo, formatCurrency
-- [expenseHistoryHelpers.js](../../src/modules/expenses/expenseHistoryHelpers.js): getAllExpenseInstallmentDates, getInstallmentDetails
 - [continua](src-modules-expenses-2.md): parte 2
 <!-- hub:map:end -->

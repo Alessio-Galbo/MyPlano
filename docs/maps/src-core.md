@@ -1,6 +1,6 @@
 <!-- hub:map:start -->
 # Mappa: src/core/
-Torna al [router](../../AGENTS.md) · 56 file
+Torna al [router](../../AGENTS.md) · 75 file
 - [dates/installmentKeyAudit.js](../../src/core/dates/installmentKeyAudit.js): Detects (and, only on explicit request, fixes) installment keys saved one day early by the
 - [dates/isoDate.js](../../src/core/dates/isoDate.js): Calendar dates as 'YYYY-MM-DD' strings, always in LOCAL time.
 - [dates/recurrence.js](../../src/core/dates/recurrence.js): Due dates of an expense: series grid (see recurrenceGrid.js) + installments - excluded - after endD…
@@ -18,10 +18,29 @@ Torna al [router](../../AGENTS.md) · 56 file
 - [i18n/locales/it/expenses.json](../../src/core/i18n/locales/it/expenses.json): chiavi: title, subtitle, addExpense, editExpense, fields, frequencies
 - [i18n/translations.js](../../src/core/i18n/translations.js): translations
 - [i18n/useFormatters.js](../../src/core/i18n/useFormatters.js): useFormatters
+- [notifications/buildMirror.js](../../src/core/notifications/buildMirror.js): Pure: the "mirror" the Service Worker reads to notify with the app closed (public/sw-notify-core.js…
+- [notifications/environment.js](../../src/core/notifications/environment.js): What this device can do with system notifications (used by the settings card and periodicSync.js).
+- [notifications/index.js](../../src/core/notifications/index.js): System (OS) notifications without a server: see notifyLifecycle.js and public/sw-notify.js.
+- [notifications/notifyConstants.js](../../src/core/notifications/notifyConstants.js): Names shared by the page and the Service Worker code in public/sw-notify.js (keep them in sync).
+- [notifications/notifyDb.js](../../src/core/notifications/notifyDb.js): Tiny key/value IndexedDB store read by the Service Worker (public/sw-notify.js).
+- [notifications/notifyLifecycle.js](../../src/core/notifications/notifyLifecycle.js): Started once by src/components/pwa/registerPwa.js: keeps the IndexedDB mirror up to date (on data s…
+- [notifications/periodicSync.js](../../src/core/notifications/periodicSync.js): Periodic Background Sync (Chrome/Edge, installed app only): the browser wakes the Service Worker ab…
+- [notifications/scheduleMirror.js](../../src/core/notifications/scheduleMirror.js): Writes the mirror (buildMirror.js) to IndexedDB when the data change (see notifyLifecycle.js); skip…
+- [notifications/swBridge.js](../../src/core/notifications/swBridge.js): Page <-> Service Worker: ask the SW to check and notify (same code as the background check), test
+- [profiles/NoProfileNotice.jsx](../../src/core/profiles/NoProfileNotice.jsx): NoProfileNotice
+- [profiles/ProfileSelectField.jsx](../../src/core/profiles/ProfileSelectField.jsx): ProfileSelectField
+- [profiles/index.js](../../src/core/profiles/index.js): hasProfile, pickInitialProfileId, findOrphanItems, orphanKey, assignOrphanItems (+3)
+- [profiles/orphanItems.js](../../src/core/profiles/orphanItems.js): Every expense and document must belong to an existing profile. These pure helpers find the
+- [profiles/profileField.css](../../src/core/profiles/profileField.css)
+- [profiles/useFormProfileReset.js](../../src/core/profiles/useFormProfileReset.js): useFormProfileReset
 - [state/AppContext.jsx](../../src/core/state/AppContext.jsx): AppProvider, useApp
 - [state/index.js](../../src/core/state/index.js): AppProvider, useApp, useAppData
+- [state/profileActions.js](../../src/core/state/profileActions.js): requestAddProfile, useAddProfileRequest, requestManageProfiles, useManageProfilesRequest
+- [state/profileBundle.js](../../src/core/state/profileBundle.js): Pure helpers to take a profile and everything that belongs to it out of the
+- [state/uiActions.js](../../src/core/state/uiActions.js): requestOpenNotificationCenter, useOpenNotificationCenterRequest, DATA_CHANGED_EVENT, announceDataCh…
 - [state/useAppData.js](../../src/core/state/useAppData.js): useAppData
 - [state/usePersistedSlice.js](../../src/core/state/usePersistedSlice.js): usePersistedSlice
+- [state/useProfileBundle.js](../../src/core/state/useProfileBundle.js): useProfileBundle
 - [state/useProfileFinance.js](../../src/core/state/useProfileFinance.js): useProfileFinance
 - [state/useProfileState.js](../../src/core/state/useProfileState.js): useProfileState
 - [state/useStorageSync.js](../../src/core/state/useStorageSync.js): useStorageSync
@@ -30,7 +49,7 @@ Torna al [router](../../AGENTS.md) · 56 file
 - [storage/archiveService.js](../../src/core/storage/archiveService.js): saveReceiptToArchive, openReceiptFromArchive, selectArchiveDirectory, getConnectedDirectoryName, di…
 - [storage/backupAttachments.js](../../src/core/storage/backupAttachments.js): getAttachmentsSize, collectAttachments, restoreAttachments
 - [storage/backupFormat.js](../../src/core/storage/backupFormat.js): BACKUP_FORMAT, BACKUP_VERSION, APP_VERSION, readAllDataKeys, buildBackup (+2)
-- [storage/backupValidation.js](../../src/core/storage/backupValidation.js): validateBackupData, validateAttachments
+- [storage/backupValidation.js](../../src/core/storage/backupValidation.js): validateBackupData, validateAttachments, countBackupOrphans
 - [storage/backupWriter.js](../../src/core/storage/backupWriter.js): restoreSnapshot, rollback, writeDataAtomically
 - [storage/exportImportService.js](../../src/core/storage/exportImportService.js): exportAllAppData, exportBackupJson, importAllAppData, applyParsedBackup, parseBackup (+2)
 - [storage/idMigrationHelper.js](../../src/core/storage/idMigrationHelper.js): createItemId, ensureItemIds

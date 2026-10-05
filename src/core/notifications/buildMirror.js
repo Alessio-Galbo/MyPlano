@@ -3,26 +3,26 @@
 // for today and for today+30 so it stays valid for about a month without opening the app
 // (occurrences from 60 days ago to 60 days ahead). Texts are already translated.
 import { addDays, todayISO } from '../dates/isoDate';
-import {
-  getUpcomingDeadlines, getDocumentAlertDays, EXPENSE_WINDOW_DAYS,
-} from '../../modules/budget/calculations/upcomingHelper';
+import { getUpcomingDeadlines, getDocumentAlertDays } from '../../modules/budget/calculations/upcomingHelper';
+import { getExpenseAlertDays, DEFAULT_EXPENSE_ALERT_DAYS } from './alertDays';
 import { isItemDismissed } from '../../components/layout/notificationDismissal';
 
 export const MIRROR_VERSION = 1;
 export const MIRROR_AHEAD_DAYS = 30;
 
-const soonDays = (item) => (item.itemType === 'document' ? getDocumentAlertDays(item.raw) : EXPENSE_WINDOW_DAYS);
+const soonDays = (item, expenseAlertDays) => (item.itemType === 'document'
+  ? getDocumentAlertDays(item.raw) : getExpenseAlertDays(item.raw, expenseAlertDays));
 
 export function buildMirror({
   expenses = [], documents = [], dismissedIds = [], enabled = false, muted = false,
-  lang = 'it', texts = {}, today = todayISO(),
+  lang = 'it', texts = {}, today = todayISO(), expenseAlertDays = DEFAULT_EXPENSE_ALERT_DAYS,
 } = {}) {
   const hidden = new Set(dismissedIds);
   const byId = new Map();
   [today, addDays(today, MIRROR_AHEAD_DAYS)].forEach((day) => {
-    getUpcomingDeadlines(expenses, documents, 'all', day).forEach((item) => {
+    getUpcomingDeadlines(expenses, documents, 'all', day, { expenseAlertDays }).forEach((item) => {
       if (byId.has(item.id) || !item.alertEnabled || isItemDismissed(item, hidden)) return;
-      byId.set(item.id, { id: item.id, date: item.date, title: String(item.title || ''), soon: soonDays(item) });
+      byId.set(item.id, { id: item.id, date: item.date, title: String(item.title || ''), soon: soonDays(item, expenseAlertDays) });
     });
   });
   const items = [...byId.values()].sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));

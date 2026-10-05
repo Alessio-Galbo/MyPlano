@@ -9,8 +9,8 @@ import { SettingsResetCard } from './SettingsResetCard';
 import { InstallmentKeyFixCard } from './InstallmentKeyFixCard';
 import { SystemNotificationsCard } from './SystemNotificationsCard';
 import { OrphanItemsCard } from './OrphanItemsCard';
-import { SettingsProfilesCard } from '../profiles/SettingsProfilesCard';
 import { SettingsSupportCard } from './SettingsSupportCard';
+import { ExpenseAlertDefaultRow } from './ExpenseAlertDefaultRow';
 import './SettingsView.css';
 
 export function SettingsView({ documents, expenses, onDataRestored, onSaveExpense, profiles, onSaveDocument }) {
@@ -47,11 +47,11 @@ export function SettingsView({ documents, expenses, onDataRestored, onSaveExpens
           </div>
           <Toggle checked={isGlobalMuted} onChange={toggleGlobalMute} />
         </div>
+
+        <ExpenseAlertDefaultRow />
       </div>
 
       <SystemNotificationsCard />
-
-      <SettingsProfilesCard profiles={profiles} />
 
       <OrphanItemsCard expenses={expenses} documents={documents} profiles={profiles}
         onSaveExpense={onSaveExpense} onSaveDocument={onSaveDocument} />

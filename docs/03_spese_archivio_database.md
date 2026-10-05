@@ -118,3 +118,9 @@ Quando si acquisisce o si salva una ricevuta in formato JPEG, MyPlano **scrive d
 
 ### Massima Sicurezza & Fallback Locale
 Se non viene collegata una cartella del PC, i file vengono conservati nel database protetto locale del browser (IndexedDB). Queste ricevute possono essere incluse nel backup (opzione *Includi allegati*); quelle nella cartella del PC no, perché sono già file tuoi.
+
+## Preavviso della Spesa
+
+- Nel form della spesa, accanto a *Abilita avviso*, il campo **Avvisami N giorni prima** decide quando la spesa entra nella campanella, nella card *Scadenze imminenti* e nelle notifiche sul telefono.
+- Le spese nuove partono dal **preavviso predefinito** impostabile in *Impostazioni* (30 giorni se non lo cambi); le spese che non hanno un valore proprio seguono sempre il predefinito.
+- Nel calendario esportato (`.ics`) il promemoria resta 3 giorni prima, salvo un preavviso impostato sulla singola spesa.

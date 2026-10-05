@@ -9,12 +9,13 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ## [Non rilasciato]
 
 ### Aggiunto
+- **Preavviso configurabile per le spese**: "Avvisami N giorni prima" nel form della spesa e preavviso predefinito in Impostazioni (30 giorni); vale per campanella, card e notifiche sul telefono. Nel calendario `.ics` il promemoria resta 3 giorni salvo valore impostato sulla spesa.
 - **Supporta MyPlano**: card in Impostazioni con il pulsante per offrire un caffè su Ko-fi (si apre in una nuova scheda).
 - **Primo avvio**: il banner "Stai vedendo dati di esempio" compare solo finché profili, spese e documenti sono ancora quelli di esempio, con "Inizia con i miei dati" (dice cosa si perde, poi apre Nuovo profilo) e "Tieni gli esempi" (ricordato).
 - **Stati vuoti guidati**: senza profili "Crea il tuo primo profilo" in Bilancio, Spese e Documenti (Nuova spesa/Nuovo documento disabilitati con spiegazione); liste vuote con "Aggiungi la prima spesa / il primo documento" e avviso se sono nascoste dai filtri.
 - **Campo Profilo nel form spesa** (obbligatorio, prima ogni spesa finiva nel primo profilo); nel form documento il profilo è preselezionato come quello scelto in alto (il primo con "Visione d'Insieme").
 - **Elementi senza profilo**: banner in Bilancio "N elementi senza profilo - Rivedi" e card in Impostazioni per assegnarli uno a uno o con "Assegna tutti a...", applicato solo dopo conferma; l'import segnala quanti ce ne sono; nel centro notifiche compaiono come "Senza profilo".
-- **Profili modificabili**: matita in Gestione profili per cambiare nome e colore (10 colori o Auto), avviso per nomi duplicati; card "Profili" in Impostazioni con Gestisci e Nuovo profilo.
+- **Profili modificabili**: matita in Gestione profili per cambiare nome e colore (10 colori o Auto), avviso per nomi duplicati (dal selettore dei profili in alto).
 - **Eliminazione profilo con "Annulla"**: dopo la conferma un avviso permette di ripristinare profilo, spese, documenti, finanze e strategia di budget.
 - **Notifiche sul dispositivo** (Impostazioni): interruttore (il permesso si chiede solo al tocco), stato Attive/Disattivate/Bloccate/Non supportate, riga "cosa funziona su questo dispositivo" e "Invia notifica di prova". Una notifica riassuntiva ("MyPlano - 3 scadenze"), una volta per fase (in arrivo, oggi, in ritardo), stessa selezione della campanella; il tocco apre il centro notifiche. In background (Chrome/Edge con app installata) a cura del sistema, circa 1-2 volte al giorno.
 - **Nuova icona MyPlano** (scudo con spunta) al posto del logo Vite.
@@ -50,6 +51,8 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 - Schema dati versionato (versione 2) con migrazioni eseguite una sola volta all'avvio.
 
 ### Corretto
+- **Icona con bordi neri** sul telefono: l'icona adattiva (maskable) e quella per iPhone ora sono a tutto campo con il gradiente, senza fondo scuro.
+- Tolta da Impostazioni la card "Profili", doppione del selettore in alto.
 - **Dati di esempio rimasti** dopo aver creato il proprio profilo dal menu profili: ora compare "Ci sono ancora i dati di esempio" con *Rimuovi gli esempi*, che toglie solo le voci di esempio mai modificate.
 - Freccia doppia nei pulsanti "indietro" dell'Hub su telefono.
 - **Rate nel giorno sbagliato**: con il fuso italiano le rate non annuali uscivano il giorno prima e dopo l'ora legale slittavano ancora (15 → 14 → 13).

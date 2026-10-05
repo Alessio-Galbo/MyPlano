@@ -1,10 +1,10 @@
 import { addDays, diffDays, todayISO } from '../../../core/dates/isoDate';
 import { getOccurrences, getNextOccurrence } from '../../../core/dates/recurrence';
 import { getInstallmentStatus } from '../../expenses/expenseInstallmentHelpers';
+import { getExpenseAlertDays, DEFAULT_EXPENSE_ALERT_DAYS } from '../../../core/notifications/alertDays';
 
 // Unpaid expenses / expired documents stay listed as "overdue" for this many days.
 export const OVERDUE_HORIZON_DAYS = 60;
-export const EXPENSE_WINDOW_DAYS = 30;
 export const DEFAULT_DOC_ALERT_DAYS = 30;
 
 export const expenseNotifId = (expenseId, date) => `exp-${expenseId}@${date}`;
@@ -33,12 +33,14 @@ function baseItem(today, date, raw, itemType, id, legacyId) {
   };
 }
 
-function expenseItems(e, today) {
+// Expense window: its own `alertDays`, else the global default (also when its alert is off).
+function expenseItems(e, today, defaultDays) {
   if (!e?.nextDueDate) return [];
   const horizon = addDays(today, -OVERDUE_HORIZON_DAYS);
   // Dates before nextDueDate are history: only from nextDueDate onward can be overdue.
   const from = horizon > e.nextDueDate ? horizon : e.nextDueDate;
-  const dates = getOccurrences(e, from, addDays(today, EXPENSE_WINDOW_DAYS))
+  const windowDays = e.enableAlert === false ? defaultDays : getExpenseAlertDays(e, defaultDays);
+  const dates = getOccurrences(e, from, addDays(today, windowDays))
     .filter((d) => getInstallmentStatus(e, d) !== 'paid');
   const next = getNextExpenseDate(e, today);
   return dates.map((date) => ({
@@ -66,11 +68,12 @@ function documentItem(d, today) {
 }
 
 // Deadlines of the profile (or 'all'): overdue (last 60 days, unpaid/expired) and upcoming
-// (expenses 30 days, documents `alertDays`). One item per occurrence, sorted by date.
-export function getUpcomingDeadlines(expenses = [], documents = [], profileId = 'all', today = todayISO()) {
+// (expenses `alertDays` or `expenseAlertDays`, documents `alertDays`). One item per occurrence, sorted by date.
+export function getUpcomingDeadlines(expenses = [], documents = [], profileId = 'all', today = todayISO(),
+  { expenseAlertDays = DEFAULT_EXPENSE_ALERT_DAYS } = {}) {
   const mine = (x) => profileId === 'all' || x?.profileId === profileId;
   const items = [
-    ...(expenses || []).filter(mine).flatMap((e) => expenseItems(e, today)),
+    ...(expenses || []).filter(mine).flatMap((e) => expenseItems(e, today, expenseAlertDays)),
     ...(documents || []).filter(mine).map((d) => documentItem(d, today)).filter(Boolean),
   ];
   return items.sort((a, b) => (a.date === b.date

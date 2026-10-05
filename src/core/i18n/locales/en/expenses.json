@@ -14,6 +14,7 @@
     "advanceCycle": "Advance cycle (+1)",
     "advanceDateHelp": "Calculate next due date based on frequency",
     "enableAlert": "Enable alert",
+    "alertDays": "Notify me (days before)",
     "includeInCalendar": "Include in calendar (.ics)",
     "notes": "Notes"
   },

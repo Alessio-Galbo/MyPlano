@@ -15,7 +15,9 @@ Metodo generico (strategie di cache, update flow, hosting statico): skill `pwa-s
   `node .claude/skills/myplano-pwa/scripts/pwa-scenario.mjs` → `ALL OK`; screenshot in `%TEMP%/myplano-pwa-test/`.
 - Modalità senza bordi (WCO desktop simulato, fullscreen telefono con notch, modale): `node .claude/skills/myplano-pwa/scripts/display-modes.mjs`.
 - Due schede + chunk lazy mancante dopo un deploy: `node .claude/skills/myplano-pwa/scripts/pwa-update-tabs.mjs`.
-- Icone da `public/favicon.svg` (Chrome headless): `node .claude/skills/myplano-pwa/scripts/icons.mjs`.
+- Icone da `public/favicon.svg` (Chrome headless): `node .claude/skills/myplano-pwa/scripts/icons.mjs` → `any` 192/512
+  con angoli trasparenti, `maskable` 512 e apple-touch 180 opache a tutto campo (glifo al 90%, dentro la zona sicura).
+  Verifica e regole (maschere simulate, bordi neri, aggiornamento sul telefono): skill AI-hub `app-icon-generation`.
 - Notifiche di sistema (≈1 min, preview :18528, CDP 19528): `node .claude/skills/myplano-pwa/scripts/notify-scenario.mjs`
   → `ALL OK`; screenshot `card-desktop.png`, `card-mobile*.png`, `center.png` in `%TEMP%/myplano-notify-test/`.
 - Test puro (mirror + riassunto + registro): `node Tools/test_system_notifications.mjs`.

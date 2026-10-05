@@ -7,10 +7,11 @@ import { todayISO } from '../dates/isoDate';
 import { translations } from '../i18n/translations';
 import { buildMirror } from './buildMirror';
 import { setNotifyItem } from './notifyDb';
+import { getExpenseAlertDefault } from '../storage/expenseAlertDefault';
 import { MIRROR_KEY, PREF_KEY } from './notifyConstants';
 
 const WATCHED = [DATA_KEYS.EXPENSES, DATA_KEYS.DOCUMENTS, DATA_KEYS.DISMISSED_NOTIFICATIONS,
-  DATA_KEYS.NOTIFICATIONS_MUTED, UI_KEYS.LANGUAGE, PREF_KEY];
+  DATA_KEYS.NOTIFICATIONS_MUTED, DATA_KEYS.EXPENSE_ALERT_DAYS, UI_KEYS.LANGUAGE, PREF_KEY];
 let lastSignature = null;
 
 const raw = (key) => {
@@ -46,6 +47,7 @@ export async function syncMirror({ force = false } = {}) {
     lang,
     texts: pushTexts(lang),
     today,
+    expenseAlertDays: getExpenseAlertDefault(),
   });
   try {
     await setNotifyItem(MIRROR_KEY, { ...mirror, updated: new Date().toISOString() });

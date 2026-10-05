@@ -55,7 +55,7 @@ MyPlano consente di organizzare le finanze e le scadenze dell'intero nucleo fami
 - Creazione di profili dedicati (es. *Personale*, *Famiglia*, *Genitori*, *Veicoli*, *Attività*).
 - **Modifica**: la matita in *Gestione profili* cambia nome e colore (10 colori oppure *Auto*); un avviso segnala i nomi duplicati.
 - Con *Auto* il colore è assegnato tra i colori neon coordinati; si può cambiare quando vuoi.
-- *Impostazioni* ha una card *Profili* con *Gestisci* e *Nuovo profilo*.
+- I profili si gestiscono dal selettore in alto (pallino del profilo → *Gestisci profili*).
 - Fondo iniziale dedicato e introito mensile configurabili individualmente per ciascun profilo.
 
 ### Navigazione & Filtro Rapido Globale
@@ -75,7 +75,7 @@ MyPlano consente di organizzare le finanze e le scadenze dell'intero nucleo fami
 Garantisce piena interoperabilità con gli strumenti di produttività quotidiani e sovranità totale sui dati:
 
 ### Notifiche & Centro Notifiche
-- La campanella nella navbar conta le scadenze imminenti (spese: 30 giorni; documenti: i giorni di preavviso del documento) e mette in rosso, in cima, il gruppo *Scaduti / in ritardo* (fino a 60 giorni indietro).
+- La campanella nella navbar conta le scadenze imminenti (spese: il preavviso della spesa, o quello predefinito impostato in *Impostazioni*, 30 giorni se non lo cambi; documenti: i giorni di preavviso del documento) e mette in rosso, in cima, il gruppo *Scaduti / in ritardo* (fino a 60 giorni indietro).
 - Ogni scadenza è una notifica a sé e le rate pagate sono escluse.
 - *Silenzia tutte*: il badge sparisce e la campanella appare barrata; la lista resta consultabile con un avviso.
 - Il centro notifiche ricorda l'ultima scheda aperta; `Esc` chiude il menu della campanella.
@@ -90,7 +90,7 @@ Garantisce piena interoperabilità con gli strumenti di produttività quotidiani
 ### Esportazione Calendario Universale iCalendar (`.ics`)
 - Genera un file `.ics` standard con le **spese** (se *Includi in calendario* non è spento) e i **documenti** (se il promemoria è attivo).
 - **Serie ricorrenti**: per ogni spesa ricorrente viene scritta una sola serie (con fine, esclusioni e date aggiunte) invece di una voce per ogni rata.
-- **Promemoria**: 3 giorni prima per le spese, i giorni di preavviso del documento per i documenti.
+- **Promemoria**: per le spese 3 giorni prima, oppure il preavviso impostato sulla singola spesa; i giorni di preavviso del documento per i documenti.
 - **Compatibilità**: importabile in **Google Calendar**, **Apple Calendar**, **Microsoft Outlook**, **Thunderbird** o qualsiasi app di calendario. Nota: Google Calendar ignora i promemoria dei file importati; Apple Calendar e Outlook li rispettano.
 
 ### Backup & Ripristino JSON (formato v3)

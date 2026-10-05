@@ -75,11 +75,7 @@
     "expensesCountMany": "{n} spese",
     "documentsCountOne": "{n} documento",
     "documentsCountMany": "{n} documenti",
-    "restoredToast": "Profilo \"{name}\" ripristinato con le sue spese e i suoi documenti",
-    "settingsTitle": "Profili",
-    "settingsDesc": "Persone o ambiti (casa, auto, famiglia) a cui collegare spese e documenti.",
-    "settingsEmpty": "Nessun profilo: creane uno per iniziare.",
-    "manageButton": "Gestisci"
+    "restoredToast": "Profilo \"{name}\" ripristinato con le sue spese e i suoi documenti"
   },
   "notifications": {
     "title": "Notifiche & Scadenze",
@@ -174,6 +170,8 @@
     "languageLabel": "Lingua dell'Interfaccia",
     "languageDesc": "Seleziona la lingua per testi ed etichette",
     "muteDesc": "Disattiva temporaneamente tutti i promemoria",
+    "expenseAlertDaysLabel": "Preavviso predefinito per le spese",
+    "expenseAlertDaysDesc": "Giorni di anticipo proposti per le nuove spese e usati da quelle senza un valore proprio (campanella, scadenze imminenti, notifiche). Nel calendario .ics il promemoria è di 3 giorni, salvo un valore impostato sulla spesa",
     "calendarDesc": "Genera file .ics per Google Calendar, Outlook o Apple Calendar",
     "backupDesc": "Salva una copia di sicurezza di tutti i tuoi dati o ripristina un file",
     "databaseMaintenance": "Dati dell'app",

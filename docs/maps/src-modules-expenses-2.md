@@ -1,6 +1,9 @@
 <!-- hub:map:start -->
 # Mappa: src/modules/expenses/
-Torna al [router](../../AGENTS.md) · 90 file
+Torna al [router](../../AGENTS.md) · 93 file
+- [expenseExpansionHelper.js](../../src/modules/expenses/expenseExpansionHelper.js): expandExpensesForRange
+- [expenseHelpers.js](../../src/modules/expenses/expenseHelpers.js): advanceNextDueDate, getExpenseUrgency, getCategoryLabel, getExpenseBadgeInfo, formatCurrency
+- [expenseHistoryHelpers.js](../../src/modules/expenses/expenseHistoryHelpers.js): getAllExpenseInstallmentDates, getInstallmentDetails
 - [expenseInstallmentHelpers.js](../../src/modules/expenses/expenseInstallmentHelpers.js): advanceDate, getInstallmentStatus, toggleInstallmentStatus, getExpenseDatesInYear, findNextInstallm…
 - [expensePaymentFundHelper.js](../../src/modules/expenses/expensePaymentFundHelper.js): recordInstallmentPayment, revertInstallmentPayment
 - [expenseTreeBuilder.js](../../src/modules/expenses/expenseTreeBuilder.js): buildExpenseTreeData

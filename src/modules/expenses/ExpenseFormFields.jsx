@@ -5,6 +5,7 @@ import { SuggestInput } from '../../components/ui';
 import { isDateInPast } from './pastDateHelpers';
 import { PastDateNotice } from './PastDateNotice';
 import { ContractSectionFields } from './ContractSectionFields';
+import { ExpenseAlertFields } from './ExpenseAlertFields';
 import { ExpenseFrequencyField } from './ExpenseFrequencyField';
 import { getCategoryLabel } from './expenseHelpers';
 import { ProfileSelectField } from '../../core/profiles';
@@ -72,6 +73,8 @@ export function ExpenseFormFields({ formData, setFormData, expenses = [], profil
           onApplyDate={(d) => setFormData({ ...formData, nextDueDate: d })}
         />
       )}
+
+      <ExpenseAlertFields formData={formData} setFormData={setFormData} />
 
       <ContractSectionFields formData={formData} setFormData={setFormData} />
     </div>

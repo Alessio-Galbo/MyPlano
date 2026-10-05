@@ -1,0 +1,14 @@
+.expense-alert-toggle {
+  align-self: end;
+  min-height: 2.5rem;
+  justify-content: center;
+}
+
+@media (max-width: 540px) {
+  .expense-alert-toggle { min-height: 0; }
+}
+
+#exp-form-alert-days:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

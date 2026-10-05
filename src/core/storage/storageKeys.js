@@ -15,6 +15,7 @@ export const DATA_KEYS = {
   BUDGET_STRATEGIES: 'myplano_budget_strategies',
   DISMISSED_NOTIFICATIONS: 'myplano_dismissed_notifications',
   NOTIFICATIONS_MUTED: 'myplano_notifications_muted',
+  EXPENSE_ALERT_DAYS: 'myplano_expense_alert_days',
   SCHEMA_VERSION: 'myplano_schema_version',
 };
 

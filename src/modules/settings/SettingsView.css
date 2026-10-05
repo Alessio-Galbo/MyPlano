@@ -69,3 +69,8 @@
   color: var(--text-muted);
   line-height: 1.5;
 }
+
+.settings-days-input {
+  width: 6rem;
+  flex: 0 0 auto;
+}

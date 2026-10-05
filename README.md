@@ -24,7 +24,7 @@
 - 🗄️ **Hub Database Scadenze (3 Colonne)**: naviga l'albero delle spese per anno, gestisci lo stato dei pagamenti e acquisisci ricevute con caricamento file o scatto fotografico diretto da fotocamera/webcam.
 - 🏷️ **Tag Nativi nei File (EXIF)**: salvataggio ordinato sul tuo PC in `[Anno]/[Categoria]/` con metadati EXIF inseriti direttamente nelle immagini JPEG.
 - 📅 **Timeline Pluriennale Dinamica**: sezioni annuali con header sticky in glassmorphism, totale di spesa dell'anno e collegamenti inter-annuali veloci.
-- 🔔 **Notifiche & Scadenze Imminenti**: campanella con le scadenze imminenti (spese a 30 giorni, documenti secondo il preavviso di ciascuno), gruppo "Scaduti", card dedicata nel Bilancio e centro notifiche per nascondere o ripristinare le singole voci.
+- 🔔 **Notifiche & Scadenze Imminenti**: campanella con le scadenze imminenti (spese e documenti con un preavviso configurabile, "Avvisami N giorni prima"; 30 giorni il predefinito per le spese), gruppo "Scaduti", card dedicata nel Bilancio e centro notifiche per nascondere o ripristinare le singole voci.
 - 🪪 **Scadenzario Documenti & Carte**: monitoraggio validità di documenti e carte bancarie, con procedura di rinnovo guidata (+1, +3, +5, +10 anni).
 - 📱 **Esperienza Mobile-First**: navbar reattiva ad icone compatte per le schede inattive, controlli veloci integrati nell'header e modali a schermo intero.
 - 🔒 **100% Privacy & Local-First**: zero cloud, zero tracking. Tutti i dati e i documenti rimangono esclusivamente sui tuoi dispositivi.

@@ -87,6 +87,20 @@ check('log: entries older than 60 days pruned', () => {
   const pruned = markNotified({ 'x#today': '2026-07-01', 'y#soon': '2026-09-01' }, ['z#today'], today);
   assert.deepEqual(Object.keys(pruned).sort(), ['y#soon', 'z#today']);
 });
+check('mirror: expense notice = alertDays, else the default (changed)', () => {
+  const e = [{ id: 'a7', title: 'A7', amount: 1, frequency: 'oneOff', nextDueDate: '2026-10-14', alertDays: 7 },
+    { id: 'a5', title: 'A5', amount: 1, frequency: 'oneOff', nextDueDate: '2026-10-09', alertDays: 7 },
+    { id: 'nd', title: 'ND', amount: 1, frequency: 'oneOff', nextDueDate: '2026-10-20' }];
+  const m = buildMirror({ expenses: e, enabled: true, texts, today, expenseAlertDays: 20 });
+  assert.equal(m.items.find((i) => i.id === 'exp-a5@2026-10-09').soon, 7);
+  assert.equal(m.items.find((i) => i.id === 'exp-nd@2026-10-20').soon, 20);
+  assert.equal(mirror.items.find((i) => i.id === 'exp-aff@2026-10-04').soon, 30);
+  // Due in 10 days with a 7-day notice: no "soon" summary today, it arrives 7 days before.
+  const only7 = { ...m, items: m.items.filter((i) => i.id.startsWith('exp-a7')) };
+  assert.equal(only7.items.length, 1, 'kept in the mirror for later days');
+  assert.equal(summarize(only7, {}, today), null);
+  assert.equal(summarize(only7, {}, '2026-10-07').body, 'A7 tra 7 gg');
+});
 check('localToday uses local calendar date', () => assert.equal(localToday(new Date(2026, 0, 5, 23, 59)), '2026-01-05'));
 
 console.log(fails ? `FAILED (${fails})` : 'ALL TESTS PASSED');

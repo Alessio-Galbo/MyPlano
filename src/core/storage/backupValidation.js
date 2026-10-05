@@ -19,6 +19,7 @@ function checkKey(key, value) {
   if (key === K.DISMISSED_NOTIFICATIONS) return Array.isArray(value) && value.every((id) => typeof id === 'string');
   if (OBJECT_MAPS.includes(key)) return isPlainObject(value);
   if (NUMBERS.includes(key)) return isFiniteNumber(value);
+  if (key === K.EXPENSE_ALERT_DAYS) return Number.isInteger(Number(value)) && Number(value) >= 1;
   if (key === K.NOTIFICATIONS_MUTED) return typeof value === 'boolean' || value === 'true' || value === 'false';
   return true; // unknown keys are ignored on import
 }
