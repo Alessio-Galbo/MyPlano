@@ -17,7 +17,7 @@ La documentazione dell'applicazione è organizzata nelle seguenti guide tematich
 | [02 - Bilancio & Sinking Funds](02_bilancio_e_sinking_funds.md) | Finanze, Quote & Previsioni | Metodo Sinking Funds, Fondo & Introito, Visione d'Insieme del Nucleo, Algoritmo Cold Start e Timeline Cashflow. |
 | [03 - Spese, Timeline & Database](03_spese_archivio_database.md) | Scadenziario & Archivio Ricevute | Vista multi-anno con timeline, bollette a consumo, Hub Archivio a 3 colonne, foto/webcam e tag nativi EXIF nei file. |
 | [04 - Documenti, Profili & Sicurezza](04_documenti_profili_impostazioni.md) | Carte, Identità & Sovranità Dati | Monitoraggio documenti con rinnovo guidato, gestione multi-profilo modificabile, notifiche (anche sul dispositivo), primo avvio con dati di esempio, export iCalendar (.ics) con ricorrenze e promemoria, backup JSON v3 con allegati e bilinguismo. |
-| [Release Notes](RELEASE_NOTES.md) | Note di Rilascio GitHub | Sintesi delle novità e changelog orientato agli utenti per i rilasci su GitHub. |
+| [Novità](../NOVITA.md) | Note di rilascio (in parole semplici) | Sintesi delle novità e changelog orientato agli utenti per i rilasci su GitHub. |
 
 ---
 

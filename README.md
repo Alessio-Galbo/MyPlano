@@ -82,7 +82,7 @@ Approfondisci il funzionamento di ogni modulo consultando le guide dedicate nell
 - [**02 - Bilancio, Sinking Funds & Nucleo**](docs/02_bilancio_e_sinking_funds.md): guida dettagliata alla logica finanziaria e alla visione d'insieme.
 - [**03 - Spese, Timeline & Database Scadenze**](docs/03_spese_archivio_database.md): gestione spese pluriennali, archivio a 3 colonne, foto e tag EXIF.
 - [**04 - Documenti, Profili & Sicurezza**](docs/04_documenti_profili_impostazioni.md): scadenzario documenti, profili familiari, backup e privacy.
-- [**Note di Rilascio GitHub**](docs/RELEASE_NOTES.md): testo pronto all'uso per i rilasci ufficiali su GitHub.
+- [**Note di Rilascio GitHub**](NOVITA.md): testo pronto all'uso per i rilasci ufficiali su GitHub.
 
 ---
 
