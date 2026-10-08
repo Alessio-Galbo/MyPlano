@@ -1,11 +1,11 @@
 <!-- hub:map:start -->
 # MyPlano
-> Scadenze, Sinking Funds & Archivio Ricevute > *Web Application reattiva, moderna e orientata alla…
+> Scadenze, Sinking Funds & Archivio Ricevute > *Web Application reattiva, moderna e orientata alla privacy per la pianificazione finanziaria e la gestione delle scadenze del tuo nucleo.*
 ## Mappe
 | Area | Mappa | Contenuto |
 |---|---|---|
-| `Tools/` | [Tools](docs/maps/Tools.md) | Registro Strumenti & Script di Utilità (/Tools) |
-| `docs/` | [docs](docs/maps/docs.md) | 6 file, es. 00_idea_base.md, 01_funzionalita_implementate.md, 02_bilancio_e_sinking_funds.md |
+| `Tools/` | [Tools](docs/maps/Tools.md) | Registro Strumenti & Script di Utilità |
+| `docs/` | [docs](docs/maps/docs.md) | 6 file in archivio/ |
 | `src/` | [src](docs/maps/src.md) | 6 file in hooks/ |
 | `src/components/` | [src-components](docs/maps/src-components.md) | 65 file in layout/, onboarding/, pwa/, ui/ |
 | `src/core/dates/` | [src-core-dates](docs/maps/src-core-dates.md) | 4 file, es. installmentKeyAudit.js, isoDate.js, recurrence.js |
@@ -29,7 +29,7 @@
 ## Regole
 - globali: `~/.claude/CLAUDE.md` e `~/.gemini/GEMINI.md` (generate da AI-hub)
 ## Skill attive
-- per tag: app-icon-generation, headless-chrome-cdp, modern-web-guidance, pwa-service-worker-checklist, service-troubleshooting, web-share-social-preview
+- per tag: app-icon-generation, headless-chrome-cdp, modern-web-guidance, public-repo-hygiene, pwa-service-worker-checklist, service-troubleshooting, web-share-social-preview
 - del progetto: myplano-pwa
 ## Non qui
 - `.agents/`, `.claude/`, `.github/`: config dei tool AI

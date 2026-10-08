@@ -32,7 +32,10 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 - **Accessibilità**: focus nei modali, Esc chiude solo il modale in primo piano, navbar con scheda attiva indicata.
 - **Schermata di errore** con "Scarica dati grezzi (JSON)" e "Ricarica", senza reset.
 
+- **Mappe del progetto** per gli agenti AI: `hub maps apply "MyPlano" --apply` (AI-hub) — 16 mappe in `docs/maps/`.
+
 ### Modificato
+- **Documenti**: note di rilascio v1.0.0 (`docs/RELEASE_NOTES.md`) riportate in `NOVITA.md` e il file spostato in `docs/archivio/`; il piano (PROGRESS.md) non ha più la sezione «Fatto» (le 17 voci erano già in questo file, tranne le mappe aggiunte sopra).
 - **Niente scorrimento orizzontale su telefono**: corretti "Nuovo profilo", barra in alto con nomi lunghi, storico bollette (schede su telefono) e form "Registra bolletta"; controllato su 94 schermate e modali a 360 e 390 px.
 - **Primo avvio**: dopo il primo profilo l'app chiede se attivare le notifiche sul telefono (scelta ricordata).
 - **Impostazioni su telefono**: le righe vanno a capo, i pulsanti larghi scendono sotto il testo invece di comprimerlo in una colonna stretta.

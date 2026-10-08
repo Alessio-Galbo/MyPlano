@@ -1,7 +1,7 @@
 <!-- hub:map:start -->
 # Mappa: Tools/
 Torna al [router](../../AGENTS.md) · 16 file
-- [README.md](../../Tools/README.md): Registro Strumenti & Script di Utilità (/Tools)
+- [README.md](../../Tools/README.md): Registro Strumenti & Script di Utilità
 - [check_i18n_keys.py](../../Tools/check_i18n_keys.py): Controlla che le chiavi t() usate in src esistano nei file di lingua it ed en
 - [check_line_limits.py](../../Tools/check_line_limits.py): Controllo del limite di righe per file: richiama lo strumento unico di AI-hub.
 - [launch_with_qr.py](../../Tools/launch_with_qr.py): Avvia il server Vite su LAN e mostra URL e QR code per aprire l'app da smartphone

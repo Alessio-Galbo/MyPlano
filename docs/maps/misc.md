@@ -1,9 +1,10 @@
 <!-- hub:map:start -->
 # Mappa: misc
-Torna al [router](../../AGENTS.md) · 12 file
-- [CHANGELOG.md](../../CHANGELOG.md): Changelog
-- [PROGRESS.md](../../PROGRESS.md): MyPlano — Avanzamento lavori
-- [README.md](../../README.md): 🛡️ MyPlano
+Torna al [router](../../AGENTS.md) · 13 file
+- [CHANGELOG.md](../../CHANGELOG.md): [Non rilasciato], [0.1.0] - 2026-09-16
+- [NOVITA.md](../../NOVITA.md): Novità — MyPlano: In arrivo, 1.0.0 — prima versione
+- [PROGRESS.md](../../PROGRESS.md): MyPlano — Avanzamento lavori: Risposte e domande per te, Ora, Prossimi, In attesa, Per il futuro, I…
+- [README.md](../../README.md): 🛡️ MyPlano: ✨ Cos'è MyPlano?, 🚀 Caratteristiche Principali, 🏃 Avvio Rapido, 🌐 Uso Online & Installa…
 - [avvia_myplano.bat](../../avvia_myplano.bat): Avvio rapido Windows: lancia lo script Python col QR, altrimenti ripiega su npm run dev
 - [index.html](../../index.html): MyPlano / Scadenze & Bilancio
 - [package-lock.json](../../package-lock.json): JSON grande
