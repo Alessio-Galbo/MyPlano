@@ -7,6 +7,7 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ---
 
 ## [Non rilasciato]
+- Preavviso configurabile per le spese ("Avvisami N giorni prima" + predefinito in Impostazioni) — fatto — `alertDays.js`, `ExpenseAlertFields.jsx`, `ExpenseAlertDefaultRow.jsx` — Tried in the app: it works
 
 ### Aggiunto
 - **Preavviso configurabile per le spese**: "Avvisami N giorni prima" nel form della spesa e preavviso predefinito in Impostazioni (30 giorni); vale per campanella, card e notifiche sul telefono. Nel calendario `.ics` il promemoria resta 3 giorni salvo valore impostato sulla spesa.

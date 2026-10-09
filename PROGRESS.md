@@ -7,12 +7,11 @@ Lavoro concluso: [CHANGELOG.md](CHANGELOG.md) (tecnico) e [NOVITA.md](NOVITA.md)
 ## Ora
 
 ## Prossimi
-- [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home)
 
 ## In attesa
-- [ ] Preavviso configurabile per le spese ("Avvisami N giorni prima" + predefinito in Impostazioni) — fatto — `alertDays.js`, `ExpenseAlertFields.jsx`, `ExpenseAlertDefaultRow.jsx` — attende: test dell'utente
 
 ## Per il futuro
+- [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home) — parcheggiato il 2026-10-09: Need an iPhone
 
 ## Idee di sviluppo futuro
 ### Ricerca e viste
