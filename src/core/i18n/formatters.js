@@ -3,6 +3,7 @@
 // English uses en-GB: the app works in EUR and day-first dates, so en-US (month-first)
 // would make "04/10/2026" ambiguous next to Italian data.
 import { parseISODate } from '../dates/isoDate.js';
+import { formatDate as formatWith } from '../../shared/date-format/index.js';
 
 export const LOCALES = { it: 'it-IT', en: 'en-GB' };
 let currentLanguage = 'it';
@@ -23,7 +24,6 @@ function cached(kind, locale, options, Ctor) {
 }
 
 const toDate = (value) => (value instanceof Date ? value : parseISODate(String(value || '')));
-const capitalize = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
 // formatCurrency(12.5) -> "12,50 €" (it) / "€12.50" (en). opts.maximumFractionDigits: 0 for round values.
 export function formatCurrency(amount, opts = {}, lang) {
@@ -39,24 +39,17 @@ export function formatCurrency(amount, opts = {}, lang) {
 
 // 'YYYY-MM-DD' -> "04/10/2026" (it and en-GB are both day-first). Empty -> '-'.
 export function formatDate(iso, lang) {
-  const date = iso ? toDate(iso) : null;
-  if (!date) return '-';
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  return cached('d', getFormatLocale(lang), options, Intl.DateTimeFormat).format(date);
+  return formatWith(iso ? toDate(iso) : null, { locale: getFormatLocale(lang), preset: 'numeric', fallback: '-' });
 }
 
 // "4 ott" / "4 Oct"
 export function formatShortDate(iso, lang) {
-  const date = iso ? toDate(iso) : null;
-  if (!date) return '-';
-  return cached('d', getFormatLocale(lang), { day: 'numeric', month: 'short' }, Intl.DateTimeFormat).format(date);
+  return formatWith(iso ? toDate(iso) : null, { locale: getFormatLocale(lang), preset: 'dayMonth', fallback: '-' });
 }
 
 // Month name, capitalized: "Ottobre" / "October" (style 'long' | 'short').
 export function formatMonthName(value, style = 'long', lang) {
-  const date = toDate(value);
-  if (!date) return '';
-  return capitalize(cached('d', getFormatLocale(lang), { month: style }, Intl.DateTimeFormat).format(date));
+  return formatWith(toDate(value), { locale: getFormatLocale(lang), intl: { month: style }, capitalize: true });
 }
 
 // "Ottobre 2026" / "October 2026"
@@ -69,9 +62,7 @@ export function formatMonthYear(value, style = 'long', lang) {
 // Timestamp (ISO with time or Date) -> local date + time.
 export function formatDateTime(value, lang) {
   const date = value instanceof Date ? value : new Date(value);
-  if (isNaN(date)) return '-';
-  const options = { dateStyle: 'short', timeStyle: 'short' };
-  return cached('d', getFormatLocale(lang), options, Intl.DateTimeFormat).format(date);
+  return formatWith(date, { locale: getFormatLocale(lang), preset: 'short', fallback: '-' });
 }
 
 // formatPercent(12.5) -> "12,5%" (it) / "12.5%" (en). Input is already a percentage (0-100).
