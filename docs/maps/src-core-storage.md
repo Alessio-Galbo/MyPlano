@@ -1,9 +1,13 @@
 <!-- hub:map:start -->
 # Mappa: src/core/storage/
-Torna al [router](../../AGENTS.md) · 29 file
+Torna al [router](../../AGENTS.md) · 33 file
 - [archiveDirectory.js](../../src/core/storage/archiveDirectory.js): Sceglie, collega e scollega la cartella archivio del PC e aggiorna l'indice JSON
 - [archiveNaming.js](../../src/core/storage/archiveNaming.js): ID univoci, chiave IndexedDB delle ricevute e nomi file senza sovrascritture
 - [archiveService.js](../../src/core/storage/archiveService.js): Salva le ricevute in una cartella anno/categoria o in IndexedDB, poi le riapre
+- [autoBackup/autoBackupConfig.js](../../src/core/storage/autoBackup/autoBackupConfig.js): Configuration and cadence checks for periodic automatic snapshots.
+- [autoBackup/autoBackupDb.js](../../src/core/storage/autoBackup/autoBackupDb.js): IndexedDB persistence for automatic backup snapshots.
+- [autoBackup/autoBackupService.js](../../src/core/storage/autoBackup/autoBackupService.js): Creation, listing, pruning, and restoring of periodic automatic snapshots.
+- [autoBackup/index.js](../../src/core/storage/autoBackup/index.js): Aggregator: exports configuration, storage, and service for automatic snapshots.
 - [backupAttachments.js](../../src/core/storage/backupAttachments.js): Ricevute IndexedDB in base64 per il backup: dimensione, raccolta, ripristino sicuro
 - [backupFormat.js](../../src/core/storage/backupFormat.js): Formato backup v3: lettura chiavi dati, costruzione, parsing e conversione legacy
 - [backupValidation.js](../../src/core/storage/backupValidation.js): Valida dati e allegati del backup e conta spese/documenti senza profilo

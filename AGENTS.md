@@ -6,7 +6,7 @@
 |---|---|---|
 | `Tools/` | [Tools](docs/maps/Tools.md) | Registro Strumenti & Script di Utilità |
 | `docs/` | [docs](docs/maps/docs.md) | 6 file in archivio/ |
-| `src/` | [src](docs/maps/src.md) | 6 file in hooks/ |
+| `src/` | [src](docs/maps/src.md) | 4 file, es. App.css, App.jsx, index.css |
 | `src/components/` | [src-components](docs/maps/src-components.md) | 65 file in layout/, onboarding/, pwa/, ui/ |
 | `src/core/dates/` | [src-core-dates](docs/maps/src-core-dates.md) | 4 file, es. installmentKeyAudit.js, isoDate.js, recurrence.js |
 | `src/core/i18n/` | [src-core-i18n](docs/maps/src-core-i18n.md) | I18nProvider, useI18n, translations, useFormatters |
@@ -15,12 +15,14 @@
 | `src/core/state/` | [src-core-state](docs/maps/src-core-state.md) | AppProvider, useApp, useAppData |
 | `src/core/storage/` | [src-core-storage](docs/maps/src-core-storage.md) | storageService, INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES |
 | `src/core/theme/` | [src-core-theme](docs/maps/src-core-theme.md) | 3 file, es. colorHelpers.js, colors.css, dynamicThemeService.js |
+| `src/hooks/` | [src-hooks](docs/maps/src-hooks.md) | 3 file, es. useAutoBackupLifecycle.js, useCarousel.js, usePersistentState.js |
 | `src/modules/budget/` | [src-modules-budget](docs/maps/src-modules-budget.md) | BudgetOverview, BudgetTab, CashflowTimeline, ColdStartCard, InitialBalanceCard (+1) |
 | `src/modules/budget/calculations/` | [src-modules-budget-calculations](docs/maps/src-modules-budget-calculations.md) | 9 file, es. cashflowTimeline.js, coldStartAnalysis.js, coreMetrics.js |
 | `src/modules/documents/` | [src-modules-documents](docs/maps/src-modules-documents.md) | DocumentList, DocumentCard, DocumentFormModal |
 | `src/modules/expenses/` | [src-modules-expenses](docs/maps/src-modules-expenses.md) | ExpenseList, ExpenseCard, YearGroupedExpenseGrid, ExpenseFormModal, ExpenseHistoryModal |
 | `src/modules/profiles/` | [src-modules-profiles](docs/maps/src-modules-profiles.md) | AddProfileModal, DeleteProfileModal, ProfileModalsContainer, ProfileManagementModal, usePr |
-| `src/modules/settings/` | [src-modules-settings](docs/maps/src-modules-settings.md) | SettingsView |
+| `src/modules/settings/` | [src-modules-settings](docs/maps/src-modules-settings.md) | SettingsView, SettingsAutoBackupCard |
+| `src/shared/` | [src-shared](docs/maps/src-shared.md) | 6 file in date-format/ |
 | `src/styles/` | [src-styles](docs/maps/src-styles.md) | 6 file, es. fonts.css, index.css, layout.css |
 | `misc` | [misc](docs/maps/misc.md) | file nella root e cartelle piccole: public/, src/ |
 ## Avvio e test

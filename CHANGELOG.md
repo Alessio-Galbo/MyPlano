@@ -7,6 +7,7 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ---
 
 ## [Non rilasciato]
+- **Backup automatico**: snapshot periodico (oggi il backup è solo manuale) (idea R-003) — node Tools/test_auto_backup.mjs: tutti i test passati (cadenza, preferenze, listing, pruning rotazione 7 snapshot), build OK
 - Preavviso configurabile per le spese ("Avvisami N giorni prima" + predefinito in Impostazioni) — fatto — `alertDays.js`, `ExpenseAlertFields.jsx`, `ExpenseAlertDefaultRow.jsx` — Tried in the app: it works
 
 ### Aggiunto

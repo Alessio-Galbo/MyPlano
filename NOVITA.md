@@ -22,6 +22,7 @@ Cosa è cambiato, in parole semplici (più recente in alto). Dettagli tecnici: [
 - **Nuova icona**, interfaccia in italiano e inglese con date e valute della lingua scelta, app più veloce all'avvio.
 
 ### Dati e backup
+- **Backup automatico & snapshot locali**: MyPlano salva periodicamente una copia di sicurezza automatica nel browser (giornaliera o settimanale) conservando gli ultimi 7 snapshot; puoi ripristinare o scaricare qualsiasi snapshot precedente con un click da Impostazioni.
 - **Backup con le ricevute**, import «tutto o niente» con conferma; i dati non si perdono più con salvataggi ravvicinati o due schede aperte.
 - Avvisi con **«Annulla»** e preferenze ricordate tra una sessione e l'altra.
 
