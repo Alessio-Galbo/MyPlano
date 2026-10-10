@@ -6,9 +6,13 @@ Lavoro concluso: [CHANGELOG.md](CHANGELOG.md) (tecnico) e [NOVITA.md](NOVITA.md)
 
 ## Ora
 
+## Approvati
+
 ## Prossimi
 
 ## In attesa
+
+## Test richiesti
 
 ## Per il futuro
 - [ ] Notifiche su iPhone da verificare su un dispositivo reale (app aggiunta alla Home) — parcheggiato il 2026-10-09: Need an iPhone
