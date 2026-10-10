@@ -9,6 +9,8 @@ Lavoro concluso: [CHANGELOG.md](CHANGELOG.md) (tecnico) e [NOVITA.md](NOVITA.md)
 ## Approvati
 
 ## Prossimi
+- [ ] [approvato per l'AI] Risolvere: descrivere i 6 file senza nota nella mappa di MyPlano (elenco: `hub maps describe "MyPlano" --todo`; se molti usa sotto-agenti; salva con `hub maps describe "MyPlano" --from-json <file.json> --apply` o docstring, poi `hub maps refresh "MyPlano" --apply`) (problema `maps_describe:MyPlano`) — verifica: `hub maps describe "MyPlano" --check`
+  - nota hub: verifica non passata il 2026-10-10 (`hub maps describe "MyPlano" --check`: exit 1)
 
 ## In attesa
 
