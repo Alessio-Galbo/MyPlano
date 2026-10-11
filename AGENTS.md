@@ -13,7 +13,7 @@
 | `src/core/notifications/` | [src-core-notifications](docs/maps/src-core-notifications.md) | System (OS) notifications without a server: see notifyLifecycle.js and public/sw-notify.js |
 | `src/core/profiles/` | [src-core-profiles](docs/maps/src-core-profiles.md) | hasProfile, pickInitialProfileId, findOrphanItems, orphanKey, assignOrphanItems (+3) |
 | `src/core/state/` | [src-core-state](docs/maps/src-core-state.md) | AppProvider, useApp, useAppData |
-| `src/core/storage/` | [src-core-storage](docs/maps/src-core-storage.md) | storageService, INITIAL_PROFILES, INITIAL_DOCUMENTS, INITIAL_EXPENSES |
+| `src/core/storage/` | [src-core-storage](docs/maps/src-core-storage.md) | Punto di accesso dell'archivio locale: servizio dati, dati iniziali e backup automatico. |
 | `src/core/theme/` | [src-core-theme](docs/maps/src-core-theme.md) | 3 file, es. colorHelpers.js, colors.css, dynamicThemeService.js |
 | `src/hooks/` | [src-hooks](docs/maps/src-hooks.md) | 3 file, es. useAutoBackupLifecycle.js, useCarousel.js, usePersistentState.js |
 | `src/modules/budget/` | [src-modules-budget](docs/maps/src-modules-budget.md) | BudgetOverview, BudgetTab, CashflowTimeline, ColdStartCard, InitialBalanceCard (+1) |
@@ -21,7 +21,7 @@
 | `src/modules/documents/` | [src-modules-documents](docs/maps/src-modules-documents.md) | DocumentList, DocumentCard, DocumentFormModal |
 | `src/modules/expenses/` | [src-modules-expenses](docs/maps/src-modules-expenses.md) | ExpenseList, ExpenseCard, YearGroupedExpenseGrid, ExpenseFormModal, ExpenseHistoryModal |
 | `src/modules/profiles/` | [src-modules-profiles](docs/maps/src-modules-profiles.md) | AddProfileModal, DeleteProfileModal, ProfileModalsContainer, ProfileManagementModal, usePr |
-| `src/modules/settings/` | [src-modules-settings](docs/maps/src-modules-settings.md) | SettingsView, SettingsAutoBackupCard |
+| `src/modules/settings/` | [src-modules-settings](docs/maps/src-modules-settings.md) | Esporta la schermata Impostazioni, la scheda del backup automatico e gli helper per il cal |
 | `src/shared/` | [src-shared](docs/maps/src-shared.md) | 6 file in date-format/ |
 | `src/styles/` | [src-styles](docs/maps/src-styles.md) | 6 file, es. fonts.css, index.css, layout.css |
 | `misc` | [misc](docs/maps/misc.md) | file nella root e cartelle piccole: public/, src/ |

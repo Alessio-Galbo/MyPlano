@@ -16,7 +16,7 @@ Torna al [router](../../AGENTS.md) · 33 file
 - [exportImportService.js](../../src/core/storage/exportImportService.js): Esporta e importa backup con allegati, rollback e migrazioni dopo l'import
 - [idMigrationHelper.js](../../src/core/storage/idMigrationHelper.js): Crea ID unici, corregge ID mancanti o duplicati e ripulisce notifiche rotte
 - [imageOptimizer.js](../../src/core/storage/imageOptimizer.js): Ridimensiona le immagini delle ricevute e le comprime in JPEG con un canvas
-- [index.js](../../src/core/storage/index.js): Aggregatore: esporta storageService e i dati iniziali (profili, documenti, spese)
+- [index.js](../../src/core/storage/index.js): Punto di accesso dell'archivio locale: servizio dati, dati iniziali e backup automatico.
 - [indexedDbHelper.js](../../src/core/storage/indexedDbHelper.js): Helper IndexedDB: leggi/scrivi/elimina chiavi e voci per prefisso (es. ricevute blob_)
 - [initialData.js](../../src/core/storage/initialData.js): Aggregatore dei dati demo iniziali: profili, documenti e spese da seedData
 - [jpegExifWriter.js](../../src/core/storage/jpegExifWriter.js): Inserisce tag XPKeywords EXIF (APP1) in un buffer JPEG

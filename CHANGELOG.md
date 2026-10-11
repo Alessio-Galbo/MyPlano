@@ -7,6 +7,7 @@ e questo progetto aderisce al [Semantic Versioning](https://semver.org/lang/it/)
 ---
 
 ## [Non rilasciato]
+- Decisione dell'utente su: Riprendi lavoro interrotto: MyPlano · Risolvere: descrivere i 6 file senza nota nella mappa di MyPlano (elenco: `hub maps describe "MyPlano" --todo` — riga descrittiva in testa ai 6 file; maps describe --check exit 0; unittest Tools 6 OK; test_auto_backup*.mjs OK; vite build OK; line limits OK
 - **Backup automatico**: snapshot periodico (oggi il backup è solo manuale) (idea R-003) — node Tools/test_auto_backup.mjs: tutti i test passati (cadenza, preferenze, listing, pruning rotazione 7 snapshot), build OK
 - Preavviso configurabile per le spese ("Avvisami N giorni prima" + predefinito in Impostazioni) — fatto — `alertDays.js`, `ExpenseAlertFields.jsx`, `ExpenseAlertDefaultRow.jsx` — Tried in the app: it works
 

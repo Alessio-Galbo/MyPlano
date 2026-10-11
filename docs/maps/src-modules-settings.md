@@ -22,15 +22,15 @@ Torna al [router](../../AGENTS.md) · 34 file
 - [SettingsSupportCard.css](../../src/modules/settings/SettingsSupportCard.css): Stili della card di supporto: icona colorata e pulsante link
 - [SettingsSupportCard.jsx](../../src/modules/settings/SettingsSupportCard.jsx): Card impostazioni con link donazione Ko-fi per sostenere l'app gratuita
 - [SettingsView.css](../../src/modules/settings/SettingsView.css): Stili della pagina impostazioni: contenitore, card, righe con etichetta e descrizione
-- [SettingsView.jsx](../../src/modules/settings/SettingsView.jsx): Pagina impostazioni: lingua, silenzia tutto, notifiche, backup, archivio, reset, card
+- [SettingsView.jsx](../../src/modules/settings/SettingsView.jsx): Schermata Impostazioni: lingua, notifiche, backup, archivio, ripristino e supporto.
 - [SnapshotItemRow.jsx](../../src/modules/settings/SnapshotItemRow.jsx): Renders a single automatic snapshot item with restore, download, and delete actions.
 - [SystemNotificationsCard.css](../../src/modules/settings/SystemNotificationsCard.css): Stili card notifiche dispositivo: badge di stato, avvisi, pulsante di test
 - [SystemNotificationsCard.jsx](../../src/modules/settings/SystemNotificationsCard.jsx): Card notifiche di sistema: toggle permesso, stato, avvisi e invio notifica di prova
-- [backupTexts.js](../../src/modules/settings/backupTexts.js): Testi tradotti del backup: messaggi errore, ultimo backup, riepilogo import, dimensioni
+- [backupTexts.js](../../src/modules/settings/backupTexts.js): Testi tradotti per backup e ripristino: messaggi di esito, ultimo backup, riepilogo importazione, p…
 - [icsCalendar.js](../../src/modules/settings/icsCalendar.js): Pure .ics builder (no i18n import, testable in node). `t` is the translate function.
 - [icsExportHelper.js](../../src/modules/settings/icsExportHelper.js): Genera calendario ICS da documenti/spese con traduttore e scarica file nel browser
 - [icsFormat.js](../../src/modules/settings/icsFormat.js): RFC 5545 helpers: text escaping, 75-octet line folding, DATE values, recurrence rules.
-- [index.js](../../src/modules/settings/index.js): Aggregatore del modulo impostazioni: esporta SettingsView e helper export ICS
+- [index.js](../../src/modules/settings/index.js): Esporta la schermata Impostazioni, la scheda del backup automatico e gli helper per il calendario (…
 - [useAutoBackupActions.js](../../src/modules/settings/useAutoBackupActions.js): State and actions for automatic backup settings and snapshot management.
 - [useAutoBackupPrefs.js](../../src/modules/settings/useAutoBackupPrefs.js): Hook to manage automatic backup user preferences.
 - [useBackupActions.js](../../src/modules/settings/useBackupActions.js): Hook stato e azioni backup: export JSON, scelta file, import con conferma, allegati
