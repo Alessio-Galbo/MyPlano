@@ -1,10 +1,11 @@
-# Build di MyPlano e pubblicazione su GitHub Pages (https://alessio-galbo.github.io/MyPlano/) a ogni push su main.
+# Build di MyPlano e pubblicazione su GitHub Pages (https://alessio-galbo.github.io/MyPlano/) solo a ogni push sul ramo deploy
+# (tasto «Pubblica il sito» di AI-hub: git push origin main:deploy), mai a ogni push su main.
 # Prerequisito una tantum: Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [deploy]
   workflow_dispatch:
 
 permissions:
@@ -47,6 +48,7 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+          retention-days: 1
 
   deploy:
     needs: build
