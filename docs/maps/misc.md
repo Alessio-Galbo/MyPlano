@@ -3,7 +3,7 @@
 Torna al [router](../../AGENTS.md) · 13 file
 - [CHANGELOG.md](../../CHANGELOG.md): [Non rilasciato], [0.1.0] - 2026-09-16
 - [NOVITA.md](../../NOVITA.md): Novità — MyPlano: In arrivo, 1.0.0 — prima versione
-- [PROGRESS.md](../../PROGRESS.md): MyPlano — Avanzamento lavori: Risposte e domande per te, Ora, Approvati, Prossimi, In attesa, Test…
+- [PROGRESS.md](../../PROGRESS.md): MyPlano — Avanzamento lavori: Domande per te, Ora, Approvati, Prossimi, Prove da fare, Per il futuro
 - [README.md](../../README.md): 🛡️ MyPlano: ✨ Cos'è MyPlano?, 🚀 Caratteristiche Principali, 🏃 Avvio Rapido, 🌐 Uso Online & Installa…
 - [avvia_myplano.bat](../../avvia_myplano.bat): Avvio rapido Windows: lancia lo script Python col QR, altrimenti ripiega su npm run dev
 - [index.html](../../index.html): MyPlano / Scadenze & Bilancio
