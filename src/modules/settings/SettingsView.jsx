@@ -1,9 +1,11 @@
+// Schermata Impostazioni: lingua, notifiche, backup, archivio, ripristino e supporto.
 import React from 'react';
 import { Globe, HelpCircle } from 'lucide-react';
 import { Toggle } from '../../components/ui';
 import { useI18n } from '../../core/i18n';
 import { useApp } from '../../core/state';
 import { SettingsBackupCard } from './SettingsBackupCard';
+import { SettingsAutoBackupCard } from './SettingsAutoBackupCard';
 import { SettingsArchiveCard } from './SettingsArchiveCard';
 import { SettingsResetCard } from './SettingsResetCard';
 import { InstallmentKeyFixCard } from './InstallmentKeyFixCard';
@@ -73,6 +75,8 @@ export function SettingsView({ documents, expenses, onDataRestored, onSaveExpens
         expenses={expenses}
         onDataRestored={onDataRestored}
       />
+
+      <SettingsAutoBackupCard onDataRestored={onDataRestored} />
 
       <SettingsSupportCard />
 

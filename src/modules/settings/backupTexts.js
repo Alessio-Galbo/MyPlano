@@ -1,3 +1,4 @@
+// Testi tradotti per backup e ripristino: messaggi di esito, ultimo backup, riepilogo importazione, peso allegati.
 import { diffDays, todayISO } from '../../core/dates/isoDate';
 import { formatDateTime } from '../../core/i18n/formatters';
 
@@ -17,6 +18,9 @@ export function backupMessageText(t, code) {
     errReadFailed: t('common.backup.errReadFailed'),
     errExportFailed: t('common.backup.errExportFailed'),
     errRestoreFailed: t('common.backup.errRestoreFailed'),
+    snapshotCreated: t('common.autoBackup.snapshotCreated'),
+    snapshotRestored: t('common.autoBackup.snapshotRestored'),
+    snapshotDeleted: t('common.autoBackup.snapshotDeleted'),
   };
   return texts[code] || texts.errInvalidFormat;
 }

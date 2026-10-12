@@ -250,6 +250,28 @@
     "downloadRecovery": "Scarica copia dei dati precedenti",
     "legacyWarning": "Backup di versione precedente: alcune impostazioni (strategie, notifiche nascoste, silenzia notifiche) torneranno ai valori predefiniti."
   },
+  "autoBackup": {
+    "title": "Backup automatico & Snapshot locali",
+    "desc": "Salva periodicamente una copia di sicurezza automatica dei tuoi dati nel browser",
+    "enableLabel": "Attiva backup automatico",
+    "frequencyLabel": "Frequenza snapshot",
+    "frequencyDaily": "Ogni giorno (consigliato)",
+    "frequencyWeekly": "Ogni settimana",
+    "lastSnapshot": "Ultimo snapshot: {time}",
+    "noSnapshots": "Nessuno snapshot salvato finora",
+    "retentionNote": "Vengono conservati automaticamente gli ultimi 7 snapshot più recenti.",
+    "createNow": "Crea snapshot adesso",
+    "creating": "Creazione...",
+    "restoreButton": "Ripristina",
+    "downloadButton": "Scarica JSON",
+    "deleteButton": "Elimina",
+    "itemsSummary": "{profiles} profili, {expenses} spese, {documents} documenti",
+    "restoreConfirmTitle": "Ripristinare questo snapshot?",
+    "restoreConfirmMessage": "I dati attuali verranno sostituiti con la copia salvata il {date} ({profiles} profili, {expenses} spese, {documents} doc). Continuare?",
+    "snapshotCreated": "Snapshot creato con successo.",
+    "snapshotRestored": "Snapshot ripristinato con successo.",
+    "snapshotDeleted": "Snapshot eliminato."
+  },
   "installmentFix": {
     "banner": "Ci sono {n} rate pagate con una data da correggere: finché non le correggi la rata giusta risulta non pagata.",
     "bannerOne": "C'è 1 rata pagata con una data da correggere: finché non la correggi la rata giusta risulta non pagata.",

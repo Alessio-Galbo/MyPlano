@@ -250,6 +250,28 @@
     "downloadRecovery": "Download copy of previous data",
     "legacyWarning": "Older backup version: some settings (strategies, hidden notifications, mute) will go back to their defaults."
   },
+  "autoBackup": {
+    "title": "Automatic backup & Local snapshots",
+    "desc": "Periodically saves an automatic safety copy of your data in the browser",
+    "enableLabel": "Enable automatic backup",
+    "frequencyLabel": "Snapshot frequency",
+    "frequencyDaily": "Every day (recommended)",
+    "frequencyWeekly": "Every week",
+    "lastSnapshot": "Last snapshot: {time}",
+    "noSnapshots": "No snapshots saved yet",
+    "retentionNote": "Up to 7 recent snapshots are automatically kept.",
+    "createNow": "Create snapshot now",
+    "creating": "Creating...",
+    "restoreButton": "Restore",
+    "downloadButton": "Download JSON",
+    "deleteButton": "Delete",
+    "itemsSummary": "{profiles} profiles, {expenses} expenses, {documents} documents",
+    "restoreConfirmTitle": "Restore this snapshot?",
+    "restoreConfirmMessage": "Current data will be replaced with the copy saved on {date} ({profiles} profiles, {expenses} expenses, {documents} docs). Continue?",
+    "snapshotCreated": "Snapshot created successfully.",
+    "snapshotRestored": "Snapshot restored successfully.",
+    "snapshotDeleted": "Snapshot deleted."
+  },
   "installmentFix": {
     "banner": "There are {n} paid installments with a date to fix: until you fix them the right installment shows as unpaid.",
     "bannerOne": "There is 1 paid installment with a date to fix: until you fix it the right installment shows as unpaid.",

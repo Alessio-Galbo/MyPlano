@@ -1,0 +1,63 @@
+/* Stili per la card del backup automatico e la lista degli snapshot salvati. */
+.auto-backup-frequency {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 8px);
+}
+
+.snapshots-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs, 6px);
+  margin-top: var(--space-sm, 8px);
+  padding-top: var(--space-sm, 8px);
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.snapshot-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md, 12px);
+  padding: var(--space-xs, 6px) var(--space-sm, 8px);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--bg-surface-secondary, rgba(255, 255, 255, 0.03));
+}
+
+.snapshot-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.snapshot-item-date {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.snapshot-item-summary {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.snapshot-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.auto-backup-empty {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: var(--space-xs, 6px) 0;
+}
+
+.auto-backup-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs, 4px);
+}

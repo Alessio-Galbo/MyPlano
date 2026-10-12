@@ -1,3 +1,4 @@
+// Guscio dell'app: barra di navigazione, schede, finestre dei profili e backup automatico all'avvio.
 import React from 'react';
 import { Navbar, TabContent } from './components/layout';
 import {
@@ -7,8 +8,10 @@ import {
 import { useApp, useAppData } from './core/state';
 import { useAddProfileRequest, useManageProfilesRequest } from './core/state/profileActions';
 import { ToastProvider } from './components/ui';
+import { useAutoBackupLifecycle } from './hooks/useAutoBackupLifecycle';
 
 export function App() {
+  useAutoBackupLifecycle();
   const { activeTab, selectedProfileId, setSelectedProfileId, reloadPreferences } = useApp();
   const dialogs = useProfileDialogs();
   // "New profile" / "Manage profiles" can be requested from anywhere (settings, empty states, onboarding).

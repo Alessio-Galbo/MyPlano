@@ -1,3 +1,4 @@
+"""Avvia il server di sviluppo e stampa gli indirizzi per PC e smartphone, con QR del link in rete locale."""
 import sys
 import socket
 import subprocess

@@ -22,6 +22,7 @@ export const DATA_KEYS = {
 export const UI_KEYS = {
   LANGUAGE: 'myplano_language',
   DATABASE_HUB_PREFS: 'myplano_database_hub_prefs',
+  AUTO_BACKUP_PREFS: 'myplano_ui_auto_backup_prefs',
 };
 
 export const UI_PREFIX = 'myplano_ui_';
